@@ -27,9 +27,6 @@ namespace EasySave_V1
             backup.SetdestDirectory(Console.ReadLine());
             Console.WriteLine("1 - Backup complète\n2 - Backup incrémentielle");
             backup.SetbackupType(int.Parse(Console.ReadLine()));
-            Console.WriteLine(backup.GetbackupName() + " - " + backup.GetsrcDirectory() + " - " + backup.GetdestDirectory() + " - " + backup.GetbackupType());
-            Console.WriteLine(backup.GetsrcDirectoryInfo());
-            Console.WriteLine(backup.GetdestDirectoryInfo());
             backup.Copy();
         }
       

@@ -86,6 +86,8 @@ namespace Save
         {
             if(this.backupType == 1)
             {
+                NewSaveDirectory();
+                Console.WriteLine(GetdestDirectory() + "\\Backup");
                 CopyAll(GetsrcDirectoryInfo(), GetdestDirectoryInfo());
             } else if (this.backupType == 2){
                 Console.WriteLine("sauvegarde incrémentielle");
@@ -94,6 +96,22 @@ namespace Save
                 Console.WriteLine("Mauvaise sauvegarde relancer le programme");
             }
 
+        }
+
+        public void NewSaveDirectory()
+        {
+            String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
+            String TodaysTime = DateTime.Now.ToString("HH-mm");
+            if (!Directory.Exists(GetdestDirectory()))
+            {
+                GetdestDirectoryInfo().CreateSubdirectory("Backup - " + Todaysdate + "_" + TodaysTime);
+                SetdestDirectoryInfo(GetdestDirectory() + "\\Backup - " + Todaysdate + "_" + TodaysTime);
+            } else
+            {
+                Directory.CreateDirectory(GetdestDirectory());
+                GetdestDirectoryInfo().CreateSubdirectory("Backup - " + Todaysdate + "_" + TodaysTime);
+                SetdestDirectoryInfo(GetdestDirectory() + "\\Backup - " + Todaysdate + "_" + TodaysTime);
+            }
         }
         public void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
