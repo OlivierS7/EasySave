@@ -1,4 +1,5 @@
 ﻿using System;
+using Save;
 
 namespace EasySave_V1
 {
@@ -6,7 +7,31 @@ namespace EasySave_V1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World! Testing Git");
+
+            EasySave easySave = new EasySave();
+            easySave.Initialize();
+            
         }
+    }
+
+    class EasySave
+    {
+        public void Initialize()
+        {
+            Backup backup = new Backup();
+            Console.WriteLine("Veuillez entrer le nom de la sauvegarde :");
+            backup.SetbackupName(Console.ReadLine());
+            Console.WriteLine("Veuillez entrer le nom du dossier source :");
+            backup.SetsrcDirectory(Console.ReadLine());
+            Console.WriteLine("Veuillez entrer le nom du dossier de destination :");
+            backup.SetdestDirectory(Console.ReadLine());
+            Console.WriteLine("1 - Backup complète\n2 - Backup incrémentielle");
+            backup.SetbackupType(int.Parse(Console.ReadLine()));
+            Console.WriteLine(backup.GetbackupName() + " - " + backup.GetsrcDirectory() + " - " + backup.GetdestDirectory() + " - " + backup.GetbackupType());
+            Console.WriteLine(backup.GetsrcDirectoryInfo());
+            Console.WriteLine(backup.GetdestDirectoryInfo());
+            backup.Copy();
+        }
+      
     }
 }
