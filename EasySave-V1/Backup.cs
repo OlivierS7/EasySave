@@ -101,16 +101,16 @@ namespace Save
         public void NewSaveDirectory()
         {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
-            String TodaysTime = DateTime.Now.ToString("HH-mm");
+            String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
             if (!Directory.Exists(GetdestDirectory()))
             {
-                GetdestDirectoryInfo().CreateSubdirectory("Backup - " + Todaysdate + "_" + TodaysTime);
-                SetdestDirectoryInfo(GetdestDirectory() + "\\Backup - " + Todaysdate + "_" + TodaysTime);
+                GetdestDirectoryInfo().CreateSubdirectory(Todaysdate + "_" + TodaysTime);
+                SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
             } else
             {
                 Directory.CreateDirectory(GetdestDirectory());
-                GetdestDirectoryInfo().CreateSubdirectory("Backup - " + Todaysdate + "_" + TodaysTime);
-                SetdestDirectoryInfo(GetdestDirectory() + "\\Backup - " + Todaysdate + "_" + TodaysTime);
+                GetdestDirectoryInfo().CreateSubdirectory(Todaysdate + "_" + TodaysTime);
+                SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
             }
         }
         public void CopyAll(DirectoryInfo source, DirectoryInfo target)
