@@ -12,15 +12,6 @@ namespace Save
         private string destDirectory;
         private DirectoryInfo dest;
         private int backupType;
-        /* public Backup(string backupName, string srcDirectory, string destDirectory, int backupType)
-        {
-            this.backupName = backupName;
-            this.srcDirectoy = srcDirectory;
-            this.destDirectory = destDirectory;
-            this.backupType = backupType;
-        } */
-
-        public Backup() { }
 
         public string GetbackupName()
         {
@@ -82,12 +73,12 @@ namespace Save
             this.backupType = backupType;
         }
 
-        public void Copy()
+        /* Method to choose which action will be executed */
+        public void prepareCopy()
         {
             if(this.backupType == 1)
             {
                 NewSaveDirectory();
-                Console.WriteLine(GetdestDirectory() + "\\Backup");
                 CopyAll(GetsrcDirectoryInfo(), GetdestDirectoryInfo());
             } else if (this.backupType == 2){
                 Console.WriteLine("sauvegarde incrémentielle");
@@ -95,15 +86,16 @@ namespace Save
             {
                 Console.WriteLine("Mauvaise sauvegarde relancer le programme");
             }
-
         }
 
+        /* Method to create Destination Directory and a Sub Directory */
         public void NewSaveDirectory()
         {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
             if (!Directory.Exists(GetdestDirectory()))
             {
+                // Create SubDirectory with date and time
                 GetdestDirectoryInfo().CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
             } else
@@ -113,6 +105,8 @@ namespace Save
                 SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
             }
         }
+
+        /* Method to create a full backup of a directory */
         public void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
             Directory.CreateDirectory(target.FullName);
