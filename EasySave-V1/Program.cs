@@ -20,13 +20,13 @@ namespace EasySave_V1
         {
             Backup backup = new Backup();
             Console.WriteLine("Veuillez entrer le nom de la sauvegarde :");
-            backup.SetbackupName(Console.ReadLine());
+            backup.backupName = (Console.ReadLine());
             Console.WriteLine("Veuillez entrer le nom du dossier source :");
-            backup.SetsrcDirectory(Console.ReadLine());
+            backup.srcDirectory = (Console.ReadLine());
             Console.WriteLine("Veuillez entrer le nom du dossier de destination :");
-            backup.SetdestDirectory(Console.ReadLine());
+            backup.destDirectory = (Console.ReadLine());
             Console.WriteLine("1 - Backup complète\n2 - Backup incrémentielle");
-            backup.SetbackupType(int.Parse(Console.ReadLine()));
+            backup.backupType = (int.Parse(Console.ReadLine()));
             backup.prepareCopy();
         }
       

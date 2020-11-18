@@ -6,71 +6,54 @@ namespace Save
     public class Backup
     {
 
-        private string backupName;
-        private string srcDirectoy;
-        private DirectoryInfo source;
-        private string destDirectory;
-        private DirectoryInfo dest;
-        private int backupType;
+        private string _backupName;
+        private string _srcDirectory;
+        private string _destDirectory;
+        private DirectoryInfo _source;
+        private DirectoryInfo _dest;
+        private int _backupType;
 
-        public string GetbackupName()
+        public string backupName
         {
-            return backupName;
-        }
-
-        public void SetbackupName(string backupName)
-        {
-            this.backupName = backupName;
+            get => this._backupName;
+            set => this._backupName = value;
         }
 
-        public string GetsrcDirectory()
+
+        public string srcDirectory
         {
-            return srcDirectoy;
+            get => this._srcDirectory;
+            set { 
+                this._srcDirectory = value;
+                this._source = new DirectoryInfo(value);
+            }
         }
 
-        public void SetsrcDirectory(string srcDirectory)
+        public string destDirectory
         {
-            this.srcDirectoy = srcDirectory;
-            SetsrcDirectoryInfo(srcDirectory);
+            get => this._destDirectory;
+            set {
+                this._destDirectory = value;
+                this._dest = new DirectoryInfo(value);
+            }
+    }
+
+        public DirectoryInfo srcDirectoryInfo
+        {
+            get => this._source;
+            set => this._source = value;
         }
 
-        public string GetdestDirectory()
+        public DirectoryInfo destDirectoryInfo
         {
-            return destDirectory;
+            get => this._dest;
+            set => this._dest = value;
         }
 
-        public void SetdestDirectory(string destDirectory)
+        public int backupType
         {
-            this.destDirectory = destDirectory;
-            SetdestDirectoryInfo(destDirectory);
-        }
-        public DirectoryInfo GetsrcDirectoryInfo()
-        {
-            return source;
-        }
-
-        public void SetsrcDirectoryInfo(string srcDirectory)
-        {
-            this.source = new DirectoryInfo(srcDirectory);
-        }
-        public DirectoryInfo GetdestDirectoryInfo()
-        {
-            return dest;
-        }
-
-        public void SetdestDirectoryInfo(string destDirectory)
-        {
-            this.dest = new DirectoryInfo(destDirectory);
-        }
-
-        public int GetbackupType()
-        {
-            return backupType;
-        }
-
-        public void SetbackupType(int backupType)
-        {
-            this.backupType = backupType;
+            get => this._backupType;
+            set => this._backupType = value;
         }
 
         /* Method to choose which action will be executed */
@@ -79,7 +62,7 @@ namespace Save
             if(this.backupType == 1)
             {
                 NewSaveDirectory();
-                CopyAll(GetsrcDirectoryInfo(), GetdestDirectoryInfo());
+                CopyAll(this.srcDirectoryInfo, this.destDirectoryInfo);
             } else if (this.backupType == 2){
                 Console.WriteLine("sauvegarde incrémentielle");
             } else
@@ -93,16 +76,18 @@ namespace Save
         {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
-            if (!Directory.Exists(GetdestDirectory()))
+            if (!Directory.Exists(this.destDirectory))
             {
                 // Create SubDirectory with date and time
-                GetdestDirectoryInfo().CreateSubdirectory(Todaysdate + "_" + TodaysTime);
-                SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
+                Directory.CreateDirectory(this.destDirectory);
+                Console.WriteLine(this.destDirectoryInfo);
+                this.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
+                this.destDirectoryInfo = new DirectoryInfo(this.destDirectoryInfo + "\\" + Todaysdate + "_" + TodaysTime);
             } else
             {
-                Directory.CreateDirectory(GetdestDirectory());
-                GetdestDirectoryInfo().CreateSubdirectory(Todaysdate + "_" + TodaysTime);
-                SetdestDirectoryInfo(GetdestDirectory() + "\\" + Todaysdate + "_" + TodaysTime);
+                
+                this.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
+                this.destDirectoryInfo = new DirectoryInfo(this.destDirectory + "\\" + Todaysdate + "_" + TodaysTime);
             }
         }
 
