@@ -10,16 +10,16 @@ namespace NSModel {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
             if (!Directory.Exists(template.destDirectory))
-            {
-                // Create SubDirectory with date and time
+            {                
+                // Create Directory and SubDirectory with date and time
+                Directory.CreateDirectory(template.destDirectory);
                 Console.WriteLine(template.destDirectoryInfo);
                 template.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 template.destDirectoryInfo = new DirectoryInfo(template.destDirectoryInfo + "\\" + Todaysdate + "_" + TodaysTime);
             }
             else
-            {              
-                // Create Directory and SubDirectory with date and time
-                Directory.CreateDirectory(template.destDirectory);
+            {
+                // Create SubDirectory with date and time
                 template.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 template.destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + Todaysdate + "_" + TodaysTime);
             };
