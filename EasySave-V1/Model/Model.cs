@@ -31,9 +31,7 @@ namespace NSModel {
 			}
 			catch
             {
-				//NE PAS FAIRE L'AFFICHAGE ICI A CHANGER
-				Console.WriteLine("Aucune sauvegarde ne correspond");
-				Thread.Sleep(1000);
+				throw new ArgumentException("This save template doesn't exist. Please Try Again !");
             }			
 		}
 
