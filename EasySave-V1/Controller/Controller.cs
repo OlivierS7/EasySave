@@ -52,5 +52,9 @@ namespace NSController {
 			}
 			return templatesNames;
 		}
+		public void OpenLogs()
+        {
+			model.OpenLogs();
+		}
 	}
 }

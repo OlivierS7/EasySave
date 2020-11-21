@@ -3,19 +3,19 @@ using NSController;
 
 namespace NSView {
 	public class ConsoleView : IView  {
-		private MenuState currentState;
+		private MenuState currentMenu;
 		private Controller controller;
 		public ConsoleView(Controller controller) {
 			this.controller = controller;
-			this.currentState = new StartMenuState();
-			this.currentState.ShowMenu(this, controller);
+			this.currentMenu = new StartMenuState();
+			this.currentMenu.ShowMenu(this, controller);
 	}
 
         public Controller Controller { get => controller; }
 
         public void ChangeMenu(MenuState state, Controller controller) {
-			this.currentState = state;
-			this.currentState.ShowMenu(this, controller);
+			this.currentMenu = state;
+			this.currentMenu.ShowMenu(this, controller);
 		}
 	}
 }

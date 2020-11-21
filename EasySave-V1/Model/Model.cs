@@ -1,6 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
-using System.Threading;
+using NSModel.Singleton;
 
 namespace NSModel {
 	public class Model {
@@ -54,5 +55,10 @@ namespace NSModel {
         {
 			return this.templates[templateIndex];
         }
+
+		public void OpenLogs()
+        {
+			Process.Start("Notepad.exe", Log.GetLogInstance().fileName);
+		}
 	}
 }
