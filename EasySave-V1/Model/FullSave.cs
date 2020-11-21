@@ -6,6 +6,7 @@ namespace NSModel {
 		public void LastFullSaveForSrcDir(string srcDir, string destDir) {
 			throw new System.NotImplementedException("Not implemented");
 		}
+
 		public void Execute(SaveTemplate template) {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
@@ -13,7 +14,6 @@ namespace NSModel {
             {                
                 // Create Directory and SubDirectory with date and time
                 Directory.CreateDirectory(template.destDirectory);
-                Console.WriteLine(template.destDirectoryInfo);
                 template.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 template.destDirectoryInfo = new DirectoryInfo(template.destDirectoryInfo + "\\" + Todaysdate + "_" + TodaysTime);
             }

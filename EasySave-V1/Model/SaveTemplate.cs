@@ -11,7 +11,6 @@ namespace NSModel
         private DirectoryInfo _source;
         private DirectoryInfo _dest;
         private SaveStrategy _saveStrategy;
-        //private Model templates;
 
         public string backupName
         {
@@ -64,14 +63,23 @@ namespace NSModel
             set => this._saveStrategy = value;
         }
 
-        public SaveTemplate(string srcDir, string destDir, string name, int type)
+        public SaveTemplate(string name, string srcDir, string destDir, int type)
         {
+            this.backupName = name;
             this.srcDirectory = srcDir;
             this.destDirectory = destDir;
-            this.backupName = name;
             this.backupType = type;
-            this.saveStrategy = new FullSave();
-            this.saveStrategy.Execute(this);
+            if (type == 1)
+            {
+                this.saveStrategy = new FullSave();
+            }
+            else if (type == 2)
+            {
+                this.saveStrategy = new DifferentialSave();
+            } else
+            {
+                throw new ArgumentException("Type of Save isn't valid. Please try again !");
+            }
         }
 
 	}

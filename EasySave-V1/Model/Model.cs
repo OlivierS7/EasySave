@@ -1,28 +1,46 @@
 using System;
+using System.Collections.Generic;
 using NSController;
 
 namespace NSModel {
 	public class Model {
 
-		private SaveTemplate _templates;
-		//private Save _save;
-		private Controller _controller;
+		private List<SaveTemplate> _templates;
 
-		public SaveTemplate templates
+		public List<SaveTemplate> templates
 		{
 			get => this._templates;
 			set => this._templates = value;
 		}
-		public void CreateSaveTemplate(string srcDir, string destDir, string name, int type) {
-			templates = new SaveTemplate(srcDir, destDir, name, type);
-			ExecuteSave(1);
+
+		public Model()
+        {
+			this.templates = new List<SaveTemplate>();
+        }
+		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
+			this.templates.Add(new SaveTemplate(name, srcDir, destDir, type));
+			ExecuteOneSave(0);
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
-			throw new System.NotImplementedException("Not implemented");
+			this.templates.RemoveAt(templateIndex - 1);
 		}
-		public void ExecuteSave(int templateIndex) {
-			//this.templates.saveStrategy.Execute();
+		public void ExecuteOneSave(int templateIndex) {
+			SaveTemplate template = IntToSaveTemplate(templateIndex);
+			template.saveStrategy.Execute(template);			
 		}
+
+		public void ExecuteAllSave()
+		{
+			foreach (SaveTemplate template in templates)
+			{
+				template.saveStrategy.Execute(template);
+			}
+		}
+
+		public SaveTemplate IntToSaveTemplate(int templateIndex)
+        {
+			return this.templates[templateIndex];
+        }
 
 
 

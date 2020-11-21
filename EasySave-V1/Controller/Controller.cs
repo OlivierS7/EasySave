@@ -31,8 +31,8 @@ namespace NSController {
 			this.model = new Model();
 			this.consoleView = new ConsoleView(this);
 		}
-		public void CreateSaveTemplate(string srcDir, string destDir, string name, int type) {
-			this.model.CreateSaveTemplate(srcDir, destDir, name, type);
+		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
+			this.model.CreateSaveTemplate(name, srcDir, destDir, type);
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
 			throw new System.NotImplementedException("Not implemented");
