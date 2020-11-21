@@ -3,7 +3,7 @@ using NSController;
 
 namespace NSView {
 	public interface MenuState {
-		void ShowMenu(ConsoleView view, Controller controller);
+		void ShowMenu(ConsoleView view);
 
 	}
 

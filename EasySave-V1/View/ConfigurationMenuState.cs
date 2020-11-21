@@ -1,10 +1,9 @@
 using System;
 using System.Threading;
-using NSController;
 
 namespace NSView {
 	public class ConfigurationMenuState : MenuState  {
-		public void ShowMenu(ConsoleView view, Controller controller) {
+		public void ShowMenu(ConsoleView view) {
 			Console.Clear();
 			Console.WriteLine(" __________________________________________________________________________________ ");
 			Console.WriteLine("|  ______               _____  __     __     _____             __      __  ______  |");
@@ -37,18 +36,18 @@ namespace NSView {
 			switch (choice)
 			{
 				case (1):
-					view.ChangeMenu(new CreateMenuState(), controller);
+					view.ChangeMenu(new CreateMenuState());
 					break;
 				case (2):
-					view.ChangeMenu(new DeleteMenuState(), controller);
+					view.ChangeMenu(new DeleteMenuState());
 					break;
 				case (3):
 					Console.WriteLine("Not yet implemented... Back to menu");
 					Thread.Sleep(2000);
-					view.ChangeMenu(new StartMenuState(), controller);
+					view.ChangeMenu(new StartMenuState());
 					break;
 				case (4):
-					view.ChangeMenu(new StartMenuState(), controller);
+					view.ChangeMenu(new StartMenuState());
 					break;
 				case (5):
 					Console.WriteLine("Thanks for using EasySave, see you soon !");
