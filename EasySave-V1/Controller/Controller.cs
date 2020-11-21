@@ -1,7 +1,6 @@
 using NSModel;
 using NSView;
 
-
 namespace NSController {
 	public class Controller {
 
@@ -45,6 +44,10 @@ namespace NSController {
 		}
 		public string GetAllTemplates() {
 			throw new System.NotImplementedException("Not implemented");
+		}
+		public void OpenLogs()
+        {
+			model.OpenLogs();
 		}
 	}
 }
