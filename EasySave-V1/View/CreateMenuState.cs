@@ -1,8 +1,9 @@
 using System;
+using NSController;
 
 namespace NSView {
 	public class CreateMenuState : MenuState  {
-		public void ShowMenu(ConsoleView view) {
+		public void ShowMenu(ConsoleView view, Controller controller) {
 			Console.WriteLine("===========================================");
 			Console.WriteLine("Please enter save template name:");
 			string name = (Console.ReadLine());
@@ -18,7 +19,7 @@ namespace NSView {
 			int type;
 			Int32.TryParse(Console.ReadLine(), out type);
 			view.Controller.CreateSaveTemplate(name, srcDir, destDir, type);
-			view.ChangeMenu(new ConfigurationMenuState());
+			view.ChangeMenu(new ConfigurationMenuState(), controller);
 		}
 
 	}

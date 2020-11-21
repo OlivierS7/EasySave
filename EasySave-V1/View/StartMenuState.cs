@@ -1,8 +1,9 @@
 using System;
+using NSController;
 
 namespace NSView {
 	public class StartMenuState : MenuState  {
-		public void ShowMenu(ConsoleView view) {
+		public void ShowMenu(ConsoleView view, Controller controller) { 
 			Console.Clear();
 			Console.WriteLine(" __________________________________________________________________________________ ");
 			Console.WriteLine("|  ______               _____  __     __     _____             __      __  ______  |");
@@ -35,13 +36,13 @@ namespace NSView {
             switch (choice)
             {
 				case (1):
-					view.ChangeMenu(new ConfigurationMenuState());
+					view.ChangeMenu(new ConfigurationMenuState(), controller);
 					break;
 				case (2):
-					view.ChangeMenu(new ExecuteConfigurationState());
+					view.ChangeMenu(new ExecuteConfigurationState(), controller);
 					break;
 				case (3):
-					view.ChangeMenu(new LogState());
+					view.ChangeMenu(new LogState(), controller);
 					break;
 				case (4):
 					Console.WriteLine("Thanks for using EasySave, see you soon !");

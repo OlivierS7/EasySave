@@ -21,7 +21,14 @@ namespace NSModel {
 			this.templates.Add(new SaveTemplate(name, srcDir, destDir, type));
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
-			this.templates.RemoveAt(templateIndex - 1);
+			try
+            {
+				this.templates.RemoveAt(templateIndex - 1);
+			}
+			catch
+            {
+				throw new ArgumentException("This save template doesn't exist. Please Try Again !");
+			}
 		}
 		public void ExecuteOneSave(int templateIndex) {
 			try

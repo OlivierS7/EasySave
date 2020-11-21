@@ -1,6 +1,6 @@
 using NSModel;
 using NSView;
-
+using System.Collections.Generic;
 
 namespace NSController {
 	public class Controller {
@@ -43,8 +43,14 @@ namespace NSController {
 		public void ExecuteAllSave() {
 			this.model.ExecuteAllSave();
 		}
-		public string GetAllTemplates() {
-			throw new System.NotImplementedException("Not implemented");
+		public List<string> GetAllTemplates() {
+			List<SaveTemplate> templates = this.model.templates;
+			List<string> templatesNames = new List<string>();
+			foreach (SaveTemplate template in templates)
+			{
+				templatesNames.Add(template.backupName);
+			}
+			return templatesNames;
 		}
 	}
 }
