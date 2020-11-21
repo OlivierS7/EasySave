@@ -46,7 +46,8 @@ namespace NSView {
 				if (yesNo == "y" || yesNo == "Y")
                 {
 					view.Controller.ExecuteAllSave();
-                } else if (yesNo == "n" || yesNo == "N")
+					view.ChangeMenu(new StartMenuState());
+				} else if (yesNo == "n" || yesNo == "N")
                 {
 					Console.WriteLine("Going back to selection...");
 					Thread.Sleep(2000);

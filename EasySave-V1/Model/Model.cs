@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using NSController;
+using System.Threading;
 
 namespace NSModel {
 	public class Model {
@@ -24,8 +24,17 @@ namespace NSModel {
 			this.templates.RemoveAt(templateIndex - 1);
 		}
 		public void ExecuteOneSave(int templateIndex) {
-			SaveTemplate template = IntToSaveTemplate(templateIndex);
-			template.saveStrategy.Execute(template);			
+			try
+            {
+				SaveTemplate template = IntToSaveTemplate(templateIndex);
+				template.saveStrategy.Execute(template);
+			}
+			catch
+            {
+				//NE PAS FAIRE L'AFFICHAGE ICI A CHANGER
+				Console.WriteLine("Aucune sauvegarde ne correspond");
+				Thread.Sleep(1000);
+            }			
 		}
 
 		public void ExecuteAllSave()
@@ -40,9 +49,5 @@ namespace NSModel {
         {
 			return this.templates[templateIndex];
         }
-
-
-
 	}
-
 }

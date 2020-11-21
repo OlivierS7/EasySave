@@ -17,9 +17,5 @@ namespace NSView {
 			this.currentState = state;
 			this.currentState.ShowMenu(this);
 		}
-
-		//private Program program;
-
 	}
-
 }

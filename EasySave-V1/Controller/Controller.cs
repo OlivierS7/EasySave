@@ -35,13 +35,13 @@ namespace NSController {
 			this.model.CreateSaveTemplate(name, srcDir, destDir, type);
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
-			throw new System.NotImplementedException("Not implemented");
+			this.model.DeleteSaveTemplate(templateIndex);
 		}
 		public void ExecuteSave(int templateIndex) {
 			this.model.ExecuteOneSave(templateIndex - 1);
 		}
 		public void ExecuteAllSave() {
-			throw new System.NotImplementedException("Not implemented");
+			this.model.ExecuteAllSave();
 		}
 		public string GetAllTemplates() {
 			throw new System.NotImplementedException("Not implemented");
