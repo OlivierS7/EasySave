@@ -38,7 +38,7 @@ namespace NSController {
 			throw new System.NotImplementedException("Not implemented");
 		}
 		public void ExecuteSave(int templateIndex) {
-			throw new System.NotImplementedException("Not implemented");
+			this.model.ExecuteOneSave(templateIndex - 1);
 		}
 		public void ExecuteAllSave() {
 			throw new System.NotImplementedException("Not implemented");
