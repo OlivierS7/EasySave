@@ -19,7 +19,10 @@ namespace NSModel {
 			this.templates = new List<SaveTemplate>();
         }
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
-			this.templates.Add(new SaveTemplate(name, srcDir, destDir, type));
+			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
+			FullSaveHistory.GetInstance();
+			FullSaveHistory.GetInstance().Write(template);
+			this.templates.Add(template);
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
