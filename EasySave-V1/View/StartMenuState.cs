@@ -1,5 +1,4 @@
 using System;
-using NSController;
 
 namespace NSView {
 	public class StartMenuState : MenuState  {

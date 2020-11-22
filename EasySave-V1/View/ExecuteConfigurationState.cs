@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using NSController;
-
 
 namespace NSView {
 	public class ExecuteConfigurationState : MenuState {

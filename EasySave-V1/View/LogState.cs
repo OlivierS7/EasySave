@@ -1,5 +1,3 @@
-using NSController;
-
 
 namespace NSView {
 	public class LogState: MenuState {

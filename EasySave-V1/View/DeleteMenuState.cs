@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using NSController;
 
 namespace NSView {
 	public class DeleteMenuState : MenuState  {
