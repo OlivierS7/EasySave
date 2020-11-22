@@ -19,10 +19,12 @@ namespace NSModel.Singleton {
 				file = new FileInfo(path);
 			} else
             {
-				File.Create(path);
-				File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
-				file = new FileInfo(path);
-            }
+				using (File.Create(path))
+				{
+					File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
+					file = new FileInfo(path);
+				}
+			}
 		}
 		public static FullSaveHistory GetInstance() {
 			if (fullSaveHistory == null)
@@ -35,15 +37,18 @@ namespace NSModel.Singleton {
 			string path = "..\\..\\..\\tempFullSaveHistory.json";
 			var obj = new { srcDir = template.srcDirectory, destDir = template.destDirectory };
 			string lineToInsert = JsonConvert.SerializeObject(obj);
-			string stringToCompare = template.srcDirectory;
+			string stringToCompare = template.srcDirectory.Replace("\\", "\\\\");
 			string currentLine;
 			bool exist = false;
 			File.Copy(file.ToString(), path);
+			var attributes = File.GetAttributes(file.ToString());
+			attributes &= ~FileAttributes.Hidden;
+			File.SetAttributes(file.ToString(), attributes);
 			StreamReader reader = new StreamReader(path);
 			StreamWriter writer = new StreamWriter(file.ToString());
 			while ((currentLine = reader.ReadLine()) != null)
-			{ 
-				if (currentLine.Contains("\"" + stringToCompare + "\""))
+			{
+				if (currentLine.Contains("\"srcDir\":\"" + stringToCompare + "\""))
 				{
 					exist = true;
 					writer.WriteLine(lineToInsert);
@@ -59,6 +64,7 @@ namespace NSModel.Singleton {
             }
 			reader.Close();
 			writer.Close();
+			File.SetAttributes(file.ToString(), File.GetAttributes(path) | FileAttributes.Hidden);
 			File.Delete(path);
 			//File.Move(path, file.ToString());
 		}
