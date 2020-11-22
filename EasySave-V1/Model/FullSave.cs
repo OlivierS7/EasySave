@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using NSModel.Singleton;
 
 namespace NSModel {
 	public class FullSave : SaveStrategy  {
@@ -22,8 +23,9 @@ namespace NSModel {
                 // Create SubDirectory with date and time
                 template.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 template.destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + Todaysdate + "_" + TodaysTime);
-            };
+            }
             CopyAll(template.srcDirectoryInfo, template.destDirectoryInfo);
+            Log.GetLogInstance().Write(template,);
         }
 
         /* Method to create a full backup of a directory */
