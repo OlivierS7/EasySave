@@ -14,16 +14,21 @@ namespace NSModel {
 			set => this._templates = value;
 		}
 
+		/* Constructor */
 		public Model()
         {
 			this.templates = new List<SaveTemplate>();
         }
+
+		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			FullSaveHistory.GetInstance();
 			FullSaveHistory.GetInstance().Write(template);
 			this.templates.Add(template);
 		}
+
+		/* Method to delete a save template */
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
             {
@@ -34,6 +39,8 @@ namespace NSModel {
 				throw new ArgumentException("This save template doesn't exist. Please Try Again !");
 			}
 		}
+
+		/* Method to execute one backup */
 		public void ExecuteOneSave(int templateIndex) {
 			try
             {
@@ -46,6 +53,8 @@ namespace NSModel {
             }			
 		}
 
+
+		/* Method to execute all backups */
 		public void ExecuteAllSave()
 		{
 			foreach (SaveTemplate template in templates)
@@ -54,11 +63,15 @@ namespace NSModel {
 			}
 		}
 
-		public SaveTemplate IntToSaveTemplate(int templateIndex)
+
+		/* Method to get the saveTemplate from the user's input */
+		private SaveTemplate IntToSaveTemplate(int templateIndex)
         {
 			return this.templates[templateIndex];
         }
 
+
+		/* Method to open logs */
 		public void OpenLogs()
         {
 			Process.Start("Notepad.exe", Log.GetLogInstance().fileName);

@@ -24,6 +24,7 @@ namespace NSView {
             {
 				view.ChangeMenu(new StartMenuState());
             }
+			/* Verify user's input */
 			while (choice != 1 && choice != 2)
             {
 				Console.WriteLine("===========================================");
@@ -32,8 +33,7 @@ namespace NSView {
 				input = Console.ReadLine();
 				Int32.TryParse(input, out choice);
 			}
-			//Afficher la liste ici
-			if(choice == 1)
+			if (choice == 1)
             {
 				Console.WriteLine("Please choose the save template to execute :");
 				List<string> templatesName = view.Controller.GetAllTemplates();
@@ -53,6 +53,7 @@ namespace NSView {
 				{
 					Console.WriteLine((i + 1) + " - " + templatesName[i]);
 				}
+				/* Change Menu in terms of user's input */
 				string yesNo = Console.ReadLine();
 				if (yesNo == "y" || yesNo == "Y")
                 {

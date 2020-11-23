@@ -68,7 +68,7 @@ namespace NSModel.Singleton {
 			File.Delete(path);
 			//File.Move(path, file.ToString());
 		}
-		private string GetFullSaveForDir(string srcDir) {
+		public string GetFullSaveForDir(string srcDir) {
 			throw new System.NotImplementedException("Not implemented");
 		}
 	}

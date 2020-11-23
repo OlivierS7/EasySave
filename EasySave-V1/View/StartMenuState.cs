@@ -21,7 +21,8 @@ namespace NSView {
 			string input = Console.ReadLine();
 			int choice;
 			Int32.TryParse(input, out choice);
-			while(choice < 1 || choice > 4)
+			/* Verify user's input */
+			while (choice < 1 || choice > 4)
             {
 				Console.WriteLine("===========================================");
 				Console.WriteLine("/!\\Please choose a valid option:");
@@ -32,7 +33,8 @@ namespace NSView {
 				input = Console.ReadLine();
 				Int32.TryParse(input, out choice);
 			}
-            switch (choice)
+			/* Change Menu in terms of user's input */
+			switch (choice)
             {
 				case (1):
 					view.ChangeMenu(new ConfigurationMenuState());
