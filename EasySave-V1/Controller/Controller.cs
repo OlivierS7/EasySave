@@ -49,7 +49,7 @@ namespace NSController {
                 {
 					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
 				}
-				catch (ArgumentException err)
+				catch (Exception err)
                 {
 					PrintMessage(err.Message);
                 }
@@ -76,7 +76,7 @@ namespace NSController {
 			{
 				this.model.DeleteSaveTemplate(templateIndex);
 			}
-			catch (ArgumentException err)
+			catch (Exception err)
 			{
 				PrintMessage(err.Message);
 			}
@@ -86,7 +86,7 @@ namespace NSController {
 			{
 				this.model.ExecuteOneSave(templateIndex);
 			}
-			catch (ArgumentException err)
+			catch (Exception err)
 			{
 				PrintMessage(err.Message);
 			}
@@ -96,7 +96,7 @@ namespace NSController {
 			{
 				this.model.ExecuteAllSave();
 			}
-			catch (ArgumentException err)
+			catch (Exception err)
 			{
 				PrintMessage(err.Message);
 			}
@@ -106,7 +106,7 @@ namespace NSController {
 			List<string> templatesNames = new List<string>();
 			if (this.model.templates.Count == 0)
             {
-				throw new ArgumentException("There is no save templates");
+				throw new Exception("There is no save templates");
             } 
 			else
             {

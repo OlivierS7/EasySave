@@ -36,7 +36,7 @@ namespace NSView {
 				}
 				if (choice == 1)
 				{
-					Console.WriteLine("Please choose the save template to execute :");
+					Console.WriteLine("\nPlease choose the save template to execute :");
 					List<string> templatesName = view.Controller.GetAllTemplates();
 					for (int i = 0; i < templatesName.Count; i++)
 					{

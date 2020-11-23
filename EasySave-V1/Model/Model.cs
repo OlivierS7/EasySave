@@ -24,7 +24,7 @@ namespace NSModel {
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			if(type != 1 && type != 2)
             {
-				throw new ArgumentException(type + " isn't a valid type");
+				throw new Exception(type + " isn't a valid type");
             }
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
@@ -35,7 +35,7 @@ namespace NSModel {
 		public void DeleteSaveTemplate(int templateIndex) {
 			if (this.templates.Count < templateIndex)
             {
-				throw new ArgumentException(templateIndex + ": No save template at this index");
+				throw new Exception(templateIndex + ": No save template at this index");
 			}
 			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			this.templates.RemoveAt(templateIndex - 1);
@@ -45,7 +45,7 @@ namespace NSModel {
 		public void ExecuteOneSave(int templateIndex) {
 			if (this.templates.Count < templateIndex)
 			{
-				throw new ArgumentException(templateIndex + ": No save template at this index");
+				throw new Exception(templateIndex + ": No save template at this index");
 			}
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			template.saveStrategy.Execute(template);		
@@ -57,7 +57,7 @@ namespace NSModel {
 		{
 			if (templates.Count == 0)
             {
-				throw new ArgumentException("There is no save templates to execute");
+				throw new Exception("There is no save templates to execute");
 			}
 			foreach (SaveTemplate template in templates)
 			{

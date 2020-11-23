@@ -67,6 +67,10 @@ namespace NSModel
                     wasCreated = false;
                 }
             }
+            else
+            {
+                throw new Exception("You need to execute at least one full save with the same source directory as your differential save");
+            }
         }
     }
 }
