@@ -46,7 +46,15 @@ namespace NSView {
 					view.ChangeMenu(new LogState());
 					break;
 				case (4):
-					Console.WriteLine("Thanks for using EasySave, see you soon !");
+					Console.Clear();
+					Console.WriteLine("\n\n\n		   _____                                                                             _ ");
+					Console.WriteLine("		  / ____|                                                                           | |");
+					Console.WriteLine("		 | (___     ___    ___     _   _    ___    _   _     ___    ___     ___    _ __     | |");
+					Console.WriteLine("		  \\___ \\   / _ \\  / _ \\   | | | |  / _ \\  | | | |   / __|  / _ \\   / _ \\  | '_ \\    | |");
+					Console.WriteLine("		  ____) | |  __/ |  __/   | |_| | | (_) | | |_| |   \\__ \\ | (_) | | (_) | | | | |   |_|");
+					Console.WriteLine("		 |_____/   \\___|  \\___|    \\__, |  \\___/   \\__,_|   |___/  \\___/   \\___/  |_| |_|   (_)");
+					Console.WriteLine("		                            __/ |                                                      ");
+					Console.WriteLine("		                           |___/                                                       ");
 					Environment.Exit(1);
 					break;
 			}
