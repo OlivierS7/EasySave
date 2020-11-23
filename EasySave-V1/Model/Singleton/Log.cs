@@ -61,7 +61,6 @@ namespace NSModel.Singleton
 				}
 				catch (Exception e)
 				{
-
 					Console.WriteLine("Exception: " + e.Message);
 				}
 			}
@@ -76,11 +75,8 @@ namespace NSModel.Singleton
 				}
 				catch (Exception e)
 				{
-
 					Console.WriteLine("Exception: " + e.Message);
-
 				}
-
 			}
 		}
 	}
