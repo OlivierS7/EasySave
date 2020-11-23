@@ -1,78 +1,87 @@
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace NSModel.Singleton {
-	public class Log {
+namespace NSModel.Singleton
+{
+	public class Log
+	{
 		private static Log log;
 		private DirectoryInfo dir;
 		private FileInfo _file;
 		private string _fileName;
 		private string _directoryPath = @"..\..\..\..\Logs";
-		private string _fileinfoPath = @"..\..\..\..\Logs\test.txt";
+		private string _fileinfoPath = @"..\..\..\..\Logs\logs.json";
 
 
-		public FileInfo file {
+		public FileInfo file
+		{
 			get => _file;
 		}
-        public string fileName {
+		public string fileName
+		{
 			get => _fileName;
 			set => _fileName = value;
 		}
 
-        private Log() {
+		private Log()
+		{
 			dir = new DirectoryInfo(_directoryPath);
 			_file = new FileInfo(_fileinfoPath);//à changer
-			fileName = "..\\..\\..\\..\\Logs\\test.txt";
+			fileName = _fileinfoPath;
 		}
-/*		public Int64 DirectoryLength(DirectoryInfo folder)
-        {
-			Int64 bytes = 0;
-            foreach (FileInfo fi in folder.GetFiles())
-            {
-				bytes += fi.Length;
-            }
-            foreach (DirectoryInfo i in folder.GetDirectories())
-            {
-				bytes += DirectoryLength(i);
-            }
-			return bytes;
-        }*/
-		public static Log GetLogInstance() {
+		public static Log GetLogInstance()
+		{
 			if (log == null)
 			{
 				log = new Log();
 			}
 			return log;
 		}
-/*		private void LengthStats(SaveTemplate template)
-        {
-			Int64 size = DirectoryLength(new DirectoryInfo(template.srcDirectoryInfo));
-        }*/
-		public void Write(SaveTemplate template, Int64 totalSize) {
-            try
-            {
-				StreamWriter sw = new StreamWriter(_fileinfoPath);
-                sw.Write(
-				"----" + template.backupName + "----" +
-				"{ \"\nSource address: \"" + template.srcDirectoryInfo +
-				"\"\nDestination address: \"" + template.destDirectoryInfo + 
-				"\nTotal size: " + totalSize + 
-				"\nTime: " +
-				"\n----" + "fin" +template.backupName + "----\n"
-				);
-				 
+		public void Write(SaveTemplate template, long totalSize, TimeSpan time)
+		{
+			var obj = new 
+			{
+				BackupName = template.backupName, 
+				SourceDirectory = template.srcDirectory, 
+				DestinationDirectory = template.destDirectory, 
+				Size = totalSize + "Bytes", 
+				Time = time  
+			};
 
-				sw.Close();
-			}
-            catch (Exception e)
-            {
+			if (!File.Exists(_fileinfoPath))
+			{
+				try
+				{
+					StreamWriter sw = file.CreateText();
+					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
+					sw.Write(output);
+					sw.Close();
+				}
+				catch (Exception e)
+				{
 
-				Console.WriteLine("Exception: " + e.Message);
+					Console.WriteLine("Exception: " + e.Message);
+				}
 			}
-		}
-		private string CheckExistingLogs() {
-			throw new System.NotImplementedException("Not implemented");
+			else
+			{
+				try
+				{
+					StreamWriter sw = file.AppendText();
+					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
+					sw.Write(output);
+					sw.Close();
+				}
+				catch (Exception e)
+				{
+
+					Console.WriteLine("Exception: " + e.Message);
+
+				}
+
+			}
 		}
 	}
 }

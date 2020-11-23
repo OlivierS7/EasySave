@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using NSModel.Singleton;
 
@@ -11,6 +12,8 @@ namespace NSModel {
 		public void Execute(SaveTemplate template) {
             String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             String TodaysTime = DateTime.Now.ToString("HH-mm-ss");
+            Stopwatch stopw = new Stopwatch();
+            stopw.Start();
             if (!Directory.Exists(template.destDirectory))
             {                
                 // Create Directory and SubDirectory with date and time
@@ -24,8 +27,10 @@ namespace NSModel {
                 template.destDirectoryInfo.CreateSubdirectory(Todaysdate + "_" + TodaysTime);
                 template.destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + Todaysdate + "_" + TodaysTime);
             }
+            
             CopyAll(template.srcDirectoryInfo, template.destDirectoryInfo);
-            Log.GetLogInstance().Write(template,);
+            stopw.Stop();
+            Log.GetLogInstance().Write(template,DirSize(template.srcDirectoryInfo), stopw.Elapsed);
         }
 
         /* Method to create a full backup of a directory */
@@ -43,6 +48,23 @@ namespace NSModel {
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir);
             }
+        }
+        public long DirSize(DirectoryInfo d)
+        {
+            long size = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                size += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                size += DirSize(di);
+            }
+            return size;
         }
     }
 }
