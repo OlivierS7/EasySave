@@ -1,10 +1,24 @@
 # EasySave V1.0
 
-### Pré-requis
+## Table of content
 
-Télécharger le code source et exécuter le programme.
+- [Introduction](#Introduction)
+- [Pré-requis](#Pré-requis)
+    - [Installation](#Installation)
+- [Pre-requisites](#Pre-requisites)
+- [Made With](#Made-With)
+- [Autors](#Autors)
 
-## Fabriqué avec
+## Introduction
+
+EasySave is an application to manage your backups. You can pre-configure 5 backups and run them at any time. Backups can be full or differential and allows you to backup any data. Our application allows you to follow the progress of your backups in real time and to watch all the operations performed thanks to a log file.
+### Pre-requisites
+
+ 1 - Install Visual Studio on your machine
+ 2 - Download or clone the repository
+ 3 - Open the solution (.sln) with Visual Studio and launch the application
+
+## Made With
 
 [<img src="https://img.shields.io/badge/c%23%20-%23239120.svg?&style=for-the-badge&logo=c-sharp&logoColor=white"/>](https://fr.wikipedia.org/wiki/C_sharp)
 
@@ -16,7 +30,7 @@ Télécharger le code source et exécuter le programme.
 
 [![ForTheBadge built-by-developers](http://ForTheBadge.com/images/badges/built-by-developers.svg)](https://GitHub.com/OlivierS7/EasySave)
 
-## Auteurs
+## Autors
 
 * **Olivier SIMONNEAU** _alias_ [@OlivierS7](https://github.com/OlivierS7)
 * **Hadrien GOSSELIN** _alias_ [@sqartox](https://github.com/sqartox)
