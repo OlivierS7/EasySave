@@ -125,10 +125,15 @@ namespace NSController {
         {
 			this.consoleView.PrintMessage(message);
         }
-
 		public void Progression(string progression)
         {
 			this.consoleView.Progression(progression);
+        }
+		public bool maxTemplatesReached()
+        {
+			if (model.templates.Count == 5)
+				return true;
+			return false;
         }
 	}
 }

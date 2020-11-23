@@ -17,9 +17,8 @@ namespace NSView {
 			Console.WriteLine("Do you want to execute one or multiple save template(s) ?");
 			Console.WriteLine("1 - Execute one template | 2 - Execute all templates");
 			Console.WriteLine("3 - Go back to menu");
-			int choice;
-			string input = Console.ReadLine();
-			Int32.TryParse(input, out choice);
+			ConsoleKeyInfo input = Console.ReadKey();
+			int choice = view.CheckInput(input);
 			if (choice == 3)
             {
 				view.ChangeMenu(new StartMenuState());
@@ -29,11 +28,11 @@ namespace NSView {
 			{
 				while (choice != 1 && choice != 2)
 				{
-					Console.WriteLine("===========================================");
+					Console.WriteLine("\n===========================================");
 					Console.WriteLine("/!\\Please enter a valid choice");
 					Console.WriteLine("1 - Execute one template | 2 - Execute all templates");
-					input = Console.ReadLine();
-					Int32.TryParse(input, out choice);
+					input = Console.ReadKey();
+				    choice = view.CheckInput(input);
 				}
 				if (choice == 1)
 				{
@@ -43,8 +42,8 @@ namespace NSView {
 					{
 						Console.WriteLine((i + 1) + " - " + templatesName[i]);
 					}
-					input = Console.ReadLine();
-					Int32.TryParse(input, out choice);
+					string stringInput = Console.ReadLine();
+					Int32.TryParse(stringInput, out choice);
 					view.Controller.ExecuteSave(choice);
 					view.ChangeMenu(new StartMenuState());
 				}

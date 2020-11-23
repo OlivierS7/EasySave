@@ -19,39 +19,39 @@ namespace NSView {
 			Console.WriteLine("   3)Modify existing save template");
 			Console.WriteLine("   4)Back to menu");
 			Console.WriteLine("   5)Exit application");
-			string input = Console.ReadLine();
-			int choice;
-			Int32.TryParse(input, out choice);
+			ConsoleKeyInfo input = Console.ReadKey();
+			int choice = view.CheckInput(input);
 			/* Verify user's input */
-			while (choice < 1 || choice > 5)
+			while (choice == 0 || choice > 5)
 			{
+				Console.WriteLine("\n===========================================");
 				Console.WriteLine("/!\\Please choose a valid option:");
 				Console.WriteLine("   1)Create a save template");
 				Console.WriteLine("   2)Delete a save template");
 				Console.WriteLine("   3)Modify existing save template");
 				Console.WriteLine("   4)Back to menu");
 				Console.WriteLine("   5)Exit application");
-				input = Console.ReadLine();
-				Int32.TryParse(input, out choice);
+				input = Console.ReadKey();
+				choice = view.CheckInput(input);
 			}
 			/* Change Menu in terms of user's input */
 			switch (choice)
 			{
-				case (1):
+				case 1:
 					view.ChangeMenu(new CreateMenuState());
 					break;
-				case (2):
+				case 2:
 					view.ChangeMenu(new DeleteMenuState());
 					break;
-				case (3):
+				case 3:
 					Console.WriteLine("Not yet implemented... Back to menu");
 					Thread.Sleep(2000);
 					view.ChangeMenu(new StartMenuState());
 					break;
-				case (4):
+				case 4:
 					view.ChangeMenu(new StartMenuState());
 					break;
-				case (5):
+				case 5:
 					Console.Clear();
 					Console.WriteLine("\n\n\n		   _____                                                                             _ ");
 					Console.WriteLine("		  / ____|                                                                           | |");
@@ -65,7 +65,5 @@ namespace NSView {
 					break;
 			}
 		}
-
 	}
-
 }
