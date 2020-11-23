@@ -16,7 +16,7 @@ namespace NSView {
 			Console.WriteLine("|__________________________________________________________________________________| \n \n");
 			Console.WriteLine("Do you want to execute one or multiple save template(s) ?");
 			Console.WriteLine("1 - Execute one template | 2 - Execute all templates");
-			Console.WriteLine("3)Go back to menu");
+			Console.WriteLine("3 - Go back to menu");
 			int choice;
 			string input = Console.ReadLine();
 			Int32.TryParse(input, out choice);
@@ -24,53 +24,62 @@ namespace NSView {
             {
 				view.ChangeMenu(new StartMenuState());
             }
-			/* Verify user's input */
-			while (choice != 1 && choice != 2)
-            {
-				Console.WriteLine("===========================================");
-				Console.WriteLine("/!\\Please enter a valid choice");
-				Console.WriteLine("1 - Execute one template | 2 - Execute all templates");
-				input = Console.ReadLine();
-				Int32.TryParse(input, out choice);
-			}
-			if (choice == 1)
-            {
-				Console.WriteLine("Please choose the save template to execute :");
-				List<string> templatesName = view.Controller.GetAllTemplates();
-				for (int i = 0; i < templatesName.Count; i++)
+            /* Verify user's input */
+            try 
+			{
+				while (choice != 1 && choice != 2)
 				{
-					Console.WriteLine((i + 1) + " - " + templatesName[i]);
+					Console.WriteLine("===========================================");
+					Console.WriteLine("/!\\Please enter a valid choice");
+					Console.WriteLine("1 - Execute one template | 2 - Execute all templates");
+					input = Console.ReadLine();
+					Int32.TryParse(input, out choice);
 				}
-				input = Console.ReadLine();
-				Int32.TryParse(input, out choice);
-				view.Controller.ExecuteSave(choice);
-				view.ChangeMenu(new StartMenuState());
-            } else
-            {
-				Console.WriteLine("Are you sure you want to execute all these templates ? (y/n)");
-				List<string> templatesName = view.Controller.GetAllTemplates();
-				for (int i = 0; i < templatesName.Count; i++)
+				if (choice == 1)
 				{
-					Console.WriteLine((i + 1) + " - " + templatesName[i]);
-				}
-				/* Change Menu in terms of user's input */
-				string yesNo = Console.ReadLine();
-				if (yesNo == "y" || yesNo == "Y")
-                {
-					view.Controller.ExecuteAllSave();
+					Console.WriteLine("Please choose the save template to execute :");
+					List<string> templatesName = view.Controller.GetAllTemplates();
+					for (int i = 0; i < templatesName.Count; i++)
+					{
+						Console.WriteLine((i + 1) + " - " + templatesName[i]);
+					}
+					input = Console.ReadLine();
+					Int32.TryParse(input, out choice);
+					view.Controller.ExecuteSave(choice);
 					view.ChangeMenu(new StartMenuState());
-				} else if (yesNo == "n" || yesNo == "N")
-                {
-					Console.WriteLine("Going back to selection...");
-					Thread.Sleep(2000);
-					view.ChangeMenu(new ExecuteConfigurationState());
-				} else
-                {
-					Console.WriteLine("Not a valid choice, going back to selection...");
-					Thread.Sleep(2000);
-					view.ChangeMenu(new ExecuteConfigurationState());
-                }
+				}
+				else
+				{
+					Console.WriteLine("Are you sure you want to execute all these templates ? (y/n)");
+					List<string> templatesName = view.Controller.GetAllTemplates();
+					for (int i = 0; i < templatesName.Count; i++)
+					{
+						Console.WriteLine((i + 1) + " - " + templatesName[i]);
+					}
+					/* Change Menu in terms of user's input */
+					string yesNo = Console.ReadLine();
+					if (yesNo == "y" || yesNo == "Y")
+					{
+						view.Controller.ExecuteAllSave();
+						view.ChangeMenu(new StartMenuState());
+					}
+					else if (yesNo == "n" || yesNo == "N")
+					{
+						Console.WriteLine("Going back to selection...");
+						Thread.Sleep(2000);
+						view.ChangeMenu(new ExecuteConfigurationState());
+					}
+					else
+					{
+						Console.WriteLine("Not a valid choice, going back to selection...");
+						Thread.Sleep(2000);
+					}
+				}
+			} catch (ArgumentException err)
+            {
+				view.PrintMessage(err.Message);
             }
+			view.ChangeMenu(new ExecuteConfigurationState());
 		}
 
 	}

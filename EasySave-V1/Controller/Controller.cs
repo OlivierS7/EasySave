@@ -45,7 +45,14 @@ namespace NSController {
 			Match destDirNameMatch = directoryName.Match(destDir);
 			if(nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
             {
-				this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+                try
+                {
+					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+				}
+				catch (ArgumentException err)
+                {
+					PrintMessage(err.Message);
+                }
 			}
             else
 			{
@@ -59,26 +66,54 @@ namespace NSController {
                 }
 				if(!destDirNameMatch.Success)
                 {
-					error += "Invalid destination directory path format\n";
+					error += "Invalid destination directory path format";
 				}
 				PrintMessage(error);
             }
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
-			this.model.DeleteSaveTemplate(templateIndex);
+			try
+			{
+				this.model.DeleteSaveTemplate(templateIndex);
+			}
+			catch (ArgumentException err)
+			{
+				PrintMessage(err.Message);
+			}
 		}
 		public void ExecuteSave(int templateIndex) {
-			this.model.ExecuteOneSave(templateIndex);
+			try
+			{
+				this.model.ExecuteOneSave(templateIndex);
+			}
+			catch (ArgumentException err)
+			{
+				PrintMessage(err.Message);
+			}
 		}
 		public void ExecuteAllSave() {
-			this.model.ExecuteAllSave();
+			try
+			{
+				this.model.ExecuteAllSave();
+			}
+			catch (ArgumentException err)
+			{
+				PrintMessage(err.Message);
+			}
 		}
 		public List<string> GetAllTemplates() {
 			List<SaveTemplate> templates = this.model.templates;
 			List<string> templatesNames = new List<string>();
-			foreach (SaveTemplate template in templates)
-			{
-				templatesNames.Add(template.backupName);
+			if (this.model.templates.Count == 0)
+            {
+				throw new ArgumentException("There is no save templates");
+            } 
+			else
+            {
+				foreach (SaveTemplate template in templates)
+				{
+					templatesNames.Add(template.backupName);
+				}
 			}
 			return templatesNames;
 		}

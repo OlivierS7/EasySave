@@ -60,10 +60,7 @@ namespace NSModel
             else if (type == 2)
             {
                 this.saveStrategy = new DifferentialSave();
-            } else
-            {
-                throw new ArgumentException("Type of Save isn't valid. Please try again !");
-            }
+            } 
         }
     }
 }

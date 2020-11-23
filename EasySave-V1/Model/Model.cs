@@ -22,6 +22,10 @@ namespace NSModel {
 
 		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
+			if(type != 1 && type != 2)
+            {
+				throw new ArgumentException(type + " isn't a valid type");
+            }
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
@@ -29,35 +33,32 @@ namespace NSModel {
 
 		/* Method to delete a save template */
 		public void DeleteSaveTemplate(int templateIndex) {
-			Console.WriteLine(this.templates.ToString());
-			try
+			if (this.templates.Count < templateIndex)
             {
-				SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
-				this.templates.RemoveAt(templateIndex - 1);
+				throw new ArgumentException(templateIndex + ": No save template at this index");
 			}
-			catch
-            {
-				throw new ArgumentException("This save template doesn't exist. Please Try Again !");
-			}
+			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
+			this.templates.RemoveAt(templateIndex - 1);
 		}
 
 		/* Method to execute one backup */
 		public void ExecuteOneSave(int templateIndex) {
-			try
-            {
-				SaveTemplate template = IntToSaveTemplate(templateIndex);
-				template.saveStrategy.Execute(template);
+			if (this.templates.Count < templateIndex)
+			{
+				throw new ArgumentException(templateIndex + ": No save template at this index");
 			}
-			catch
-            {
-				throw new ArgumentException("This save template doesn't exist. Please Try Again !");
-            }			
+			SaveTemplate template = IntToSaveTemplate(templateIndex);
+			template.saveStrategy.Execute(template);		
 		}
 
 
 		/* Method to execute all backups */
 		public void ExecuteAllSave()
 		{
+			if (templates.Count == 0)
+            {
+				throw new ArgumentException("There is no save templates to execute");
+			}
 			foreach (SaveTemplate template in templates)
 			{
 				template.saveStrategy.Execute(template);
