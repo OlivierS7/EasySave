@@ -68,7 +68,7 @@ namespace NSController {
 			this.model.DeleteSaveTemplate(templateIndex);
 		}
 		public void ExecuteSave(int templateIndex) {
-			this.model.ExecuteOneSave(templateIndex - 1);
+			this.model.ExecuteOneSave(templateIndex);
 		}
 		public void ExecuteAllSave() {
 			this.model.ExecuteAllSave();

@@ -17,19 +17,22 @@ namespace NSModel {
 		/* Constructor */
 		public Model()
         {
-			this.templates = new List<SaveTemplate>();
+			this.templates = SaveTemplateConfig.GetSaveTemplateInstance().GetTemplates();
         }
 
 		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
+			SaveTemplateConfig.GetSaveTemplateInstance().Write(template);
 		}
 
 		/* Method to delete a save template */
 		public void DeleteSaveTemplate(int templateIndex) {
+			Console.WriteLine(this.templates.ToString());
 			try
             {
+				SaveTemplateConfig.GetSaveTemplateInstance().Delete(IntToSaveTemplate(templateIndex));
 				this.templates.RemoveAt(templateIndex - 1);
 			}
 			catch
@@ -65,7 +68,7 @@ namespace NSModel {
 		/* Method to get the saveTemplate from the user's input */
 		private SaveTemplate IntToSaveTemplate(int templateIndex)
         {
-			return this.templates[templateIndex];
+			return this.templates[templateIndex - 1];
         }
 
 

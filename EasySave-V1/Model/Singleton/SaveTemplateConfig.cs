@@ -53,7 +53,7 @@ namespace NSModel.Singleton {
 			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
 			if (templates != null)
 			{
-				templates.RemoveAll(item => item.backupName == template.backupName);
+				templates.RemoveAll(item => item.backupName == template.backupName && item.destDirectory == template.destDirectory);
 			}
 			StreamWriter writer = new StreamWriter(file.ToString());
 			writer.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
