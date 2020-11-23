@@ -17,14 +17,14 @@ namespace NSModel {
 		/* Constructor */
 		public Model()
         {
-			this.templates = SaveTemplateConfig.GetSaveTemplateInstance().GetTemplates();
+			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
         }
 
 		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
-			SaveTemplateConfig.GetSaveTemplateInstance().Write(template);
+			SaveTemplateConfig.GetInstance().Write(template);
 		}
 
 		/* Method to delete a save template */
@@ -32,7 +32,7 @@ namespace NSModel {
 			Console.WriteLine(this.templates.ToString());
 			try
             {
-				SaveTemplateConfig.GetSaveTemplateInstance().Delete(IntToSaveTemplate(templateIndex));
+				SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 				this.templates.RemoveAt(templateIndex - 1);
 			}
 			catch
