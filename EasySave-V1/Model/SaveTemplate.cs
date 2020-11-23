@@ -5,6 +5,7 @@ namespace NSModel
 {
     [DataContract]
 	public class SaveTemplate {
+        /* Parameters for the Serialization */
         [DataMember(Name = "name")]
         private string _backupName;
         [DataMember(Name = "srcDir")]

@@ -26,6 +26,7 @@ namespace NSModel {
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTime);
             };
             CopyAll(srcDirectoryInfo, destDirectoryInfo);
+            /* Call the Singleton to write in FullSaveHistory.json */
             FullSaveHistory.GetInstance().Write(template, dateTime);
         }
 

@@ -13,6 +13,7 @@ namespace NSModel.Singleton {
 			set => _file = value; 
 		}
 
+		/* Constructor */
         private FullSaveHistory() {
 			string path = "..\\..\\..\\FullSaveHistory.json";
 			if (File.Exists(path))
@@ -27,6 +28,8 @@ namespace NSModel.Singleton {
 				}				
 			}
 		}
+
+		/* Method to get Instance of this Singleton*/
 		public static FullSaveHistory GetInstance() {
 			if (fullSaveHistory == null)
 			{
@@ -34,6 +37,8 @@ namespace NSModel.Singleton {
 			}
 			return fullSaveHistory;
 		}
+
+		/* Method to write into FullSaveHistory.json to save the full backups */
 		public void Write(SaveTemplate template, string dateTime) {
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
@@ -54,6 +59,8 @@ namespace NSModel.Singleton {
 			writer.Close();
 			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
 		}
+
+		/* Method to get the last full save for a source directory */
 		public SaveTemplate GetFullSaveForDir(SaveTemplate template) {
 			string reader = File.ReadAllText(file.ToString());
 			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
