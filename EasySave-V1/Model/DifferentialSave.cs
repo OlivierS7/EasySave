@@ -48,9 +48,8 @@ namespace NSModel
                                 stopw.Start();
                                 src.CopyTo(src.FullName.Replace(srcDir, destDir));
                                 stopw.Stop();
-                                Log.GetLogInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
+                                Log.GetLogInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
                                 stopw.Reset();
-                                Console.WriteLine("Fichier édité: " + compFile);
                             }
                         }
                     }
@@ -59,7 +58,11 @@ namespace NSModel
                     {
                         /* Creating files and folders if they doesn't exists */
                         new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
+                        stopw.Start();
                         src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                        stopw.Stop();
+                        Log.GetLogInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
+                        stopw.Reset();
                     }
                     wasCreated = false;
                 }

@@ -4,5 +4,11 @@
     "srcDir": "C:\\Users\\sqart\\Documents\\A3\\src",
     "destDir": "C:\\Users\\sqart\\Documents\\A3\\dest",
     "type": 1
+  },
+  {
+    "name": "diff",
+    "srcDir": "C:\\Users\\sqart\\Documents\\A3\\src",
+    "destDir": "C:\\Users\\sqart\\Documents\\A3\\comp",
+    "type": 2
   }
 ]
