@@ -54,7 +54,7 @@ namespace NSController {
 		}
 		public void OpenLogs()
         {
-			model.OpenLogs();
+			this.model.OpenLogs();
 		}
 	}
 }

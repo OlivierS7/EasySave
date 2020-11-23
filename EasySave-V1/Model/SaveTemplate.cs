@@ -1,15 +1,18 @@
 using System;
-using System.IO;
+using System.Runtime.Serialization;
 
 namespace NSModel
 {
+    [DataContract]
 	public class SaveTemplate {
+        [DataMember(Name = "name")]
         private string _backupName;
+        [DataMember(Name = "srcDir")]
         private string _srcDirectory;
+        [DataMember(Name = "destDir")]
         private string _destDirectory;
+        [DataMember(Name = "type")]
         private int _backupType;
-        private DirectoryInfo _source;
-        private DirectoryInfo _dest;
         private SaveStrategy _saveStrategy;
 
         public string backupName
@@ -22,33 +25,13 @@ namespace NSModel
         public string srcDirectory
         {
             get => this._srcDirectory;
-            set
-            {
-                this._srcDirectory = value;
-                this._source = new DirectoryInfo(value);
-            }
+            set => this._srcDirectory = value;
         }
 
         public string destDirectory
         {
             get => this._destDirectory;
-            set
-            {
-                this._destDirectory = value;
-                this._dest = new DirectoryInfo(value);
-            }
-        }
-
-        public DirectoryInfo srcDirectoryInfo
-        {
-            get => this._source;
-            set => this._source = value;
-        }
-
-        public DirectoryInfo destDirectoryInfo
-        {
-            get => this._dest;
-            set => this._dest = value;
+            set => this._destDirectory = value;
         }
 
         public int backupType
@@ -81,7 +64,5 @@ namespace NSModel
                 throw new ArgumentException("Type of Save isn't valid. Please try again !");
             }
         }
-
-	}
-
+    }
 }

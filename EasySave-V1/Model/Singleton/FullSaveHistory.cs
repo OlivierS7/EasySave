@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace NSModel.Singleton {
@@ -20,10 +21,10 @@ namespace NSModel.Singleton {
 			} else
             {
 				using (File.Create(path))
-				{
-					File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
+				{					
 					file = new FileInfo(path);
-				}
+					File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
+				}				
 			}
 		}
 		public static FullSaveHistory GetInstance() {
@@ -33,43 +34,38 @@ namespace NSModel.Singleton {
 			}
 			return fullSaveHistory;
 		}
-		public void Write(SaveTemplate template) {
-			string path = "..\\..\\..\\tempFullSaveHistory.json";
-			var obj = new { srcDir = template.srcDirectory, destDir = template.destDirectory };
-			string lineToInsert = JsonConvert.SerializeObject(obj);
-			string stringToCompare = template.srcDirectory.Replace("\\", "\\\\");
-			string currentLine;
-			bool exist = false;
-			File.Copy(file.ToString(), path);
+		public void Write(SaveTemplate template, string dateTime) {
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
 			File.SetAttributes(file.ToString(), attributes);
-			StreamReader reader = new StreamReader(path);
-			StreamWriter writer = new StreamWriter(file.ToString());
-			while ((currentLine = reader.ReadLine()) != null)
-			{
-				if (currentLine.Contains("\"srcDir\":\"" + stringToCompare + "\""))
-				{
-					exist = true;
-					writer.WriteLine(lineToInsert);
-				} 
-				else
-				{
-					writer.WriteLine(currentLine);
-				}				
-			}
-			if (!exist)
+            string reader = File.ReadAllText(file.ToString());
+			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
+			if (templates != null)
             {
-				writer.WriteLine(lineToInsert);
-            }
-			reader.Close();
+				templates.RemoveAll(item => item.srcDirectory == template.srcDirectory);
+			} else
+            {
+				templates = new List<SaveTemplate>();
+			}
+			template.destDirectory += "\\" + dateTime;
+			templates.Add(template);
+			StreamWriter writer = new StreamWriter(file.ToString());
+			writer.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
 			writer.Close();
-			File.SetAttributes(file.ToString(), File.GetAttributes(path) | FileAttributes.Hidden);
-			File.Delete(path);
-			//File.Move(path, file.ToString());
+			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
 		}
-		public string GetFullSaveForDir(string srcDir) {
-			throw new System.NotImplementedException("Not implemented");
+		public SaveTemplate GetFullSaveForDir(SaveTemplate template) {
+			string reader = File.ReadAllText(file.ToString());
+			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
+			if (templates != null)
+			{
+				foreach (SaveTemplate item in templates)
+                {
+					if (item.srcDirectory == template.srcDirectory)
+						return item;
+                }
+			}
+			return null;
 		}
 	}
 }
