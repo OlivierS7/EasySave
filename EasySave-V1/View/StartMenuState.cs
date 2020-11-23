@@ -46,7 +46,7 @@ namespace NSView {
 					break;
 				case 4:
 					Console.Clear();
-					Console.WriteLine("\n\n\n		   _____                                                                             _ ");
+					Console.WriteLine("\n\n\n\n\n\n		   _____                                                                             _ ");
 					Console.WriteLine("		  / ____|                                                                           | |");
 					Console.WriteLine("		 | (___     ___    ___     _   _    ___    _   _     ___    ___     ___    _ __     | |");
 					Console.WriteLine("		  \\___ \\   / _ \\  / _ \\   | | | |  / _ \\  | | | |   / __|  / _ \\   / _ \\  | '_ \\    | |");
