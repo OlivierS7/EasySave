@@ -1,3 +1,8 @@
+#User-Config-Files
+FullSaveHistory.json
+SaveTemplatesConfig.json
+State.json
+
 # User-specific files
 *.rsuser
 *.suo
