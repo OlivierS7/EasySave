@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using NSModel.Singleton;
 
@@ -25,6 +26,7 @@ namespace NSModel
                 string[] srcFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
                 string[] compFiles = Directory.GetFiles(compDir, ".", SearchOption.AllDirectories);
 
+                Stopwatch stopw = new Stopwatch();
                 bool wasCreated = false;
                 foreach (string srcFile in srcFiles)
                 {
@@ -43,7 +45,11 @@ namespace NSModel
                             {
                                 /* Creating files and folders if they doesn't exists */
                                 new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
+                                stopw.Start();
                                 src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                                stopw.Stop();
+                                Log.GetLogInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
+                                stopw.Reset();
                                 Console.WriteLine("Fichier édité: " + compFile);
                             }
                         }
