@@ -1,5 +1,7 @@
+using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace NSModel.Singleton
 {
@@ -9,6 +11,9 @@ namespace NSModel.Singleton
 		private DirectoryInfo dir;
 		private FileInfo _file;
 		private string _fileName;
+		private string _directoryPath = @"..\..\..\..\Logs";
+		private string _fileinfoPath = @"..\..\..\..\Logs\logs.json";
+
 
 		public FileInfo file
 		{
@@ -22,9 +27,9 @@ namespace NSModel.Singleton
 
 		private Log()
 		{
-			dir = new DirectoryInfo("..\\..\\..\\..\\Logs");
-			_file = new FileInfo("..\\..\\..\\..\\Logs\\logsTest.txt");//à changer
-			fileName = "..\\..\\..\\..\\Logs\\logsTest.txt";
+			dir = new DirectoryInfo(_directoryPath);
+			_file = new FileInfo(_fileinfoPath);//à changer
+			fileName = _fileinfoPath;
 		}
 		public static Log GetLogInstance()
 		{
@@ -34,13 +39,49 @@ namespace NSModel.Singleton
 			}
 			return log;
 		}
-		private void Write(SaveTemplate template, int totalSize, DateTime time)
+		public void Write(SaveTemplate template, long totalSize, TimeSpan time)
 		{
-			throw new System.NotImplementedException("Not implemented");
-		}
-		private string CheckExistingLogs()
-		{
-			throw new System.NotImplementedException("Not implemented");
+			var obj = new 
+			{
+				BackupName = template.backupName, 
+				SourceDirectory = template.srcDirectory, 
+				DestinationDirectory = template.destDirectory, 
+				Size = totalSize + "Bytes", 
+				Time = time  
+			};
+
+			if (!File.Exists(_fileinfoPath))
+			{
+				try
+				{
+					StreamWriter sw = file.CreateText();
+					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
+					sw.Write(output);
+					sw.Close();
+				}
+				catch (Exception e)
+				{
+
+					Console.WriteLine("Exception: " + e.Message);
+				}
+			}
+			else
+			{
+				try
+				{
+					StreamWriter sw = file.AppendText();
+					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
+					sw.Write(output);
+					sw.Close();
+				}
+				catch (Exception e)
+				{
+
+					Console.WriteLine("Exception: " + e.Message);
+
+				}
+
+			}
 		}
 	}
 }
