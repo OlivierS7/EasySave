@@ -13,8 +13,6 @@ namespace NSModel {
             string dateTime = Todaysdate + "_" + TodaysTime;
             DirectoryInfo srcDirectoryInfo = new DirectoryInfo(template.srcDirectory);
             DirectoryInfo destDirectoryInfo = new DirectoryInfo(template.destDirectory);
-            Stopwatch stopw = new Stopwatch();
-            stopw.Start();
             if (!Directory.Exists(template.destDirectory))
             {                
                 /* Create Directory and SubDirectory with date and time */
@@ -28,45 +26,31 @@ namespace NSModel {
                 destDirectoryInfo.CreateSubdirectory(dateTime);
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTime);
             };
-            CopyAll(srcDirectoryInfo, destDirectoryInfo);
+            CopyAll(srcDirectoryInfo, destDirectoryInfo, template.backupName);
             /* Call the Singleton to write in FullSaveHistory.json */
             FullSaveHistory.GetInstance().Write(template, dateTime);
-            stopw.Stop();
-            Log.GetLogInstance().Write(template, DirSize(srcDirectoryInfo), stopw.Elapsed);
         }
 
         /* Method to create a full backup of a directory */
-        public void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName)
         {
+            Stopwatch stopw = new Stopwatch();
             Directory.CreateDirectory(target.FullName);
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {
+                stopw.Start();
                 fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                stopw.Stop();
+                Log.GetLogInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
+                stopw.Reset();
             }
             // Copy each subdirectory using recursion.
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+                CopyAll(diSourceSubDir, nextTargetSubDir, saveTemplateName);
             }
-        }
-        public long DirSize(DirectoryInfo d)
-        {
-            long size = 0;
-            // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis)
-            {
-                size += fi.Length;
-            }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                size += DirSize(di);
-            }
-            return size;
         }
     }
 }

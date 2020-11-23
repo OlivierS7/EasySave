@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -11,13 +12,33 @@ namespace NSModel.Singleton
 		private DirectoryInfo dir;
 		private FileInfo _file;
 		private string _fileName;
-		private string _directoryPath = @"..\..\..\..\Logs";
-		private string _fileinfoPath = @"..\..\..\..\Logs\logs.json";
+		private string _directoryPath = @"..\..\..\Logs";
+		public List<LogObject> logObjects = new List<LogObject>();
 
+		public class LogObject
+        {
+			public string SaveTemplateName;
+			public string SourceDirectory;
+			public string DestinationDirectory;
+			public string Size;
+			public TimeSpan Time;
+			public string Hour;
+
+			public LogObject(string SaveTemplateName, string SourceDirectory ,string DestinationDirectory, string Size, TimeSpan Time)
+            {
+				this.SaveTemplateName = SaveTemplateName;
+				this.SourceDirectory = SourceDirectory;
+				this.DestinationDirectory = DestinationDirectory;
+				this.Size = Size;
+				this.Time = Time;
+				this.Hour = DateTime.Now.ToString("HH:mm:ss");
+            }
+		}
 
 		public FileInfo file
 		{
 			get => _file;
+			set => _file = value;
 		}
 		public string fileName
 		{
@@ -27,9 +48,23 @@ namespace NSModel.Singleton
 
 		private Log()
 		{
-			dir = new DirectoryInfo(_directoryPath);
-			_file = new FileInfo(_fileinfoPath);//à changer
-			fileName = _fileinfoPath;
+			String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
+			string currentLog = _directoryPath + "\\" + "logs-" + Todaysdate + ".json";
+			new FileInfo(currentLog).Directory.Create();
+			if (File.Exists(currentLog))
+			{
+				file = new FileInfo(currentLog);
+				string reader = File.ReadAllText(file.ToString());
+				/* Reading the config file and converting it to a list of LogObjects */
+				logObjects = JsonConvert.DeserializeObject<List<LogObject>>(reader);
+			}
+			else
+			{
+				using (File.Create(currentLog))
+				{
+					file = new FileInfo(currentLog);
+				}
+			}
 		}
 		public static Log GetLogInstance()
 		{
@@ -39,45 +74,14 @@ namespace NSModel.Singleton
 			}
 			return log;
 		}
-		public void Write(SaveTemplate template, long totalSize, TimeSpan time)
+		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time)
 		{
-			var obj = new 
-			{
-				BackupName = template.backupName, 
-				SourceDirectory = template.srcDirectory, 
-				DestinationDirectory = template.destDirectory, 
-				Size = totalSize + "Bytes", 
-				Time = time  
-			};
-
-			if (!File.Exists(_fileinfoPath))
-			{
-				try
-				{
-					StreamWriter sw = file.CreateText();
-					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
-					sw.Write(output);
-					sw.Close();
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine("Exception: " + e.Message);
-				}
-			}
-			else
-			{
-				try
-				{
-					StreamWriter sw = file.AppendText();
-					string output = JsonConvert.SerializeObject(obj,Formatting.Indented);
-					sw.Write(output);
-					sw.Close();
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine("Exception: " + e.Message);
-				}
-			}
+			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString()+" bytes", time);
+			logObjects.Add(currentFile);
+			StreamWriter writer = new StreamWriter(file.ToString());
+			string output = JsonConvert.SerializeObject(logObjects,Formatting.Indented);
+			writer.Write(output);
+			writer.Close();
 		}
 	}
 }

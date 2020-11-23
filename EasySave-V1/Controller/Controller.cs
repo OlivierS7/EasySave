@@ -125,5 +125,10 @@ namespace NSController {
         {
 			this.consoleView.PrintMessage(message);
         }
+
+		public void Progression(string progression)
+        {
+			this.consoleView.Progression(progression);
+        }
 	}
 }

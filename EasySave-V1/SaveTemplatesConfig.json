@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "name": "log test",
+    "srcDir": "C:\\Users\\sqart\\Documents\\A3\\src",
+    "destDir": "C:\\Users\\sqart\\Documents\\A3\\dest",
+    "type": 1
+  }
+]

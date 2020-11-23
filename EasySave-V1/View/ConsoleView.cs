@@ -23,5 +23,9 @@ namespace NSView {
 			Console.WriteLine("\nPress any key to continue...");
 			Console.ReadKey();
         }
+		public void Progression (string progression)
+        {
+			Console.WriteLine(progression);
+        }
 	}
 }
