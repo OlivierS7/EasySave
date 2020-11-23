@@ -54,6 +54,7 @@ namespace NSView {
 					Console.WriteLine("		 |_____/   \\___|  \\___|    \\__, |  \\___/   \\__,_|   |___/  \\___/   \\___/  |_| |_|   (_)");
 					Console.WriteLine("		                            __/ |                                                      ");
 					Console.WriteLine("		                           |___/                                                       ");
+					Console.ReadKey();
 					Environment.Exit(1);
 					break;
 			}		
