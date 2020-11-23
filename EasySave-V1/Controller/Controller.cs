@@ -1,6 +1,10 @@
 using NSModel;
 using NSView;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+
 
 namespace NSController {
 	public class Controller {
@@ -30,9 +34,35 @@ namespace NSController {
 		public Controller() {
 			this.model = new Model();
 			this.consoleView = new ConsoleView(this);
+			this.consoleView.CurrentMenu.ShowMenu(this.consoleView);
 		}
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
-			this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+			string error = "";
+			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
+			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
+			Match nameMatch = nameForm.Match(name);
+			Match srcDirNameMatch = directoryName.Match(srcDir);
+			Match destDirNameMatch = directoryName.Match(destDir);
+			if(nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
+            {
+				this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+			}
+            else
+			{
+				if(!nameMatch.Success)
+                {
+					error = "Invalid name\n";
+                }
+				if(!srcDirNameMatch.Success)
+                {
+					error += "Invalid source directory path format\n";
+                }
+				if(!destDirNameMatch.Success)
+                {
+					error += "Invalid destination directory path format\n";
+				}
+				PrintMessage(error);
+            }
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
 			this.model.DeleteSaveTemplate(templateIndex);
@@ -56,5 +86,9 @@ namespace NSController {
         {
 			model.OpenLogs();
 		}
+		public void PrintMessage(string message)
+        {
+			this.consoleView.PrintMessage(message);
+        }
 	}
 }
