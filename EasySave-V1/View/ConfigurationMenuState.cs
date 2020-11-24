@@ -13,24 +13,30 @@ namespace NSView {
 			Console.WriteLine("| | |____   / ____ \\   ____) |    | |       ____) |  / ____ \\     \\  /    | |____  |");
 			Console.WriteLine("| |______| /_/    \\_\\ |_____/     |_|      |_____/  /_/    \\_\\     \\/     |______| |");
 			Console.WriteLine("|__________________________________________________________________________________| \n \n");
-			Console.WriteLine("Please choose an option:");
-			Console.WriteLine("   1)Create a save template");
-			Console.WriteLine("   2)Delete a save template");
-			Console.WriteLine("   3)Modify existing save template");
-			Console.WriteLine("   4)Back to menu");
-			Console.WriteLine("   5)Exit application");
+			Console.WriteLine("  Please choose an option:");
+			Console.WriteLine("  _________________________________________");
+			Console.WriteLine(" |                                         |");
+			Console.WriteLine(" | 1 - Create a save template              |");
+			Console.WriteLine(" | 2 - Delete a save template              |");
+			Console.WriteLine(" | 3 - Modify existing save template       |");
+			Console.WriteLine(" | 4 - Back to menu                        |");
+			Console.WriteLine(" | 5 - Exit application                    |");
+			Console.WriteLine(" |_________________________________________|");
 			ConsoleKeyInfo input = Console.ReadKey();
 			int choice = view.CheckInput(input);
 			/* Verify user's input */
 			while (choice == 0 || choice > 5)
 			{
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine("/!\\Please choose a valid option:");
-				Console.WriteLine("   1)Create a save template");
-				Console.WriteLine("   2)Delete a save template");
-				Console.WriteLine("   3)Modify existing save template");
-				Console.WriteLine("   4)Back to menu");
-				Console.WriteLine("   5)Exit application");
+				Console.WriteLine(@"    /!\Please choose a valid option/!\");
+				Console.WriteLine("  _________________________________________");
+				Console.WriteLine(" |                                         |");
+				Console.WriteLine(" | 1 - Create a save template              |");
+				Console.WriteLine(" | 2 - Delete a save template              |");
+				Console.WriteLine(" | 3 - Modify existing save template       |");
+				Console.WriteLine(" | 4 - Back to menu                        |");
+				Console.WriteLine(" | 5 - Exit application                    |");
+				Console.WriteLine(" |_________________________________________|");
 				input = Console.ReadKey();
 				choice = view.CheckInput(input);
 			}
@@ -56,9 +62,9 @@ namespace NSView {
 					Console.WriteLine("\n\n\n\n\n\n		   _____                                                                             _ ");
 					Console.WriteLine("		  / ____|                                                                           | |");
 					Console.WriteLine("		 | (___     ___    ___     _   _    ___    _   _     ___    ___     ___    _ __     | |");
-					Console.WriteLine("		  \\___ \\   / _ \\  / _ \\   | | | |  / _ \\  | | | |   / __|  / _ \\   / _ \\  | '_ \\    | |");
-					Console.WriteLine("		  ____) | |  __/ |  __/   | |_| | | (_) | | |_| |   \\__ \\ | (_) | | (_) | | | | |   |_|");
-					Console.WriteLine("		 |_____/   \\___|  \\___|    \\__, |  \\___/   \\__,_|   |___/  \\___/   \\___/  |_| |_|   (_)");
+					Console.WriteLine(@"		  \___ \   / _ \  / _ \   | | | |  / _ \  | | | |   / __|  / _ \   / _ \  | '_ \    | |");
+					Console.WriteLine(@"		  ____) | |  __/ |  __/   | |_| | | (_) | | |_| |   \__ \ | (_) | | (_) | | | | |   |_|");
+					Console.WriteLine(@"		 |_____/   \___|  \___|    \__, |  \___/   \__,_|   |___/  \___/   \___/  |_| |_|   (_)");
 					Console.WriteLine("		                            __/ |                                                      ");
 					Console.WriteLine("		                           |___/                                                       ");
 					Console.ReadKey();

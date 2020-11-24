@@ -19,7 +19,7 @@ namespace NSView {
 		}
 		public void PrintMessage (string message)
         {
-			Console.WriteLine("\n/!\\WARNING/!\\ " + message);
+			Console.WriteLine("\n		/!\\WARNING/!\\\n" + message);
 			Console.WriteLine("\nPress any key to continue...");
 			Console.ReadKey();
         }

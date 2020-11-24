@@ -6,11 +6,11 @@ namespace NSView {
 		public void ShowMenu(ConsoleView view) {
 			try
             {
-				Console.WriteLine("\nWhich save template would you like to delete ?");
+				Console.WriteLine("\n  Which save template would you like to delete ?");
 				List<string> templatesName = view.Controller.GetAllTemplates();
 				for (int i = 0; i < templatesName.Count; i++)
 				{
-					Console.WriteLine((i + 1) + " - " + templatesName[i]);
+					Console.WriteLine("    " + (i + 1) + " - " + templatesName[i]);
 				}
 				int choice;
 				string input = Console.ReadLine();

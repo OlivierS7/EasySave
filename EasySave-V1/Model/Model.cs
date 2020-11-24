@@ -26,6 +26,10 @@ namespace NSModel {
             {
 				throw new Exception(type + " isn't a valid type");
             }
+			if(srcDir == destDir)
+            {
+				throw new Exception("The source directory cannot be the same as the destination directory");
+            }
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
