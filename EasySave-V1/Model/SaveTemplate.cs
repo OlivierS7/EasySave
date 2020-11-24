@@ -1,4 +1,6 @@
+using NSModel.Singleton;
 using System;
+using System.IO;
 using System.Runtime.Serialization;
 
 namespace NSModel
@@ -49,6 +51,14 @@ namespace NSModel
 
         public SaveTemplate(string name, string srcDir, string destDir, int type)
         {
+            string[] allFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
+            int totalFiles = allFiles.Length;
+            long totalSize = 0;
+            foreach (string currentFile in allFiles)
+            {
+                FileInfo info = new FileInfo(currentFile);
+                totalSize += info.Length;
+            }
             this.backupName = name;
             this.srcDirectory = srcDir;
             this.destDirectory = destDir;
@@ -60,7 +70,7 @@ namespace NSModel
             else if (type == 2)
             {
                 this.saveStrategy = new DifferentialSave();
-            } 
+            }
         }
     }
 }

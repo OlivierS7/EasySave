@@ -86,7 +86,7 @@ namespace NSModel.Singleton {
 			if (templates != null)
 			{
 				/* Removing the template from the config file */
-				templates.RemoveAll(item => item.backupName == template.backupName && item.destDirectory == template.destDirectory);
+				templates.RemoveAll(item => item.backupName == template.backupName && item.destDirectory == template.destDirectory && item.srcDirectory == template.srcDirectory);
 			}
 			StreamWriter writer = new StreamWriter(file.ToString());
 
@@ -114,6 +114,9 @@ namespace NSModel.Singleton {
 			{
 				templates = new List<SaveTemplate>();
 			}
+
+			/* Hiding file */
+			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
 			return templates;
 		}
 	}
