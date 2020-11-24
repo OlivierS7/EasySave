@@ -66,7 +66,7 @@ namespace NSModel.Singleton
 				}
 			}
 		}
-		public static Log GetLogInstance()
+		public static Log GetInstance()
 		{
 			if (log == null)
 			{

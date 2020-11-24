@@ -81,7 +81,7 @@ namespace NSController {
 				PrintMessage(err.Message);
 			}
 		}
-		public void ExecuteSave(int templateIndex) {
+		public void ExecuteOneSave(int templateIndex) {
 			try
 			{
 				this.model.ExecuteOneSave(templateIndex);

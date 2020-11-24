@@ -48,7 +48,7 @@ namespace NSModel
                                 stopw.Start();
                                 src.CopyTo(src.FullName.Replace(srcDir, destDir));
                                 stopw.Stop();
-                                Log.GetLogInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
+                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
                                 stopw.Reset();
                             }
                         }
@@ -61,7 +61,7 @@ namespace NSModel
                         stopw.Start();
                         src.CopyTo(src.FullName.Replace(srcDir, destDir));
                         stopw.Stop();
-                        Log.GetLogInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
                         stopw.Reset();
                     }
                     wasCreated = false;

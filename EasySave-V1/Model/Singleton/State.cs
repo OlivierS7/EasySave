@@ -9,7 +9,7 @@ namespace NSModel.Singleton {
 		private State() {
 			throw new System.NotImplementedException("Not implemented");
 		}
-		public static State GetStateInstance() {
+		public static State GetInstance() {
 			throw new System.NotImplementedException("Not implemented");
 		}
 		private void InitWrite(SaveTemplate template, bool state, int totalFiles, int totalSize) {

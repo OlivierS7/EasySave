@@ -42,7 +42,7 @@ namespace NSModel {
                 stopw.Start();
                 fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
                 stopw.Stop();
-                Log.GetLogInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
+                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
                 stopw.Reset();
             }
             // Copy each subdirectory using recursion.

@@ -44,7 +44,7 @@ namespace NSView {
 					}
 					string stringInput = Console.ReadLine();
 					Int32.TryParse(stringInput, out choice);
-					view.Controller.ExecuteSave(choice);
+					view.Controller.ExecuteOneSave(choice);
 					view.ChangeMenu(new StartMenuState());
 				}
 				else

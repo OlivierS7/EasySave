@@ -76,7 +76,7 @@ namespace NSModel {
 		/* Method to open logs */
 		public void OpenLogs()
         {
-			Process.Start("Notepad.exe", Log.GetLogInstance().file.ToString());
+			Process.Start("Notepad.exe", Log.GetInstance().file.ToString());
 		}
 	}
 }
