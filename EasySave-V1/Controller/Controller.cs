@@ -81,6 +81,10 @@ namespace NSController {
 				PrintMessage(err.Message);
 			}
 		}
+		public void ModifySaveTemplate(int templateIndex, string destDir, int type)
+        {
+			this.model.ModifySaveTemplate(templateIndex, destDir, type);
+        }
 		public void ExecuteOneSave(int templateIndex) {
 			try
 			{

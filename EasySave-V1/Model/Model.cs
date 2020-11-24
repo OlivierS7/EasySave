@@ -24,11 +24,11 @@ namespace NSModel {
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			if(type != 1 && type != 2)
             {
-				throw new Exception(type + " isn't a valid type");
+				throw new Exception("  " + type + " isn't a valid type");
             }
 			if(srcDir == destDir)
             {
-				throw new Exception("The source directory cannot be the same as the destination directory");
+				throw new Exception("  The source directory cannot be the same as the destination directory");
             }
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
@@ -40,18 +40,39 @@ namespace NSModel {
 		public void DeleteSaveTemplate(int templateIndex) {
 			if (this.templates.Count < templateIndex)
             {
-				throw new Exception(templateIndex + ": No save template at this index");
+				throw new Exception("  " + templateIndex + ": No save template at this index");
 			}
 			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			State.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			this.templates.RemoveAt(templateIndex - 1);
 		}
 
+		public void ModifySaveTemplate(int templateIndex, string destDir, int type)
+        {
+			SaveTemplate template = this.IntToSaveTemplate(templateIndex);
+			if (type != 1 && type != 2)
+			{
+				throw new Exception("  " + type + " isn't a valid type");
+			}
+			if (template.srcDirectory == destDir)
+			{
+				throw new Exception("  The source directory cannot be the same as the destination directory");
+			}
+			SaveTemplateConfig.GetInstance().Delete(template);
+			State.GetInstance().Delete(template);
+			template.backupType = type;
+			template.destDirectory = destDir;
+			this.templates.RemoveAt(templateIndex - 1);
+			this.templates.Add(template);
+			SaveTemplateConfig.GetInstance().Write(template);
+			State.GetInstance().Create(template);
+		}
+
 		/* Method to execute one backup */
 		public void ExecuteOneSave(int templateIndex) {
 			if (this.templates.Count < templateIndex)
 			{
-				throw new Exception(templateIndex + ": No save template at this index");
+				throw new Exception("  " + templateIndex + ": No save template at this index");
 			}
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			template.saveStrategy.Execute(template);		
@@ -63,7 +84,7 @@ namespace NSModel {
 		{
 			if (templates.Count == 0)
             {
-				throw new Exception("There is no save templates to execute");
+				throw new Exception("  There is no save templates to execute");
 			}
 			foreach (SaveTemplate template in templates)
 			{

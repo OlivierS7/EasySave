@@ -50,9 +50,7 @@ namespace NSView {
 					view.ChangeMenu(new DeleteMenuState());
 					break;
 				case 3:
-					Console.WriteLine("Not yet implemented... Back to menu");
-					Thread.Sleep(2000);
-					view.ChangeMenu(new StartMenuState());
+					view.ChangeMenu(new ModifyMenuState());
 					break;
 				case 4:
 					view.ChangeMenu(new StartMenuState());
