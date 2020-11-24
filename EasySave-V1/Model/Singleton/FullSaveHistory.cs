@@ -69,7 +69,13 @@ namespace NSModel.Singleton {
 				foreach (SaveTemplate item in templates)
                 {
 					if (item.srcDirectory == template.srcDirectory)
+                    {
+						if(!new DirectoryInfo(item.srcDirectory).Exists)
+                        {
+							return null;
+                        }
 						return item;
+					}
                 }
 			}
 			return null;
