@@ -58,7 +58,7 @@ namespace NSView {
 				}
 				else if(choice == 2)
 				{
-					Console.WriteLine("  Are you sure you want to execute all these templates ? (y/n)");
+					Console.WriteLine("\n  Are you sure you want to execute all these templates ? (y/n)");
 					List<string> templatesName = view.Controller.GetAllTemplates();
 					for (int i = 0; i < templatesName.Count; i++)
 					{
