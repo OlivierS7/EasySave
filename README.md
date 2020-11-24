@@ -4,6 +4,7 @@
 
 - [Introduction](#Introduction)
 - [Pre-requisites](#Pre-requisites)
+<a href="https://github.com/OlivierS7/EasySave/tree/easysave/v1.0/UML" >UML Diagrams</a>
 - [Made With](#Made-With)
 - [Autors](#Autors)
 
