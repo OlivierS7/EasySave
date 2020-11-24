@@ -52,7 +52,6 @@ namespace NSModel {
             Directory.CreateDirectory(target.FullName);
             int filesLeft = totalFiles;
             long sizeLeft = totalSize;
-            FileInfo destFile;
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {

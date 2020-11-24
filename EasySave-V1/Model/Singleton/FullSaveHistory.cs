@@ -52,8 +52,8 @@ namespace NSModel.Singleton {
             {
 				templates = new List<SaveTemplate>();
 			}
-			template.destDirectory += "\\" + dateTime;
-			templates.Add(template);
+			SaveTemplate currentTemplate = new SaveTemplate(template.backupName, template.srcDirectory, template.destDirectory + "\\" + dateTime, template.backupType);
+			templates.Add(currentTemplate);
 			StreamWriter writer = new StreamWriter(file.ToString());
 			writer.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
 			writer.Close();

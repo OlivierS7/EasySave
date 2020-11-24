@@ -74,7 +74,7 @@ namespace NSView {
 						Thread.Sleep(2000);
 					}
 				}
-			} catch (ArgumentException err)
+			} catch (Exception err)
             {
 				view.PrintMessage(err.Message);
             }

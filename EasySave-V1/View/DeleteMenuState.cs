@@ -6,7 +6,7 @@ namespace NSView {
 		public void ShowMenu(ConsoleView view) {
 			try
             {
-				Console.WriteLine("Which save template would you like to delete ?");
+				Console.WriteLine("\nWhich save template would you like to delete ?");
 				List<string> templatesName = view.Controller.GetAllTemplates();
 				for (int i = 0; i < templatesName.Count; i++)
 				{
@@ -16,7 +16,7 @@ namespace NSView {
 				string input = Console.ReadLine();
 				Int32.TryParse(input, out choice);
 				view.Controller.DeleteSaveTemplate(choice);
-			} catch (ArgumentException err)
+			} catch (Exception err)
             {
 				view.PrintMessage(err.Message);
             }
