@@ -39,7 +39,14 @@ namespace NSModel.Singleton {
 				this.totalFiles = totalFiles;
 				this.filesLeft = filesLeft;
 				this.time = time;
-				this.progression = 100 - ((sizeLeft * 100) / totalSize);
+				if(totalSize == 0)
+                {
+					this.progression = 0;
+                }
+                else
+                {
+					this.progression = 100 - ((sizeLeft * 100) / totalSize);
+				}
 			}
 		}
 
@@ -105,6 +112,49 @@ namespace NSModel.Singleton {
 				templatesState.RemoveAt(index);
 				templatesState.Insert(index, currentTemplate);
 			}
+			StreamWriter writer = new StreamWriter(file.ToString());
+			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
+			writer.Write(output);
+			writer.Close();
+		}
+		public void Create(SaveTemplate template)
+		{
+			string reader = File.ReadAllText(file.ToString());
+			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
+			if (this.templatesState == null)
+			{
+				this.templatesState = new List<SaveTemplateState>();
+			}
+			string saveType;
+			if (template.backupType == 1)
+			{
+				saveType = "FullSave";
+			}
+			else
+			{
+				saveType = "DifferentialSave";
+			}
+			this.templatesState.Add(new SaveTemplateState(DateTime.Now, template, saveType, false, null, null, 0, 0, 0, 0, 0, TimeSpan.Zero));
+			StreamWriter writer = new StreamWriter(file.ToString());
+			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
+			writer.Write(output);
+			writer.Close();
+		}
+		public void Delete(SaveTemplate template)
+        {
+			string reader = File.ReadAllText(file.ToString());
+			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
+			int index = 0;
+			int count = 0;
+			foreach(SaveTemplateState getTemplate in templatesState)
+			{
+				if(getTemplate.template.backupName == template.backupName && getTemplate.template.srcDirectory == template.srcDirectory)
+                {
+					index = count;
+					count++;
+				}
+			}
+			this.templatesState.RemoveAt(index);
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
 			writer.Write(output);

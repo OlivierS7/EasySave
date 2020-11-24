@@ -29,6 +29,7 @@ namespace NSModel {
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
+			State.GetInstance().Create(template);
 		}
 
 		/* Method to delete a save template */
@@ -38,6 +39,7 @@ namespace NSModel {
 				throw new Exception(templateIndex + ": No save template at this index");
 			}
 			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
+			State.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			this.templates.RemoveAt(templateIndex - 1);
 		}
 
