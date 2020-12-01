@@ -3,11 +3,14 @@ using System.Diagnostics;
 using System.IO;
 using NSModel.Singleton;
 
-namespace NSModel {
-	public class FullSave : SaveStrategy  {
+namespace NSModel
+{
+    public class FullSave : SaveStrategy
+    {
 
         /* Method to execute a backup */
-        public void Execute(SaveTemplate template) {
+        public void Execute(SaveTemplate template)
+        {
             DateTime currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             string TodaysTime = DateTime.Now.ToString("HH-mm-ss");
@@ -26,7 +29,7 @@ namespace NSModel {
             DirectoryInfo srcDirectoryInfo = new DirectoryInfo(template.srcDirectory);
             DirectoryInfo destDirectoryInfo = new DirectoryInfo(template.destDirectory);
             if (!Directory.Exists(template.destDirectory))
-            {                
+            {
                 /* Create Directory and SubDirectory with date and time */
                 Directory.CreateDirectory(template.destDirectory);
                 destDirectoryInfo.CreateSubdirectory(dateTime);
@@ -55,13 +58,32 @@ namespace NSModel {
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {
+                string destination = Path.Combine(target.FullName, fi.Name);
+                string sourceFile = fi.ToString();
                 stopw.Start();
-                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                if (Path.GetExtension(sourceFile) == ".txt")
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                    {
+                        startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                    } else
+                    {
+                        startInfo.FileName = @"CryptoSoft.exe";
+                    }
+                    startInfo.ArgumentList.Add(sourceFile);
+                    startInfo.ArgumentList.Add(destination);
+                    Process currentProcess = Process.Start(startInfo);
+                    currentProcess.WaitForExit();
+                } else
+                {
+                    fi.CopyTo(destination, true);
+                }
                 filesLeft--;
                 sizeLeft = sizeLeft - fi.Length;
-                State.GetInstance().Write(start, template, true, fi.ToString(), Path.Combine(target.FullName, fi.Name), fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                State.GetInstance().Write(start, template, true, sourceFile, destination, fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                 stopw.Stop();
-                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(Path.Combine(target.FullName, fi.Name)), fi.Length, stopw.Elapsed);
+                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed);
                 stopw.Reset();
             }
             // Copy each subdirectory using recursion.
