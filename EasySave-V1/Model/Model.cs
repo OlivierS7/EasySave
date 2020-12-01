@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using NSModel.Singleton;
+using System.IO;
 
 namespace NSModel {
 	public class Model {
@@ -30,6 +31,10 @@ namespace NSModel {
             {
 				throw new Exception("  The source directory cannot be the same as the destination directory");
             }
+            if (!Directory.Exists(srcDir))
+            {
+				throw new Exception("  The source directory doesn't exist");
+			}
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);

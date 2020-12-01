@@ -9,7 +9,6 @@ namespace NSModel.Singleton
 	public class Log
 	{
 		private static Log log;
-		private DirectoryInfo dir;
 		private FileInfo _file;
 		private string _fileName;
 		private string _directoryPath = @"..\..\..\Logs";
