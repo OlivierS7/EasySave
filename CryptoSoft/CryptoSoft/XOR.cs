@@ -12,7 +12,7 @@ namespace CryptoSoft
 
 		private XOR()
 		{
-			string path = @"D:\A3-Prog-Syteme\EasySave\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\Key.txt";
+			string path = @".\Key.txt";
 			if (File.Exists(path))
 			{
 				key = File.ReadAllBytes(path);

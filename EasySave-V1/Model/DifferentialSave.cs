@@ -26,8 +26,10 @@ namespace NSModel
                 string compDir = fullSave.destDirectory;
                 string[] srcFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
                 string[] compFiles = Directory.GetFiles(compDir, ".", SearchOption.AllDirectories);
+                DirectoryInfo srcDirInfo = new DirectoryInfo(srcDir);
 
                 bool wasCreated = false;
+                bool sameFile = false;
                 int totalFiles = 0;
                 long totalSize = 0;
                 int filesLeft = totalFiles;
@@ -39,7 +41,6 @@ namespace NSModel
                     foreach (string compFile in compFiles)
                     {
                         FileInfo comp = new FileInfo(compFile);
-
                         /* Checking if files have the same name */
                         if (comp.Name == src.Name)
                         {
@@ -70,11 +71,32 @@ namespace NSModel
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
+                    string currentSrcDirName = src.DirectoryName;
+                    DirectoryInfo currentSrcDir = src.Directory;
                     foreach (string compFile in compFiles)
                     {
+                        sameFile = false;
                         FileInfo comp = new FileInfo(compFile);
+                        DirectoryInfo currentCompDir = comp.Directory;
+                        if (currentSrcDirName != srcDir)
+                        {
+                            if (currentSrcDir.Name == currentCompDir.Name)
+                            {
+                                sameFile = true;
+                            }
+                        }
+                        if(currentSrcDirName == srcDir)
+                        {
+                            if (currentSrcDirName.EndsWith(currentSrcDir.Name))
+                            {
+                                if (currentCompDir.FullName.EndsWith(compDir))
+                                {
+                                    sameFile = true;
+                                }
+                            }
+                        }
                         /* Checking if files have the same name */
-                        if (comp.Name == src.Name)
+                        if (comp.Name == src.Name && sameFile)
                         {
                             wasCreated = true;
 
