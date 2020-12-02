@@ -52,6 +52,7 @@ namespace NSModel
         public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName, Stopwatch totalTime, DateTime start, SaveTemplate template, int totalFiles, long totalSize)
         {
             Stopwatch stopw = new Stopwatch();
+            Stopwatch cryptDuration = new Stopwatch();
             Directory.CreateDirectory(target.FullName);
             int filesLeft = totalFiles;
             long sizeLeft = totalSize;
@@ -63,6 +64,7 @@ namespace NSModel
                 stopw.Start();
                 if (Path.GetExtension(sourceFile) == ".txt")
                 {
+                    cryptDuration.Start();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                     {
@@ -75,6 +77,7 @@ namespace NSModel
                     startInfo.ArgumentList.Add(destination);
                     Process currentProcess = Process.Start(startInfo);
                     currentProcess.WaitForExit();
+                    cryptDuration.Stop();
                 } else
                 {
                     fi.CopyTo(destination, true);
@@ -83,8 +86,9 @@ namespace NSModel
                 sizeLeft = sizeLeft - fi.Length;
                 State.GetInstance().Write(start, template, true, sourceFile, destination, fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                 stopw.Stop();
-                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed);
+                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed, cryptDuration.Elapsed);
                 stopw.Reset();
+                cryptDuration.Reset();
             }
             // Copy each subdirectory using recursion.
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())

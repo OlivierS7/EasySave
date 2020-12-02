@@ -2,7 +2,7 @@
   "profiles": {
     "CryptoSoft": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\celin\\Desktop\\src\\Crypt.txtazeazeaz\" \"C:\\Users\\celin\\Desktop\\src\\Decrypt.txt\" "
+      "commandLineArgs": "\"C:\\Users\\celin\\Desktop\\src\\Crypt.txt\" \"C:\\Users\\celin\\Desktop\\src\\Decrypt.txt\" "
     }
   }
 }

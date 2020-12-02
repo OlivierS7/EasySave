@@ -22,8 +22,9 @@ namespace NSModel.Singleton
 			public string Size;
 			public TimeSpan Time;
 			public string Hour;
+			public TimeSpan CryptDuration;
 
-			public LogObject(string SaveTemplateName, string SourceDirectory ,string DestinationDirectory, string Size, TimeSpan Time)
+			public LogObject(string SaveTemplateName, string SourceDirectory ,string DestinationDirectory, string Size, TimeSpan Time, TimeSpan CryptDuration)
             {
 				this.SaveTemplateName = SaveTemplateName;
 				this.SourceDirectory = SourceDirectory;
@@ -31,7 +32,9 @@ namespace NSModel.Singleton
 				this.Size = Size;
 				this.Time = Time;
 				this.Hour = DateTime.Now.ToString("HH:mm:ss");
-            }
+				this.CryptDuration = CryptDuration;
+
+			}
 		}
 
 		public FileInfo file
@@ -73,9 +76,9 @@ namespace NSModel.Singleton
 			}
 			return log;
 		}
-		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time)
+		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, TimeSpan cryptDuration)
 		{
-			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString()+" bytes", time);
+			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString()+" bytes", time, cryptDuration);
 			logObjects.Add(currentFile);
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(logObjects,Formatting.Indented);

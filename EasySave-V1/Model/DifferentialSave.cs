@@ -66,13 +66,13 @@ namespace NSModel
                 totalTime.Start();
 
                 Stopwatch stopw = new Stopwatch();
+                Stopwatch cryptDuration = new Stopwatch();
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
                     foreach (string compFile in compFiles)
                     {
                         FileInfo comp = new FileInfo(compFile);
-
                         /* Checking if files have the same name */
                         if (comp.Name == src.Name)
                         {
@@ -84,29 +84,73 @@ namespace NSModel
                                 /* Creating files and folders if they doesn't exists */
                                 new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
                                 stopw.Start();
-                                src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                                if (Path.GetExtension(src.ToString()) == ".txt")
+                                {
+                                    cryptDuration.Start();
+                                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                                    if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                                    {
+                                        startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                                    }
+                                    else
+                                    {
+                                        startInfo.FileName = @"CryptoSoft.exe";
+                                    }
+                                    startInfo.ArgumentList.Add(src.ToString());
+                                    startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                                    Process currentProcess = Process.Start(startInfo);
+                                    currentProcess.WaitForExit();
+                                    cryptDuration.Stop();
+                                }
+                                else
+                                {
+                                    src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                                }                                
                                 filesLeft--;
                                 sizeLeft = sizeLeft - src.Length;
                                 stopw.Stop();
                                 State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
+                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration.Elapsed);
                                 stopw.Reset();
+                                cryptDuration.Reset();
                             }
                         }
                     }
                     /* If file exists only in the src directory, it was created recently */
                     if (!wasCreated)
                     {
+
                         /* Creating files and folders if they doesn't exists */
                         new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
                         stopw.Start();
-                        src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                        if (Path.GetExtension(src.ToString()) == ".txt")
+                        {
+                            cryptDuration.Start();
+                            ProcessStartInfo startInfo = new ProcessStartInfo();
+                            if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                            {
+                                startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                            }
+                            else
+                            {
+                                startInfo.FileName = @"CryptoSoft.exe";
+                            }
+                            startInfo.ArgumentList.Add(src.ToString());
+                            startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                            Process currentProcess = Process.Start(startInfo);
+                            currentProcess.WaitForExit();
+                            cryptDuration.Stop();
+                        } else
+                        {
+                            src.CopyTo(src.FullName.Replace(srcDir, destDir));
+                        }
                         filesLeft--;
                         sizeLeft = sizeLeft - src.Length;
                         stopw.Stop();
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration.Elapsed);
                         stopw.Reset();
+                        cryptDuration.Reset();
                     }
                     wasCreated = false;
                 }
