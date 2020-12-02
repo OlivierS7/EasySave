@@ -52,33 +52,36 @@ namespace NSModel
         public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName, Stopwatch totalTime, DateTime start, SaveTemplate template, int totalFiles, long totalSize)
         {
             Stopwatch stopw = new Stopwatch();
-            Stopwatch cryptDuration = new Stopwatch();
             Directory.CreateDirectory(target.FullName);
             int filesLeft = totalFiles;
             long sizeLeft = totalSize;
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {
+                string cryptDuration = "0";
                 string destination = Path.Combine(target.FullName, fi.Name);
                 string sourceFile = fi.ToString();
                 stopw.Start();
                 if (Path.GetExtension(sourceFile) == ".txt")
                 {
-                    cryptDuration.Start();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                     {
                         startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                    } else
+                    }
+                    else
                     {
                         startInfo.FileName = @"CryptoSoft.exe";
                     }
                     startInfo.ArgumentList.Add(sourceFile);
                     startInfo.ArgumentList.Add(destination);
+                    startInfo.UseShellExecute = false;
+                    startInfo.RedirectStandardOutput = true;
                     Process currentProcess = Process.Start(startInfo);
                     currentProcess.WaitForExit();
-                    cryptDuration.Stop();
-                } else
+                    cryptDuration = currentProcess.ExitCode.ToString();
+                }
+                else
                 {
                     fi.CopyTo(destination, true);
                 }
@@ -86,9 +89,8 @@ namespace NSModel
                 sizeLeft = sizeLeft - fi.Length;
                 State.GetInstance().Write(start, template, true, sourceFile, destination, fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                 stopw.Stop();
-                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed, cryptDuration.Elapsed);
+                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed, cryptDuration);
                 stopw.Reset();
-                cryptDuration.Reset();
             }
             // Copy each subdirectory using recursion.
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())

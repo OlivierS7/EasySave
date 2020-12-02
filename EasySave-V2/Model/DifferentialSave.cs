@@ -5,9 +5,11 @@ using NSModel.Singleton;
 
 namespace NSModel
 {
-	public class DifferentialSave : SaveStrategy  {
-		public SaveTemplate CheckFullSave(SaveTemplate template) {
-			return FullSaveHistory.GetInstance().GetFullSaveForDir(template);
+    public class DifferentialSave : SaveStrategy
+    {
+        public SaveTemplate CheckFullSave(SaveTemplate template)
+        {
+            return FullSaveHistory.GetInstance().GetFullSaveForDir(template);
         }
         public void Execute(SaveTemplate template)
         {
@@ -67,7 +69,7 @@ namespace NSModel
                 totalTime.Start();
 
                 Stopwatch stopw = new Stopwatch();
-                Stopwatch cryptDuration = new Stopwatch();
+                string cryptDuration = "0";
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
@@ -85,7 +87,7 @@ namespace NSModel
                                 sameFile = true;
                             }
                         }
-                        if(currentSrcDirName == srcDir)
+                        if (currentSrcDirName == srcDir)
                         {
                             if (currentSrcDirName.EndsWith(currentSrcDir.Name))
                             {
@@ -108,7 +110,6 @@ namespace NSModel
                                 stopw.Start();
                                 if (Path.GetExtension(src.ToString()) == ".txt")
                                 {
-                                    cryptDuration.Start();
                                     ProcessStartInfo startInfo = new ProcessStartInfo();
                                     if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                                     {
@@ -120,21 +121,22 @@ namespace NSModel
                                     }
                                     startInfo.ArgumentList.Add(src.ToString());
                                     startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                                    startInfo.UseShellExecute = false;
+                                    startInfo.RedirectStandardOutput = true;
                                     Process currentProcess = Process.Start(startInfo);
                                     currentProcess.WaitForExit();
-                                    cryptDuration.Stop();
+                                    cryptDuration = currentProcess.ExitCode.ToString();
                                 }
                                 else
                                 {
                                     src.CopyTo(src.FullName.Replace(srcDir, destDir));
-                                }                                
+                                }
                                 filesLeft--;
                                 sizeLeft = sizeLeft - src.Length;
                                 stopw.Stop();
                                 State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration.Elapsed);
+                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                                 stopw.Reset();
-                                cryptDuration.Reset();
                             }
                         }
                     }
@@ -147,7 +149,6 @@ namespace NSModel
                         stopw.Start();
                         if (Path.GetExtension(src.ToString()) == ".txt")
                         {
-                            cryptDuration.Start();
                             ProcessStartInfo startInfo = new ProcessStartInfo();
                             if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                             {
@@ -159,10 +160,13 @@ namespace NSModel
                             }
                             startInfo.ArgumentList.Add(src.ToString());
                             startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                            startInfo.UseShellExecute = false;
+                            startInfo.RedirectStandardOutput = true;
                             Process currentProcess = Process.Start(startInfo);
                             currentProcess.WaitForExit();
-                            cryptDuration.Stop();
-                        } else
+                            cryptDuration = currentProcess.ExitCode.ToString();
+                        }
+                        else
                         {
                             src.CopyTo(src.FullName.Replace(srcDir, destDir));
                         }
@@ -170,9 +174,8 @@ namespace NSModel
                         sizeLeft = sizeLeft - src.Length;
                         stopw.Stop();
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                         stopw.Reset();
-                        cryptDuration.Reset();
                     }
                     wasCreated = false;
                 }

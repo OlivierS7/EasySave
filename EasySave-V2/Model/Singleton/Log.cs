@@ -14,17 +14,17 @@ namespace NSModel.Singleton
 		public List<LogObject> logObjects = new List<LogObject>();
 
 		public class LogObject
-        {
+		{
 			public string SaveTemplateName;
 			public string SourceDirectory;
 			public string DestinationDirectory;
 			public string Size;
 			public TimeSpan Time;
 			public string Hour;
-			public TimeSpan CryptDuration;
+			public string CryptDuration;
 
-			public LogObject(string SaveTemplateName, string SourceDirectory ,string DestinationDirectory, string Size, TimeSpan Time, TimeSpan CryptDuration)
-            {
+			public LogObject(string SaveTemplateName, string SourceDirectory, string DestinationDirectory, string Size, TimeSpan Time, string CryptDuration)
+			{
 				this.SaveTemplateName = SaveTemplateName;
 				this.SourceDirectory = SourceDirectory;
 				this.DestinationDirectory = DestinationDirectory;
@@ -75,12 +75,12 @@ namespace NSModel.Singleton
 			}
 			return log;
 		}
-		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, TimeSpan cryptDuration)
+		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, string cryptDuration)
 		{
-			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString()+" bytes", time, cryptDuration);
+			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString() + " bytes", time, cryptDuration + "ms");
 			logObjects.Add(currentFile);
 			StreamWriter writer = new StreamWriter(file.ToString());
-			string output = JsonConvert.SerializeObject(logObjects,Formatting.Indented);
+			string output = JsonConvert.SerializeObject(logObjects, Formatting.Indented);
 			writer.Write(output);
 			writer.Close();
 		}

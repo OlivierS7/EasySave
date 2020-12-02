@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace CryptoSoft
 
 		private XOR()
 		{
-			string path = @".\.\.\.\Key.txt";
+			string path = @".\..\..\..\Key.txt";
 			if (File.Exists(path))
 			{
 				key = File.ReadAllBytes(path);
@@ -32,15 +33,25 @@ namespace CryptoSoft
 			}
 			return xor;
 		}
-		public byte[] EncryptOrDecrypt(string source)
+		public int EncryptOrDecrypt(string source, string destination)
         {
-			byte[] text = File.ReadAllBytes(source);
-            byte[] xor = new byte[text.Length];
-            for (int i = 0; i < text.Length; i++)
+			try
             {
-                xor[i] = (byte)(text[i] ^ key[i % key.Length]);
+				Stopwatch time = new Stopwatch();
+				time.Start();
+				byte[] text = File.ReadAllBytes(source);
+				byte[] xor = new byte[text.Length];
+				for (int i = 0; i < text.Length; i++)
+				{
+					xor[i] = (byte)(text[i] ^ key[i % key.Length]);
+				}
+				File.WriteAllBytes(destination, xor);
+				time.Stop();
+				return (int)time.ElapsedMilliseconds;
+			} catch
+            {
+				return -1;
             }
-            return xor;
         }
     }
 }
