@@ -47,17 +47,17 @@ namespace EasySave_V2.View
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] items =
-            {
-                "Full save",
-                "Differential save"
-            };
-            comboBox1.Items.AddRange(items);
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

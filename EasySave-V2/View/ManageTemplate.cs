@@ -14,17 +14,21 @@ namespace EasySave_V2.View
         {
             InitializeComponent();
             creaSaveTemplate1.Hide();
+            delSaveTemplate1.Hide();
             
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
+            delSaveTemplate1.Hide();
             creaSaveTemplate1.Show();
             creaSaveTemplate1.BringToFront();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-         
+            creaSaveTemplate1.Hide();
+            delSaveTemplate1.Show();
+            delSaveTemplate1.BringToFront();
         }
     }
 }

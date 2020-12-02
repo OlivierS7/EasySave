@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.creaSaveTemplate1 = new EasySave_V2.View.creaSaveTemplate();
+            this.delSaveTemplate1 = new EasySave_V2.View.DelSaveTemplate();
             this.SuspendLayout();
             // 
             // button1
@@ -57,13 +58,21 @@
             // 
             this.creaSaveTemplate1.Location = new System.Drawing.Point(36, 98);
             this.creaSaveTemplate1.Name = "creaSaveTemplate1";
-            this.creaSaveTemplate1.Size = new System.Drawing.Size(860, 454);
+            this.creaSaveTemplate1.Size = new System.Drawing.Size(617, 268);
             this.creaSaveTemplate1.TabIndex = 2;
+            // 
+            // delSaveTemplate1
+            // 
+            this.delSaveTemplate1.Location = new System.Drawing.Point(36, 130);
+            this.delSaveTemplate1.Name = "delSaveTemplate1";
+            this.delSaveTemplate1.Size = new System.Drawing.Size(509, 208);
+            this.delSaveTemplate1.TabIndex = 3;
             // 
             // ManageTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.delSaveTemplate1);
             this.Controls.Add(this.creaSaveTemplate1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -78,5 +87,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private creaSaveTemplate creaSaveTemplate1;
+        private DelSaveTemplate delSaveTemplate1;
     }
 }
