@@ -12,7 +12,7 @@ namespace CryptoSoft
 
 		private XOR()
 		{
-			string path = @".\Key.txt";
+			string path = @".\.\.\.\Key.txt";
 			if (File.Exists(path))
 			{
 				key = File.ReadAllBytes(path);
