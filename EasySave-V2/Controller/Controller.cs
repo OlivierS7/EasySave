@@ -52,11 +52,11 @@ namespace NSController {
 			{
 				if(!nameMatch.Success)
                 {
-					error = "Invalid name\n";
+					error = "Invalid name, please try again";
                 }
 				if(!srcDirNameMatch.Success)
                 {
-					error += "Invalid source directory path format\n";
+					error += "Invalid source directory path format";
                 }
 				if(!destDirNameMatch.Success)
                 {
@@ -76,9 +76,42 @@ namespace NSController {
 				PrintMessage(err.Message, -1);
 			}
 		}
-		public void ModifySaveTemplate(int templateIndex, string destDir, int type)
+		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
         {
-			this.model.ModifySaveTemplate(templateIndex, destDir, type);
+			string error = "";
+			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
+			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
+			Match nameMatch = nameForm.Match(name);
+			Match srcDirNameMatch = directoryName.Match(srcDir);
+			Match destDirNameMatch = directoryName.Match(destDir);
+			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
+			{
+				try
+				{
+					this.model.ModifySaveTemplate(templateIndex, name, srcDir, destDir, type);
+					PrintMessage("Successfully modified the save template", 1);
+				}
+				catch (Exception err)
+				{
+					PrintMessage(err.Message, -1);
+				}
+			} else
+            {
+				if (!nameMatch.Success)
+				{
+					error = "Invalid name\n";
+				}
+				if (!srcDirNameMatch.Success)
+				{
+					error += "Invalid source directory path format\n";
+				}
+				if (!destDirNameMatch.Success)
+				{
+					error += "Invalid destination directory path format";
+				}
+				PrintMessage(error, -1);
+			}
+			
         }
 		public void ExecuteOneSave(int templateIndex) {
 			try

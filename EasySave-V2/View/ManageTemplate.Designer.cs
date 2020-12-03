@@ -32,6 +32,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.creaSaveTemplate1 = new EasySave_V2.View.creaSaveTemplate();
             this.delSaveTemplate1 = new EasySave_V2.View.DelSaveTemplate();
+            this.button3 = new System.Windows.Forms.Button();
+            this.modifySaveTemplate1 = new EasySave_V2.View.ModifySaveTemplate();
             this.SuspendLayout();
             // 
             // button1
@@ -65,20 +67,38 @@
             // 
             this.delSaveTemplate1.Location = new System.Drawing.Point(36, 114);
             this.delSaveTemplate1.Name = "delSaveTemplate1";
-            this.delSaveTemplate1.Size = new System.Drawing.Size(965, 390);
+            this.delSaveTemplate1.Size = new System.Drawing.Size(965, 485);
             this.delSaveTemplate1.TabIndex = 3;
-            this.delSaveTemplate1.Load += new System.EventHandler(this.delSaveTemplate1_Load);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(370, 28);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(143, 48);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Modify a save template";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // modifySaveTemplate1
+            // 
+            this.modifySaveTemplate1.Location = new System.Drawing.Point(55, 82);
+            this.modifySaveTemplate1.Name = "modifySaveTemplate1";
+            this.modifySaveTemplate1.Size = new System.Drawing.Size(1086, 638);
+            this.modifySaveTemplate1.TabIndex = 5;
             // 
             // ManageTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.modifySaveTemplate1);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.delSaveTemplate1);
             this.Controls.Add(this.creaSaveTemplate1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "ManageTemplate";
-            this.Size = new System.Drawing.Size(1051, 743);
+            this.Size = new System.Drawing.Size(1195, 740);
             this.ResumeLayout(false);
 
         }
@@ -89,5 +109,7 @@
         private System.Windows.Forms.Button button2;
         private creaSaveTemplate creaSaveTemplate1;
         private DelSaveTemplate delSaveTemplate1;
+        private System.Windows.Forms.Button button3;
+        private ModifySaveTemplate modifySaveTemplate1;
     }
 }

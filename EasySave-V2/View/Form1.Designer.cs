@@ -70,7 +70,7 @@ namespace NSView
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(24, 571);
+            this.button4.Location = new System.Drawing.Point(24, 696);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 54);
             this.button4.TabIndex = 3;
@@ -88,7 +88,7 @@ namespace NSView
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 696);
+            this.panel1.Size = new System.Drawing.Size(200, 905);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -96,7 +96,7 @@ namespace NSView
             // 
             this.manageTemplate1.Location = new System.Drawing.Point(206, 0);
             this.manageTemplate1.Name = "manageTemplate1";
-            this.manageTemplate1.Size = new System.Drawing.Size(930, 594);
+            this.manageTemplate1.Size = new System.Drawing.Size(1318, 905);
             this.manageTemplate1.TabIndex = 8;
             this.manageTemplate1.Load += new System.EventHandler(this.manageTemplate1_Load);
             // 
@@ -104,7 +104,7 @@ namespace NSView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1167, 696);
+            this.ClientSize = new System.Drawing.Size(1524, 905);
             this.Controls.Add(this.manageTemplate1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";

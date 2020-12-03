@@ -56,7 +56,7 @@ namespace NSModel
 			this.templates.RemoveAt(templateIndex - 1);
 		}
 
-		public void ModifySaveTemplate(int templateIndex, string destDir, int type)
+		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
 		{
 			SaveTemplate template = this.IntToSaveTemplate(templateIndex);
 			if (type != 1 && type != 2)
@@ -67,10 +67,16 @@ namespace NSModel
 			{
 				throw new Exception("  The source directory cannot be the same as the destination directory");
 			}
+			if (!Directory.Exists(srcDir))
+			{
+				throw new Exception("  The source directory doesn't exist");
+			}
 			SaveTemplateConfig.GetInstance().Delete(template);
 			State.GetInstance().Delete(template);
-			template.backupType = type;
+			template.backupName = name;
+			template.srcDirectory = srcDir;
 			template.destDirectory = destDir;
+			template.backupType = type;
 			this.templates.RemoveAt(templateIndex - 1);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
