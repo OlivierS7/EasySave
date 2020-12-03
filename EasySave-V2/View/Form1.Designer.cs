@@ -36,7 +36,7 @@ namespace NSView
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.manageTemplate1 = new EasySave_V2.View.ManageTemplate();
-            this.executeSaveTemplate1 = new EasySave_V2.View.executeSaveTemplate();
+            this.executeSaveTemplate1 = new EasySave_V2.View.ExecuteSaveTemplate();
             this.editConfig1 = new EasySave_V2.View.EditConfig();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -156,7 +156,7 @@ namespace NSView
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
         private EasySave_V2.View.ManageTemplate manageTemplate1;
-        private EasySave_V2.View.executeSaveTemplate executeSaveTemplate1;
+        private EasySave_V2.View.ExecuteSaveTemplate executeSaveTemplate1;
         private System.Windows.Forms.Button button5;
         private EasySave_V2.View.EditConfig editConfig1;
     }

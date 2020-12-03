@@ -88,7 +88,7 @@ namespace EasySave_V2.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            controller.removeAllowedProcess(listBox1.SelectedIndex);
+            controller.removeAllowedProcess(listBox1.SelectedIndex + 1);
             allowedProcesses = controller.getAllowedProcesses();
             ChangelistBox1();
             button3.Hide();
@@ -96,7 +96,7 @@ namespace EasySave_V2.View
 
         private void button4_Click(object sender, EventArgs e)
         {
-            controller.removeExtensionToEncrypt(listBox2.SelectedIndex);
+            controller.removeExtensionToEncrypt(listBox2.SelectedIndex + 1);
             extensionsToEncrypt = controller.getExtensionsToEncrypt();
             ChangelistBox2();
             button4.Hide();

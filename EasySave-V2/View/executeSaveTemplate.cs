@@ -9,11 +9,11 @@ using NSController;
 
 namespace EasySave_V2.View
 {
-    public partial class executeSaveTemplate : UserControl
+    public partial class ExecuteSaveTemplate : UserControl
     {
         public Controller controller;
         public List<string> templates;
-        public executeSaveTemplate()
+        public ExecuteSaveTemplate()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace EasySave_V2.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.controller.ExecuteOneSave(listBox1.SelectedIndex);
+            this.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
         }
         public void ChangelistBox()
         {

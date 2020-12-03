@@ -1,6 +1,6 @@
 ﻿namespace EasySave_V2.View
 {
-    partial class executeSaveTemplate
+    partial class ExecuteSaveTemplate
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.
