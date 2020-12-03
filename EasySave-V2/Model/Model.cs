@@ -138,11 +138,15 @@ namespace NSModel
 		public bool CheckProcesses()
 		{
 			Process[] processes = Process.GetProcesses();
-			foreach (Process process in processes)
-			{
-				if (process.ProcessName.Contains("Calculator"))
+			List<string> processesList = getAllowedProcesses();
+			foreach(string strProcess in processesList)
+            {
+				foreach (Process process in processes)
 				{
-					return true;
+					if (process.ProcessName.Contains(strProcess))
+					{
+						return true;
+					}
 				}
 			}
 			return false;
