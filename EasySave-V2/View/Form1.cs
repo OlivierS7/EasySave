@@ -22,14 +22,12 @@ namespace NSView
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            manageTemplate1.Hide();
-            executeSaveTemplate1.Hide();
-            editConfig1.Hide();
+            hideAll();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            executeSaveTemplate1.Hide();
+            hideAll();
             manageTemplate1.Show();
             manageTemplate1.controller = this.controller;
             manageTemplate1.BringToFront();
@@ -37,7 +35,7 @@ namespace NSView
 
         private void button2_Click(object sender, EventArgs e)
         {
-            manageTemplate1.Hide();
+            hideAll();
             executeSaveTemplate1.Show();
             executeSaveTemplate1.controller = this.controller;
             executeSaveTemplate1.templates = this.controller.GetAllTemplates();
@@ -48,12 +46,12 @@ namespace NSView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.controller.OpenLogs();
+            controller.OpenLogs();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.controller.Exit();
+            controller.Exit();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -76,17 +74,19 @@ namespace NSView
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.hideAll();
+            hideAll();
+            editConfig1.Show();
             editConfig1.controller = this.controller;
             editConfig1.forbiddenProcesses = this.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = this.controller.getExtensionsToEncrypt();
-            editConfig1.Show();
+            editConfig1.BringToFront();
         }
 
         private void hideAll()
         {
-            editConfig1.Hide();
+            executeSaveTemplate1.Hide();
             manageTemplate1.Hide();
+            editConfig1.Hide();
         }
     }
 }
