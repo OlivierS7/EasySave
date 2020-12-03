@@ -64,13 +64,9 @@ namespace NSModel
             this.destDirectory = destDir;
             this.backupType = type;
             if (type == 1)
-            {
                 this.saveStrategy = new FullSave();
-            }
             else if (type == 2)
-            {
                 this.saveStrategy = new DifferentialSave();
-            }
         }
     }
 }

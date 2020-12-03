@@ -83,18 +83,14 @@ namespace NSModel
                         if (currentSrcDirName != srcDir)
                         {
                             if (currentSrcDir.Name == currentCompDir.Name)
-                            {
                                 sameFile = true;
-                            }
                         }
                         if (currentSrcDirName == srcDir)
                         {
                             if (currentSrcDirName.EndsWith(currentSrcDir.Name))
                             {
                                 if (currentCompDir.FullName.EndsWith(compDir))
-                                {
                                     sameFile = true;
-                                }
                             }
                         }
                         /* Checking if files have the same name */
@@ -112,13 +108,9 @@ namespace NSModel
                                 {
                                     ProcessStartInfo startInfo = new ProcessStartInfo();
                                     if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                                    {
                                         startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                                    }
                                     else
-                                    {
                                         startInfo.FileName = @"CryptoSoft.exe";
-                                    }
                                     startInfo.ArgumentList.Add(src.ToString());
                                     startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
                                     startInfo.UseShellExecute = false;
@@ -129,9 +121,7 @@ namespace NSModel
                                     cryptDuration = currentProcess.ExitCode.ToString();
                                 }
                                 else
-                                {
                                     src.CopyTo(src.FullName.Replace(srcDir, destDir));
-                                }
                                 filesLeft--;
                                 sizeLeft = sizeLeft - src.Length;
                                 stopw.Stop();
@@ -152,13 +142,9 @@ namespace NSModel
                         {
                             ProcessStartInfo startInfo = new ProcessStartInfo();
                             if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                            {
                                 startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                            }
                             else
-                            {
                                 startInfo.FileName = @"CryptoSoft.exe";
-                            }
                             startInfo.ArgumentList.Add(src.ToString());
                             startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
                             startInfo.UseShellExecute = false;
@@ -169,9 +155,7 @@ namespace NSModel
                             cryptDuration = currentProcess.ExitCode.ToString();
                         }
                         else
-                        {
                             src.CopyTo(src.FullName.Replace(srcDir, destDir));
-                        }
                         filesLeft--;
                         sizeLeft = sizeLeft - src.Length;
                         stopw.Stop();
@@ -185,9 +169,7 @@ namespace NSModel
                 totalTime.Stop();
             }
             else
-            {
                 throw new Exception("You need to execute at least one full save with the same source directory as your differential save");
-            }
         }
     }
 }

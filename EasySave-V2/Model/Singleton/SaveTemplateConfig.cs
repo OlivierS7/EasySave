@@ -13,9 +13,7 @@ namespace NSModel.Singleton {
 			/* Create the config file if it doesn't exist already and hide it */
 			string path = "..\\..\\..\\SaveTemplatesConfig.json";
 			if (File.Exists(path))
-			{
 				file = new FileInfo(path);
-			}
 			else
 			{
 				using (File.Create(path))
@@ -31,9 +29,7 @@ namespace NSModel.Singleton {
 		/* Method to get Instance of this Singleton*/
 		public static SaveTemplateConfig GetInstance() {
 			if (saveTemplateConfig == null)
-			{
 				saveTemplateConfig = new SaveTemplateConfig();
-			}
 			return saveTemplateConfig;
 		}
 
@@ -52,9 +48,7 @@ namespace NSModel.Singleton {
 				/* Reading the config file and converting it to a list of SaveTemplates */
 				List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
 				if (templates == null)
-				{
 					templates = new List<SaveTemplate>();
-				}
 				templates.Add(template);
 				StreamWriter writer = new StreamWriter(file.ToString());
 
@@ -111,9 +105,7 @@ namespace NSModel.Singleton {
 			/* Reading the config file and converting it to a list of SaveTemplates */
 			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
 			if (templates == null)
-			{
 				templates = new List<SaveTemplate>();
-			}
 
 			/* Hiding file */
 			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);

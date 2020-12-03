@@ -66,13 +66,9 @@ namespace NSModel
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                    {
                         startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                    }
                     else
-                    {
                         startInfo.FileName = @"CryptoSoft.exe";
-                    }
                     startInfo.ArgumentList.Add(sourceFile);
                     startInfo.ArgumentList.Add(destination);
                     startInfo.UseShellExecute = false;
@@ -83,9 +79,7 @@ namespace NSModel
                     cryptDuration = currentProcess.ExitCode.ToString();
                 }
                 else
-                {
                     fi.CopyTo(destination, true);
-                }
                 filesLeft--;
                 sizeLeft = sizeLeft - fi.Length;
                 State.GetInstance().Write(start, template, true, sourceFile, destination, fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);

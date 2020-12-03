@@ -17,9 +17,8 @@ namespace NSModel.Singleton {
         private FullSaveHistory() {
 			string path = "..\\..\\..\\FullSaveHistory.json";
 			if (File.Exists(path))
-            {
 				file = new FileInfo(path);
-			} else
+			else
             {
 				using (File.Create(path))
 				{					
@@ -32,9 +31,7 @@ namespace NSModel.Singleton {
 		/* Method to get Instance of this Singleton*/
 		public static FullSaveHistory GetInstance() {
 			if (fullSaveHistory == null)
-			{
 				fullSaveHistory = new FullSaveHistory();
-			}
 			return fullSaveHistory;
 		}
 
@@ -46,12 +43,9 @@ namespace NSModel.Singleton {
             string reader = File.ReadAllText(file.ToString());
 			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
 			if (templates != null)
-            {
 				templates.RemoveAll(item => item.srcDirectory == template.srcDirectory);
-			} else
-            {
+			else
 				templates = new List<SaveTemplate>();
-			}
 			SaveTemplate currentTemplate = new SaveTemplate(template.backupName, template.srcDirectory, template.destDirectory + "\\" + dateTime, template.backupType);
 			templates.Add(currentTemplate);
 			StreamWriter writer = new StreamWriter(file.ToString());
@@ -71,9 +65,7 @@ namespace NSModel.Singleton {
 					if (item.srcDirectory == template.srcDirectory)
                     {
 						if(!new DirectoryInfo(item.srcDirectory).Exists)
-                        {
 							return null;
-                        }
 						return item;
 					}
                 }

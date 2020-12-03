@@ -40,13 +40,9 @@ namespace NSModel.Singleton {
 				this.filesLeft = filesLeft;
 				this.time = time;
 				if(totalSize == 0)
-                {
 					this.progression = 0;
-                }
                 else
-                {
 					this.progression = 100 - ((sizeLeft * 100) / totalSize);
-				}
 			}
 		}
 
@@ -68,9 +64,7 @@ namespace NSModel.Singleton {
 		}
 		public static State GetInstance() {
 			if (state == null)
-			{
 				state = new State();
-			}
 			return state;
 		}
 		public void Write(DateTime date, SaveTemplate template, bool isActive, string srcFile, string destFile, long fileSize, long totalSize, long sizeLeft, int totalFiles, int filesLeft, TimeSpan time)
@@ -78,18 +72,12 @@ namespace NSModel.Singleton {
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
 			if (this.templatesState == null)
-            {
 				this.templatesState = new List<SaveTemplateState>();
-            }
 			string saveType;
 			if(template.backupType == 1)
-            {
 				saveType = "FullSave";
-            }
             else
-            {
 				saveType = "DifferentialSave";
-            }
 			SaveTemplateState currentTemplate = new SaveTemplateState(date, template, saveType, isActive, srcFile, destFile, fileSize, totalSize, sizeLeft, totalFiles, filesLeft, time);
 			int count = 0;
 			int index = 0;
@@ -104,9 +92,7 @@ namespace NSModel.Singleton {
 				count++;
 			}
             if (!replaced)
-            {
 				templatesState.Add(currentTemplate);
-            } 
 			else
             {
 				templatesState.RemoveAt(index);
@@ -122,18 +108,12 @@ namespace NSModel.Singleton {
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
 			if (this.templatesState == null)
-			{
 				this.templatesState = new List<SaveTemplateState>();
-			}
 			string saveType;
 			if (template.backupType == 1)
-			{
 				saveType = "FullSave";
-			}
 			else
-			{
 				saveType = "DifferentialSave";
-			}
 			this.templatesState.Add(new SaveTemplateState(DateTime.Now, template, saveType, false, null, null, 0, 0, 0, 0, 0, TimeSpan.Zero));
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);

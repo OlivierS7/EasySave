@@ -70,9 +70,7 @@ namespace NSModel.Singleton
 		public static Log GetInstance()
 		{
 			if (log == null)
-			{
 				log = new Log();
-			}
 			return log;
 		}
 		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, string cryptDuration)

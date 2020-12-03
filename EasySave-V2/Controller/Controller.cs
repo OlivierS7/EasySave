@@ -51,17 +51,11 @@ namespace NSController {
             else
 			{
 				if(!nameMatch.Success)
-                {
 					error = "Invalid name, please try again";
-                }
 				if(!srcDirNameMatch.Success)
-                {
 					error += "Invalid source directory path format";
-                }
 				if(!destDirNameMatch.Success)
-                {
 					error += "Invalid destination directory path format";
-				}
 				PrintMessage(error, -1);
             }
 		}
@@ -161,16 +155,6 @@ namespace NSController {
 		public void PrintMessage(string message, int type)
         {
 			this.View.PrintMessage(message, type);
-        }
-		public void Progression(string progression)
-        {
-			//this.consoleView.Progression(progression);
-        }
-		public bool maxTemplatesReached()
-        {
-			if (model.templates.Count == 5)
-				return true;
-			return false;
         }
 
 		public void Exit()

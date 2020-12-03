@@ -27,17 +27,11 @@ namespace NSModel
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type)
 		{
 			if (type != 1 && type != 2)
-			{
 				throw new Exception("  " + type + " isn't a valid type");
-			}
 			if (srcDir == destDir)
-			{
 				throw new Exception("  The source directory cannot be the same as the destination directory");
-			}
 			if (!Directory.Exists(srcDir))
-			{
 				throw new Exception("  The source directory doesn't exist");
-			}
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
@@ -48,29 +42,22 @@ namespace NSModel
 		public void DeleteSaveTemplate(int templateIndex)
 		{
 			if (this.templates.Count < templateIndex)
-			{
 				throw new Exception("  " + templateIndex + ": No save template at this index");
-			}
 			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			State.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			this.templates.RemoveAt(templateIndex - 1);
 		}
 
+		/* Method to modify a save template */
 		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
 		{
 			SaveTemplate template = this.IntToSaveTemplate(templateIndex);
 			if (type != 1 && type != 2)
-			{
 				throw new Exception("  " + type + " isn't a valid type");
-			}
 			if (template.srcDirectory == destDir)
-			{
 				throw new Exception("  The source directory cannot be the same as the destination directory");
-			}
 			if (!Directory.Exists(srcDir))
-			{
 				throw new Exception("  The source directory doesn't exist");
-			}
 			SaveTemplateConfig.GetInstance().Delete(template);
 			State.GetInstance().Delete(template);
 			template.backupName = name;
@@ -87,18 +74,12 @@ namespace NSModel
 		public void ExecuteOneSave(int templateIndex)
 		{
 			if (this.templates.Count < templateIndex)
-			{
 				throw new Exception("  " + templateIndex + ": No save template at this index");
-			}
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			if (!CheckProcesses())
-			{
 				template.saveStrategy.Execute(template);
-			}
 			else
-			{
 				throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
-			}
 		}
 
 
@@ -106,19 +87,13 @@ namespace NSModel
 		public void ExecuteAllSave()
 		{
 			if (templates.Count == 0)
-			{
 				throw new Exception("  There is no save templates to execute");
-			}
 			foreach (SaveTemplate template in templates)
 			{
 				if (!CheckProcesses())
-				{
 					template.saveStrategy.Execute(template);
-				}
 				else
-				{
 					throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
-				}
 			}
 		}
 
@@ -144,33 +119,39 @@ namespace NSModel
 				foreach (Process process in processes)
 				{
 					if (process.ProcessName.Contains(strProcess))
-					{
 						return true;
-					}
 				}
 			}
 			return false;
 		}
+
+		/* Method to get the forbidden processes from the parameters */
 		public List<string> getForbiddenProcesses()
         {
 			return SaveParameter.GetInstance().Parameters1.getForbiddenProcesses();
         }
+		/* Method to get the extensions to encrypt from the parameters */
 		public List<string> getExtensionsToEncrypt()
 		{
 			return SaveParameter.GetInstance().Parameters1.getCryptExtensions();
 		}
+
+		/* Method to add the forbidden processes to the parameters */
 		public void addForbiddenProcess(string process)
         {
 			SaveParameter.GetInstance().Write(process, 1);
         }
+		/* Method to add the extensions to encrypt to the parameters */
 		public void addExtensionToEncrypt(string extension)
 		{
 			SaveParameter.GetInstance().Write(extension, 2);
 		}
+		/* Method to remove the forbidden processes to the parameters */
 		public void removeForbiddenProcess(int index)
         {
 			SaveParameter.GetInstance().Delete(index, 1);
         }
+		/* Method to remove the extensions to encrypt to the parameters */
 		public void removeExtensionToEncrypt(int index)
 		{
 			SaveParameter.GetInstance().Delete(index, 2);

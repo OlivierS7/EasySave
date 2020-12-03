@@ -18,38 +18,26 @@ namespace NSModel.Singleton
 			public List<string> getCryptExtensions()
             {
 				if (cryptExtensions == null)
-                {
 					this.cryptExtensions = new List<string>();
-                }
 				return cryptExtensions;
             }
 			public List<string> getForbiddenProcesses()
 			{
 				if (forbiddenProcesses == null)
-				{
 					this.forbiddenProcesses = new List<string>();
-				}
 				return forbiddenProcesses;
 			}
 
 			public Parameters(List<string> cryptList, List<string> processesList)
             {
 				if(cryptList == null)
-                {
 					this.cryptExtensions = new List<string>();
-                }
                 else
-                {
 					this.cryptExtensions = cryptList;
-				}
 				if (processesList == null)
-				{
 					this.forbiddenProcesses = new List<string>();
-				}
 				else
-                {
 					this.forbiddenProcesses = processesList;
-				}
             }
 		}
 
@@ -87,9 +75,7 @@ namespace NSModel.Singleton
 		public static SaveParameter GetInstance()
 		{
 			if (saveParameter == null)
-			{
 				saveParameter = new SaveParameter();
-			}
 			return saveParameter;
 		}
 		public void Write(string parameter, int type)
@@ -106,9 +92,7 @@ namespace NSModel.Singleton
 			/* Reading the config file and converting it to a list of SaveTemplates */
 			this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
 			if (this.Parameters1 == null)
-			{
 				this.Parameters1 = new Parameters(null, null);
-			}
 			if (type == 1)
 				this.Parameters1.forbiddenProcesses.Add(parameter);
 			if(type == 2)
