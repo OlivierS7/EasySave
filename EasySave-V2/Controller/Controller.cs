@@ -107,7 +107,7 @@ namespace NSController {
 			List<string> templatesNames = new List<string>();
 			if (this.model.templates.Count == 0)
             {
-				throw new Exception("There is no save templates");
+				PrintMessage("There is no save templates", -1);
             } 
 			else
             {
