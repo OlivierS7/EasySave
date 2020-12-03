@@ -63,7 +63,7 @@
             // 
             // delSaveTemplate1
             // 
-            this.delSaveTemplate1.Location = new System.Drawing.Point(36, 130);
+            this.delSaveTemplate1.Location = new System.Drawing.Point(36, 123);
             this.delSaveTemplate1.Name = "delSaveTemplate1";
             this.delSaveTemplate1.Size = new System.Drawing.Size(509, 208);
             this.delSaveTemplate1.TabIndex = 3;
