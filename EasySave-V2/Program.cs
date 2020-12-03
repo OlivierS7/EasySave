@@ -12,7 +12,7 @@ namespace EasySave_V2
         [STAThread]
         static void Main()
         {
-            Controller controller = new Controller();
+             Controller controller = new Controller();
             
         }
     }

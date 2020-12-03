@@ -18,20 +18,24 @@ namespace NSView
         {
             this.controller = controller;
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            manageTemplate1.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            manageTemplate1.Show();
+            manageTemplate1.BringToFront();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+
 
         }
 
@@ -43,6 +47,21 @@ namespace NSView
         private void button4_Click(object sender, EventArgs e)
         {
             this.controller.Exit();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void createSaveTemplate1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manageTemplate1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
