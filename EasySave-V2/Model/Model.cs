@@ -112,15 +112,11 @@ namespace NSModel
 		}
 		public bool CheckProcesses()
 		{
-			Process[] processes = Process.GetProcesses();
 			List<string> processesList = getForbiddenProcesses();
 			foreach(string strProcess in processesList)
             {
-				foreach (Process process in processes)
-				{
-					if (process.ProcessName.Contains(strProcess))
-						return true;
-				}
+				if (Process.GetProcessesByName(strProcess).Length > 0)
+					return true;
 			}
 			return false;
 		}
