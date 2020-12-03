@@ -117,7 +117,7 @@ namespace NSView
             // 
             this.editConfig1.Location = new System.Drawing.Point(478, 112);
             this.editConfig1.Name = "editConfig1";
-            this.editConfig1.Size = new System.Drawing.Size(389, 429);
+            this.editConfig1.Size = new System.Drawing.Size(389, 482);
             this.editConfig1.TabIndex = 9;
             this.editConfig1.Visible = false;
             // 

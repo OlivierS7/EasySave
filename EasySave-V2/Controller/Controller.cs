@@ -152,13 +152,21 @@ namespace NSController {
 		{
 			return this.model.getExtensionsToEncrypt();
 		}
-		public void addAllowedProcesses(string process)
+		public void addAllowedProcess(string process)
 		{
-			this.model.addAllowedProcesses(process);
+			this.model.addAllowedProcess(process);
 		}
-		public void addExtensionsToEncrypt(string extension)
+		public void addExtensionToEncrypt(string extension)
 		{
-			this.model.addExtensionsToEncrypt(extension);
+			this.model.addExtensionToEncrypt(extension);
+		}
+		public void removeAllowedProcess(int index)
+        {
+			this.model.removeAllowedProcess(index);
+        }
+		public void removeExtensionToEncrypt(int index)
+		{
+			this.model.removeExtensionToEncrypt(index);
 		}
 	}
 }

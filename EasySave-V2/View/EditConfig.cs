@@ -32,12 +32,12 @@ namespace EasySave_V2.View
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            button3.Show();
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            button4.Show();
         }
         private void ChangelistBox1()
         {
@@ -64,22 +64,42 @@ namespace EasySave_V2.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            controller.addAllowedProcesses(textBox1.Text);
+            controller.addAllowedProcess(textBox1.Text);
             allowedProcesses = controller.getAllowedProcesses();
             ChangelistBox1();
+            button3.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            controller.addExtensionsToEncrypt(textBox2.Text);
-            extensionsToEncrypt = this.controller.getExtensionsToEncrypt();
+            controller.addExtensionToEncrypt(textBox2.Text);
+            extensionsToEncrypt = controller.getExtensionsToEncrypt();
             ChangelistBox2();
+            button4.Hide();
         }
 
         private void EditConfig_Load(object sender, EventArgs e)
         {
             ChangelistBox1();
             ChangelistBox2();
+            button3.Hide();
+            button4.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            controller.removeAllowedProcess(listBox1.SelectedIndex);
+            allowedProcesses = controller.getAllowedProcesses();
+            ChangelistBox1();
+            button3.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            controller.removeExtensionToEncrypt(listBox2.SelectedIndex);
+            extensionsToEncrypt = controller.getExtensionsToEncrypt();
+            ChangelistBox2();
+            button4.Hide();
         }
     }
 }
