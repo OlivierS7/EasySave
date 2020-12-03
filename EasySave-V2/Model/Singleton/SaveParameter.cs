@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -76,6 +77,8 @@ namespace NSModel.Singleton
 		}
 		public void Write(string parameter, int type)
 		{
+			if (type != 1 && type != 2)
+				throw new Exception("Can only choose type 1 (allowed processes) or type 2 (extensions to crypt)");
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
@@ -102,7 +105,8 @@ namespace NSModel.Singleton
 		/* Method to delete a SaveTemplate in the config file */
 		public void Delete(int index, int type)
 		{
-
+			if (type != 1 && type != 2)
+				throw new Exception("Can only choose type 1 (allowed processes) or type 2 (extensions to crypt)");
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
