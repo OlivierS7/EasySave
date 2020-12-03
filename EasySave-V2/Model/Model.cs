@@ -138,7 +138,7 @@ namespace NSModel
 		public bool CheckProcesses()
 		{
 			Process[] processes = Process.GetProcesses();
-			List<string> processesList = getAllowedProcesses();
+			List<string> processesList = getForbiddenProcesses();
 			foreach(string strProcess in processesList)
             {
 				foreach (Process process in processes)
@@ -151,15 +151,15 @@ namespace NSModel
 			}
 			return false;
 		}
-		public List<string> getAllowedProcesses()
+		public List<string> getForbiddenProcesses()
         {
-			return SaveParameter.GetInstance().Parameters1.getAllowedProcesses();
+			return SaveParameter.GetInstance().Parameters1.getForbiddenProcesses();
         }
 		public List<string> getExtensionsToEncrypt()
 		{
 			return SaveParameter.GetInstance().Parameters1.getCryptExtensions();
 		}
-		public void addAllowedProcess(string process)
+		public void addForbiddenProcess(string process)
         {
 			SaveParameter.GetInstance().Write(process, 1);
         }
@@ -167,7 +167,7 @@ namespace NSModel
 		{
 			SaveParameter.GetInstance().Write(extension, 2);
 		}
-		public void removeAllowedProcess(int index)
+		public void removeForbiddenProcess(int index)
         {
 			SaveParameter.GetInstance().Delete(index, 1);
         }

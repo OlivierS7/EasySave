@@ -78,7 +78,7 @@ namespace NSView
         {
             this.hideAll();
             editConfig1.controller = this.controller;
-            editConfig1.allowedProcesses = this.controller.getAllowedProcesses();
+            editConfig1.forbiddenProcesses = this.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = this.controller.getExtensionsToEncrypt();
             editConfig1.Show();
         }

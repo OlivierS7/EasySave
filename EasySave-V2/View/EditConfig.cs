@@ -13,7 +13,7 @@ namespace EasySave_V2.View
     public partial class EditConfig : UserControl
     {
         public Controller controller;
-        public List<string> allowedProcesses;
+        public List<string> forbiddenProcesses;
         public List<string> extensionsToEncrypt;
         public EditConfig()
         {
@@ -42,11 +42,11 @@ namespace EasySave_V2.View
         private void ChangelistBox1()
         {
             listBox1.Items.Clear();
-            if (allowedProcesses != null)
+            if (forbiddenProcesses != null)
             {
-                for (int i = 0; i < allowedProcesses.Count; i++)
+                for (int i = 0; i < forbiddenProcesses.Count; i++)
                 {
-                    listBox1.Items.Add("" + allowedProcesses[i]);
+                    listBox1.Items.Add("" + forbiddenProcesses[i]);
                 };
             }
         }
@@ -64,8 +64,8 @@ namespace EasySave_V2.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            controller.addAllowedProcess(textBox1.Text);
-            allowedProcesses = controller.getAllowedProcesses();
+            controller.addForbiddenProcess(textBox1.Text);
+            forbiddenProcesses = controller.getForbiddenProcesses();
             ChangelistBox1();
             button3.Hide();
         }
@@ -88,8 +88,8 @@ namespace EasySave_V2.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            controller.removeAllowedProcess(listBox1.SelectedIndex + 1);
-            allowedProcesses = controller.getAllowedProcesses();
+            controller.removeForbiddenProcess(listBox1.SelectedIndex + 1);
+            forbiddenProcesses = controller.getForbiddenProcesses();
             ChangelistBox1();
             button3.Hide();
         }

@@ -112,7 +112,7 @@ namespace EasySave_V2.View
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 15);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Allowed Softwares";
+            this.label2.Text = "Forbidden Softwares";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button3
