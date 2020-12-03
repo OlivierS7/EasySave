@@ -41,10 +41,11 @@ namespace NSController {
                 try
                 {
 					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+					PrintMessage("Successfully created the save template", 1);
 				}
 				catch (Exception err)
                 {
-					PrintMessage(err.Message);
+					PrintMessage(err.Message, -1);
                 }
 			}
             else
@@ -61,17 +62,18 @@ namespace NSController {
                 {
 					error += "Invalid destination directory path format";
 				}
-				PrintMessage(error);
+				PrintMessage(error, -1);
             }
 		}
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
 			{
 				this.model.DeleteSaveTemplate(templateIndex);
+				PrintMessage("Successfully deleted the save template", 1);
 			}
 			catch (Exception err)
 			{
-				PrintMessage(err.Message);
+				PrintMessage(err.Message, -1);
 			}
 		}
 		public void ModifySaveTemplate(int templateIndex, string destDir, int type)
@@ -82,20 +84,22 @@ namespace NSController {
 			try
 			{
 				this.model.ExecuteOneSave(templateIndex);
+				PrintMessage("Successfully executed the save", 1);
 			}
 			catch (Exception err)
 			{
-				PrintMessage(err.Message);
+				PrintMessage(err.Message, -1);
 			}
 		}
 		public void ExecuteAllSave() {
 			try
 			{
 				this.model.ExecuteAllSave();
+				PrintMessage("Successfully executed all saves", 1);
 			}
 			catch (Exception err)
 			{
-				PrintMessage(err.Message);
+				PrintMessage(err.Message, -1);
 			}
 		}
 		public List<string> GetAllTemplates() {
@@ -118,9 +122,9 @@ namespace NSController {
         {
 			this.model.OpenLogs();
 		}
-		public void PrintMessage(string message)
+		public void PrintMessage(string message, int type)
         {
-			this.View.PrintMessage(message);
+			this.View.PrintMessage(message, type);
         }
 		public void Progression(string progression)
         {

@@ -68,9 +68,12 @@ namespace NSView
 
         }
 
-        public void PrintMessage(string message)
+        public void PrintMessage(string message, int type)
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (type == -1)
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (type == 1)
+                MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
     }
 }
