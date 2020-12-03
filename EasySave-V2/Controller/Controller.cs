@@ -114,6 +114,9 @@ namespace NSController {
 				foreach (SaveTemplate template in templates)
 				{
 					templatesNames.Add(template.backupName);
+					templatesNames.Add(template.srcDirectory);
+					templatesNames.Add(template.destDirectory);
+					templatesNames.Add(template.backupType.ToString());
 				}
 			}
 			return templatesNames;

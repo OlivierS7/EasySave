@@ -28,8 +28,8 @@ namespace NSView
         private void button1_Click(object sender, EventArgs e)
         {
             manageTemplate1.Show();
-            manageTemplate1.BringToFront();
             manageTemplate1.controller = this.controller;
+            manageTemplate1.BringToFront();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,27 +53,17 @@ namespace NSView
 
         }
 
-        private void createSaveTemplate1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void manageTemplate1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void manageTemplate1_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
         public void PrintMessage(string message, int type)
         {
             if (type == -1)
                 MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (type == 1)
-                MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void manageTemplate1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

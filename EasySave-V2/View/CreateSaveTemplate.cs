@@ -26,7 +26,7 @@ namespace EasySave_V2.View
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
-            if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (fdb.ShowDialog() == DialogResult.OK)
             {
                 this.textBox2.Text = fdb.SelectedPath;
             }
@@ -41,7 +41,7 @@ namespace EasySave_V2.View
         private void button3_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
-            if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (fdb.ShowDialog() == DialogResult.OK)
             {
                 this.textBox3.Text = fdb.SelectedPath;
             }

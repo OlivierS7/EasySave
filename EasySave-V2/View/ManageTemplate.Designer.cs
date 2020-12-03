@@ -42,7 +42,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Create a save template";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -58,15 +58,16 @@
             // 
             this.creaSaveTemplate1.Location = new System.Drawing.Point(36, 98);
             this.creaSaveTemplate1.Name = "creaSaveTemplate1";
-            this.creaSaveTemplate1.Size = new System.Drawing.Size(617, 268);
+            this.creaSaveTemplate1.Size = new System.Drawing.Size(997, 417);
             this.creaSaveTemplate1.TabIndex = 2;
             // 
             // delSaveTemplate1
             // 
-            this.delSaveTemplate1.Location = new System.Drawing.Point(36, 130);
+            this.delSaveTemplate1.Location = new System.Drawing.Point(36, 114);
             this.delSaveTemplate1.Name = "delSaveTemplate1";
-            this.delSaveTemplate1.Size = new System.Drawing.Size(509, 208);
+            this.delSaveTemplate1.Size = new System.Drawing.Size(965, 390);
             this.delSaveTemplate1.TabIndex = 3;
+            this.delSaveTemplate1.Load += new System.EventHandler(this.delSaveTemplate1_Load);
             // 
             // ManageTemplate
             // 
@@ -77,7 +78,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "ManageTemplate";
-            this.Size = new System.Drawing.Size(1051, 594);
+            this.Size = new System.Drawing.Size(1051, 743);
             this.ResumeLayout(false);
 
         }
