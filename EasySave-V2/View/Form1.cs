@@ -40,7 +40,7 @@ namespace NSView
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.controller.OpenLogs();
         }
 
         private void button4_Click(object sender, EventArgs e)
