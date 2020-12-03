@@ -77,6 +77,7 @@ namespace NSModel
                     startInfo.ArgumentList.Add(destination);
                     startInfo.UseShellExecute = false;
                     startInfo.RedirectStandardOutput = true;
+                    startInfo.CreateNoWindow = true;
                     Process currentProcess = Process.Start(startInfo);
                     currentProcess.WaitForExit();
                     cryptDuration = currentProcess.ExitCode.ToString();

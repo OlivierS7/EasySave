@@ -36,6 +36,7 @@ namespace NSView
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.manageTemplate1 = new EasySave_V2.View.ManageTemplate();
+            this.executeSaveTemplate1 = new EasySave_V2.View.executeSaveTemplate();
             this.editConfig1 = new EasySave_V2.View.EditConfig();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +114,13 @@ namespace NSView
             this.manageTemplate1.TabIndex = 8;
             this.manageTemplate1.Load += new System.EventHandler(this.manageTemplate1_Load);
             // 
+            // executeSaveTemplate1
+            // 
+            this.executeSaveTemplate1.Location = new System.Drawing.Point(206, 98);
+            this.executeSaveTemplate1.Name = "executeSaveTemplate1";
+            this.executeSaveTemplate1.Size = new System.Drawing.Size(949, 518);
+            this.executeSaveTemplate1.TabIndex = 9;
+            // 
             // editConfig1
             // 
             this.editConfig1.Location = new System.Drawing.Point(478, 112);
@@ -125,6 +133,8 @@ namespace NSView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1167, 696);
+            this.Controls.Add(this.executeSaveTemplate1);
             this.ClientSize = new System.Drawing.Size(1524, 905);
             this.Controls.Add(this.editConfig1);
             this.Controls.Add(this.manageTemplate1);
@@ -146,6 +156,7 @@ namespace NSView
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
         private EasySave_V2.View.ManageTemplate manageTemplate1;
+        private EasySave_V2.View.executeSaveTemplate executeSaveTemplate1;
         private System.Windows.Forms.Button button5;
         private EasySave_V2.View.EditConfig editConfig1;
     }

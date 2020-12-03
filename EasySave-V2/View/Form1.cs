@@ -23,11 +23,13 @@ namespace NSView
         private void Form1_Load(object sender, EventArgs e)
         {
             manageTemplate1.Hide();
+            executeSaveTemplate1.Hide();
             editConfig1.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            executeSaveTemplate1.Hide();
             manageTemplate1.Show();
             manageTemplate1.controller = this.controller;
             manageTemplate1.BringToFront();
@@ -35,7 +37,12 @@ namespace NSView
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            manageTemplate1.Hide();
+            executeSaveTemplate1.Show();
+            executeSaveTemplate1.controller = this.controller;
+            executeSaveTemplate1.templates = this.controller.GetAllTemplates();
+            executeSaveTemplate1.ChangelistBox();
+            executeSaveTemplate1.BringToFront();
 
         }
 
