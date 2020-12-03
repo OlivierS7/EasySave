@@ -103,17 +103,15 @@ namespace EasySave_V2.View
             this.label1.Size = new System.Drawing.Size(120, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "Extensions to encrypt";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(39, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 15);
+            this.label2.Size = new System.Drawing.Size(115, 15);
             this.label2.TabIndex = 7;
             this.label2.Text = "Forbidden Softwares";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button3
             // 

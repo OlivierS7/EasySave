@@ -79,6 +79,8 @@ namespace NSView
             editConfig1.controller = this.controller;
             editConfig1.forbiddenProcesses = this.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = this.controller.getExtensionsToEncrypt();
+            editConfig1.ChangelistBox1();
+            editConfig1.ChangelistBox2();
             editConfig1.BringToFront();
         }
 
