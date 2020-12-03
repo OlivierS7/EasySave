@@ -71,27 +71,27 @@ namespace NSModel
 		}
 
 		/* Method to execute one backup */
-		public void ExecuteOneSave(int templateIndex)
+		public void ExecuteOneSave(int templateIndex, List<string> extensionsToEncrypt)
 		{
 			if (this.templates.Count < templateIndex)
 				throw new Exception("  " + templateIndex + ": No save template at this index");
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			if (!CheckProcesses())
-				template.saveStrategy.Execute(template);
+				template.saveStrategy.Execute(template, extensionsToEncrypt);
 			else
 				throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
 		}
 
 
 		/* Method to execute all backups */
-		public void ExecuteAllSave()
+		public void ExecuteAllSave(List<string> extensionsToEncrypt)
 		{
 			if (templates.Count == 0)
 				throw new Exception("  There is no save templates to execute");
 			foreach (SaveTemplate template in templates)
 			{
 				if (!CheckProcesses())
-					template.saveStrategy.Execute(template);
+					template.saveStrategy.Execute(template, extensionsToEncrypt);
 				else
 					throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
 			}

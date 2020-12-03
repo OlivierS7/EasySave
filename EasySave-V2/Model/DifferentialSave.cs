@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using NSModel.Singleton;
@@ -11,7 +12,7 @@ namespace NSModel
         {
             return FullSaveHistory.GetInstance().GetFullSaveForDir(template);
         }
-        public void Execute(SaveTemplate template)
+        public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
             SaveTemplate fullSave = CheckFullSave(template);
             if (fullSave != null)
@@ -104,23 +105,29 @@ namespace NSModel
                                 /* Creating files and folders if they doesn't exists */
                                 new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
                                 stopw.Start();
-                                if (Path.GetExtension(src.ToString()) == ".txt")
+                                bool isCrypted = false;
+                                foreach (string extension in extensionsToEncrypt)
                                 {
-                                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                                    if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                                        startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                                    else
-                                        startInfo.FileName = @"CryptoSoft.exe";
-                                    startInfo.ArgumentList.Add(src.ToString());
-                                    startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
-                                    startInfo.UseShellExecute = false;
-                                    startInfo.RedirectStandardOutput = true;
-                                    startInfo.CreateNoWindow = true;
-                                    Process currentProcess = Process.Start(startInfo);
-                                    currentProcess.WaitForExit();
-                                    cryptDuration = currentProcess.ExitCode.ToString();
+                                    if (Path.GetExtension(src.ToString()) == extension)
+                                    {
+                                        isCrypted = true;
+                                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                                        if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                                            startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                                        else
+                                            startInfo.FileName = @"CryptoSoft.exe";
+                                        startInfo.ArgumentList.Add(src.ToString());
+                                        startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                                        startInfo.UseShellExecute = false;
+                                        startInfo.RedirectStandardOutput = true;
+                                        startInfo.CreateNoWindow = true;
+                                        Process currentProcess = Process.Start(startInfo);
+                                        currentProcess.WaitForExit();
+                                        cryptDuration = currentProcess.ExitCode.ToString();
+                                    }
                                 }
-                                else
+                                   
+                                if(!isCrypted)
                                     src.CopyTo(src.FullName.Replace(srcDir, destDir));
                                 filesLeft--;
                                 sizeLeft = sizeLeft - src.Length;
@@ -138,23 +145,28 @@ namespace NSModel
                         /* Creating files and folders if they doesn't exists */
                         new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
                         stopw.Start();
-                        if (Path.GetExtension(src.ToString()) == ".txt")
+                        bool isCrypted = false;
+                        foreach (string extension in extensionsToEncrypt)
                         {
-                            ProcessStartInfo startInfo = new ProcessStartInfo();
-                            if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                                startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                            else
-                                startInfo.FileName = @"CryptoSoft.exe";
-                            startInfo.ArgumentList.Add(src.ToString());
-                            startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
-                            startInfo.UseShellExecute = false;
-                            startInfo.RedirectStandardOutput = true;
-                            startInfo.CreateNoWindow = true;
-                            Process currentProcess = Process.Start(startInfo);
-                            currentProcess.WaitForExit();
-                            cryptDuration = currentProcess.ExitCode.ToString();
+                            if (Path.GetExtension(src.ToString()) == extension)
+                            {
+                                isCrypted = true;
+                                ProcessStartInfo startInfo = new ProcessStartInfo();
+                                if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                                    startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                                else
+                                    startInfo.FileName = @"CryptoSoft.exe";
+                                startInfo.ArgumentList.Add(src.ToString());
+                                startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
+                                startInfo.UseShellExecute = false;
+                                startInfo.RedirectStandardOutput = true;
+                                startInfo.CreateNoWindow = true;
+                                Process currentProcess = Process.Start(startInfo);
+                                currentProcess.WaitForExit();
+                                cryptDuration = currentProcess.ExitCode.ToString();
+                            }
                         }
-                        else
+                        if (!isCrypted)
                             src.CopyTo(src.FullName.Replace(srcDir, destDir));
                         filesLeft--;
                         sizeLeft = sizeLeft - src.Length;

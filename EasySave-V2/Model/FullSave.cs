@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using NSModel.Singleton;
@@ -9,7 +10,7 @@ namespace NSModel
     {
 
         /* Method to execute a backup */
-        public void Execute(SaveTemplate template)
+        public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
             DateTime currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -41,7 +42,7 @@ namespace NSModel
                 destDirectoryInfo.CreateSubdirectory(dateTime);
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTime);
             };
-            CopyAll(srcDirectoryInfo, destDirectoryInfo, template.backupName, totalTime, currentDateTime, template, totalFiles, totalSize);
+            CopyAll(srcDirectoryInfo, destDirectoryInfo, template.backupName, totalTime, currentDateTime, template, totalFiles, totalSize, extensionsToEncrypt);
             /* Call the Singleton to write in FullSaveHistory.json */
             FullSaveHistory.GetInstance().Write(template, dateTime);
             State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
@@ -49,7 +50,7 @@ namespace NSModel
         }
 
         /* Method to create a full backup of a directory */
-        public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName, Stopwatch totalTime, DateTime start, SaveTemplate template, int totalFiles, long totalSize)
+        public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName, Stopwatch totalTime, DateTime start, SaveTemplate template, int totalFiles, long totalSize, List<string> extensionsToEncrypt)
         {
             Stopwatch stopw = new Stopwatch();
             Directory.CreateDirectory(target.FullName);
@@ -59,26 +60,32 @@ namespace NSModel
             foreach (FileInfo fi in source.GetFiles())
             {
                 string cryptDuration = "0";
+                bool isCrypted = false;
                 string destination = Path.Combine(target.FullName, fi.Name);
                 string sourceFile = fi.ToString();
                 stopw.Start();
-                if (Path.GetExtension(sourceFile) == ".txt")
+                foreach(string extension in extensionsToEncrypt)
                 {
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                        startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                    else
-                        startInfo.FileName = @"CryptoSoft.exe";
-                    startInfo.ArgumentList.Add(sourceFile);
-                    startInfo.ArgumentList.Add(destination);
-                    startInfo.UseShellExecute = false;
-                    startInfo.RedirectStandardOutput = true;
-                    startInfo.CreateNoWindow = true;
-                    Process currentProcess = Process.Start(startInfo);
-                    currentProcess.WaitForExit();
-                    cryptDuration = currentProcess.ExitCode.ToString();
+                    if (Path.GetExtension(sourceFile) == extension)
+                    {
+                        isCrypted = true;
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
+                        if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                            startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+                        else
+                            startInfo.FileName = @"CryptoSoft.exe";
+                        startInfo.ArgumentList.Add(sourceFile);
+                        startInfo.ArgumentList.Add(destination);
+                        startInfo.UseShellExecute = false;
+                        startInfo.RedirectStandardOutput = true;
+                        startInfo.CreateNoWindow = true;
+                        Process currentProcess = Process.Start(startInfo);
+                        currentProcess.WaitForExit();
+                        cryptDuration = currentProcess.ExitCode.ToString();
+                    }
+                    
                 }
-                else
+                if(!isCrypted)
                     fi.CopyTo(destination, true);
                 filesLeft--;
                 sizeLeft = sizeLeft - fi.Length;
@@ -91,7 +98,7 @@ namespace NSModel
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir, saveTemplateName, totalTime, start, template, totalFiles, totalSize);
+                CopyAll(diSourceSubDir, nextTargetSubDir, saveTemplateName, totalTime, start, template, totalFiles, totalSize, extensionsToEncrypt);
             }
         }
     }

@@ -110,7 +110,8 @@ namespace NSController {
 		public void ExecuteOneSave(int templateIndex) {
 			try
 			{
-				this.model.ExecuteOneSave(templateIndex);
+				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
+				this.model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
 				PrintMessage("Successfully executed the save", 1);
 			}
 			catch (Exception err)
@@ -121,7 +122,8 @@ namespace NSController {
 		public void ExecuteAllSave() {
 			try
 			{
-				this.model.ExecuteAllSave();
+				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
+				this.model.ExecuteAllSave(extensionsToEncrypt);
 				PrintMessage("Successfully executed all saves", 1);
 			}
 			catch (Exception err)
