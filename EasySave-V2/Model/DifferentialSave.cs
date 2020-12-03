@@ -123,6 +123,7 @@ namespace NSModel
                                     startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
                                     startInfo.UseShellExecute = false;
                                     startInfo.RedirectStandardOutput = true;
+                                    startInfo.CreateNoWindow = true;
                                     Process currentProcess = Process.Start(startInfo);
                                     currentProcess.WaitForExit();
                                     cryptDuration = currentProcess.ExitCode.ToString();
@@ -162,6 +163,7 @@ namespace NSModel
                             startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
                             startInfo.UseShellExecute = false;
                             startInfo.RedirectStandardOutput = true;
+                            startInfo.CreateNoWindow = true;
                             Process currentProcess = Process.Start(startInfo);
                             currentProcess.WaitForExit();
                             cryptDuration = currentProcess.ExitCode.ToString();

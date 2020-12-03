@@ -88,7 +88,7 @@ namespace NSController {
 			}
 			catch (Exception err)
 			{
-				PrintMessage(err.Message, -1);
+				PrintMessage(err.ToString(), -1);
 			}
 		}
 		public void ExecuteAllSave() {
