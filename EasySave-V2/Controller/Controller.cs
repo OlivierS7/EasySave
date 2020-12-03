@@ -177,5 +177,29 @@ namespace NSController {
         {
 			Environment.Exit(1);
 		}
+		public List<string> getAllowedProcesses()
+		{
+			return this.model.getAllowedProcesses();
+		}
+		public List<string> getExtensionsToEncrypt()
+		{
+			return this.model.getExtensionsToEncrypt();
+		}
+		public void addAllowedProcess(string process)
+		{
+			this.model.addAllowedProcess(process);
+		}
+		public void addExtensionToEncrypt(string extension)
+		{
+			this.model.addExtensionToEncrypt(extension);
+		}
+		public void removeAllowedProcess(int index)
+        {
+			this.model.removeAllowedProcess(index);
+        }
+		public void removeExtensionToEncrypt(int index)
+		{
+			this.model.removeExtensionToEncrypt(index);
+		}
 	}
 }

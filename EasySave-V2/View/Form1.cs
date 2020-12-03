@@ -23,6 +23,7 @@ namespace NSView
         private void Form1_Load(object sender, EventArgs e)
         {
             manageTemplate1.Hide();
+            editConfig1.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,6 +65,21 @@ namespace NSView
         private void manageTemplate1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.hideAll();
+            editConfig1.controller = this.controller;
+            editConfig1.allowedProcesses = this.controller.getAllowedProcesses();
+            editConfig1.extensionsToEncrypt = this.controller.getExtensionsToEncrypt();
+            editConfig1.Show();
+        }
+
+        private void hideAll()
+        {
+            editConfig1.Hide();
+            manageTemplate1.Hide();
         }
     }
 }

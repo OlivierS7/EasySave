@@ -147,5 +147,29 @@ namespace NSModel
 			}
 			return false;
 		}
+		public List<string> getAllowedProcesses()
+        {
+			return SaveParameter.GetInstance().Parameters1.getAllowedProcesses();
+        }
+		public List<string> getExtensionsToEncrypt()
+		{
+			return SaveParameter.GetInstance().Parameters1.getCryptExtensions();
+		}
+		public void addAllowedProcess(string process)
+        {
+			SaveParameter.GetInstance().Write(process, 1);
+        }
+		public void addExtensionToEncrypt(string extension)
+		{
+			SaveParameter.GetInstance().Write(extension, 2);
+		}
+		public void removeAllowedProcess(int index)
+        {
+			SaveParameter.GetInstance().Delete(index, 1);
+        }
+		public void removeExtensionToEncrypt(int index)
+		{
+			SaveParameter.GetInstance().Delete(index, 2);
+		}
 	}
 }

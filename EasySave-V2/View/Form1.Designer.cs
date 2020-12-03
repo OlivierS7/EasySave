@@ -34,7 +34,9 @@ namespace NSView
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.manageTemplate1 = new EasySave_V2.View.ManageTemplate();
+            this.editConfig1 = new EasySave_V2.View.EditConfig();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +83,7 @@ namespace NSView
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button3);
@@ -92,6 +95,16 @@ namespace NSView
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(24, 344);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(144, 54);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Parameters";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // manageTemplate1
             // 
             this.manageTemplate1.Location = new System.Drawing.Point(206, 0);
@@ -100,11 +113,20 @@ namespace NSView
             this.manageTemplate1.TabIndex = 8;
             this.manageTemplate1.Load += new System.EventHandler(this.manageTemplate1_Load);
             // 
+            // editConfig1
+            // 
+            this.editConfig1.Location = new System.Drawing.Point(478, 112);
+            this.editConfig1.Name = "editConfig1";
+            this.editConfig1.Size = new System.Drawing.Size(389, 482);
+            this.editConfig1.TabIndex = 9;
+            this.editConfig1.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1524, 905);
+            this.Controls.Add(this.editConfig1);
             this.Controls.Add(this.manageTemplate1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
@@ -124,6 +146,8 @@ namespace NSView
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
         private EasySave_V2.View.ManageTemplate manageTemplate1;
+        private System.Windows.Forms.Button button5;
+        private EasySave_V2.View.EditConfig editConfig1;
     }
 }
 

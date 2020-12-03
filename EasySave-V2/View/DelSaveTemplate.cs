@@ -46,14 +46,14 @@ namespace EasySave_V2.View
         {
             listBox1.Items.Clear();
             int index = 1;
-            if (templates != null)
+            if(templates != null)
             {
                 for (int i = 1; i <= templates.Count; i += 4)
                 {
                     listBox1.Items.Add("ID : " + index + " | Name : " + templates[i - 1] + " | Source Directory : " + templates[i] + " | Destination Directory : " + templates[i + 1] + " | Backup Type : " + templates[i + 2]);
                     index++;
                 };
-            }          
+            }
         }
     }
 }
