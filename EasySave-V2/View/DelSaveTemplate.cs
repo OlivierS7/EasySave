@@ -18,12 +18,6 @@ namespace EasySave_V2.View
         {
             InitializeComponent();
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //this.controller.DeleteSaveTemplate(1);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
@@ -35,11 +29,6 @@ namespace EasySave_V2.View
         private void DelSaveTemplate_Load(object sender, EventArgs e)
         {
             ChangelistBox1();
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         public void ChangelistBox1()

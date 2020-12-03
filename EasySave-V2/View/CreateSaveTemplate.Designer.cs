@@ -50,7 +50,6 @@
             this.SaveTemplateName.Size = new System.Drawing.Size(39, 15);
             this.SaveTemplateName.TabIndex = 0;
             this.SaveTemplateName.Text = "Name";
-            this.SaveTemplateName.Click += new System.EventHandler(this.SaveTemplateName_Click);
             // 
             // label2
             // 
@@ -67,7 +66,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(383, 23);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -75,7 +73,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(332, 23);
             this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
@@ -102,7 +99,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(332, 23);
             this.textBox3.TabIndex = 5;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // button3
             // 
@@ -133,7 +129,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 23);
             this.comboBox1.TabIndex = 9;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button2
             // 

@@ -54,10 +54,6 @@ namespace NSView
             controller.Exit();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         public void PrintMessage(string message, int type)
         {
@@ -65,11 +61,6 @@ namespace NSView
                 MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (type == 1)
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void manageTemplate1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button5_Click(object sender, EventArgs e)

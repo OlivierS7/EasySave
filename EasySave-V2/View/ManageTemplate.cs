@@ -43,13 +43,6 @@ namespace EasySave_V2.View
             modifySaveTemplate1.ChangelistBox1();
             modifySaveTemplate1.Show();
             modifySaveTemplate1.BringToFront();
-        }
-
-        private void delSaveTemplate1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
+        }       
     }
 }

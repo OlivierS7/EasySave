@@ -94,7 +94,6 @@ namespace NSView
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 905);
             this.panel1.TabIndex = 6;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button5
             // 
@@ -112,7 +111,6 @@ namespace NSView
             this.manageTemplate1.Name = "manageTemplate1";
             this.manageTemplate1.Size = new System.Drawing.Size(1318, 905);
             this.manageTemplate1.TabIndex = 8;
-            this.manageTemplate1.Load += new System.EventHandler(this.manageTemplate1_Load);
             // 
             // executeSaveTemplate1
             // 

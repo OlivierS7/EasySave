@@ -18,11 +18,6 @@ namespace EasySave_V2.View
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void executeSaveTemplate_Load(object sender, EventArgs e)
         {
             ChangelistBox();

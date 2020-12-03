@@ -14,16 +14,6 @@ namespace EasySave_V2.View
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();

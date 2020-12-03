@@ -113,7 +113,6 @@ namespace EasySave_V2.View
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(362, 23);
             this.textBox2.TabIndex = 7;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox3
             // 
@@ -158,10 +157,6 @@ namespace EasySave_V2.View
             this.Confirm.Text = "Confirm";
             this.Confirm.UseVisualStyleBackColor = true;
             this.Confirm.Click += new System.EventHandler(this.Confirm_Click);
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
             // ModifySaveTemplate
             // 
