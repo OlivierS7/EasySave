@@ -26,6 +26,7 @@ namespace EasySave_V2.View
             creaSaveTemplate1.Hide();
             delSaveTemplate1.controller = this.controller;
             delSaveTemplate1.templates = this.controller.GetAllTemplates();
+            delSaveTemplate1.ChangelistBox1();
             delSaveTemplate1.Show();
             delSaveTemplate1.BringToFront();
         }

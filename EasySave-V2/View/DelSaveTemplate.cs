@@ -42,7 +42,7 @@ namespace EasySave_V2.View
             
         }
 
-        private void ChangelistBox1()
+        public void ChangelistBox1()
         {
             listBox1.Items.Clear();
             int index = 1;
