@@ -5,12 +5,14 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using NSController;
+using System.Diagnostics;
 
 namespace EasySave_V2.View
 {
     public partial class creaSaveTemplate : UserControl
     {
-
+        public Controller controller;
         public creaSaveTemplate()
         {
             InitializeComponent();
@@ -57,7 +59,16 @@ namespace EasySave_V2.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            string name = textBox1.Text;
+            string srcDir = textBox2.Text;
+            string destDir = textBox3.Text;
+            int type = comboBox1.SelectedIndex + 1;
+            this.controller.CreateSaveTemplate(name, srcDir, destDir, type);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

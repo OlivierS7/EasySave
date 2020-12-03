@@ -98,6 +98,7 @@ namespace NSView
             this.manageTemplate1.Name = "manageTemplate1";
             this.manageTemplate1.Size = new System.Drawing.Size(930, 594);
             this.manageTemplate1.TabIndex = 8;
+            this.manageTemplate1.Load += new System.EventHandler(this.manageTemplate1_Load_1);
             // 
             // Form1
             // 

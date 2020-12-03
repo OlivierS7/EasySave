@@ -17,8 +17,7 @@ namespace NSView
         public Form1(Controller controller)
         {
             this.controller = controller;
-            InitializeComponent();
-            
+            InitializeComponent(); 
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,7 +29,7 @@ namespace NSView
         {
             manageTemplate1.Show();
             manageTemplate1.BringToFront();
-
+            manageTemplate1.controller = this.controller;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -62,6 +61,16 @@ namespace NSView
         private void manageTemplate1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void manageTemplate1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public void PrintMessage(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

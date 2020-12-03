@@ -9,10 +9,10 @@ using System.Windows.Forms;
 namespace NSController {
 	public class Controller {
 
-		private IView _View;
+		private Form1 _View;
 		private Model _model;
 
-		public IView View
+		public Form1 View
 		{
 			get => this._View;
 			set => this._View = value;
@@ -26,9 +26,8 @@ namespace NSController {
 
 		public Controller() {
 			this.model = new Model();
-			//this.consoleView = new ConsoleView(this);
-			//this.consoleView.CurrentMenu.ShowMenu(this.consoleView);
-			Application.Run(new Form1(this));
+			this.View = new Form1(this);
+			Application.Run(this.View);
 		}
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			string error = "";
@@ -121,7 +120,7 @@ namespace NSController {
 		}
 		public void PrintMessage(string message)
         {
-			//this.consoleView.PrintMessage(message);
+			this.View.PrintMessage(message);
         }
 		public void Progression(string progression)
         {
