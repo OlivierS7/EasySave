@@ -2,6 +2,7 @@
 FullSaveHistory.json
 SaveTemplatesConfig.json
 State.json
+SaveParameters.json
 
 # User-specific files
 *.rsuser

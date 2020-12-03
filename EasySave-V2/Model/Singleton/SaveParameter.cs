@@ -12,29 +12,43 @@ namespace NSModel.Singleton
 		private Parameters parameters;
 		public class Parameters
 		{
-			private List<string> cryptExtensions = new List<string>();
-			private List<string> allowedProcesses = new List<string>();
+			public List<string> cryptExtensions = new List<string>();
+			public List<string> allowedProcesses = new List<string>();
 
-            public List<string> CryptExtensions { get => cryptExtensions; set => cryptExtensions = value; }
-            public List<string> AllowedProcesses { get => allowedProcesses; set => allowedProcesses = value; }
+			public List<string> getCryptExtensions()
+            {
+				if (cryptExtensions == null)
+                {
+					this.cryptExtensions = new List<string>();
+                }
+				return cryptExtensions;
+            }
+			public List<string> getAllowedProcesses()
+			{
+				if (allowedProcesses == null)
+				{
+					this.allowedProcesses = new List<string>();
+				}
+				return allowedProcesses;
+			}
 
-            public Parameters(List<string> cryptList, List<string> processesList)
+			public Parameters(List<string> cryptList, List<string> processesList)
             {
 				if(cryptList == null)
                 {
-					this.CryptExtensions = new List<string>();
+					this.cryptExtensions = new List<string>();
                 }
                 else
                 {
-					this.CryptExtensions = cryptList;
+					this.cryptExtensions = cryptList;
 				}
 				if (processesList == null)
 				{
-					this.AllowedProcesses = new List<string>();
+					this.allowedProcesses = new List<string>();
 				}
 				else
                 {
-					this.AllowedProcesses = processesList;
+					this.allowedProcesses = processesList;
 				}
             }
 		}
@@ -44,16 +58,19 @@ namespace NSModel.Singleton
 			get => _file;
 			set => _file = value;
 		}
+        public Parameters Parameters1 { get => parameters; set => parameters = value; }
 
-		/* Constructor */
-		private SaveParameter()
+        /* Constructor */
+        private SaveParameter()
 		{
 			string path = "..\\..\\..\\SaveParameters.json";
 			if (File.Exists(path))
 			{
 				file = new FileInfo(path);
 				string reader = File.ReadAllText(file.ToString());
-				this.parameters = JsonConvert.DeserializeObject<Parameters>(reader);
+				this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
+				if (this.Parameters1 == null)
+					this.Parameters1 = new Parameters(null, null);
 			}
 			else
 			{
@@ -62,7 +79,7 @@ namespace NSModel.Singleton
 					file = new FileInfo(path);
 					File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
 				}
-				this.parameters = new Parameters(null, null);
+				this.Parameters1 = new Parameters(null, null);
 			}
 		}
 
@@ -87,15 +104,19 @@ namespace NSModel.Singleton
 			string reader = File.ReadAllText(file.ToString());
 
 			/* Reading the config file and converting it to a list of SaveTemplates */
-			this.parameters = JsonConvert.DeserializeObject<Parameters>(reader);
-			if(type == 1)
-				this.parameters.AllowedProcesses.Add(parameter);
+			this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
+			if (this.Parameters1 == null)
+			{
+				this.Parameters1 = new Parameters(null, null);
+			}
+			if (type == 1)
+				this.Parameters1.allowedProcesses.Add(parameter);
 			if(type == 2)
-				this.parameters.CryptExtensions.Add(parameter);
+				this.Parameters1.cryptExtensions.Add(parameter);
 			StreamWriter writer = new StreamWriter(file.ToString());
 
 			/* Converting the list of SaveTemplates to a Json and writing it to config file */
-			writer.WriteLine(JsonConvert.SerializeObject(this.parameters, Formatting.Indented));
+			writer.WriteLine(JsonConvert.SerializeObject(this.Parameters1, Formatting.Indented));
 			writer.Close();
 
 			/* Hiding file */
@@ -115,15 +136,15 @@ namespace NSModel.Singleton
 			string reader = File.ReadAllText(file.ToString());
 
 			/* Reading the config file and converting it to a list of SaveTemplates */
-			this.parameters = JsonConvert.DeserializeObject<Parameters>(reader);
+			this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
 			if (type == 1)
-				this.parameters.AllowedProcesses.RemoveAt(index - 1);
+				this.Parameters1.allowedProcesses.RemoveAt(index - 1);
 			if (type == 2)
-				this.parameters.CryptExtensions.RemoveAt(index - 1);
+				this.Parameters1.cryptExtensions.RemoveAt(index - 1);
 			StreamWriter writer = new StreamWriter(file.ToString());
 
 			/* Converting the list of SaveTemplates to a Json and writing it to config file */
-			writer.WriteLine(JsonConvert.SerializeObject(this.parameters, Formatting.Indented));
+			writer.WriteLine(JsonConvert.SerializeObject(this.Parameters1, Formatting.Indented));
 			writer.Close();
 
 			/* Hiding file */
