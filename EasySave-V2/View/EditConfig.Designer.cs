@@ -1,5 +1,5 @@
 ﻿
-namespace EasySave_V2.View
+namespace NSView
 {
     partial class EditConfig
     {

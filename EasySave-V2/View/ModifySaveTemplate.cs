@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using NSController;
 
-namespace EasySave_V2.View
+namespace NSView
 {
     public partial class ModifySaveTemplate : UserControl
     {
@@ -32,20 +32,6 @@ namespace EasySave_V2.View
             }
         }
 
-        public void ChangelistBox1()
-        {
-            listBox1.Items.Clear();
-            int index = 1;
-            if (templates != null)
-            {
-                for (int i = 1; i <= templates.Count; i += 4)
-                {
-                    listBox1.Items.Add("ID : " + index + " | Name : " + templates[i - 1] + " | Source Directory : " + templates[i] + " | Destination Directory : " + templates[i + 1] + " | Backup Type : " + templates[i + 2]);
-                    index++;
-                };
-            }
-        }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] splitString = listBox1.SelectedItem.ToString().Split(" | ");
@@ -62,6 +48,20 @@ namespace EasySave_V2.View
             this.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
             this.templates = this.controller.GetAllTemplates();
             ChangelistBox1();
+        }
+
+        public void ChangelistBox1()
+        {
+            listBox1.Items.Clear();
+            int index = 1;
+            if (templates != null)
+            {
+                for (int i = 1; i <= templates.Count; i += 4)
+                {
+                    listBox1.Items.Add("ID : " + index + " | Name : " + templates[i - 1] + " | Source Directory : " + templates[i] + " | Destination Directory : " + templates[i + 1] + " | Backup Type : " + templates[i + 2]);
+                    index++;
+                };
+            }
         }
     }
 }

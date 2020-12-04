@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using NSController;
-using System.Diagnostics;
 
-namespace EasySave_V2.View
+namespace NSView
 {
-    public partial class DelSaveTemplate : UserControl
+    public partial class DeleteSaveTemplate : UserControl
     {
         public Controller controller;
         public List<string> templates;
-        public DelSaveTemplate()
+        public DeleteSaveTemplate()
         {
             InitializeComponent();
         }

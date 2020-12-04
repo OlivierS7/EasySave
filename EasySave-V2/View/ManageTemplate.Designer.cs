@@ -1,4 +1,4 @@
-﻿namespace EasySave_V2.View
+﻿namespace NSView
 {
     partial class ManageTemplate
     {
@@ -30,10 +30,10 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.creaSaveTemplate1 = new EasySave_V2.View.creaSaveTemplate();
-            this.delSaveTemplate1 = new EasySave_V2.View.DelSaveTemplate();
+            this.creaSaveTemplate1 = new NSView.creaSaveTemplate();
+            this.delSaveTemplate1 = new NSView.DeleteSaveTemplate();
             this.button3 = new System.Windows.Forms.Button();
-            this.modifySaveTemplate1 = new EasySave_V2.View.ModifySaveTemplate();
+            this.modifySaveTemplate1 = new NSView.ModifySaveTemplate();
             this.SuspendLayout();
             // 
             // button1
@@ -108,7 +108,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private creaSaveTemplate creaSaveTemplate1;
-        private DelSaveTemplate delSaveTemplate1;
+        private DeleteSaveTemplate delSaveTemplate1;
         private System.Windows.Forms.Button button3;
         private ModifySaveTemplate modifySaveTemplate1;
     }

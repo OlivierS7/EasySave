@@ -1,7 +1,7 @@
 ﻿
 namespace NSView
 {
-    partial class Form1
+    partial class StartMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -35,9 +35,9 @@ namespace NSView
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
-            this.manageTemplate1 = new EasySave_V2.View.ManageTemplate();
-            this.executeSaveTemplate1 = new EasySave_V2.View.ExecuteSaveTemplate();
-            this.editConfig1 = new EasySave_V2.View.EditConfig();
+            this.manageTemplate1 = new NSView.ManageTemplate();
+            this.executeSaveTemplate1 = new NSView.ExecuteSaveTemplate();
+            this.editConfig1 = new NSView.EditConfig();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -153,10 +153,10 @@ namespace NSView
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
-        private EasySave_V2.View.ManageTemplate manageTemplate1;
-        private EasySave_V2.View.ExecuteSaveTemplate executeSaveTemplate1;
+        private NSView.ManageTemplate manageTemplate1;
+        private NSView.ExecuteSaveTemplate executeSaveTemplate1;
         private System.Windows.Forms.Button button5;
-        private EasySave_V2.View.EditConfig editConfig1;
+        private NSView.EditConfig editConfig1;
     }
 }
 

@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using NSController;
 
-namespace EasySave_V2.View
+namespace NSView
 {
     public partial class EditConfig : UserControl
     {
@@ -32,7 +27,7 @@ namespace EasySave_V2.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text == "")
+            if(textBox1.Text != "")
             {
                 controller.addForbiddenProcess(textBox1.Text);
                 forbiddenProcesses = controller.getForbiddenProcesses();
@@ -43,7 +38,7 @@ namespace EasySave_V2.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text == "")
+            if (textBox2.Text != "")
             {
                 controller.addExtensionToEncrypt(textBox2.Text);
                 extensionsToEncrypt = controller.getExtensionsToEncrypt();

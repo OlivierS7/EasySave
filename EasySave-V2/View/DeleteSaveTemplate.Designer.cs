@@ -1,6 +1,6 @@
-﻿namespace EasySave_V2.View
+﻿namespace NSView
 {
-    partial class DelSaveTemplate
+    partial class DeleteSaveTemplate
     {
         /// <summary> 
         /// Variable nécessaire au concepteur.

@@ -2,17 +2,16 @@ using NSModel;
 using NSView;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace NSController {
 	public class Controller {
 
-		private Form1 _View;
+		private IView _View;
 		private Model _model;
 
-		public Form1 View
+		public IView View
 		{
 			get => this._View;
 			set => this._View = value;
@@ -26,8 +25,8 @@ namespace NSController {
 
 		public Controller() {
 			this.model = new Model();
-			this.View = new Form1(this);
-			Application.Run(this.View);
+			this.View = new GraphicalView(this);
+			this.View.Start(); ;
 		}
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			string error = "";
