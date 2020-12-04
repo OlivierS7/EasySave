@@ -7,7 +7,7 @@ namespace NSView
     {
         public StartMenu()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,5 +66,6 @@ namespace NSView
             if (type == 1)
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
     }
 }
