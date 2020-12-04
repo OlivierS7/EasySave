@@ -7,7 +7,7 @@ namespace NSView
     class GraphicalView : IView
     {
         private Controller controller;
-        private StartMenu form;
+        private StartMenu startMenu;
 
         public GraphicalView(Controller controller)
         {
@@ -18,13 +18,13 @@ namespace NSView
 
         public void PrintMessage(string message, int type)
         {
-            form.PrintMessage(message, type);
+            startMenu.PrintMessage(message, type);
         }
 
         public void Start()
         {
-            form = new StartMenu(this);
-            Application.Run(form);
+            startMenu = new StartMenu(this);
+            Application.Run(startMenu);
         }
     }
 }
