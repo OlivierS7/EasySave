@@ -295,6 +295,15 @@ namespace EasySave_V1.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Switch language / Changer de langue.
+        /// </summary>
+        internal static string SwitchLang {
+            get {
+                return ResourceManager.GetString("SwitchLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à WARNING.
         /// </summary>
         internal static string Warning {

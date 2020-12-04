@@ -195,6 +195,9 @@
   <data name="SourcePath" xml:space="preserve">
     <value>Please enter source directory path:</value>
   </data>
+  <data name="SwitchLang" xml:space="preserve">
+    <value>Switch language / Changer de langue</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>WARNING</value>
   </data>
