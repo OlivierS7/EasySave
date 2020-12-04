@@ -13,6 +13,7 @@ namespace NSView
         private void Form1_Load(object sender, EventArgs e)
         {
             HideAll();
+            aboutUs1.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,6 +58,7 @@ namespace NSView
             executeSaveTemplate1.Hide();
             manageTemplate1.Hide();
             editConfig1.Hide();
+            aboutUs1.Hide();
         }
 
         public void PrintMessage(string message, int type)
@@ -67,5 +69,10 @@ namespace NSView
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            HideAll();
+            aboutUs1.Show();
+        }
     }
 }

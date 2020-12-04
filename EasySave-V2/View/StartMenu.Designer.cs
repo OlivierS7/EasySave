@@ -39,6 +39,8 @@ namespace NSView
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.aboutUs1 = new EasySave_V2.View.AboutUs();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +74,7 @@ namespace NSView
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.button5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button5.Location = new System.Drawing.Point(23, 576);
+            this.button5.Location = new System.Drawing.Point(23, 531);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(169, 90);
             this.button5.TabIndex = 4;
@@ -84,7 +86,7 @@ namespace NSView
             // 
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(36, 739);
+            this.button4.Location = new System.Drawing.Point(35, 798);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 54);
             this.button4.TabIndex = 3;
@@ -97,7 +99,7 @@ namespace NSView
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button3.Location = new System.Drawing.Point(23, 389);
+            this.button3.Location = new System.Drawing.Point(23, 359);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(169, 90);
             this.button3.TabIndex = 2;
@@ -110,7 +112,7 @@ namespace NSView
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button2.Location = new System.Drawing.Point(23, 202);
+            this.button2.Location = new System.Drawing.Point(23, 187);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(169, 90);
             this.button2.TabIndex = 1;
@@ -135,6 +137,7 @@ namespace NSView
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button5);
@@ -145,6 +148,27 @@ namespace NSView
             this.panel1.Size = new System.Drawing.Size(215, 881);
             this.panel1.TabIndex = 10;
             // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.button6.Location = new System.Drawing.Point(23, 693);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(169, 71);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "About Us";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // aboutUs1
+            // 
+            this.aboutUs1.BackColor = System.Drawing.Color.Transparent;
+            this.aboutUs1.Location = new System.Drawing.Point(233, 12);
+            this.aboutUs1.Name = "aboutUs1";
+            this.aboutUs1.Size = new System.Drawing.Size(1279, 881);
+            this.aboutUs1.TabIndex = 11;
+            // 
             // StartMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -152,6 +176,7 @@ namespace NSView
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(112)))), ((int)(((byte)(193)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1524, 905);
+            this.Controls.Add(this.aboutUs1);
             this.Controls.Add(this.executeSaveTemplate1);
             this.Controls.Add(this.editConfig1);
             this.Controls.Add(this.manageTemplate1);
@@ -175,6 +200,8 @@ namespace NSView
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button6;
+        private EasySave_V2.View.AboutUs aboutUs1;
     }
 }
 
