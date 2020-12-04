@@ -51,9 +51,9 @@ namespace NSController {
             else
 			{
 				if(!nameMatch.Success)
-					error = "Invalid name, please try again";
+					error = "Invalid name, please try again\n";
 				if(!srcDirNameMatch.Success)
-					error += "Invalid source directory path format";
+					error += "Invalid source directory path format\n";
 				if(!destDirNameMatch.Success)
 					error += "Invalid destination directory path format";
 				PrintMessage(error, -1);

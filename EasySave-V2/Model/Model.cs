@@ -112,8 +112,7 @@ namespace NSModel
 		}
 		public bool CheckProcesses()
 		{
-			List<string> processesList = getForbiddenProcesses();
-			foreach(string strProcess in processesList)
+			foreach(string strProcess in getForbiddenProcesses())
             {
 				if (Process.GetProcessesByName(strProcess).Length > 0)
 					return true;
