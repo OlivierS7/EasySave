@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using EasySave_V1.Properties;
 
 namespace NSView
 {
@@ -11,7 +12,7 @@ namespace NSView
 		{
 			try
 			{
-				Console.WriteLine("\n  Which save template would you like to modify ?");
+				Console.WriteLine("\n  "+Resources.SaveToModif);
 				List<string> templatesName = view.Controller.GetAllTemplates();
 				for (int i = 0; i < templatesName.Count; i++)
 				{
@@ -22,18 +23,18 @@ namespace NSView
 				Int32.TryParse(input, out choice);
 				if(choice == 0 || choice > view.Controller.GetAllTemplates().Count)
                 {
-					Console.WriteLine("\nNot a valid choice, going back to selection...");
+					Console.WriteLine("\n"+Resources.InvalidToSelec);
 					Thread.Sleep(2000);
 					view.ChangeMenu(new StartMenuState());
 				}
                 else
                 {
 					Console.WriteLine("\n===========================================");
-					Console.WriteLine(" Please enter destination directory path:");
+					Console.WriteLine(" "+Resources.DestPath);
 					string destDir = (Console.ReadLine());
 					Console.WriteLine("\n===========================================");
-					Console.WriteLine(" Please pick a save type for the template:");
-					Console.WriteLine(" 1 - Full backup | 2 - Differential backup");
+					Console.WriteLine(" "+Resources.SaveType);
+					Console.WriteLine(" "+Resources.SaveTypeChoice);
 					int type;
 					Int32.TryParse(Console.ReadLine(), out type);
 					view.Controller.ModifySaveTemplate(choice, destDir, type);

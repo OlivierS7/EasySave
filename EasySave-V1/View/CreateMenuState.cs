@@ -1,28 +1,29 @@
 using System;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class CreateMenuState : MenuState  {
 		public void ShowMenu(ConsoleView view) {
             if (view.Controller.maxTemplatesReached())
             {
-				Console.WriteLine("\n  Maximum number of save templates reached. Please delete one before adding another");
-				Console.WriteLine("\n  Press any key to continue...");
+				Console.WriteLine("\n  "+Resources.MaxReached);
+				Console.WriteLine("\n  "+Resources.PressKeyToContinue);
 				Console.ReadKey();
             }
             else
             {
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(" Please enter save template name:");
+				Console.WriteLine(" "+Resources.SaveName);
 				string name = (Console.ReadLine());
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(" Please enter source directory path:");
+				Console.WriteLine(" "+Resources.SourcePath);
 				string srcDir = (Console.ReadLine());
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(" Please enter destination directory path:");
+				Console.WriteLine(" "+Resources.DestPath);
 				string destDir = (Console.ReadLine());
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(" Please pick a save type for the template:");
-				Console.WriteLine(" 1 - Full backup | 2 - Differential backup");
+				Console.WriteLine(" "+Resources.SaveType);
+				Console.WriteLine(" "+Resources.SaveTypeChoice);
 				int type;
 				Int32.TryParse(Console.ReadLine(), out type);
 				view.Controller.CreateSaveTemplate(name, srcDir, destDir, type);

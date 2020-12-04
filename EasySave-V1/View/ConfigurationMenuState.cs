@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class ConfigurationMenuState : MenuState  {
@@ -13,30 +14,30 @@ namespace NSView {
 			Console.WriteLine("| | |____   / ____ \\   ____) |    | |       ____) |  / ____ \\     \\  /    | |____  |");
 			Console.WriteLine("| |______| /_/    \\_\\ |_____/     |_|      |_____/  /_/    \\_\\     \\/     |______| |");
 			Console.WriteLine("|__________________________________________________________________________________| \n \n");
-			Console.WriteLine("  Please choose an option:");
-			Console.WriteLine("  _________________________________________");
-			Console.WriteLine(" |                                         |");
-			Console.WriteLine(" | 1 - Create a save template              |");
-			Console.WriteLine(" | 2 - Delete a save template              |");
-			Console.WriteLine(" | 3 - Modify existing save template       |");
-			Console.WriteLine(" | 4 - Back to menu                        |");
-			Console.WriteLine(" | 5 - Exit application                    |");
-			Console.WriteLine(" |_________________________________________|");
+			Console.WriteLine("  "+Resources.Option);
+			Console.WriteLine("  _________________________________________________________________________________");
+			Console.WriteLine(" |");
+			Console.WriteLine(" | 1 - " + Resources.CreateSave);
+			Console.WriteLine(" | 2 - " + Resources.DeleteSave);
+			Console.WriteLine(" | 3 - " + Resources.ModifySave);
+			Console.WriteLine(" | 4 - " + Resources.BackToMenu);
+			Console.WriteLine(" | 5 - " + Resources.Exit);
+			Console.WriteLine(" |_________________________________________________________________________________");
 			ConsoleKeyInfo input = Console.ReadKey();
 			int choice = view.CheckInput(input);
 			/* Verify user's input */
 			while (choice == 0 || choice > 5)
 			{
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(@"    /!\Please choose a valid option/!\");
-				Console.WriteLine("  _________________________________________");
-				Console.WriteLine(" |                                         |");
-				Console.WriteLine(" | 1 - Create a save template              |");
-				Console.WriteLine(" | 2 - Delete a save template              |");
-				Console.WriteLine(" | 3 - Modify existing save template       |");
-				Console.WriteLine(" | 4 - Back to menu                        |");
-				Console.WriteLine(" | 5 - Exit application                    |");
-				Console.WriteLine(" |_________________________________________|");
+				Console.WriteLine(@"    /!\"+Resources.InvalidChoice+@"/!\");
+				Console.WriteLine("  _________________________________________________________________________________");
+				Console.WriteLine(" |");
+				Console.WriteLine(" | 1 - " + Resources.CreateSave);
+				Console.WriteLine(" | 2 - " + Resources.DeleteSave);
+				Console.WriteLine(" | 3 - " + Resources.ModifySave);
+				Console.WriteLine(" | 4 - " + Resources.BackToMenu);
+				Console.WriteLine(" | 5 - " + Resources.Exit);
+				Console.WriteLine(" |_________________________________________________________________________________");
 				input = Console.ReadKey();
 				choice = view.CheckInput(input);
 			}

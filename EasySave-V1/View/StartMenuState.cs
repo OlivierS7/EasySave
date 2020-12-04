@@ -1,4 +1,5 @@
 using System;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class StartMenuState : MenuState  {
@@ -12,29 +13,29 @@ namespace NSView {
 			Console.WriteLine(@"| | |____   / ____ \   ____) |    | |       ____) |  / ____ \     \  /    | |____  |");
 			Console.WriteLine(@"| |______| /_/    \_\ |_____/     |_|      |_____/  /_/    \_\     \/     |______| |");
 			Console.WriteLine("|__________________________________________________________________________________| \n \n");
-			Console.WriteLine("Welcome to the EasySave program !\n");
-			Console.WriteLine("  Please choose an option:");
-			Console.WriteLine("  _________________________________________");
-			Console.WriteLine(" |                                         |");
-			Console.WriteLine(" | 1 - Manage save templates               |");
-			Console.WriteLine(" | 2 - Execute one or more save templates  |");
-			Console.WriteLine(" | 3 - Open logs file                      |");
-			Console.WriteLine(" | 4 - Exit application                    |");
-			Console.WriteLine(" |_________________________________________|");
+			Console.WriteLine(Resources.Welcome + "\n");
+			Console.WriteLine(Resources.Option);
+			Console.WriteLine("  _________________________________________________________________________________");
+			Console.WriteLine(" |");
+			Console.WriteLine(" | 1 - " + Resources.ManageOption);
+			Console.WriteLine(" | 2 - " + Resources.ExecuteOption);
+			Console.WriteLine(" | 3 - " + Resources.OpenLogs);
+			Console.WriteLine(" | 4 - " + Resources.Exit);
+			Console.WriteLine(" |_________________________________________________________________________________");
 			ConsoleKeyInfo input = Console.ReadKey();
 			int choice = view.CheckInput(input);
 			/* Verify user's input */
 			while (choice == 0 || choice > 4)
             {
 				Console.WriteLine("\n===========================================");
-				Console.WriteLine(@"    /!\Please choose a valid option/!\");
-				Console.WriteLine("  _________________________________________");
-				Console.WriteLine(" |                                         |");
-				Console.WriteLine(" | 1 - Manage save templates               |");
-				Console.WriteLine(" | 2 - Execute one or more save templates  |");
-				Console.WriteLine(" | 3 - Open logs file                      |");
-				Console.WriteLine(" | 4 - Exit application                    |");
-				Console.WriteLine(" |_________________________________________|");
+				Console.WriteLine(@"    /!\" + Resources.InvalidChoice + @"/!\");
+				Console.WriteLine("  _________________________________________________________________________________");
+				Console.WriteLine(" |");
+				Console.WriteLine(" | 1 - " + Resources.ManageOption);
+				Console.WriteLine(" | 2 - " + Resources.ExecuteOption);
+				Console.WriteLine(" | 3 - " + Resources.OpenLogs);
+				Console.WriteLine(" | 4 - " + Resources.Exit);
+				Console.WriteLine(" |_________________________________________________________________________________");
 				input = Console.ReadKey();
 				choice = view.CheckInput(input);
 			}

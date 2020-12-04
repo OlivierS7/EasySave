@@ -1,5 +1,6 @@
 using System;
 using NSController;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class ConsoleView : IView  {
@@ -19,8 +20,8 @@ namespace NSView {
 		}
 		public void PrintMessage (string message)
         {
-			Console.WriteLine("\n		/!\\WARNING/!\\\n" + message);
-			Console.WriteLine("\nPress any key to continue...");
+			Console.WriteLine("\n		/!\\"+Resources.Warning+"/!\\\n" + message);
+			Console.WriteLine("\n"+Resources.PressKeyToContinue);
 			Console.ReadKey();
         }
 		public void Progression (string progression)

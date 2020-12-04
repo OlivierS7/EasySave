@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class DeleteMenuState : MenuState  {
 		public void ShowMenu(ConsoleView view) {
 			try
             {
-				Console.WriteLine("\n  Which save template would you like to delete ?");
+				Console.WriteLine("\n  "+Resources.SelecDel);
 				List<string> templatesName = view.Controller.GetAllTemplates();
 				for (int i = 0; i < templatesName.Count; i++)
 				{

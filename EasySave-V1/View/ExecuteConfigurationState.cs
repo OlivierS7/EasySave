@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using EasySave_V1.Properties;
 
 namespace NSView {
 	public class ExecuteConfigurationState : MenuState {
@@ -14,13 +15,13 @@ namespace NSView {
 			Console.WriteLine(@"| | |____   / ____ \   ____) |    | |       ____) |  / ____ \     \  /    | |____  |");
 			Console.WriteLine(@"| |______| /_/    \_\ |_____/     |_|      |_____/  /_/    \_\     \/     |______| |");
 			Console.WriteLine("|__________________________________________________________________________________| \n \n");
-			Console.WriteLine("  Do you want to execute one or multiple save template(s) ?");
-			Console.WriteLine("  _______________________________________");
-			Console.WriteLine(" |                                       |");
-			Console.WriteLine(" |  1 - Execute one template             |");
-			Console.WriteLine(" |  2 - Execute all templates            |");
-			Console.WriteLine(" |  3 - Go back to menu                  |");
-			Console.WriteLine(" |_______________________________________|");
+			Console.WriteLine("  "+Resources.OneOrMultiple);
+			Console.WriteLine("  _________________________________________________________________________________");
+			Console.WriteLine(" |");
+			Console.WriteLine(" |  1 - "+Resources.ExecOne);
+			Console.WriteLine(" |  2 - " + Resources.ExecAll);
+			Console.WriteLine(" |  3 - " + Resources.BackToMenu);
+			Console.WriteLine(" |_________________________________________________________________________________");
 			ConsoleKeyInfo input = Console.ReadKey();
 			int choice = view.CheckInput(input);
 			if (choice == 3)
@@ -33,19 +34,19 @@ namespace NSView {
 				while (choice != 1 && choice != 2 && choice != 3)
 				{
 					Console.WriteLine("\n===========================================");
-					Console.WriteLine(@"   /!\Please choose a valid option/!\");
-					Console.WriteLine("  _______________________________________");
-					Console.WriteLine(" |                                       |");
-					Console.WriteLine(" |  1 - Execute one template             |");
-					Console.WriteLine(" |  2 - Execute all templates            |");
-					Console.WriteLine(" |  3 - Go back to menu                  |");
-					Console.WriteLine(" |_______________________________________|");
+					Console.WriteLine(@"   "+Resources.InvalidChoice);
+					Console.WriteLine("  _________________________________________________________________________________");
+					Console.WriteLine(" |");
+					Console.WriteLine(" |  1 - " + Resources.ExecOne);
+					Console.WriteLine(" |  2 - " + Resources.ExecAll);
+					Console.WriteLine(" |  3 - " + Resources.BackToMenu);
+					Console.WriteLine(" |_________________________________________________________________________________");
 					input = Console.ReadKey();
 				    choice = view.CheckInput(input);
 				}
 				if (choice == 1)
 				{
-					Console.WriteLine("\n  Please choose the save template to execute :");
+					Console.WriteLine("\n  "+Resources.ChoiceToExec);
 					List<string> templatesName = view.Controller.GetAllTemplates();
 					for (int i = 0; i < templatesName.Count; i++)
 					{
@@ -58,7 +59,7 @@ namespace NSView {
 				}
 				else if(choice == 2)
 				{
-					Console.WriteLine("\n  Are you sure you want to execute all these templates ? (y/n)");
+					Console.WriteLine("\n  "+Resources.ExecAllConfirm);
 					List<string> templatesName = view.Controller.GetAllTemplates();
 					for (int i = 0; i < templatesName.Count; i++)
 					{
@@ -66,20 +67,20 @@ namespace NSView {
 					}
 					/* Change Menu in terms of user's input */
 					string yesNo = Console.ReadLine();
-					if (yesNo == "y" || yesNo == "Y")
+					if (yesNo == Resources.y || yesNo == Resources.yUpper)
 					{
 						view.Controller.ExecuteAllSave();
 						view.ChangeMenu(new StartMenuState());
 					}
 					else if (yesNo == "n" || yesNo == "N")
 					{
-						Console.WriteLine("Going back to selection...");
+						Console.WriteLine(Resources.BackToSelec);
 						Thread.Sleep(2000);
 						view.ChangeMenu(new ExecuteConfigurationState());
 					}
 					else
 					{
-						Console.WriteLine("Not a valid choice, going back to selection...");
+						Console.WriteLine(Resources.InvalidToSelec);
 						Thread.Sleep(2000);
 					}
 				}
