@@ -7,7 +7,6 @@ namespace NSView
 {
     public partial class EditConfig : UserControl
     {
-        public Controller controller;
         public List<string> forbiddenProcesses;
         public List<string> extensionsToEncrypt;
         public EditConfig()
@@ -29,8 +28,8 @@ namespace NSView
         {
             if(textBox1.Text != "")
             {
-                controller.addForbiddenProcess(textBox1.Text);
-                forbiddenProcesses = controller.getForbiddenProcesses();
+                GraphicalView.controller.addForbiddenProcess(textBox1.Text);
+                forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
                 ChangelistBox1();
                 button3.Hide();
             }  
@@ -40,8 +39,8 @@ namespace NSView
         {
             if (textBox2.Text != "")
             {
-                controller.addExtensionToEncrypt(textBox2.Text);
-                extensionsToEncrypt = controller.getExtensionsToEncrypt();
+                GraphicalView.controller.addExtensionToEncrypt(textBox2.Text);
+                extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
                 ChangelistBox2();
                 button4.Hide();
             }
@@ -55,16 +54,16 @@ namespace NSView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            controller.removeForbiddenProcess(listBox1.SelectedIndex + 1);
-            forbiddenProcesses = controller.getForbiddenProcesses();
+            GraphicalView.controller.removeForbiddenProcess(listBox1.SelectedIndex + 1);
+            forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
             ChangelistBox1();
             button3.Hide();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            controller.removeExtensionToEncrypt(listBox2.SelectedIndex + 1);
-            extensionsToEncrypt = controller.getExtensionsToEncrypt();
+            GraphicalView.controller.removeExtensionToEncrypt(listBox2.SelectedIndex + 1);
+            extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
             ChangelistBox2();
             button4.Hide();
         }

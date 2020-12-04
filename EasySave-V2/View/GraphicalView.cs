@@ -6,7 +6,7 @@ namespace NSView
 {
     class GraphicalView : IView
     {
-        private Controller controller;
+        public static Controller controller;
         private StartMenu startMenu;
 
         public GraphicalView(Controller controller)
@@ -23,7 +23,7 @@ namespace NSView
 
         public void Start()
         {
-            startMenu = new StartMenu(this);
+            startMenu = new StartMenu();
             Application.Run(startMenu);
         }
     }

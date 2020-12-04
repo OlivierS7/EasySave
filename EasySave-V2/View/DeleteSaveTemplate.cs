@@ -7,7 +7,6 @@ namespace NSView
 {
     public partial class DeleteSaveTemplate : UserControl
     {
-        public Controller controller;
         public List<string> templates;
         public DeleteSaveTemplate()
         {
@@ -15,8 +14,8 @@ namespace NSView
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
-            this.templates = this.controller.GetAllTemplates();
+            GraphicalView.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
+            this.templates = GraphicalView.controller.GetAllTemplates();
             ChangelistBox1();
         }
 

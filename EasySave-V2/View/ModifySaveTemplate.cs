@@ -7,7 +7,6 @@ namespace NSView
 {
     public partial class ModifySaveTemplate : UserControl
     {
-        public Controller controller;
         public List<string> templates;
         public ModifySaveTemplate()
         {
@@ -45,8 +44,8 @@ namespace NSView
         {
             string[] splitString = listBox1.SelectedItem.ToString().Split(" | ");
             int id = Convert.ToInt32(splitString[0].Split(" : ")[1]);
-            this.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
-            this.templates = this.controller.GetAllTemplates();
+            GraphicalView.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
+            this.templates = GraphicalView.controller.GetAllTemplates();
             ChangelistBox1();
         }
 

@@ -5,10 +5,8 @@ namespace NSView
 {
     public partial class StartMenu : Form
     {
-        private IView View;
-        public StartMenu(IView View)
+        public StartMenu()
         {
-            this.View = View;
             InitializeComponent(); 
         }
 
@@ -21,7 +19,6 @@ namespace NSView
         {
             HideAll();
             manageTemplate1.Show();
-            manageTemplate1.View = View;
             manageTemplate1.BringToFront();
         }
 
@@ -29,29 +26,27 @@ namespace NSView
         {
             HideAll();
             executeSaveTemplate1.Show();
-            executeSaveTemplate1.controller = View.Controller;
-            executeSaveTemplate1.templates = View.Controller.GetAllTemplates();
+            executeSaveTemplate1.templates = GraphicalView.controller.GetAllTemplates();
             executeSaveTemplate1.ChangelistBox();
             executeSaveTemplate1.BringToFront();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            View.Controller.OpenLogs();
+            GraphicalView.controller.OpenLogs();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            View.Controller.Exit();
+            GraphicalView.controller.Exit();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             HideAll();
             editConfig1.Show();
-            editConfig1.controller = View.Controller;
-            editConfig1.forbiddenProcesses = View.Controller.getForbiddenProcesses();
-            editConfig1.extensionsToEncrypt = View.Controller.getExtensionsToEncrypt();
+            editConfig1.forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
+            editConfig1.extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
             editConfig1.ChangelistBox1();
             editConfig1.ChangelistBox2();
             editConfig1.BringToFront();

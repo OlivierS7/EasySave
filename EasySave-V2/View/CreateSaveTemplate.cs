@@ -37,7 +37,7 @@ namespace NSView
             string srcDir = textBox2.Text;
             string destDir = textBox3.Text;
             int type = comboBox1.SelectedIndex + 1;
-            this.controller.CreateSaveTemplate(name, srcDir, destDir, type);
+            GraphicalView.controller.CreateSaveTemplate(name, srcDir, destDir, type);
         }
     }
 }

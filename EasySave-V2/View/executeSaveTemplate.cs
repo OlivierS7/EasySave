@@ -11,7 +11,6 @@ namespace NSView
 {
     public partial class ExecuteSaveTemplate : UserControl
     {
-        public Controller controller;
         public List<string> templates;
         public ExecuteSaveTemplate()
         {
@@ -26,7 +25,7 @@ namespace NSView
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
+            GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -38,7 +37,7 @@ namespace NSView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            controller.ExecuteAllSave();
+            GraphicalView.controller.ExecuteAllSave();
             HideAll();
         }
 
