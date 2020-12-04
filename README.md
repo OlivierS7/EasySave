@@ -1,4 +1,4 @@
-# EasySave V1.0
+# EasySave V1.1
 
 ## Table of content
 
