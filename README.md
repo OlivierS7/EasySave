@@ -1,18 +1,28 @@
-# EasySave V1.0
+# EasySave V2.0
 
 ## Table of content
 
 - [Introduction](#Introduction)
 - [Pre-requisites](#Pre-requisites)
-- <a href="https://github.com/OlivierS7/EasySave/tree/easysave/v1.0/UML" >UML Diagrams</a>
+- <a href="https://github.com/OlivierS7/EasySave/tree/easysave/v2.0/UML" >UML Diagrams</a>
 - [Made With](#Made-With)
 - [Autors](#Autors)
 
 ## Introduction
 
-EasySave is an application to manage your backups. You can pre-configure 5 backups and run them at any time. Backups can be full or differential and allows you to backup any data. Our application allows you to follow the progress of your backups in real time and to watch all the operations performed thanks to a log file.
+EasySave is an application to manage your backups.<br />
+With our new graphical interface, you can pre-configure backups and run them at any time. Backups can be full or differential and allows you to backup any data.<br /> 
+Our application allows you to follow the progress of your backups in real time and to watch all the operations performed thanks to a log file.<br />
+Our application is able to stop your backups if one of your business software is running.<br />
+In addition, you can also encrypt any file with one or more extensions that you can configure.
+
 ## Pre-requisites
 
+### Option 1:
+1 - Download or clone the repository<br />
+2 - Open the Executable Directory and execute the EasySave.exe
+
+### Option 2:
  1 - Install Visual Studio on your machine<br />
  2 - Download or clone the repository<br />
  3 - Open the solution (.sln) with Visual Studio and launch the application
