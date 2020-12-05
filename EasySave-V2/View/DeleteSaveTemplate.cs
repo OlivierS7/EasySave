@@ -14,9 +14,12 @@ namespace NSView
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            GraphicalView.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
-            this.templates = GraphicalView.controller.GetAllTemplates();
-            ChangelistBox1();
+            if(listBox1.SelectedIndex + 1 > 0)
+            {
+                GraphicalView.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
+                this.templates = GraphicalView.controller.GetAllTemplates();
+                ChangelistBox1();
+            } 
         }
 
 

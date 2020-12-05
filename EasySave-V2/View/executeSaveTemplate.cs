@@ -24,8 +24,9 @@ namespace NSView
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
+        { 
+            if(listBox1.SelectedIndex + 1 > 0) 
+                GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
         }
 
         private void button2_Click(object sender, EventArgs e)

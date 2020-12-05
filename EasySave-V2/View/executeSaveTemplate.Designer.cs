@@ -97,7 +97,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.AliceBlue;
             this.button3.Font = new System.Drawing.Font("Impact", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(702, 508);
+            this.button3.Location = new System.Drawing.Point(686, 508);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(53, 23);
             this.button3.TabIndex = 6;
@@ -109,7 +109,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.AliceBlue;
             this.button4.Font = new System.Drawing.Font("Impact", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(875, 508);
+            this.button4.Location = new System.Drawing.Point(835, 508);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(53, 23);
             this.button4.TabIndex = 7;

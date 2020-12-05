@@ -61,7 +61,7 @@ namespace EasySave_V2.View
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(327, 524);
+            this.label1.Location = new System.Drawing.Point(327, 515);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(718, 27);
             this.label1.TabIndex = 2;

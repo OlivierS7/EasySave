@@ -41,12 +41,15 @@ namespace NSView
         }
 
         private void Confirm_Click(object sender, EventArgs e)
-        {
-            string[] splitString = listBox1.SelectedItem.ToString().Split(" | ");
-            int id = Convert.ToInt32(splitString[0].Split(" : ")[1]);
-            GraphicalView.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
-            this.templates = GraphicalView.controller.GetAllTemplates();
-            ChangelistBox1();
+        {   
+            if(listBox1.SelectedIndex + 1 > 0)
+            {
+                string[] splitString = listBox1.SelectedItem.ToString().Split(" | ");
+                int id = Convert.ToInt32(splitString[0].Split(" : ")[1]);
+                GraphicalView.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
+                this.templates = GraphicalView.controller.GetAllTemplates();
+                ChangelistBox1();
+            }
         }
 
         public void ChangelistBox1()

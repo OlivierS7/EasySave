@@ -45,16 +45,16 @@ namespace NSView
             // manageTemplate1
             // 
             this.manageTemplate1.BackColor = System.Drawing.Color.Transparent;
-            this.manageTemplate1.Location = new System.Drawing.Point(333, 127);
+            this.manageTemplate1.Location = new System.Drawing.Point(-3, 75);
             this.manageTemplate1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.manageTemplate1.Name = "manageTemplate1";
-            this.manageTemplate1.Size = new System.Drawing.Size(1827, 885);
+            this.manageTemplate1.Size = new System.Drawing.Size(1527, 822);
             this.manageTemplate1.TabIndex = 8;
             // 
             // executeSaveTemplate1
             // 
             this.executeSaveTemplate1.BackColor = System.Drawing.Color.Transparent;
-            this.executeSaveTemplate1.Location = new System.Drawing.Point(13, 92);
+            this.executeSaveTemplate1.Location = new System.Drawing.Point(13, 96);
             this.executeSaveTemplate1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.executeSaveTemplate1.Name = "executeSaveTemplate1";
             this.executeSaveTemplate1.Size = new System.Drawing.Size(1498, 776);
@@ -64,7 +64,7 @@ namespace NSView
             // 
             this.editConfig1.BackColor = System.Drawing.Color.Transparent;
             this.editConfig1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.editConfig1.Location = new System.Drawing.Point(13, 48);
+            this.editConfig1.Location = new System.Drawing.Point(-3, 48);
             this.editConfig1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.editConfig1.Name = "editConfig1";
             this.editConfig1.Size = new System.Drawing.Size(1498, 833);
@@ -77,7 +77,7 @@ namespace NSView
             this.aboutUs1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.aboutUs1.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.aboutUs1.ForeColor = System.Drawing.Color.Transparent;
-            this.aboutUs1.Location = new System.Drawing.Point(10, 58);
+            this.aboutUs1.Location = new System.Drawing.Point(13, 49);
             this.aboutUs1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.aboutUs1.Name = "aboutUs1";
             this.aboutUs1.Size = new System.Drawing.Size(1514, 832);
