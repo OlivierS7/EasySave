@@ -28,10 +28,19 @@ namespace NSView
         {
             if(textBox1.Text != "")
             {
-                GraphicalView.controller.addForbiddenProcess(textBox1.Text);
-                forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
-                ChangelistBox1();
-                button3.Hide();
+                bool isEgal = false;
+                foreach(string item in listBox1.Items)
+                {
+                    if (textBox1.Text == item)
+                        isEgal = true;
+                }
+                if (!isEgal)
+                {
+                    GraphicalView.controller.addForbiddenProcess(textBox1.Text);
+                    forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
+                    ChangelistBox1();
+                    button3.Hide();
+                }
             }  
         }
 
@@ -39,10 +48,19 @@ namespace NSView
         {
             if (textBox2.Text != "")
             {
-                GraphicalView.controller.addExtensionToEncrypt(textBox2.Text);
-                extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
-                ChangelistBox2();
-                button4.Hide();
+                bool isEgal = false;
+                foreach (string item in listBox2.Items)
+                {
+                    if (textBox2.Text == item)
+                        isEgal = true;
+                }
+                if (!isEgal)
+                {
+                    GraphicalView.controller.addExtensionToEncrypt(textBox2.Text);
+                    extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
+                    ChangelistBox2();
+                    button4.Hide();
+                }
             }
         }
 

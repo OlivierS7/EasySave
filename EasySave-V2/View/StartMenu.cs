@@ -16,33 +16,13 @@ namespace NSView
             aboutUs1.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AboutUs_Click(object sender, EventArgs e)
         {
             HideAll();
-            manageTemplate1.Show();
-            manageTemplate1.BringToFront();
+            aboutUs1.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            HideAll();
-            executeSaveTemplate1.Show();
-            executeSaveTemplate1.templates = GraphicalView.controller.GetAllTemplates();
-            executeSaveTemplate1.ChangelistBox();
-            executeSaveTemplate1.BringToFront();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            GraphicalView.controller.OpenLogs();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            GraphicalView.controller.Exit();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void parameters_Click(object sender, EventArgs e)
         {
             HideAll();
             editConfig1.Show();
@@ -51,6 +31,27 @@ namespace NSView
             editConfig1.ChangelistBox1();
             editConfig1.ChangelistBox2();
             editConfig1.BringToFront();
+        }
+
+        private void OpenLogs_Click(object sender, EventArgs e)
+        {
+            GraphicalView.controller.OpenLogs();
+        }
+
+        private void Execute_Click(object sender, EventArgs e)
+        {
+            HideAll();
+            executeSaveTemplate1.Show();
+            executeSaveTemplate1.templates = GraphicalView.controller.GetAllTemplates();
+            executeSaveTemplate1.ChangelistBox();
+            executeSaveTemplate1.BringToFront();
+        }
+
+        private void Manage_Click(object sender, EventArgs e)
+        {
+            HideAll();
+            manageTemplate1.Show();
+            manageTemplate1.BringToFront();
         }
 
         private void HideAll()
@@ -69,10 +70,9 @@ namespace NSView
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void Exit_Click(object sender, EventArgs e)
         {
-            HideAll();
-            aboutUs1.Show();
+            GraphicalView.controller.Exit();
         }
     }
 }
