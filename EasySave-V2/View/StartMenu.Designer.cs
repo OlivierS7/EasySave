@@ -173,6 +173,8 @@ namespace NSView
             this.Controls.Add(this.editConfig1);
             this.Controls.Add(this.manageTemplate1);
             this.Font = new System.Drawing.Font("Broadway", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MaximumSize = new System.Drawing.Size(1540, 932);
+            this.MinimumSize = new System.Drawing.Size(1540, 932);
             this.Name = "StartMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About us";
