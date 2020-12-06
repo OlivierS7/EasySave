@@ -37,7 +37,7 @@ namespace NSView
             {
                 for (int i = 1; i <= templates.Count; i += 4)
                 {
-                    listBox1.Items.Add("ID : " + index + " | Name : " + templates[i - 1] + " | Source Directory : " + templates[i] + " | Destination Directory : " + templates[i + 1] + " | Backup Type : " + templates[i + 2]);
+                    listBox1.Items.Add("ID : " + index + " | " + Resources.Name + " : " + templates[i - 1] + " | " + Resources.SrcDir + " : " + templates[i] + " | " + Resources.DestDir + " : " + templates[i + 1] + " | " + Resources.SaveType + " : " + templates[i + 2]);
                     index++;
                 };
             }
