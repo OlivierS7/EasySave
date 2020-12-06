@@ -69,19 +69,7 @@ namespace NSModel
                     if (Path.GetExtension(sourceFile) == extension)
                     {
                         isCrypted = true;
-                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                        if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                            startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                        else
-                            startInfo.FileName = @"CryptoSoft.exe";
-                        startInfo.ArgumentList.Add(sourceFile);
-                        startInfo.ArgumentList.Add(destination);
-                        startInfo.UseShellExecute = false;
-                        startInfo.RedirectStandardOutput = true;
-                        startInfo.CreateNoWindow = true;
-                        Process currentProcess = Process.Start(startInfo);
-                        currentProcess.WaitForExit();
-                        cryptDuration = currentProcess.ExitCode.ToString();
+                        cryptDuration = crypt(sourceFile, destination);
                     }
                     
                 }
@@ -100,6 +88,22 @@ namespace NSModel
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir, saveTemplateName, totalTime, start, template, totalFiles, totalSize, extensionsToEncrypt);
             }
+        }
+        public string crypt(string sourceFile, string destination)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+            else
+                startInfo.FileName = @"CryptoSoft.exe";
+            startInfo.ArgumentList.Add(sourceFile);
+            startInfo.ArgumentList.Add(destination);
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.CreateNoWindow = true;
+            Process currentProcess = Process.Start(startInfo);
+            currentProcess.WaitForExit();
+            return currentProcess.ExitCode.ToString();
         }
     }
 }

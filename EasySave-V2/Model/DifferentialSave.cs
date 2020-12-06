@@ -37,15 +37,36 @@ namespace NSModel
                 long totalSize = 0;
                 int filesLeft = totalFiles;
                 long sizeLeft = totalSize;
+                string currentSrcDirName;
+                FileInfo comp;
+                DirectoryInfo currentCompDir;
+                DirectoryInfo currentSrcDir;
 
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
+                    currentSrcDirName = src.DirectoryName;
+                    currentSrcDir = src.Directory;
                     foreach (string compFile in compFiles)
                     {
-                        FileInfo comp = new FileInfo(compFile);
+                        sameFile = false;
+                        comp = new FileInfo(compFile);
+                        currentCompDir = comp.Directory;
+                        if (currentSrcDirName != srcDir)
+                        {
+                            if (currentSrcDir.Name == currentCompDir.Name)
+                                sameFile = true;
+                        }
+                        if (currentSrcDirName == srcDir)
+                        {
+                            if (currentSrcDirName.EndsWith(currentSrcDir.Name))
+                            {
+                                if (currentCompDir.FullName.EndsWith(compDir))
+                                    sameFile = true;
+                            }
+                        }
                         /* Checking if files have the same name */
-                        if (comp.Name == src.Name)
+                        if (comp.Name == src.Name && sameFile)
                         {
                             wasCreated = true;
 
@@ -74,13 +95,13 @@ namespace NSModel
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
-                    string currentSrcDirName = src.DirectoryName;
-                    DirectoryInfo currentSrcDir = src.Directory;
+                    currentSrcDirName = src.DirectoryName;
+                    currentSrcDir = src.Directory;
                     foreach (string compFile in compFiles)
                     {
                         sameFile = false;
-                        FileInfo comp = new FileInfo(compFile);
-                        DirectoryInfo currentCompDir = comp.Directory;
+                        comp = new FileInfo(compFile);
+                        currentCompDir = comp.Directory;
                         if (currentSrcDirName != srcDir)
                         {
                             if (currentSrcDir.Name == currentCompDir.Name)
@@ -111,19 +132,7 @@ namespace NSModel
                                     if (Path.GetExtension(src.ToString()) == extension)
                                     {
                                         isCrypted = true;
-                                        ProcessStartInfo startInfo = new ProcessStartInfo();
-                                        if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                                            startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                                        else
-                                            startInfo.FileName = @"CryptoSoft.exe";
-                                        startInfo.ArgumentList.Add(src.ToString());
-                                        startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
-                                        startInfo.UseShellExecute = false;
-                                        startInfo.RedirectStandardOutput = true;
-                                        startInfo.CreateNoWindow = true;
-                                        Process currentProcess = Process.Start(startInfo);
-                                        currentProcess.WaitForExit();
-                                        cryptDuration = currentProcess.ExitCode.ToString();
+                                        cryptDuration = crypt(src.ToString(), src.FullName.Replace(srcDir, destDir));
                                     }
                                 }
                                    
@@ -151,19 +160,7 @@ namespace NSModel
                             if (Path.GetExtension(src.ToString()) == extension)
                             {
                                 isCrypted = true;
-                                ProcessStartInfo startInfo = new ProcessStartInfo();
-                                if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
-                                    startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
-                                else
-                                    startInfo.FileName = @"CryptoSoft.exe";
-                                startInfo.ArgumentList.Add(src.ToString());
-                                startInfo.ArgumentList.Add(src.FullName.Replace(srcDir, destDir));
-                                startInfo.UseShellExecute = false;
-                                startInfo.RedirectStandardOutput = true;
-                                startInfo.CreateNoWindow = true;
-                                Process currentProcess = Process.Start(startInfo);
-                                currentProcess.WaitForExit();
-                                cryptDuration = currentProcess.ExitCode.ToString();
+                                cryptDuration = crypt(src.ToString(), src.FullName.Replace(srcDir, destDir));
                             }
                         }
                         if (!isCrypted)
@@ -182,6 +179,22 @@ namespace NSModel
             }
             else
                 throw new Exception("You need to execute at least one full save with the same source directory as your differential save");
+        }
+        public string crypt(string sourceFile, string destination)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
+                startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
+            else
+                startInfo.FileName = @"CryptoSoft.exe";
+            startInfo.ArgumentList.Add(sourceFile);
+            startInfo.ArgumentList.Add(destination);
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.CreateNoWindow = true;
+            Process currentProcess = Process.Start(startInfo);
+            currentProcess.WaitForExit();
+            return currentProcess.ExitCode.ToString();
         }
     }
 }
