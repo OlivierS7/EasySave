@@ -171,10 +171,14 @@ namespace NSView
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Impact", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Full Save",
+            "Differential Save"});
             this.comboBox1.Location = new System.Drawing.Point(340, 553);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(407, 23);
+            this.comboBox1.Size = new System.Drawing.Size(407, 27);
             this.comboBox1.TabIndex = 13;
             // 
             // ModifySaveTemplate
@@ -199,6 +203,7 @@ namespace NSView
             this.Size = new System.Drawing.Size(1036, 657);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
