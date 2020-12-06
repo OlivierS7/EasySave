@@ -165,11 +165,17 @@
   <data name="InvalidName" xml:space="preserve">
     <value>잘못된 이름</value>
   </data>
+  <data name="InvalidSameName" xml:space="preserve">
+    <value>동일한 이름이 잘못되었습니다.</value>
+  </data>
   <data name="InvalidSrc" xml:space="preserve">
     <value>잘못된 소스 디렉토리 경로 형식</value>
   </data>
   <data name="InvalidType" xml:space="preserve">
     <value>유효한 유형이 아닙니다</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>언어</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>열린 로그</value>
@@ -233,6 +239,9 @@
   </data>
   <data name="SaveType" xml:space="preserve">
     <value>저장 유형</value>
+  </data>
+  <data name="SelectedLanguage" xml:space="preserve">
+    <value>선택한 언어</value>
   </data>
   <data name="Softwares" xml:space="preserve">
     <value>금지 된 소프트웨어</value>
