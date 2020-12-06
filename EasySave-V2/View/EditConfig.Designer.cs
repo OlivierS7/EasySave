@@ -184,7 +184,7 @@ namespace NSView
             this.comboBox1.Items.AddRange(new object[] {
             "English",
             "Français",
-            "Korean"});
+            "한국어"});
             this.comboBox1.Location = new System.Drawing.Point(956, 204);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(133, 21);

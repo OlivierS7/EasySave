@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>우리에 대해</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>더하다</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>저장 템플릿 만들기</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>저장 템플릿 삭제</value>
+  </data>
+  <data name="DelTemp" xml:space="preserve">
+    <value>삭제할 템플릿 선택</value>
+  </data>
+  <data name="DestDir" xml:space="preserve">
+    <value>목적지 디렉토리</value>
+  </data>
+  <data name="EditParam" xml:space="preserve">
+    <value>매개 변수 편집</value>
+  </data>
+  <data name="Exec" xml:space="preserve">
+    <value>저장 실행</value>
+  </data>
+  <data name="ExecAll" xml:space="preserve">
+    <value>모든 저장 실행</value>
+  </data>
+  <data name="ExecSelec" xml:space="preserve">
+    <value>선택한 저장 실행</value>
+  </data>
+  <data name="ExecTemp" xml:space="preserve">
+    <value>실행할 저장 템플릿 선택</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>응용 프로그램 종료</value>
+  </data>
+  <data name="Extensions" xml:space="preserve">
+    <value>암호화 할 확장</value>
+  </data>
+  <data name="InvalidDest" xml:space="preserve">
+    <value>잘못된 대상 디렉터리 경로 형식</value>
+  </data>
+  <data name="InvalidName" xml:space="preserve">
+    <value>잘못된 이름</value>
+  </data>
+  <data name="InvalidSrc" xml:space="preserve">
+    <value>잘못된 소스 디렉토리 경로 형식</value>
+  </data>
+  <data name="InvalidType" xml:space="preserve">
+    <value>유효한 유형이 아닙니다</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>열린 로그</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>저장 템플릿 관리</value>
+  </data>
+  <data name="Modif" xml:space="preserve">
+    <value>저장 템플릿 수정</value>
+  </data>
+  <data name="ModifTemp" xml:space="preserve">
+    <value>수정할 저장 템플릿을 선택하세요.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>아니요</value>
+  </data>
+  <data name="NoSave" xml:space="preserve">
+    <value>저장 템플릿이 없습니다. 새로 만드십시오.</value>
+  </data>
+  <data name="NoSaveToExec" xml:space="preserve">
+    <value>실행할 저장 템플릿이 없습니다.</value>
+  </data>
+  <data name="Param" xml:space="preserve">
+    <value>매개 변수</value>
+  </data>
+  <data name="Phrase1" xml:space="preserve">
+    <value>EasySave는 백업을 관리하는 응용 프로그램입니다.</value>
+  </data>
+  <data name="Phrase2" xml:space="preserve">
+    <value>새로운 그래픽 인터페이스를 사용하여 백업을 사전 구성하고 언제든지 실행할 수 있습니다.</value>
+  </data>
+  <data name="Phrase3" xml:space="preserve">
+    <value>전체 또는 차등 백업 중에서 선택할 수 있으며 모든 데이터를 백업 할 수 있습니다.</value>
+  </data>
+  <data name="Phrase4" xml:space="preserve">
+    <value>우리의 응용 프로그램을 사용하면 상태 파일을 사용하여 실시간으로 진행 상황을 확인할 수 있습니다.</value>
+  </data>
+  <data name="Phrase5" xml:space="preserve">
+    <value>로그 파일을 사용하여 수행 된 모든 작업을 볼 수도 있습니다.</value>
+  </data>
+  <data name="Phrase6" xml:space="preserve">
+    <value>비즈니스 소프트웨어 중 하나가 실행중인 경우 당사의 응용 프로그램은 모든 백업을 중지 할 수 있습니다.</value>
+  </data>
+  <data name="Phrase7" xml:space="preserve">
+    <value>또한 저장하는 동안 암호화 할 파일 확장자를 추가 할 수 있습니다.</value>
+  </data>
+  <data name="Phrase8" xml:space="preserve">
+    <value>Github에 대한 추가 정보 : https://github.com/OlivierS7/easySave/tree/easysave/v2.0</value>
+  </data>
+  <data name="Phrase9" xml:space="preserve">
+    <value>제작 : Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>풀다</value>
+  </data>
+  <data name="RunningError" xml:space="preserve">
+    <value>실행중인 프로그램은 백업 작업의 실행을 차단합니다. 닫고 다시 시도하십시오.</value>
+  </data>
+  <data name="SaveType" xml:space="preserve">
+    <value>저장 유형</value>
+  </data>
+  <data name="Softwares" xml:space="preserve">
+    <value>금지 된 소프트웨어</value>
+  </data>
+  <data name="SrcDiffDest" xml:space="preserve">
+    <value>소스 디렉토리는 대상 디렉토리와 같을 수 없습니다.</value>
+  </data>
+  <data name="SrcDir" xml:space="preserve">
+    <value>소스 디렉토리</value>
+  </data>
+  <data name="SrcInexist" xml:space="preserve">
+    <value>소스 디렉토리가 없습니다.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>저장 템플릿을 성공적으로 생성했습니다.</value>
+  </data>
+  <data name="SuccessDel" xml:space="preserve">
+    <value>저장 템플릿을 성공적으로 제거했습니다.</value>
+  </data>
+  <data name="SuccessExec" xml:space="preserve">
+    <value>저장을 성공적으로 실행했습니다.</value>
+  </data>
+  <data name="SuccessExecAll" xml:space="preserve">
+    <value>모든 저장을 성공적으로 실행했습니다.</value>
+  </data>
+  <data name="SuccessModif" xml:space="preserve">
+    <value>저장 템플릿을 성공적으로 수정했습니다.</value>
+  </data>
+  <data name="Sure" xml:space="preserve">
+    <value>모든 저장을 실행 하시겠습니까?</value>
+  </data>
+  <data name="Welcom" xml:space="preserve">
+    <value>오신 것을 환영합니다 에 EasySave</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>예</value>
+  </data>
+</root>
