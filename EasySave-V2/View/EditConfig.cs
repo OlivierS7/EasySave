@@ -146,9 +146,6 @@ namespace NSView
                 case 2:
                     Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ko-KR");
                     break;
-                case 3:
-                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("es-ES");
-                    break;
             }
             this.startMenu.LoadAllLang();
         }
