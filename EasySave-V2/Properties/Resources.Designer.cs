@@ -61,6 +61,24 @@ namespace EasySave_V2.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à About us.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Background1 {
@@ -71,12 +89,327 @@ namespace EasySave_V2.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Create a save template.
+        /// </summary>
+        internal static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete a save template.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose template to delete.
+        /// </summary>
+        internal static string DelTemp {
+            get {
+                return ResourceManager.GetString("DelTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Destination directory.
+        /// </summary>
+        internal static string DestDir {
+            get {
+                return ResourceManager.GetString("DestDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap EasySave1 {
             get {
                 object obj = ResourceManager.GetObject("EasySave1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit Parameters.
+        /// </summary>
+        internal static string EditParam {
+            get {
+                return ResourceManager.GetString("EditParam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Execute save(s).
+        /// </summary>
+        internal static string Exec {
+            get {
+                return ResourceManager.GetString("Exec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Execute all saves.
+        /// </summary>
+        internal static string ExecAll {
+            get {
+                return ResourceManager.GetString("ExecAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Execute the selected save.
+        /// </summary>
+        internal static string ExecSelec {
+            get {
+                return ResourceManager.GetString("ExecSelec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose save template(s) to execute.
+        /// </summary>
+        internal static string ExecTemp {
+            get {
+                return ResourceManager.GetString("ExecTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exit Application.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extensions to encrypt.
+        /// </summary>
+        internal static string Extensions {
+            get {
+                return ResourceManager.GetString("Extensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open Logs.
+        /// </summary>
+        internal static string Log {
+            get {
+                return ResourceManager.GetString("Log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Manage save template(s).
+        /// </summary>
+        internal static string Manage {
+            get {
+                return ResourceManager.GetString("Manage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modify a save template.
+        /// </summary>
+        internal static string Modif {
+            get {
+                return ResourceManager.GetString("Modif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose a save template to modify.
+        /// </summary>
+        internal static string ModifTemp {
+            get {
+                return ResourceManager.GetString("ModifTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Parameters.
+        /// </summary>
+        internal static string Param {
+            get {
+                return ResourceManager.GetString("Param", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à EasySave is an application to manage your backups..
+        /// </summary>
+        internal static string Phrase1 {
+            get {
+                return ResourceManager.GetString("Phrase1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à With our new graphical interface, you can pre-configure backups and run them at any time..
+        /// </summary>
+        internal static string Phrase2 {
+            get {
+                return ResourceManager.GetString("Phrase2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You can choose between a full or a differential backup and any data can be backup..
+        /// </summary>
+        internal static string Phrase3 {
+            get {
+                return ResourceManager.GetString("Phrase3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Our application allows you to follow the progress in real time using the state file..
+        /// </summary>
+        internal static string Phrase4 {
+            get {
+                return ResourceManager.GetString("Phrase4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You can also watch all performed operations using log files..
+        /// </summary>
+        internal static string Phrase5 {
+            get {
+                return ResourceManager.GetString("Phrase5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Our application is able to stop any backup if one of your business software is running..
+        /// </summary>
+        internal static string Phrase6 {
+            get {
+                return ResourceManager.GetString("Phrase6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à In addition, you can add file extensions to encrypt while saving..
+        /// </summary>
+        internal static string Phrase7 {
+            get {
+                return ResourceManager.GetString("Phrase7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à More on Github: https://github.com/OlivierS7/easySave/tree/easysave/v2.0.
+        /// </summary>
+        internal static string Phrase8 {
+            get {
+                return ResourceManager.GetString("Phrase8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Created by: Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE.
+        /// </summary>
+        internal static string Phrase9 {
+            get {
+                return ResourceManager.GetString("Phrase9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save type.
+        /// </summary>
+        internal static string SaveType {
+            get {
+                return ResourceManager.GetString("SaveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Forbidden Softwares.
+        /// </summary>
+        internal static string Softwares {
+            get {
+                return ResourceManager.GetString("Softwares", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source directory.
+        /// </summary>
+        internal static string SrcDir {
+            get {
+                return ResourceManager.GetString("SrcDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to execute all saves ?.
+        /// </summary>
+        internal static string Sure {
+            get {
+                return ResourceManager.GetString("Sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Welcome to EasySave.
+        /// </summary>
+        internal static string Welcom {
+            get {
+                return ResourceManager.GetString("Welcom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -11,6 +12,8 @@ namespace NSView
         public DeleteSaveTemplate()
         {
             InitializeComponent();
+            label1.Text = Resources.DelTemp;
+            button1.Text = Resources.Confirm;
         }
         private void button1_Click(object sender, EventArgs e)
         {

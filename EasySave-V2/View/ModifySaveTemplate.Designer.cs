@@ -72,7 +72,7 @@ namespace NSView
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(228, 424);
+            this.label2.Location = new System.Drawing.Point(192, 424);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 19);
             this.label2.TabIndex = 2;
@@ -83,7 +83,7 @@ namespace NSView
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(194, 471);
+            this.label3.Location = new System.Drawing.Point(192, 467);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 19);
             this.label3.TabIndex = 3;
@@ -94,7 +94,7 @@ namespace NSView
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(176, 513);
+            this.label4.Location = new System.Drawing.Point(192, 510);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(142, 19);
             this.label4.TabIndex = 4;
@@ -105,7 +105,7 @@ namespace NSView
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(205, 556);
+            this.label5.Location = new System.Drawing.Point(192, 552);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 19);
             this.label5.TabIndex = 5;

@@ -47,7 +47,7 @@
             this.SaveTemplateName.AutoSize = true;
             this.SaveTemplateName.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SaveTemplateName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.SaveTemplateName.Location = new System.Drawing.Point(100, 53);
+            this.SaveTemplateName.Location = new System.Drawing.Point(17, 50);
             this.SaveTemplateName.Name = "SaveTemplateName";
             this.SaveTemplateName.Size = new System.Drawing.Size(45, 19);
             this.SaveTemplateName.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(46, 89);
+            this.label2.Location = new System.Drawing.Point(17, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 19);
             this.label2.TabIndex = 0;
@@ -97,7 +97,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(22, 126);
+            this.label1.Location = new System.Drawing.Point(17, 126);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 19);
             this.label1.TabIndex = 4;
@@ -127,7 +127,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(82, 169);
+            this.label3.Location = new System.Drawing.Point(17, 169);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 19);
             this.label3.TabIndex = 8;
@@ -151,7 +151,7 @@
             this.button2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button2.Location = new System.Drawing.Point(158, 221);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(111, 27);
             this.button2.TabIndex = 10;
             this.button2.Text = "Confirm";
             this.button2.UseVisualStyleBackColor = false;

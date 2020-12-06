@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using EasySave_V2.Properties;
 
 namespace EasySave_V2.View
 {
@@ -13,6 +14,16 @@ namespace EasySave_V2.View
         public AboutUs()
         {
             InitializeComponent();
+            label1.Text = Resources.Phrase9;
+            label2.Text = Resources.Welcom;
+            label3.Text = Resources.Phrase1;
+            label4.Text = Resources.Phrase2;
+            label5.Text = Resources.Phrase3;
+            label6.Text = Resources.Phrase4;
+            label7.Text = Resources.Phrase5;
+            label8.Text = Resources.Phrase6;
+            label9.Text = Resources.Phrase7;
+            label10.Text = Resources.Phrase8;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

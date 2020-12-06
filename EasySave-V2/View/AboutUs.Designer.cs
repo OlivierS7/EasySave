@@ -50,7 +50,7 @@ namespace EasySave_V2.View
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Impact", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(469, 37);
+            this.label2.Location = new System.Drawing.Point(464, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(403, 53);
             this.label2.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace EasySave_V2.View
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(327, 515);
+            this.label1.Location = new System.Drawing.Point(327, 508);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(718, 27);
             this.label1.TabIndex = 2;
@@ -82,7 +82,7 @@ namespace EasySave_V2.View
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(447, 243);
+            this.label3.Location = new System.Drawing.Point(315, 251);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(416, 23);
             this.label3.TabIndex = 4;
@@ -92,7 +92,7 @@ namespace EasySave_V2.View
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(315, 272);
+            this.label4.Location = new System.Drawing.Point(315, 276);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(718, 23);
             this.label4.TabIndex = 5;
@@ -103,7 +103,7 @@ namespace EasySave_V2.View
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(384, 299);
+            this.label5.Location = new System.Drawing.Point(315, 301);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(550, 23);
             this.label5.TabIndex = 6;
@@ -113,7 +113,7 @@ namespace EasySave_V2.View
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(288, 324);
+            this.label6.Location = new System.Drawing.Point(315, 326);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(794, 23);
             this.label6.TabIndex = 7;
@@ -124,7 +124,7 @@ namespace EasySave_V2.View
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(401, 349);
+            this.label7.Location = new System.Drawing.Point(315, 351);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(538, 23);
             this.label7.TabIndex = 8;
@@ -134,7 +134,7 @@ namespace EasySave_V2.View
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(337, 374);
+            this.label8.Location = new System.Drawing.Point(315, 376);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(691, 23);
             this.label8.TabIndex = 9;
@@ -145,7 +145,7 @@ namespace EasySave_V2.View
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Impact", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(315, 398);
+            this.label9.Location = new System.Drawing.Point(315, 401);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(730, 23);
             this.label9.TabIndex = 10;
@@ -156,7 +156,7 @@ namespace EasySave_V2.View
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(363, 466);
+            this.label10.Location = new System.Drawing.Point(363, 459);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(135, 23);
             this.label10.TabIndex = 11;
@@ -167,7 +167,7 @@ namespace EasySave_V2.View
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(99)))), ((int)(((byte)(219)))));
-            this.linkLabel1.Location = new System.Drawing.Point(504, 466);
+            this.linkLabel1.Location = new System.Drawing.Point(504, 459);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(477, 23);
             this.linkLabel1.TabIndex = 12;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -10,6 +11,9 @@ namespace NSView
         public ManageTemplate()
         {
             InitializeComponent();
+            button1.Text = Resources.Create;
+            button2.Text = Resources.Delete;
+            button3.Text = Resources.Modif;
             creaSaveTemplate1.Hide();
             delSaveTemplate1.Hide();
             modifySaveTemplate1.Hide();

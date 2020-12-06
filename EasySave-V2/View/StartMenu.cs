@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -8,6 +9,12 @@ namespace NSView
         public StartMenu()
         {
             InitializeComponent();
+            Manage.Text = Resources.Manage;
+            button1.Text = Resources.Log;
+            parameters.Text = Resources.Param;
+            Exit.Text = Resources.Exit;
+            Execute.Text = Resources.Exec;
+            AboutUs.Text = Resources.About;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -73,6 +80,11 @@ namespace NSView
         private void Exit_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.Exit();
+        }
+
+        private void executeSaveTemplate1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -46,9 +46,9 @@ namespace NSView
             // 
             this.button1.BackColor = System.Drawing.Color.AliceBlue;
             this.button1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(536, 491);
+            this.button1.Location = new System.Drawing.Point(524, 491);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 28);
+            this.button1.Size = new System.Drawing.Size(120, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = false;
@@ -58,9 +58,9 @@ namespace NSView
             // 
             this.button2.BackColor = System.Drawing.Color.AliceBlue;
             this.button2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(866, 491);
+            this.button2.Location = new System.Drawing.Point(852, 491);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 28);
+            this.button2.Size = new System.Drawing.Size(122, 28);
             this.button2.TabIndex = 1;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = false;
@@ -70,41 +70,41 @@ namespace NSView
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(536, 451);
+            this.textBox1.Location = new System.Drawing.Point(524, 451);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(95, 26);
+            this.textBox1.Size = new System.Drawing.Size(120, 26);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(866, 451);
+            this.textBox2.Location = new System.Drawing.Point(852, 451);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(95, 26);
+            this.textBox2.Size = new System.Drawing.Size(122, 26);
             this.textBox2.TabIndex = 3;
             // 
             // listBox1
             // 
             this.listBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.listBox1.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listBox1.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
+            this.listBox1.ItemHeight = 17;
             this.listBox1.Location = new System.Drawing.Point(524, 199);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 224);
+            this.listBox1.Size = new System.Drawing.Size(120, 208);
             this.listBox1.TabIndex = 4;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // listBox2
             // 
             this.listBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.listBox2.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listBox2.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 20;
+            this.listBox2.ItemHeight = 17;
             this.listBox2.Location = new System.Drawing.Point(852, 199);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(122, 224);
+            this.listBox2.Size = new System.Drawing.Size(122, 208);
             this.listBox2.TabIndex = 5;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
@@ -134,9 +134,9 @@ namespace NSView
             // 
             this.button3.BackColor = System.Drawing.Color.AliceBlue;
             this.button3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(536, 533);
+            this.button3.Location = new System.Drawing.Point(524, 533);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.Size = new System.Drawing.Size(120, 29);
             this.button3.TabIndex = 8;
             this.button3.Text = "Remove";
             this.button3.UseVisualStyleBackColor = false;
@@ -146,9 +146,9 @@ namespace NSView
             // 
             this.button4.BackColor = System.Drawing.Color.AliceBlue;
             this.button4.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(866, 533);
+            this.button4.Location = new System.Drawing.Point(852, 533);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 29);
+            this.button4.Size = new System.Drawing.Size(122, 29);
             this.button4.TabIndex = 9;
             this.button4.Text = "Remove";
             this.button4.UseVisualStyleBackColor = false;
@@ -159,7 +159,7 @@ namespace NSView
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Impact", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(618, 54);
+            this.label3.Location = new System.Drawing.Point(578, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(301, 53);
             this.label3.TabIndex = 10;

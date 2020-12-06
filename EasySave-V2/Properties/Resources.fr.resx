@@ -118,121 +118,114 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>About us</value>
+    <value>A propos</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Ajouter</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirmer</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create a save template</value>
+    <value>Créer une sauvegarde</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete a save template</value>
+    <value>Supprimer une sauvegarde</value>
   </data>
   <data name="DelTemp" xml:space="preserve">
-    <value>Choose template to delete</value>
+    <value>Choisissez la sauvegarde à supprimer</value>
   </data>
   <data name="DestDir" xml:space="preserve">
-    <value>Destination directory</value>
-  </data>
-  <data name="EasySave1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\EasySave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Dossier de destination</value>
   </data>
   <data name="EditParam" xml:space="preserve">
-    <value>Edit Parameters</value>
+    <value>Modifier les paramètres</value>
   </data>
   <data name="Exec" xml:space="preserve">
-    <value>Execute save(s)</value>
+    <value>Exécuter des sauvegardes</value>
   </data>
   <data name="ExecAll" xml:space="preserve">
-    <value>Execute all saves</value>
+    <value>Exécuter toutes les sauvegardes</value>
   </data>
   <data name="ExecSelec" xml:space="preserve">
-    <value>Execute the selected save</value>
+    <value>Exécuter la sauvegarde sélectionnée</value>
   </data>
   <data name="ExecTemp" xml:space="preserve">
-    <value>Choose save template(s) to execute</value>
+    <value>Choisissez une sauvegarde à exécuter</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Exit Application</value>
+    <value>Quitter l'application</value>
   </data>
   <data name="Extensions" xml:space="preserve">
-    <value>Extensions to encrypt</value>
+    <value>Extensions à chiffrer</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Open Logs</value>
+    <value>Ouvrir les logs</value>
   </data>
   <data name="Manage" xml:space="preserve">
-    <value>Manage save template(s)</value>
+    <value>Gérer les sauvegardes</value>
   </data>
   <data name="Modif" xml:space="preserve">
-    <value>Modify a save template</value>
+    <value>Modifier une sauvegarde</value>
   </data>
   <data name="ModifTemp" xml:space="preserve">
-    <value>Choose a save template to modify</value>
+    <value>Choisissez une sauvegarde à modifier</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Non</value>
   </data>
   <data name="Param" xml:space="preserve">
-    <value>Parameters</value>
+    <value>Paramètres</value>
   </data>
   <data name="Phrase1" xml:space="preserve">
-    <value>EasySave is an application to manage your backups.</value>
+    <value>EasySave est une application pour gérer vos sauvegardes.</value>
   </data>
   <data name="Phrase2" xml:space="preserve">
-    <value>With our new graphical interface, you can pre-configure backups and run them at any time.</value>
+    <value>Avec notre nouvelle interface graphique, vous pouvez préconfigurer les sauvegardes et les exécuter à tout moment.</value>
   </data>
   <data name="Phrase3" xml:space="preserve">
-    <value>You can choose between a full or a differential backup and any data can be backup.</value>
+    <value>Vous pouvez choisir entre une sauvegarde complète ou différentielle et toutes les données peuvent être sauvegardées.</value>
   </data>
   <data name="Phrase4" xml:space="preserve">
-    <value>Our application allows you to follow the progress in real time using the state file.</value>
+    <value>Notre application vous permet de suivre l'avancement en temps réel à l'aide du fichier d'état.</value>
   </data>
   <data name="Phrase5" xml:space="preserve">
-    <value>You can also watch all performed operations using log files.</value>
+    <value>Vous pouvez également regarder toutes les opérations effectuées à l'aide de fichiers logs.</value>
   </data>
   <data name="Phrase6" xml:space="preserve">
-    <value>Our application is able to stop any backup if one of your business software is running.</value>
+    <value>Notre application est capable d'arrêter toute sauvegarde si l'un de vos logiciels d'entreprise est en cours d'exécution.</value>
   </data>
   <data name="Phrase7" xml:space="preserve">
-    <value>In addition, you can add file extensions to encrypt while saving.</value>
+    <value>De plus, vous pouvez ajouter des extensions de fichier à crypter lors d'une sauvegarde.</value>
   </data>
   <data name="Phrase8" xml:space="preserve">
-    <value>More on Github: https://github.com/OlivierS7/easySave/tree/easysave/v2.0</value>
+    <value>Plus sur GitHub : https://github.com/OlivierS7/easySave/tree/easysave/v2.0</value>
   </data>
   <data name="Phrase9" xml:space="preserve">
-    <value>Created by: Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
+    <value>Créer par : Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Supprimer</value>
   </data>
   <data name="SaveType" xml:space="preserve">
-    <value>Save type</value>
+    <value>Type de sauvegarde</value>
   </data>
   <data name="Softwares" xml:space="preserve">
-    <value>Forbidden Softwares</value>
+    <value>Logiciels interdits</value>
   </data>
   <data name="SrcDir" xml:space="preserve">
-    <value>Source directory</value>
+    <value>Dossier source</value>
   </data>
   <data name="Sure" xml:space="preserve">
-    <value>Are you sure you want to execute all saves ?</value>
+    <value>Êtes vous sûrs de vouloir exécuter toutes les sauvegardes ?</value>
   </data>
   <data name="Welcom" xml:space="preserve">
-    <value>Welcome to EasySave</value>
+    <value>Bienvenue sur EasySave</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Oui</value>
   </data>
 </root>

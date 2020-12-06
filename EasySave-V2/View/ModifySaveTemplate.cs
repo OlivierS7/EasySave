@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -11,6 +12,12 @@ namespace NSView
         public ModifySaveTemplate()
         {
             InitializeComponent();
+            label1.Text = Resources.ModifTemp;
+            Confirm.Text = Resources.Confirm;
+            label2.Text = Resources.Name;
+            label3.Text = Resources.SrcDir;
+            label4.Text = Resources.DestDir;
+            label5.Text = Resources.SaveType;
         }
 
         private void button1_Click(object sender, EventArgs e)

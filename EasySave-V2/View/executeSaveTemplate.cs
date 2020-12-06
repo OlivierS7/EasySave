@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -15,6 +16,12 @@ namespace NSView
         public ExecuteSaveTemplate()
         {
             InitializeComponent();
+            label1.Text = Resources.Sure;
+            label2.Text = Resources.ExecTemp;
+            button1.Text = Resources.ExecSelec;
+            button2.Text = Resources.ExecAll;
+            button3.Text = Resources.Yes;
+            button4.Text = Resources.No;
         }
 
         private void executeSaveTemplate_Load(object sender, EventArgs e)

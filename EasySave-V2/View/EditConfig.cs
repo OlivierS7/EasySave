@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -12,6 +13,13 @@ namespace NSView
         public EditConfig()
         {
             InitializeComponent();
+            label3.Text = Resources.EditParam;
+            label1.Text = Resources.Extensions;
+            label2.Text = Resources.Softwares;
+            button1.Text = Resources.Add;
+            button2.Text = Resources.Add;
+            button3.Text = Resources.Remove;
+            button4.Text = Resources.Remove;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

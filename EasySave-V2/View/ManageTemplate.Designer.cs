@@ -62,6 +62,7 @@
             // 
             // creaSaveTemplate1
             // 
+            this.creaSaveTemplate1.BackColor = System.Drawing.Color.Transparent;
             this.creaSaveTemplate1.Location = new System.Drawing.Point(247, 180);
             this.creaSaveTemplate1.Name = "creaSaveTemplate1";
             this.creaSaveTemplate1.Size = new System.Drawing.Size(1125, 610);
@@ -70,9 +71,9 @@
             // delSaveTemplate1
             // 
             this.delSaveTemplate1.BackColor = System.Drawing.Color.Transparent;
-            this.delSaveTemplate1.Location = new System.Drawing.Point(122, 156);
+            this.delSaveTemplate1.Location = new System.Drawing.Point(0, 156);
             this.delSaveTemplate1.Name = "delSaveTemplate1";
-            this.delSaveTemplate1.Size = new System.Drawing.Size(965, 485);
+            this.delSaveTemplate1.Size = new System.Drawing.Size(1073, 485);
             this.delSaveTemplate1.TabIndex = 3;
             // 
             // button3
@@ -100,12 +101,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.modifySaveTemplate1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.delSaveTemplate1);
             this.Controls.Add(this.creaSaveTemplate1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.modifySaveTemplate1);
             this.Name = "ManageTemplate";
             this.Size = new System.Drawing.Size(1195, 740);
             this.ResumeLayout(false);

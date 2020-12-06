@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using NSController;
 
@@ -12,7 +14,8 @@ namespace EasySave_V2
         [STAThread]
         static void Main()
         {
-             Controller controller = new Controller();
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
+            Controller controller = new Controller();
             
         }
     }

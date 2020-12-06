@@ -50,6 +50,7 @@ namespace NSView
             this.manageTemplate1.Name = "manageTemplate1";
             this.manageTemplate1.Size = new System.Drawing.Size(1527, 822);
             this.manageTemplate1.TabIndex = 8;
+            this.manageTemplate1.Visible = false;
             // 
             // executeSaveTemplate1
             // 
@@ -59,6 +60,8 @@ namespace NSView
             this.executeSaveTemplate1.Name = "executeSaveTemplate1";
             this.executeSaveTemplate1.Size = new System.Drawing.Size(1498, 776);
             this.executeSaveTemplate1.TabIndex = 9;
+            this.executeSaveTemplate1.Visible = false;
+            this.executeSaveTemplate1.Load += new System.EventHandler(this.executeSaveTemplate1_Load);
             // 
             // editConfig1
             // 
@@ -147,6 +150,7 @@ namespace NSView
             // 
             this.Exit.BackColor = System.Drawing.Color.AliceBlue;
             this.Exit.Font = new System.Drawing.Font("Impact", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Exit.Location = new System.Drawing.Point(1345, 0);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(179, 42);
@@ -177,7 +181,7 @@ namespace NSView
             this.MinimumSize = new System.Drawing.Size(1540, 932);
             this.Name = "StartMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About us";
+            this.Text = "EasySave V2.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
