@@ -95,6 +95,7 @@
             this.modifySaveTemplate1.Name = "modifySaveTemplate1";
             this.modifySaveTemplate1.Size = new System.Drawing.Size(1246, 638);
             this.modifySaveTemplate1.TabIndex = 5;
+            this.modifySaveTemplate1.Load += new System.EventHandler(this.modifySaveTemplate1_Load);
             // 
             // ManageTemplate
             // 
@@ -109,6 +110,7 @@
             this.Controls.Add(this.modifySaveTemplate1);
             this.Name = "ManageTemplate";
             this.Size = new System.Drawing.Size(1195, 740);
+            this.Load += new System.EventHandler(this.ManageTemplate_Load);
             this.ResumeLayout(false);
 
         }

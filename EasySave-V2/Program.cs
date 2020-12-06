@@ -14,7 +14,6 @@ namespace EasySave_V2
         [STAThread]
         static void Main()
         {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
             Controller controller = new Controller();
             
         }

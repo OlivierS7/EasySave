@@ -12,12 +12,6 @@ namespace NSView
         public ModifySaveTemplate()
         {
             InitializeComponent();
-            label1.Text = Resources.ModifTemp;
-            Confirm.Text = Resources.Confirm;
-            label2.Text = Resources.Name;
-            label3.Text = Resources.SrcDir;
-            label4.Text = Resources.DestDir;
-            label5.Text = Resources.SaveType;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +65,20 @@ namespace NSView
                     index++;
                 };
             }
+        }
+
+        private void ModifySaveTemplate_Load(object sender, EventArgs e)
+        {
+            
+        }
+        public void loadLang()
+        {
+            label1.Text = Resources.ModifTemp;
+            Confirm.Text = Resources.Confirm;
+            label2.Text = Resources.Name;
+            label3.Text = Resources.SrcDir;
+            label4.Text = Resources.DestDir;
+            label5.Text = Resources.SaveType;
         }
     }
 }

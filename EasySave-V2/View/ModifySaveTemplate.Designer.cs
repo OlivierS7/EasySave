@@ -197,6 +197,7 @@ namespace NSView
             this.Controls.Add(this.listBox1);
             this.Name = "ModifySaveTemplate";
             this.Size = new System.Drawing.Size(1036, 657);
+            this.Load += new System.EventHandler(this.ModifySaveTemplate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -175,6 +175,7 @@
             this.Controls.Add(this.SaveTemplateName);
             this.Name = "creaSaveTemplate";
             this.Size = new System.Drawing.Size(615, 277);
+            this.Load += new System.EventHandler(this.creaSaveTemplate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

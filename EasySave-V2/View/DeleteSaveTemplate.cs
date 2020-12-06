@@ -12,8 +12,6 @@ namespace NSView
         public DeleteSaveTemplate()
         {
             InitializeComponent();
-            label1.Text = Resources.DelTemp;
-            button1.Text = Resources.Confirm;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -43,6 +41,11 @@ namespace NSView
                     index++;
                 };
             }
+        }
+        public void loadLang()
+        {
+            label1.Text = Resources.DelTemp;
+            button1.Text = Resources.Confirm;
         }
     }
 }

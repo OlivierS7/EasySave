@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 using EasySave_V2.Properties;
 
@@ -9,30 +11,30 @@ namespace NSView
         public StartMenu()
         {
             InitializeComponent();
-            Manage.Text = Resources.Manage;
-            button1.Text = Resources.Log;
-            parameters.Text = Resources.Param;
-            Exit.Text = Resources.Exit;
-            Execute.Text = Resources.Exec;
-            AboutUs.Text = Resources.About;
+            LoadAllLang();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            HideAll();
             aboutUs1.Show();
         }
 
         private void AboutUs_Click(object sender, EventArgs e)
         {
-            HideAll();
-            aboutUs1.Show();
+            if (!aboutUs1.Visible)
+            {
+                HideAll();
+                aboutUs1.Show();
+            }
         }
 
         private void parameters_Click(object sender, EventArgs e)
         {
-            HideAll();
-            editConfig1.Show();
+            if (!editConfig1.Visible)
+            {
+                HideAll();
+                editConfig1.Show();
+            }
             editConfig1.forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
             editConfig1.ChangelistBox1();
@@ -47,8 +49,11 @@ namespace NSView
 
         private void Execute_Click(object sender, EventArgs e)
         {
-            HideAll();
-            executeSaveTemplate1.Show();
+            if (!executeSaveTemplate1.Visible)
+            {
+                HideAll();
+                executeSaveTemplate1.Show();
+            }
             executeSaveTemplate1.templates = GraphicalView.controller.GetAllTemplates();
             executeSaveTemplate1.ChangelistBox();
             executeSaveTemplate1.BringToFront();
@@ -56,8 +61,11 @@ namespace NSView
 
         private void Manage_Click(object sender, EventArgs e)
         {
-            HideAll();
-            manageTemplate1.Show();
+            if (!manageTemplate1.Visible)
+            {
+                HideAll();
+                manageTemplate1.Show();
+            }
             manageTemplate1.BringToFront();
         }
 
@@ -85,6 +93,37 @@ namespace NSView
         private void executeSaveTemplate1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
+            LoadAllLang();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+            LoadAllLang();
+        }
+
+        private void LoadAllLang()
+        {
+            loadLang();
+            executeSaveTemplate1.loadLang();
+            manageTemplate1.loadLang();
+            editConfig1.loadLang();
+            aboutUs1.loadLang();
+
+        }
+        private void loadLang()
+        {
+            Manage.Text = Resources.Manage;
+            button1.Text = Resources.Log;
+            parameters.Text = Resources.Param;
+            Exit.Text = Resources.Exit;
+            Execute.Text = Resources.Exec;
+            AboutUs.Text = Resources.About;
         }
     }
 }

@@ -16,12 +16,6 @@ namespace NSView
         public ExecuteSaveTemplate()
         {
             InitializeComponent();
-            label1.Text = Resources.Sure;
-            label2.Text = Resources.ExecTemp;
-            button1.Text = Resources.ExecSelec;
-            button2.Text = Resources.ExecAll;
-            button3.Text = Resources.Yes;
-            button4.Text = Resources.No;
         }
 
         private void executeSaveTemplate_Load(object sender, EventArgs e)
@@ -74,6 +68,15 @@ namespace NSView
                     index++;
                 }
             }
+        }
+        public void loadLang()
+        {
+            label1.Text = Resources.Sure;
+            label2.Text = Resources.ExecTemp;
+            button1.Text = Resources.ExecSelec;
+            button2.Text = Resources.ExecAll;
+            button3.Text = Resources.Yes;
+            button4.Text = Resources.No;
         }
     }
 }

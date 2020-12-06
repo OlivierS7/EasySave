@@ -11,11 +11,6 @@ namespace NSView
         public creaSaveTemplate()
         {
             InitializeComponent();
-            label1.Text = Resources.DestDir;
-            label2.Text = Resources.SrcDir;
-            label3.Text = Resources.SaveType;
-            button2.Text = Resources.Confirm;
-            SaveTemplateName.Text = Resources.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +39,20 @@ namespace NSView
             string destDir = textBox3.Text;
             int type = comboBox1.SelectedIndex + 1;
             GraphicalView.controller.CreateSaveTemplate(name, srcDir, destDir, type);
+        }
+
+        private void creaSaveTemplate_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        public void loadLang()
+        {
+            label1.Text = Resources.DestDir;
+            label2.Text = Resources.SrcDir;
+            label3.Text = Resources.SaveType;
+            button2.Text = Resources.Confirm;
+            SaveTemplateName.Text = Resources.Name;
         }
     }
 }
