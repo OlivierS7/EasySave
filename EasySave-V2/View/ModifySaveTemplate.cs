@@ -40,7 +40,10 @@ namespace NSView
             textBox1.Text = splitString[1].Split(" : ")[1];
             textBox2.Text = splitString[2].Split(" : ")[1];
             textBox3.Text = splitString[3].Split(" : ")[1];
-            textBox4.Text = splitString[4].Split(" : ")[1];
+            if (splitString[4].Split(" : ")[1] == "1")
+                comboBox1.Text = "Full Save";
+            else
+                comboBox1.Text = "Differential Save";
         }
 
         /* Modify the selected save template */
@@ -50,7 +53,7 @@ namespace NSView
             {
                 string[] splitString = listBox1.SelectedItem.ToString().Split(" | ");
                 int id = Convert.ToInt32(splitString[0].Split(" : ")[1]);
-                GraphicalView.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, Convert.ToInt32(textBox4.Text));
+                GraphicalView.controller.ModifySaveTemplate(id, textBox1.Text, textBox2.Text, textBox3.Text, comboBox1.SelectedIndex + 1);
                 this.templates = GraphicalView.controller.GetAllTemplates();
                 ChangelistBox1();
             }
@@ -69,11 +72,6 @@ namespace NSView
                     index++;
                 };
             }
-        }
-
-        private void ModifySaveTemplate_Load(object sender, EventArgs e)
-        {
-            
         }
 
         /* Allows the use of multiple languages */

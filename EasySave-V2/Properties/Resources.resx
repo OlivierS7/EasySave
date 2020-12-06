@@ -178,6 +178,9 @@
   <data name="InvalidType" xml:space="preserve">
     <value>isn't a valid type</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="Log" xml:space="preserve">
     <value>Open Logs</value>
   </data>
@@ -227,7 +230,7 @@
     <value>In addition, you can add file extensions to encrypt while saving.</value>
   </data>
   <data name="Phrase8" xml:space="preserve">
-    <value>More on Github: https://github.com/OlivierS7/easySave/tree/easysave/v2.0</value>
+    <value>More on Github:</value>
   </data>
   <data name="Phrase9" xml:space="preserve">
     <value>Created by: Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
@@ -240,6 +243,9 @@
   </data>
   <data name="SaveType" xml:space="preserve">
     <value>Save type</value>
+  </data>
+  <data name="SelectedLanguage" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="Softwares" xml:space="preserve">
     <value>Forbidden Softwares</value>
