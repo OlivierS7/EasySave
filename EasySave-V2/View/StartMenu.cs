@@ -19,6 +19,7 @@ namespace NSView
             aboutUs1.Show();
         }
 
+        /* Shows the about us User Control */
         private void AboutUs_Click(object sender, EventArgs e)
         {
             if (!aboutUs1.Visible)
@@ -28,6 +29,7 @@ namespace NSView
             }
         }
 
+        /* Shows the parameters User Control */
         private void parameters_Click(object sender, EventArgs e)
         {
             if (!editConfig1.Visible)
@@ -42,11 +44,13 @@ namespace NSView
             editConfig1.BringToFront();
         }
 
+        /* Open logs */
         private void OpenLogs_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.OpenLogs();
         }
 
+        /* Shows the execute save template User Control */
         private void Execute_Click(object sender, EventArgs e)
         {
             if (!executeSaveTemplate1.Visible)
@@ -59,6 +63,7 @@ namespace NSView
             executeSaveTemplate1.BringToFront();
         }
 
+        /* Shows the manage save template User Control */
         private void Manage_Click(object sender, EventArgs e)
         {
             if (!manageTemplate1.Visible)
@@ -77,6 +82,7 @@ namespace NSView
             aboutUs1.Hide();
         }
 
+        /* Print a popup message */
         public void PrintMessage(string message, int type)
         {
             if (type == -1)
@@ -85,6 +91,7 @@ namespace NSView
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /* Closes the application */
         private void Exit_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.Exit();
@@ -95,18 +102,21 @@ namespace NSView
 
         }
 
+        /* Change language to french */
         private void button3_Click(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
             LoadAllLang();
         }
 
+        /* Change language to english */
         private void button2_Click(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
             LoadAllLang();
         }
 
+        /* Allows the use of multiple languages */
         private void LoadAllLang()
         {
             loadLang();
@@ -116,6 +126,8 @@ namespace NSView
             aboutUs1.loadLang();
 
         }
+
+        /* Allows the use of multiple languages */
         private void loadLang()
         {
             Manage.Text = Resources.Manage;

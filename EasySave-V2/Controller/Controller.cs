@@ -11,6 +11,8 @@ namespace NSController {
 
 		private IView _View;
 		private Model _model;
+
+		/* Variables for Regex */
 		private string error = "";
 		private Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
 		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
@@ -27,16 +29,20 @@ namespace NSController {
 			set => this._model = value;
 		}
 
+		/* Constructor */
 		public Controller() {
 			this.model = new Model();
 			this.View = new GraphicalView(this);
 			this.View.Start(); ;
 		}
+		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
-			if(nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
+
+			/* Checking if informations matches regex */
+			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
             {
                 try
                 {
@@ -59,6 +65,8 @@ namespace NSController {
 				PrintMessage(error, -1);
             }
 		}
+
+		/* Method to delete a save template */
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
 			{
@@ -70,11 +78,15 @@ namespace NSController {
 				PrintMessage(err.Message, -1);
 			}
 		}
+
+		/* Method to modify an existing save template */
 		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
         {
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
+
+			/* Checking if informations matches regex */
 			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
 			{
 				try
@@ -98,6 +110,8 @@ namespace NSController {
 			}
 			
         }
+
+		/* Method to execute one save */
 		public void ExecuteOneSave(int templateIndex) {
 			try
 			{
@@ -110,6 +124,8 @@ namespace NSController {
 				PrintMessage(err.ToString(), -1);
 			}
 		}
+
+		/* Method to execute all saves */
 		public void ExecuteAllSave() {
 			try
 			{
@@ -122,6 +138,8 @@ namespace NSController {
 				PrintMessage(err.Message, -1);
 			}
 		}
+
+		/* Method to get all existing templates */
 		public List<string> GetAllTemplates() {
 			List<SaveTemplate> templates = this.model.templates;
 			List<string> templatesNames = new List<string>();
@@ -141,39 +159,56 @@ namespace NSController {
 			}
 			return templatesNames;
 		}
+
+		/* Method to open logs */
 		public void OpenLogs()
         {
 			this.model.OpenLogs();
 		}
+
+		/* Method to print a popup message */
 		public void PrintMessage(string message, int type)
         {
 			this.View.PrintMessage(message, type);
         }
 
+		/* Method to exit the program */
 		public void Exit()
         {
 			Environment.Exit(1);
 		}
+
+		/* Method to get all forbidden processes */
 		public List<string> getForbiddenProcesses()
 		{
 			return this.model.getForbiddenProcesses();
 		}
+
+		/* Method to get all extensions to encrypt */
 		public List<string> getExtensionsToEncrypt()
 		{
 			return this.model.getExtensionsToEncrypt();
 		}
+
+		/* Method to add a forbidden process */
 		public void addForbiddenProcess(string process)
 		{
 			this.model.addForbiddenProcess(process);
 		}
+
+		/* Method to add an extension to encrypt */
 		public void addExtensionToEncrypt(string extension)
 		{
 			this.model.addExtensionToEncrypt(extension);
 		}
+
+		/* Method to remove a forbidden process */
 		public void removeForbiddenProcess(int index)
         {
 			this.model.removeForbiddenProcess(index);
         }
+
+		/* Method to remove an extension to encrypt */
 		public void removeExtensionToEncrypt(int index)
 		{
 			this.model.removeExtensionToEncrypt(index);

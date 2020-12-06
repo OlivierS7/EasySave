@@ -13,11 +13,16 @@ namespace NSModel
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+
+            /* Variable for the directory name */
             DateTime currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             string TodaysTime = DateTime.Now.ToString("HH-mm-ss");
             string dateTime = Todaysdate + "_" + TodaysTime;
+
             string[] allFiles = Directory.GetFiles(template.srcDirectory, ".", SearchOption.AllDirectories);
+
+            /* Couting total files and their size */
             int totalFiles = allFiles.Length;
             filesLeft = totalFiles;
             long totalSize = 0;
@@ -26,7 +31,10 @@ namespace NSModel
                 FileInfo info = new FileInfo(currentFile);
                 totalSize += info.Length;
             }
+
+            /* Initializing state file */
             State.GetInstance().Write(currentDateTime, template, true, null, null, 0, totalSize, totalSize, totalFiles, totalFiles, TimeSpan.Zero);
+
             Stopwatch totalTime = new Stopwatch();
             totalTime.Start();
             DirectoryInfo srcDirectoryInfo = new DirectoryInfo(template.srcDirectory);
@@ -69,7 +77,9 @@ namespace NSModel
                 destination = Path.Combine(target.FullName, fi.Name);
                 sourceFile = fi.ToString();
                 stopw.Start();
-                foreach(string extension in extensionsToEncrypt)
+
+                /* Checking if file needs to be crypted */
+                foreach (string extension in extensionsToEncrypt)
                 {
                     if (Path.GetExtension(sourceFile) == extension)
                     {
@@ -78,7 +88,9 @@ namespace NSModel
                     }
                     
                 }
-                if(!isCrypted)
+
+                /* If file doesn't need to be crypted, simply copy it */
+                if (!isCrypted)
                     fi.CopyTo(destination, true);
                 filesLeft--;
                 sizeLeft = sizeLeft - fi.Length;
@@ -96,6 +108,7 @@ namespace NSModel
         }
         public string crypt(string sourceFile, string destination)
         {
+            /* Creating a new process */
             ProcessStartInfo startInfo = new ProcessStartInfo();
             if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                 startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
@@ -108,6 +121,8 @@ namespace NSModel
             startInfo.CreateNoWindow = true;
             Process currentProcess = Process.Start(startInfo);
             currentProcess.WaitForExit();
+
+            /* Returning exit code of process which is the crypt duration */
             return currentProcess.ExitCode.ToString();
         }
     }

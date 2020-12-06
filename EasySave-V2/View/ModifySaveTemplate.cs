@@ -14,6 +14,7 @@ namespace NSView
             InitializeComponent();
         }
 
+        /* Open folder navigation */
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
@@ -23,6 +24,7 @@ namespace NSView
             }
         }
 
+        /* Open folder navigation */
         private void button2_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
@@ -41,6 +43,7 @@ namespace NSView
             textBox4.Text = splitString[4].Split(" : ")[1];
         }
 
+        /* Modify the selected save template */
         private void Confirm_Click(object sender, EventArgs e)
         {   
             if(listBox1.SelectedIndex + 1 > 0)
@@ -53,6 +56,7 @@ namespace NSView
             }
         }
 
+        /* Show all existing save templates */
         public void ChangelistBox1()
         {
             listBox1.Items.Clear();
@@ -71,6 +75,8 @@ namespace NSView
         {
             
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label1.Text = Resources.ModifTemp;

@@ -13,6 +13,7 @@ namespace NSView
             InitializeComponent();
         }
 
+        /* Open folder navigation */
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
@@ -23,6 +24,7 @@ namespace NSView
 
         }
 
+        /* Open folder navigation */
         private void button3_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fdb = new FolderBrowserDialog();
@@ -32,6 +34,7 @@ namespace NSView
             }
         }
 
+        /* Create a save template with provided informations */
         private void button2_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
@@ -46,6 +49,7 @@ namespace NSView
             
         }
 
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label1.Text = Resources.DestDir;

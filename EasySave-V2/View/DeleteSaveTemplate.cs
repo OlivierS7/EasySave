@@ -13,6 +13,8 @@ namespace NSView
         {
             InitializeComponent();
         }
+
+        /* Delete a save template from provided informations */
         private void button1_Click(object sender, EventArgs e)
         {
             if(listBox1.SelectedIndex + 1 > 0)
@@ -23,12 +25,13 @@ namespace NSView
             } 
         }
 
-
+        /* Refrash the list */
         private void DelSaveTemplate_Load(object sender, EventArgs e)
         {
             ChangelistBox1();
         }
 
+        /* Refresh the list */
         public void ChangelistBox1()
         {
             listBox1.Items.Clear();
@@ -42,6 +45,8 @@ namespace NSView
                 };
             }
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label1.Text = Resources.DelTemp;

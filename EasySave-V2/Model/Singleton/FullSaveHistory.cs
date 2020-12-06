@@ -37,10 +37,14 @@ namespace NSModel.Singleton {
 
 		/* Method to write into FullSaveHistory.json to save the full backups */
 		public void Write(SaveTemplate template, string dateTime) {
+
+			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
 			File.SetAttributes(file.ToString(), attributes);
             string reader = File.ReadAllText(file.ToString());
+
+			/* Reading the config file and converting it to a list of SaveTemplates */
 			List<SaveTemplate> templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(reader);
 			if (templates != null)
 				templates.RemoveAll(item => item.srcDirectory == template.srcDirectory);
@@ -48,9 +52,13 @@ namespace NSModel.Singleton {
 				templates = new List<SaveTemplate>();
 			SaveTemplate currentTemplate = new SaveTemplate(template.backupName, template.srcDirectory, template.destDirectory + "\\" + dateTime, template.backupType);
 			templates.Add(currentTemplate);
+
+			/* Converting the list of SaveTemplates to a Json and writing it to config file */
 			StreamWriter writer = new StreamWriter(file.ToString());
 			writer.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
 			writer.Close();
+
+			/* Hiding file */
 			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
 		}
 

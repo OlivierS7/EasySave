@@ -51,6 +51,7 @@ namespace NSModel
 
         public SaveTemplate(string name, string srcDir, string destDir, int type)
         {
+            /* Couting files in directory and subdirectories */
             string[] allFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
             int totalFiles = allFiles.Length;
             long totalSize = 0;

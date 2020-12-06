@@ -24,6 +24,7 @@ namespace NSView
             HideAll();
         }
 
+        /* Execute the selected save */
         private void button1_Click(object sender, EventArgs e)
         { 
             if(listBox1.SelectedIndex + 1 > 0) 
@@ -37,6 +38,7 @@ namespace NSView
             label1.Show();
         }
 
+        /* Execute all saves */
         private void button3_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.ExecuteAllSave();
@@ -55,6 +57,7 @@ namespace NSView
             label1.Hide();
         }
 
+        /* Resresh the list */
         public void ChangelistBox()
         {
             listBox1.Items.Clear();
@@ -69,6 +72,8 @@ namespace NSView
                 }
             }
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label1.Text = Resources.Sure;

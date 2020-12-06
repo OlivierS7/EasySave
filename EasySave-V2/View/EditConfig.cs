@@ -25,6 +25,7 @@ namespace NSView
             button4.Show();
         }
 
+        /* Add a forbidden procces */
         private void button1_Click(object sender, EventArgs e)
         {
             if(textBox1.Text != "")
@@ -45,6 +46,7 @@ namespace NSView
             }  
         }
 
+        /* Add an extension to encrypt */
         private void button2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text != "")
@@ -71,6 +73,7 @@ namespace NSView
             button4.Hide();
         }
 
+        /* Remove a forbidden process */
         private void button3_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.removeForbiddenProcess(listBox1.SelectedIndex + 1);
@@ -79,6 +82,7 @@ namespace NSView
             button3.Hide();
         }
 
+        /* Remove an extensions to encrypt */
         private void button4_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.removeExtensionToEncrypt(listBox2.SelectedIndex + 1);
@@ -87,6 +91,7 @@ namespace NSView
             button4.Hide();
         }
 
+        /* Refresh the list */
         public void ChangelistBox1()
         {
             listBox1.Items.Clear();
@@ -98,6 +103,8 @@ namespace NSView
                 };
             }
         }
+
+        /* Refresh the list */
         public void ChangelistBox2()
         {
             listBox2.Items.Clear();
@@ -109,6 +116,8 @@ namespace NSView
                 };
             }
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label3.Text = Resources.EditParam;

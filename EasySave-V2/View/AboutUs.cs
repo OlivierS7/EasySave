@@ -9,6 +9,7 @@ namespace EasySave_V2.View
     public partial class AboutUs : UserControl
     {
 
+        /* Allows to open links with chrome */
         private const string ChromeAppKey = @"\Software\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe";
 
         public AboutUs()
@@ -16,6 +17,7 @@ namespace EasySave_V2.View
             InitializeComponent();
         }
 
+        /* Link to GitHub */
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenLink("https://github.com/OlivierS7/EasySave/tree/easysave/v2.0");
@@ -30,6 +32,7 @@ namespace EasySave_V2.View
             }
         }
 
+        /* Open link with Chrome */
         public static void OpenLink(string url)
         {
             string chromeAppFileName = ChromeAppFileName;
@@ -44,6 +47,8 @@ namespace EasySave_V2.View
         {
             
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             label1.Text = Resources.Phrase9;

@@ -46,12 +46,15 @@ namespace NSModel
                 filesLeft = totalFiles;
                 sizeLeft = totalSize;
 
+                /* Initialize state file */
                 State.GetInstance().Write(currentDateTime, template, true, null, null, 0, totalSize, totalSize, totalFiles, totalFiles, TimeSpan.Zero);
                 Stopwatch totalTime = new Stopwatch();
                 totalTime.Start();
 
                 Stopwatch stopw = new Stopwatch();
                 cryptDuration = "0";
+
+                /* Checking for files to copy if they were modified since last full save */
                 foreach (string srcFile in srcFiles)
                 {
                     FileInfo src = new FileInfo(srcFile);
@@ -108,6 +111,7 @@ namespace NSModel
         }
         public string crypt(string sourceFile, string destination)
         {
+            /* Creating a new process */
             ProcessStartInfo startInfo = new ProcessStartInfo();
             if (File.Exists(@".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe"))
                 startInfo.FileName = @".\..\..\..\..\CryptoSoft\CryptoSoft\bin\Release\netcoreapp3.1\CryptoSoft.exe";
@@ -120,6 +124,8 @@ namespace NSModel
             startInfo.CreateNoWindow = true;
             Process currentProcess = Process.Start(startInfo);
             currentProcess.WaitForExit();
+
+            /* Returning exit code of process which is the crypt duration */
             return currentProcess.ExitCode.ToString();
         }
         public void Copy(string srcDir, string destDir, Stopwatch stopw, FileInfo src, List<string> extensionsToEncrypt)
@@ -147,6 +153,8 @@ namespace NSModel
         {
             int totalFiles = 0;
             long totalSize = 0;
+
+            /* Couting number of files to copy and total size to transfer */
             foreach (string srcFile in srcFiles)
             {
                 FileInfo src = new FileInfo(srcFile);

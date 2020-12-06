@@ -16,6 +16,7 @@ namespace NSView
             modifySaveTemplate1.Hide();
         }
 
+        /* Shows the create save template User Control */
         private void button1_Click(object sender, EventArgs e)
         {
             if (!creaSaveTemplate1.Visible)
@@ -26,6 +27,7 @@ namespace NSView
             creaSaveTemplate1.BringToFront();
         }
 
+        /* Shows the delete save template User Control */
         private void button2_Click(object sender, EventArgs e)
         {
             if (!delSaveTemplate1.Visible)
@@ -38,6 +40,7 @@ namespace NSView
             delSaveTemplate1.BringToFront();
         }
 
+        /* Shows the modify save template User Control */
         private void button3_Click(object sender, EventArgs e)
         {
             if (!modifySaveTemplate1.Visible)
@@ -66,6 +69,8 @@ namespace NSView
         {
             
         }
+
+        /* Allows the use of multiple languages */
         public void loadLang()
         {
             button1.Text = Resources.Create;
