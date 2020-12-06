@@ -165,6 +165,9 @@
   <data name="InvalidName" xml:space="preserve">
     <value>Nom invalide</value>
   </data>
+  <data name="InvalidSameName" xml:space="preserve">
+    <value>Ne peut pas être nommée comme une autre configuration</value>
+  </data>
   <data name="InvalidSrc" xml:space="preserve">
     <value>Dossier de source invalide</value>
   </data>

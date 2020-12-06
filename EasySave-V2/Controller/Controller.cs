@@ -40,19 +40,33 @@ namespace NSController {
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
+			bool isEqual = false;
 
 			/* Checking if informations matches regex */
 			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
             {
-                try
+				List<SaveTemplate> templates = this.model.templates;
+				foreach(SaveTemplate template in templates)
                 {
-					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
-					PrintMessage(Resources.Success, 1);
+					if (template.backupName == name)
+                    {
+						error = Resources.InvalidSameName;
+						PrintMessage(error, -1);
+						isEqual = true;
+					}
 				}
-				catch (Exception err)
+                if (!isEqual)
                 {
-					PrintMessage(err.Message, -1);
-                }
+					try
+					{
+						this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+						PrintMessage(Resources.Success, 1);
+					}
+					catch (Exception err)
+					{
+						PrintMessage(err.Message, -1);
+					}
+				}
 			}
             else
 			{

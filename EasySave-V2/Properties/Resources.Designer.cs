@@ -22,7 +22,7 @@ namespace EasySave_V2.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace EasySave_V2.Properties {
         ///   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EasySave_V2.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace EasySave_V2.Properties {
         ///   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à About us.
         /// </summary>
-        internal static string About {
+        public static string About {
             get {
                 return ResourceManager.GetString("About", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Add.
         /// </summary>
-        internal static string Add {
+        public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Background1 {
+        public static System.Drawing.Bitmap Background1 {
             get {
                 object obj = ResourceManager.GetObject("Background1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -91,7 +91,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm.
         /// </summary>
-        internal static string Confirm {
+        public static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Create a save template.
         /// </summary>
-        internal static string Create {
+        public static string Create {
             get {
                 return ResourceManager.GetString("Create", resourceCulture);
             }
@@ -109,7 +109,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Delete a save template.
         /// </summary>
-        internal static string Delete {
+        public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
             }
@@ -118,7 +118,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose template to delete.
         /// </summary>
-        internal static string DelTemp {
+        public static string DelTemp {
             get {
                 return ResourceManager.GetString("DelTemp", resourceCulture);
             }
@@ -127,7 +127,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Destination directory.
         /// </summary>
-        internal static string DestDir {
+        public static string DestDir {
             get {
                 return ResourceManager.GetString("DestDir", resourceCulture);
             }
@@ -136,7 +136,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EasySave1 {
+        public static System.Drawing.Bitmap EasySave1 {
             get {
                 object obj = ResourceManager.GetObject("EasySave1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -146,7 +146,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Edit Parameters.
         /// </summary>
-        internal static string EditParam {
+        public static string EditParam {
             get {
                 return ResourceManager.GetString("EditParam", resourceCulture);
             }
@@ -155,7 +155,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Execute save(s).
         /// </summary>
-        internal static string Exec {
+        public static string Exec {
             get {
                 return ResourceManager.GetString("Exec", resourceCulture);
             }
@@ -164,7 +164,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Execute all saves.
         /// </summary>
-        internal static string ExecAll {
+        public static string ExecAll {
             get {
                 return ResourceManager.GetString("ExecAll", resourceCulture);
             }
@@ -173,7 +173,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Execute the selected save.
         /// </summary>
-        internal static string ExecSelec {
+        public static string ExecSelec {
             get {
                 return ResourceManager.GetString("ExecSelec", resourceCulture);
             }
@@ -182,7 +182,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose save template(s) to execute.
         /// </summary>
-        internal static string ExecTemp {
+        public static string ExecTemp {
             get {
                 return ResourceManager.GetString("ExecTemp", resourceCulture);
             }
@@ -191,7 +191,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Exit Application.
         /// </summary>
-        internal static string Exit {
+        public static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
             }
@@ -200,7 +200,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Extensions to encrypt.
         /// </summary>
-        internal static string Extensions {
+        public static string Extensions {
             get {
                 return ResourceManager.GetString("Extensions", resourceCulture);
             }
@@ -209,7 +209,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Invalid destination directory path format.
         /// </summary>
-        internal static string InvalidDest {
+        public static string InvalidDest {
             get {
                 return ResourceManager.GetString("InvalidDest", resourceCulture);
             }
@@ -218,16 +218,25 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Invalid name.
         /// </summary>
-        internal static string InvalidName {
+        public static string InvalidName {
             get {
                 return ResourceManager.GetString("InvalidName", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Can&apos;t be named like another save template.
+        /// </summary>
+        public static string InvalidSameName {
+            get {
+                return ResourceManager.GetString("InvalidSameName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Invalid source directory path format.
         /// </summary>
-        internal static string InvalidSrc {
+        public static string InvalidSrc {
             get {
                 return ResourceManager.GetString("InvalidSrc", resourceCulture);
             }
@@ -236,16 +245,25 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à isn&apos;t a valid type.
         /// </summary>
-        internal static string InvalidType {
+        public static string InvalidType {
             get {
                 return ResourceManager.GetString("InvalidType", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Open Logs.
         /// </summary>
-        internal static string Log {
+        public static string Log {
             get {
                 return ResourceManager.GetString("Log", resourceCulture);
             }
@@ -254,7 +272,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Manage save template(s).
         /// </summary>
-        internal static string Manage {
+        public static string Manage {
             get {
                 return ResourceManager.GetString("Manage", resourceCulture);
             }
@@ -263,7 +281,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Modify a save template.
         /// </summary>
-        internal static string Modif {
+        public static string Modif {
             get {
                 return ResourceManager.GetString("Modif", resourceCulture);
             }
@@ -272,7 +290,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose a save template to modify.
         /// </summary>
-        internal static string ModifTemp {
+        public static string ModifTemp {
             get {
                 return ResourceManager.GetString("ModifTemp", resourceCulture);
             }
@@ -281,7 +299,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
-        internal static string Name {
+        public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
             }
@@ -290,7 +308,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à No.
         /// </summary>
-        internal static string No {
+        public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
             }
@@ -299,7 +317,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à There is no save templates, please create one.
         /// </summary>
-        internal static string NoSave {
+        public static string NoSave {
             get {
                 return ResourceManager.GetString("NoSave", resourceCulture);
             }
@@ -308,7 +326,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à There is no save templates to execute.
         /// </summary>
-        internal static string NoSaveToExec {
+        public static string NoSaveToExec {
             get {
                 return ResourceManager.GetString("NoSaveToExec", resourceCulture);
             }
@@ -317,7 +335,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Parameters.
         /// </summary>
-        internal static string Param {
+        public static string Param {
             get {
                 return ResourceManager.GetString("Param", resourceCulture);
             }
@@ -326,7 +344,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à EasySave is an application to manage your backups..
         /// </summary>
-        internal static string Phrase1 {
+        public static string Phrase1 {
             get {
                 return ResourceManager.GetString("Phrase1", resourceCulture);
             }
@@ -335,7 +353,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à With our new graphical interface, you can pre-configure backups and run them at any time..
         /// </summary>
-        internal static string Phrase2 {
+        public static string Phrase2 {
             get {
                 return ResourceManager.GetString("Phrase2", resourceCulture);
             }
@@ -344,7 +362,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à You can choose between a full or a differential backup and any data can be backup..
         /// </summary>
-        internal static string Phrase3 {
+        public static string Phrase3 {
             get {
                 return ResourceManager.GetString("Phrase3", resourceCulture);
             }
@@ -353,7 +371,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Our application allows you to follow the progress in real time using the state file..
         /// </summary>
-        internal static string Phrase4 {
+        public static string Phrase4 {
             get {
                 return ResourceManager.GetString("Phrase4", resourceCulture);
             }
@@ -362,7 +380,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à You can also watch all performed operations using log files..
         /// </summary>
-        internal static string Phrase5 {
+        public static string Phrase5 {
             get {
                 return ResourceManager.GetString("Phrase5", resourceCulture);
             }
@@ -371,7 +389,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Our application is able to stop any backup if one of your business software is running..
         /// </summary>
-        internal static string Phrase6 {
+        public static string Phrase6 {
             get {
                 return ResourceManager.GetString("Phrase6", resourceCulture);
             }
@@ -380,16 +398,16 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à In addition, you can add file extensions to encrypt while saving..
         /// </summary>
-        internal static string Phrase7 {
+        public static string Phrase7 {
             get {
                 return ResourceManager.GetString("Phrase7", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à More on Github: https://github.com/OlivierS7/easySave/tree/easysave/v2.0.
+        ///   Recherche une chaîne localisée semblable à More on Github:.
         /// </summary>
-        internal static string Phrase8 {
+        public static string Phrase8 {
             get {
                 return ResourceManager.GetString("Phrase8", resourceCulture);
             }
@@ -398,7 +416,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Created by: Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE.
         /// </summary>
-        internal static string Phrase9 {
+        public static string Phrase9 {
             get {
                 return ResourceManager.GetString("Phrase9", resourceCulture);
             }
@@ -407,7 +425,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Remove.
         /// </summary>
-        internal static string Remove {
+        public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
             }
@@ -416,7 +434,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à A running program blocks the execution of the backup job. Please close it and retry.
         /// </summary>
-        internal static string RunningError {
+        public static string RunningError {
             get {
                 return ResourceManager.GetString("RunningError", resourceCulture);
             }
@@ -425,16 +443,25 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Save type.
         /// </summary>
-        internal static string SaveType {
+        public static string SaveType {
             get {
                 return ResourceManager.GetString("SaveType", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à English.
+        /// </summary>
+        public static string SelectedLanguage {
+            get {
+                return ResourceManager.GetString("SelectedLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Forbidden Softwares.
         /// </summary>
-        internal static string Softwares {
+        public static string Softwares {
             get {
                 return ResourceManager.GetString("Softwares", resourceCulture);
             }
@@ -443,7 +470,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à The source directory cannot be the same as the destination directory.
         /// </summary>
-        internal static string SrcDiffDest {
+        public static string SrcDiffDest {
             get {
                 return ResourceManager.GetString("SrcDiffDest", resourceCulture);
             }
@@ -452,7 +479,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Source directory.
         /// </summary>
-        internal static string SrcDir {
+        public static string SrcDir {
             get {
                 return ResourceManager.GetString("SrcDir", resourceCulture);
             }
@@ -461,7 +488,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à The source directory doesn&apos;t exist.
         /// </summary>
-        internal static string SrcInexist {
+        public static string SrcInexist {
             get {
                 return ResourceManager.GetString("SrcInexist", resourceCulture);
             }
@@ -470,7 +497,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully created the save template.
         /// </summary>
-        internal static string Success {
+        public static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
             }
@@ -479,7 +506,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully removed the save template.
         /// </summary>
-        internal static string SuccessDel {
+        public static string SuccessDel {
             get {
                 return ResourceManager.GetString("SuccessDel", resourceCulture);
             }
@@ -488,7 +515,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully executed the save.
         /// </summary>
-        internal static string SuccessExec {
+        public static string SuccessExec {
             get {
                 return ResourceManager.GetString("SuccessExec", resourceCulture);
             }
@@ -497,7 +524,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully executed all saves.
         /// </summary>
-        internal static string SuccessExecAll {
+        public static string SuccessExecAll {
             get {
                 return ResourceManager.GetString("SuccessExecAll", resourceCulture);
             }
@@ -506,7 +533,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully modified the save template.
         /// </summary>
-        internal static string SuccessModif {
+        public static string SuccessModif {
             get {
                 return ResourceManager.GetString("SuccessModif", resourceCulture);
             }
@@ -515,7 +542,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Are you sure you want to execute all saves ?.
         /// </summary>
-        internal static string Sure {
+        public static string Sure {
             get {
                 return ResourceManager.GetString("Sure", resourceCulture);
             }
@@ -524,7 +551,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Welcome to EasySave.
         /// </summary>
-        internal static string Welcom {
+        public static string Welcom {
             get {
                 return ResourceManager.GetString("Welcom", resourceCulture);
             }
@@ -533,7 +560,7 @@ namespace EasySave_V2.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Yes.
         /// </summary>
-        internal static string Yes {
+        public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }

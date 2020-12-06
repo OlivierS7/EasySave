@@ -172,6 +172,9 @@
   <data name="InvalidName" xml:space="preserve">
     <value>Invalid name</value>
   </data>
+  <data name="InvalidSameName" xml:space="preserve">
+    <value>Can't be named like another save template</value>
+  </data>
   <data name="InvalidSrc" xml:space="preserve">
     <value>Invalid source directory path format</value>
   </data>
