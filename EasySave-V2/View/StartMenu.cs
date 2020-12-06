@@ -11,6 +11,7 @@ namespace NSView
         public StartMenu()
         {
             InitializeComponent();
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
             LoadAllLang();
         }
 
@@ -32,6 +33,7 @@ namespace NSView
         /* Shows the parameters User Control */
         private void parameters_Click(object sender, EventArgs e)
         {
+            editConfig1.startMenu = this;
             if (!editConfig1.Visible)
             {
                 HideAll();
@@ -96,28 +98,8 @@ namespace NSView
         {
             GraphicalView.controller.Exit();
         }
-
-        private void executeSaveTemplate1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /* Change language to french */
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
-            LoadAllLang();
-        }
-
-        /* Change language to english */
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-            LoadAllLang();
-        }
-
         /* Allows the use of multiple languages */
-        private void LoadAllLang()
+        public void LoadAllLang()
         {
             loadLang();
             executeSaveTemplate1.loadLang();

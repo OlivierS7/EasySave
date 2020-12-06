@@ -40,13 +40,15 @@ namespace NSView
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.AliceBlue;
             this.button1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(524, 491);
+            this.button1.Location = new System.Drawing.Point(345, 496);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 28);
             this.button1.TabIndex = 0;
@@ -58,7 +60,7 @@ namespace NSView
             // 
             this.button2.BackColor = System.Drawing.Color.AliceBlue;
             this.button2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(852, 491);
+            this.button2.Location = new System.Drawing.Point(673, 496);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 28);
             this.button2.TabIndex = 1;
@@ -70,7 +72,7 @@ namespace NSView
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(524, 451);
+            this.textBox1.Location = new System.Drawing.Point(345, 456);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(120, 26);
             this.textBox1.TabIndex = 2;
@@ -79,7 +81,7 @@ namespace NSView
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(852, 451);
+            this.textBox2.Location = new System.Drawing.Point(673, 456);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(122, 26);
             this.textBox2.TabIndex = 3;
@@ -90,7 +92,7 @@ namespace NSView
             this.listBox1.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 17;
-            this.listBox1.Location = new System.Drawing.Point(524, 199);
+            this.listBox1.Location = new System.Drawing.Point(345, 204);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 208);
             this.listBox1.TabIndex = 4;
@@ -102,7 +104,7 @@ namespace NSView
             this.listBox2.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 17;
-            this.listBox2.Location = new System.Drawing.Point(852, 199);
+            this.listBox2.Location = new System.Drawing.Point(673, 204);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(122, 208);
             this.listBox2.TabIndex = 5;
@@ -113,7 +115,7 @@ namespace NSView
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(803, 157);
+            this.label1.Location = new System.Drawing.Point(624, 162);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(220, 29);
             this.label1.TabIndex = 6;
@@ -124,7 +126,7 @@ namespace NSView
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Impact", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(485, 157);
+            this.label2.Location = new System.Drawing.Point(306, 162);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(212, 29);
             this.label2.TabIndex = 7;
@@ -134,7 +136,7 @@ namespace NSView
             // 
             this.button3.BackColor = System.Drawing.Color.AliceBlue;
             this.button3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(524, 533);
+            this.button3.Location = new System.Drawing.Point(345, 538);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 29);
             this.button3.TabIndex = 8;
@@ -146,7 +148,7 @@ namespace NSView
             // 
             this.button4.BackColor = System.Drawing.Color.AliceBlue;
             this.button4.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(852, 533);
+            this.button4.Location = new System.Drawing.Point(673, 538);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(122, 29);
             this.button4.TabIndex = 9;
@@ -165,11 +167,38 @@ namespace NSView
             this.label3.TabIndex = 10;
             this.label3.Text = "Edit Parameters";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Impact", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(970, 162);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(108, 29);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Language";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "English",
+            "Français",
+            "Korean",
+            "Spanish"});
+            this.comboBox1.Location = new System.Drawing.Point(956, 204);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(133, 21);
+            this.comboBox1.TabIndex = 12;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // EditConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -203,5 +232,7 @@ namespace NSView
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

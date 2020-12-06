@@ -179,7 +179,7 @@
     <value>isn't a valid type</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>English</value>
+    <value>Language</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>Open Logs</value>
@@ -245,7 +245,7 @@
     <value>Save type</value>
   </data>
   <data name="SelectedLanguage" xml:space="preserve">
-    <value>Language</value>
+    <value>English</value>
   </data>
   <data name="Softwares" xml:space="preserve">
     <value>Forbidden Softwares</value>

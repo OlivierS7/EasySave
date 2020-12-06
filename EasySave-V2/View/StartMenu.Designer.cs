@@ -33,7 +33,7 @@ namespace NSView
             this.manageTemplate1 = new NSView.ManageTemplate();
             this.executeSaveTemplate1 = new NSView.ExecuteSaveTemplate();
             this.editConfig1 = new NSView.EditConfig();
-            this.aboutUs1 = new EasySave_V2.View.AboutUs();
+            this.aboutUs1 = new NSView.AboutUs();
             this.AboutUs = new System.Windows.Forms.Button();
             this.parameters = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,7 +63,6 @@ namespace NSView
             this.executeSaveTemplate1.Size = new System.Drawing.Size(1498, 776);
             this.executeSaveTemplate1.TabIndex = 9;
             this.executeSaveTemplate1.Visible = false;
-            this.executeSaveTemplate1.Load += new System.EventHandler(this.executeSaveTemplate1_Load);
             // 
             // editConfig1
             // 
@@ -161,30 +160,6 @@ namespace NSView
             this.Exit.UseVisualStyleBackColor = false;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.AliceBlue;
-            this.button2.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(1272, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 42);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "EN";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.AliceBlue;
-            this.button3.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(1208, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(64, 42);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "FR";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // StartMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 17F);
@@ -192,8 +167,6 @@ namespace NSView
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(112)))), ((int)(((byte)(193)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1524, 893);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.Manage);
             this.Controls.Add(this.Execute);
@@ -219,7 +192,7 @@ namespace NSView
         private NSView.ManageTemplate manageTemplate1;
         private NSView.ExecuteSaveTemplate executeSaveTemplate1;
         private NSView.EditConfig editConfig1;
-        private EasySave_V2.View.AboutUs aboutUs1;
+        private NSView.AboutUs aboutUs1;
         private System.Windows.Forms.Button AboutUs;
         private System.Windows.Forms.Button parameters;
         private System.Windows.Forms.Button button1;

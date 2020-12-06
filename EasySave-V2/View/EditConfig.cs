@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using NSController;
 using EasySave_V2.Properties;
+using System.Threading;
+using System.Globalization;
 
 namespace NSView
 {
@@ -10,6 +12,7 @@ namespace NSView
     {
         public List<string> forbiddenProcesses;
         public List<string> extensionsToEncrypt;
+        public StartMenu startMenu;
         public EditConfig()
         {
             InitializeComponent();
@@ -127,6 +130,27 @@ namespace NSView
             button2.Text = Resources.Add;
             button3.Text = Resources.Remove;
             button4.Text = Resources.Remove;
+        }
+
+       /* Change language */
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+                    break;
+                case 1:
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("fr-FR");
+                    break;
+                case 2:
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ko-KR");
+                    break;
+                case 3:
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("es-ES");
+                    break;
+            }
+            this.startMenu.LoadAllLang();
         }
     }
 }

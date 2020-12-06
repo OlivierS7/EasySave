@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using EasySave_V2.Properties;
 
-namespace EasySave_V2.View
+namespace NSView
 {
     public partial class AboutUs : UserControl
     {
