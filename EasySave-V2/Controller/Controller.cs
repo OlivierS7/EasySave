@@ -3,6 +3,7 @@ using NSView;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using EasySave_V2.Properties;
 using System.Windows.Forms;
 
 namespace NSController {
@@ -10,6 +11,9 @@ namespace NSController {
 
 		private IView _View;
 		private Model _model;
+		private string error = "";
+		private Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
+		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 
 		public IView View
 		{
@@ -29,9 +33,6 @@ namespace NSController {
 			this.View.Start(); ;
 		}
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
-			string error = "";
-			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
-			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
@@ -40,7 +41,7 @@ namespace NSController {
                 try
                 {
 					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
-					PrintMessage("Successfully created the save template", 1);
+					PrintMessage(Resources.Success, 1);
 				}
 				catch (Exception err)
                 {
@@ -50,11 +51,11 @@ namespace NSController {
             else
 			{
 				if(!nameMatch.Success)
-					error = "Invalid name, please try again\n";
+					error = Resources.InvalidName + "\n";
 				if(!srcDirNameMatch.Success)
-					error += "Invalid source directory path format\n";
+					error += Resources.InvalidSrc + "\n";
 				if(!destDirNameMatch.Success)
-					error += "Invalid destination directory path format";
+					error += Resources.InvalidDest;
 				PrintMessage(error, -1);
             }
 		}
@@ -62,7 +63,7 @@ namespace NSController {
 			try
 			{
 				this.model.DeleteSaveTemplate(templateIndex);
-				PrintMessage("Successfully deleted the save template", 1);
+				PrintMessage(Resources.SuccessDel, 1);
 			}
 			catch (Exception err)
 			{
@@ -71,9 +72,6 @@ namespace NSController {
 		}
 		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
         {
-			string error = "";
-			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
-			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
@@ -82,7 +80,7 @@ namespace NSController {
 				try
 				{
 					this.model.ModifySaveTemplate(templateIndex, name, srcDir, destDir, type);
-					PrintMessage("Successfully modified the save template", 1);
+					PrintMessage(Resources.SuccessModif, 1);
 				}
 				catch (Exception err)
 				{
@@ -91,17 +89,11 @@ namespace NSController {
 			} else
             {
 				if (!nameMatch.Success)
-				{
-					error = "Invalid name\n";
-				}
+					error = Resources.InvalidName + "\n";
 				if (!srcDirNameMatch.Success)
-				{
-					error += "Invalid source directory path format\n";
-				}
+					error += Resources.InvalidSrc + "\n";
 				if (!destDirNameMatch.Success)
-				{
-					error += "Invalid destination directory path format";
-				}
+					error += Resources.InvalidDest;
 				PrintMessage(error, -1);
 			}
 			
@@ -111,7 +103,7 @@ namespace NSController {
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				this.model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
-				PrintMessage("Successfully executed the save", 1);
+				PrintMessage(Resources.SuccessExec, 1);
 			}
 			catch (Exception err)
 			{
@@ -123,7 +115,7 @@ namespace NSController {
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				this.model.ExecuteAllSave(extensionsToEncrypt);
-				PrintMessage("Successfully executed all saves", 1);
+				PrintMessage(Resources.SuccessExecAll, 1);
 			}
 			catch (Exception err)
 			{
@@ -135,7 +127,7 @@ namespace NSController {
 			List<string> templatesNames = new List<string>();
 			if (this.model.templates.Count == 0)
             {
-				PrintMessage("There is no save templates, please create one", -1);
+				PrintMessage(Resources.NoSave, -1);
             } 
 			else
             {

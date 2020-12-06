@@ -207,6 +207,42 @@ namespace EasySave_V2.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid destination directory path format.
+        /// </summary>
+        internal static string InvalidDest {
+            get {
+                return ResourceManager.GetString("InvalidDest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid name.
+        /// </summary>
+        internal static string InvalidName {
+            get {
+                return ResourceManager.GetString("InvalidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid source directory path format.
+        /// </summary>
+        internal static string InvalidSrc {
+            get {
+                return ResourceManager.GetString("InvalidSrc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à isn&apos;t a valid type.
+        /// </summary>
+        internal static string InvalidType {
+            get {
+                return ResourceManager.GetString("InvalidType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Open Logs.
         /// </summary>
         internal static string Log {
@@ -257,6 +293,24 @@ namespace EasySave_V2.Properties {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à There is no save templates, please create one.
+        /// </summary>
+        internal static string NoSave {
+            get {
+                return ResourceManager.GetString("NoSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à There is no save templates to execute.
+        /// </summary>
+        internal static string NoSaveToExec {
+            get {
+                return ResourceManager.GetString("NoSaveToExec", resourceCulture);
             }
         }
         
@@ -360,6 +414,15 @@ namespace EasySave_V2.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à A running program blocks the execution of the backup job. Please close it and retry.
+        /// </summary>
+        internal static string RunningError {
+            get {
+                return ResourceManager.GetString("RunningError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save type.
         /// </summary>
         internal static string SaveType {
@@ -378,11 +441,74 @@ namespace EasySave_V2.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The source directory cannot be the same as the destination directory.
+        /// </summary>
+        internal static string SrcDiffDest {
+            get {
+                return ResourceManager.GetString("SrcDiffDest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Source directory.
         /// </summary>
         internal static string SrcDir {
             get {
                 return ResourceManager.GetString("SrcDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The source directory doesn&apos;t exist.
+        /// </summary>
+        internal static string SrcInexist {
+            get {
+                return ResourceManager.GetString("SrcInexist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully created the save template.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully removed the save template.
+        /// </summary>
+        internal static string SuccessDel {
+            get {
+                return ResourceManager.GetString("SuccessDel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully executed the save.
+        /// </summary>
+        internal static string SuccessExec {
+            get {
+                return ResourceManager.GetString("SuccessExec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully executed all saves.
+        /// </summary>
+        internal static string SuccessExecAll {
+            get {
+                return ResourceManager.GetString("SuccessExecAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Successfully modified the save template.
+        /// </summary>
+        internal static string SuccessModif {
+            get {
+                return ResourceManager.GetString("SuccessModif", resourceCulture);
             }
         }
         

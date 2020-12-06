@@ -71,6 +71,9 @@ namespace NSView
             button1.Text = Resources.Create;
             button2.Text = Resources.Delete;
             button3.Text = Resources.Modif;
+            creaSaveTemplate1.loadLang();
+            modifySaveTemplate1.loadLang();
+            delSaveTemplate1.loadLang();
         }
     }
 }

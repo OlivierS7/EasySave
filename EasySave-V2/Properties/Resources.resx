@@ -166,6 +166,18 @@
   <data name="Extensions" xml:space="preserve">
     <value>Extensions to encrypt</value>
   </data>
+  <data name="InvalidDest" xml:space="preserve">
+    <value>Invalid destination directory path format</value>
+  </data>
+  <data name="InvalidName" xml:space="preserve">
+    <value>Invalid name</value>
+  </data>
+  <data name="InvalidSrc" xml:space="preserve">
+    <value>Invalid source directory path format</value>
+  </data>
+  <data name="InvalidType" xml:space="preserve">
+    <value>isn't a valid type</value>
+  </data>
   <data name="Log" xml:space="preserve">
     <value>Open Logs</value>
   </data>
@@ -183,6 +195,12 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="NoSave" xml:space="preserve">
+    <value>There is no save templates, please create one</value>
+  </data>
+  <data name="NoSaveToExec" xml:space="preserve">
+    <value>There is no save templates to execute</value>
   </data>
   <data name="Param" xml:space="preserve">
     <value>Parameters</value>
@@ -217,14 +235,38 @@
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="RunningError" xml:space="preserve">
+    <value>A running program blocks the execution of the backup job. Please close it and retry</value>
+  </data>
   <data name="SaveType" xml:space="preserve">
     <value>Save type</value>
   </data>
   <data name="Softwares" xml:space="preserve">
     <value>Forbidden Softwares</value>
   </data>
+  <data name="SrcDiffDest" xml:space="preserve">
+    <value>The source directory cannot be the same as the destination directory</value>
+  </data>
   <data name="SrcDir" xml:space="preserve">
     <value>Source directory</value>
+  </data>
+  <data name="SrcInexist" xml:space="preserve">
+    <value>The source directory doesn't exist</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Successfully created the save template</value>
+  </data>
+  <data name="SuccessDel" xml:space="preserve">
+    <value>Successfully removed the save template</value>
+  </data>
+  <data name="SuccessExec" xml:space="preserve">
+    <value>Successfully executed the save</value>
+  </data>
+  <data name="SuccessExecAll" xml:space="preserve">
+    <value>Successfully executed all saves</value>
+  </data>
+  <data name="SuccessModif" xml:space="preserve">
+    <value>Successfully modified the save template</value>
   </data>
   <data name="Sure" xml:space="preserve">
     <value>Are you sure you want to execute all saves ?</value>

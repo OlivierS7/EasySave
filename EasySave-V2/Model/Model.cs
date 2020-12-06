@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using NSModel.Singleton;
 using System.IO;
+using EasySave_V2.Properties;
 
 namespace NSModel
 {
@@ -27,11 +28,11 @@ namespace NSModel
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type)
 		{
 			if (type != 1 && type != 2)
-				throw new Exception("  " + type + " isn't a valid type");
+				throw new Exception(type + Resources.InvalidType);
 			if (srcDir == destDir)
-				throw new Exception("  The source directory cannot be the same as the destination directory");
+				throw new Exception(Resources.SrcDiffDest);
 			if (!Directory.Exists(srcDir))
-				throw new Exception("  The source directory doesn't exist");
+				throw new Exception(Resources.SrcInexist);
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			SaveTemplateConfig.GetInstance().Write(template);
@@ -42,7 +43,7 @@ namespace NSModel
 		public void DeleteSaveTemplate(int templateIndex)
 		{
 			if (this.templates.Count < templateIndex)
-				throw new Exception("  " + templateIndex + ": No save template at this index");
+				throw new Exception(templateIndex + ": No save template at this index");
 			SaveTemplateConfig.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			State.GetInstance().Delete(IntToSaveTemplate(templateIndex));
 			this.templates.RemoveAt(templateIndex - 1);
@@ -53,11 +54,11 @@ namespace NSModel
 		{
 			SaveTemplate template = this.IntToSaveTemplate(templateIndex);
 			if (type != 1 && type != 2)
-				throw new Exception("  " + type + " isn't a valid type");
+				throw new Exception(type + Resources.InvalidType);
 			if (template.srcDirectory == destDir)
-				throw new Exception("  The source directory cannot be the same as the destination directory");
+				throw new Exception(Resources.SrcDiffDest);
 			if (!Directory.Exists(srcDir))
-				throw new Exception("  The source directory doesn't exist");
+				throw new Exception(Resources.SrcInexist);
 			SaveTemplateConfig.GetInstance().Delete(template);
 			State.GetInstance().Delete(template);
 			template.backupName = name;
@@ -74,12 +75,12 @@ namespace NSModel
 		public void ExecuteOneSave(int templateIndex, List<string> extensionsToEncrypt)
 		{
 			if (this.templates.Count < templateIndex)
-				throw new Exception("  " + templateIndex + ": No save template at this index");
+				throw new Exception(templateIndex + ": No save template at this index");
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			if (!CheckProcesses())
 				template.saveStrategy.Execute(template, extensionsToEncrypt);
 			else
-				throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
+				throw new Exception(Resources.RunningError);
 		}
 
 
@@ -87,13 +88,13 @@ namespace NSModel
 		public void ExecuteAllSave(List<string> extensionsToEncrypt)
 		{
 			if (templates.Count == 0)
-				throw new Exception("  There is no save templates to execute");
+				throw new Exception(Resources.NoSaveToExec);
 			foreach (SaveTemplate template in templates)
 			{
 				if (!CheckProcesses())
 					template.saveStrategy.Execute(template, extensionsToEncrypt);
 				else
-					throw new Exception("  A running program blocks the execution of the backup job. Please close it and retry");
+					throw new Exception(Resources.RunningError);
 			}
 		}
 
