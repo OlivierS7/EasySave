@@ -65,6 +65,9 @@ namespace NSModel.Singleton
 				{
 					file = new FileInfo(currentLog);
 				}
+				StreamWriter writer = new StreamWriter(file.ToString());
+				writer.Write("[]");
+				writer.Close();
 			}
 		}
 		public static Log GetInstance()

@@ -8,6 +8,7 @@ namespace NSModel
 {
     public class FullSave : SaveStrategy
     {
+        private int filesLeft;
 
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
@@ -18,6 +19,7 @@ namespace NSModel
             string dateTime = Todaysdate + "_" + TodaysTime;
             string[] allFiles = Directory.GetFiles(template.srcDirectory, ".", SearchOption.AllDirectories);
             int totalFiles = allFiles.Length;
+            filesLeft = totalFiles;
             long totalSize = 0;
             foreach (string currentFile in allFiles)
             {
@@ -54,15 +56,18 @@ namespace NSModel
         {
             Stopwatch stopw = new Stopwatch();
             Directory.CreateDirectory(target.FullName);
-            int filesLeft = totalFiles;
             long sizeLeft = totalSize;
+            string cryptDuration;
+            bool isCrypted;
+            string destination;
+            string sourceFile;
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {
-                string cryptDuration = "0";
-                bool isCrypted = false;
-                string destination = Path.Combine(target.FullName, fi.Name);
-                string sourceFile = fi.ToString();
+                cryptDuration = "0";
+                isCrypted = false;
+                destination = Path.Combine(target.FullName, fi.Name);
+                sourceFile = fi.ToString();
                 stopw.Start();
                 foreach(string extension in extensionsToEncrypt)
                 {
