@@ -13,6 +13,7 @@ namespace NSModel.Singleton
 		private string _directoryPath = @"..\..\..\Logs";
 		public List<LogObject> logObjects = new List<LogObject>();
 
+		/* Nested class */
 		public class LogObject
 		{
 			public string SaveTemplateName;
@@ -65,6 +66,9 @@ namespace NSModel.Singleton
 				{
 					file = new FileInfo(currentLog);
 				}
+				StreamWriter writer = new StreamWriter(file.ToString());
+				writer.Write("[]");
+				writer.Close();
 			}
 		}
 		public static Log GetInstance()
@@ -75,6 +79,7 @@ namespace NSModel.Singleton
 		}
 		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, string cryptDuration)
 		{
+			/* Getting all the logs in a list and adding new logs */
 			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString() + " bytes", time, cryptDuration + "ms");
 			logObjects.Add(currentFile);
 			StreamWriter writer = new StreamWriter(file.ToString());

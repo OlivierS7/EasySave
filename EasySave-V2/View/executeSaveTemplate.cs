@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using NSController;
+using EasySave_V2.Properties;
 
 namespace NSView
 {
@@ -23,9 +24,11 @@ namespace NSView
             HideAll();
         }
 
+        /* Execute the selected save */
         private void button1_Click(object sender, EventArgs e)
-        {
-            GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
+        { 
+            if(listBox1.SelectedIndex + 1 > 0) 
+                GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -35,6 +38,7 @@ namespace NSView
             label1.Show();
         }
 
+        /* Execute all saves */
         private void button3_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.ExecuteAllSave();
@@ -53,6 +57,7 @@ namespace NSView
             label1.Hide();
         }
 
+        /* Resresh the list */
         public void ChangelistBox()
         {
             listBox1.Items.Clear();
@@ -66,6 +71,17 @@ namespace NSView
                     index++;
                 }
             }
+        }
+
+        /* Allows the use of multiple languages */
+        public void loadLang()
+        {
+            label1.Text = Resources.Sure;
+            label2.Text = Resources.ExecTemp;
+            button1.Text = Resources.ExecSelec;
+            button2.Text = Resources.ExecAll;
+            button3.Text = Resources.Yes;
+            button4.Text = Resources.No;
         }
     }
 }

@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About us</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create a save template</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete a save template</value>
+  </data>
+  <data name="DelTemp" xml:space="preserve">
+    <value>Choose template to delete</value>
+  </data>
+  <data name="DestDir" xml:space="preserve">
+    <value>Destination directory</value>
+  </data>
+  <data name="EasySave1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\EasySave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditParam" xml:space="preserve">
+    <value>Edit Parameters</value>
+  </data>
+  <data name="Exec" xml:space="preserve">
+    <value>Execute save(s)</value>
+  </data>
+  <data name="ExecAll" xml:space="preserve">
+    <value>Execute all saves</value>
+  </data>
+  <data name="ExecSelec" xml:space="preserve">
+    <value>Execute the selected save</value>
+  </data>
+  <data name="ExecTemp" xml:space="preserve">
+    <value>Choose save template(s) to execute</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit Application</value>
+  </data>
+  <data name="Extensions" xml:space="preserve">
+    <value>Extensions to encrypt</value>
+  </data>
+  <data name="InvalidDest" xml:space="preserve">
+    <value>Invalid destination directory path format</value>
+  </data>
+  <data name="InvalidName" xml:space="preserve">
+    <value>Invalid name</value>
+  </data>
+  <data name="InvalidSameName" xml:space="preserve">
+    <value>Can't be named like another save template</value>
+  </data>
+  <data name="InvalidSrc" xml:space="preserve">
+    <value>Invalid source directory path format</value>
+  </data>
+  <data name="InvalidType" xml:space="preserve">
+    <value>isn't a valid type</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Open Logs</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage save template(s)</value>
+  </data>
+  <data name="Modif" xml:space="preserve">
+    <value>Modify a save template</value>
+  </data>
+  <data name="ModifTemp" xml:space="preserve">
+    <value>Choose a save template to modify</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoSave" xml:space="preserve">
+    <value>There is no save templates, please create one</value>
+  </data>
+  <data name="NoSaveToExec" xml:space="preserve">
+    <value>There is no save templates to execute</value>
+  </data>
+  <data name="Param" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="Phrase1" xml:space="preserve">
+    <value>EasySave is an application to manage your backups.</value>
+  </data>
+  <data name="Phrase2" xml:space="preserve">
+    <value>With our new graphical interface, you can pre-configure backups and run them at any time.</value>
+  </data>
+  <data name="Phrase3" xml:space="preserve">
+    <value>You can choose between a full or a differential backup and any data can be backup.</value>
+  </data>
+  <data name="Phrase4" xml:space="preserve">
+    <value>Our application allows you to follow the progress in real time using the state file.</value>
+  </data>
+  <data name="Phrase5" xml:space="preserve">
+    <value>You can also watch all performed operations using log files.</value>
+  </data>
+  <data name="Phrase6" xml:space="preserve">
+    <value>Our application is able to stop any backup if one of your business software is running.</value>
+  </data>
+  <data name="Phrase7" xml:space="preserve">
+    <value>In addition, you can add file extensions to encrypt while saving.</value>
+  </data>
+  <data name="Phrase8" xml:space="preserve">
+    <value>More on Github:</value>
+  </data>
+  <data name="Phrase9" xml:space="preserve">
+    <value>Created by: Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RunningError" xml:space="preserve">
+    <value>A running program blocks the execution of the backup job. Please close it and retry</value>
+  </data>
+  <data name="SaveType" xml:space="preserve">
+    <value>Save type</value>
+  </data>
+  <data name="SelectedLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Softwares" xml:space="preserve">
+    <value>Forbidden Softwares</value>
+  </data>
+  <data name="SrcDiffDest" xml:space="preserve">
+    <value>The source directory cannot be the same as the destination directory</value>
+  </data>
+  <data name="SrcDir" xml:space="preserve">
+    <value>Source directory</value>
+  </data>
+  <data name="SrcInexist" xml:space="preserve">
+    <value>The source directory doesn't exist</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Successfully created the save template</value>
+  </data>
+  <data name="SuccessDel" xml:space="preserve">
+    <value>Successfully removed the save template</value>
+  </data>
+  <data name="SuccessExec" xml:space="preserve">
+    <value>Successfully executed the save</value>
+  </data>
+  <data name="SuccessExecAll" xml:space="preserve">
+    <value>Successfully executed all saves</value>
+  </data>
+  <data name="SuccessModif" xml:space="preserve">
+    <value>Successfully modified the save template</value>
+  </data>
+  <data name="Sure" xml:space="preserve">
+    <value>Are you sure you want to execute all saves ?</value>
+  </data>
+  <data name="Welcom" xml:space="preserve">
+    <value>Welcome to EasySave</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>

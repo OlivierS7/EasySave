@@ -9,6 +9,7 @@ namespace NSModel.Singleton {
 		private FileInfo file;
 		public List<SaveTemplateState> templatesState = new List<SaveTemplateState>();
 
+		/* Nested class */
 		public class SaveTemplateState
 		{
 			public DateTime date;
@@ -46,6 +47,7 @@ namespace NSModel.Singleton {
 			}
 		}
 
+		/* Constructor */
 		private State() {
 			string path = "..\\..\\..\\State.json";
 			if (File.Exists(path))
@@ -62,15 +64,20 @@ namespace NSModel.Singleton {
 				}
 			}
 		}
+
+		/* Method to get Instance of this Singleton*/
 		public static State GetInstance() {
 			if (state == null)
 				state = new State();
 			return state;
 		}
+
 		public void Write(DateTime date, SaveTemplate template, bool isActive, string srcFile, string destFile, long fileSize, long totalSize, long sizeLeft, int totalFiles, int filesLeft, TimeSpan time)
 		{
+			/* Reading file and storing content */
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
+
 			if (this.templatesState == null)
 				this.templatesState = new List<SaveTemplateState>();
 			string saveType;
@@ -78,11 +85,15 @@ namespace NSModel.Singleton {
 				saveType = "FullSave";
             else
 				saveType = "DifferentialSave";
+
+			/* Creating save template state from received informations */
 			SaveTemplateState currentTemplate = new SaveTemplateState(date, template, saveType, isActive, srcFile, destFile, fileSize, totalSize, sizeLeft, totalFiles, filesLeft, time);
 			int count = 0;
 			int index = 0;
 			bool replaced = false;
-			foreach(SaveTemplateState getTemplate in templatesState)
+
+			/* Checking if this save template is already running */
+			foreach (SaveTemplateState getTemplate in templatesState)
 			{
 				if(getTemplate.template.backupName == currentTemplate.template.backupName && getTemplate.template.srcDirectory == currentTemplate.template.srcDirectory)
                 {
@@ -98,6 +109,8 @@ namespace NSModel.Singleton {
 				templatesState.RemoveAt(index);
 				templatesState.Insert(index, currentTemplate);
 			}
+
+			/* Updating informations to file */
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
 			writer.Write(output);
@@ -105,8 +118,10 @@ namespace NSModel.Singleton {
 		}
 		public void Create(SaveTemplate template)
 		{
+			/* Reading file and storing content */
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
+
 			if (this.templatesState == null)
 				this.templatesState = new List<SaveTemplateState>();
 			string saveType;
@@ -114,6 +129,8 @@ namespace NSModel.Singleton {
 				saveType = "FullSave";
 			else
 				saveType = "DifferentialSave";
+
+			/* Adding save template state in the list from received informations */
 			this.templatesState.Add(new SaveTemplateState(DateTime.Now, template, saveType, false, null, null, 0, 0, 0, 0, 0, TimeSpan.Zero));
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
@@ -122,8 +139,10 @@ namespace NSModel.Singleton {
 		}
 		public void Delete(SaveTemplate template)
         {
+			/* Reading file and storing content */
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
+
 			int index = 0;
 			int count = 0;
 			foreach(SaveTemplateState getTemplate in templatesState)
@@ -134,6 +153,8 @@ namespace NSModel.Singleton {
 					count++;
 				}
 			}
+
+			/* Removing save template state in the list from received informations */
 			this.templatesState.RemoveAt(index);
 			StreamWriter writer = new StreamWriter(file.ToString());
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);

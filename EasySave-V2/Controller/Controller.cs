@@ -3,6 +3,7 @@ using NSView;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using EasySave_V2.Properties;
 using System.Windows.Forms;
 
 namespace NSController {
@@ -10,6 +11,11 @@ namespace NSController {
 
 		private IView _View;
 		private Model _model;
+
+		/* Variables for Regex */
+		private string error = "";
+		private Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
+		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 
 		public IView View
 		{
@@ -23,66 +29,84 @@ namespace NSController {
 			set => this._model = value;
 		}
 
+		/* Constructor */
 		public Controller() {
 			this.model = new Model();
 			this.View = new GraphicalView(this);
 			this.View.Start(); ;
 		}
+		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
-			string error = "";
-			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
-			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
-			if(nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
+			bool isEqual = false;
+
+			/* Checking if informations matches regex */
+			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
             {
-                try
+				List<SaveTemplate> templates = this.model.templates;
+				foreach(SaveTemplate template in templates)
                 {
-					this.model.CreateSaveTemplate(name, srcDir, destDir, type);
-					PrintMessage("Successfully created the save template", 1);
+					if (template.backupName == name)
+                    {
+						error = Resources.InvalidSameName;
+						PrintMessage(error, -1);
+						isEqual = true;
+					}
 				}
-				catch (Exception err)
+                if (!isEqual)
                 {
-					PrintMessage(err.Message, -1);
-                }
+					try
+					{
+						this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+						PrintMessage(Resources.Success, 1);
+					}
+					catch (Exception err)
+					{
+						PrintMessage(err.Message, -1);
+					}
+				}
 			}
             else
 			{
 				if(!nameMatch.Success)
-					error = "Invalid name, please try again\n";
+					error = Resources.InvalidName + "\n";
 				if(!srcDirNameMatch.Success)
-					error += "Invalid source directory path format\n";
+					error += Resources.InvalidSrc + "\n";
 				if(!destDirNameMatch.Success)
-					error += "Invalid destination directory path format";
+					error += Resources.InvalidDest;
 				PrintMessage(error, -1);
             }
 		}
+
+		/* Method to delete a save template */
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
 			{
 				this.model.DeleteSaveTemplate(templateIndex);
-				PrintMessage("Successfully deleted the save template", 1);
+				PrintMessage(Resources.SuccessDel, 1);
 			}
 			catch (Exception err)
 			{
 				PrintMessage(err.Message, -1);
 			}
 		}
+
+		/* Method to modify an existing save template */
 		public void ModifySaveTemplate(int templateIndex, string name, string srcDir, string destDir, int type)
         {
-			string error = "";
-			Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
-			Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 			Match nameMatch = nameForm.Match(name);
 			Match srcDirNameMatch = directoryName.Match(srcDir);
 			Match destDirNameMatch = directoryName.Match(destDir);
+
+			/* Checking if informations matches regex */
 			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
 			{
 				try
 				{
 					this.model.ModifySaveTemplate(templateIndex, name, srcDir, destDir, type);
-					PrintMessage("Successfully modified the save template", 1);
+					PrintMessage(Resources.SuccessModif, 1);
 				}
 				catch (Exception err)
 				{
@@ -91,51 +115,51 @@ namespace NSController {
 			} else
             {
 				if (!nameMatch.Success)
-				{
-					error = "Invalid name\n";
-				}
+					error = Resources.InvalidName + "\n";
 				if (!srcDirNameMatch.Success)
-				{
-					error += "Invalid source directory path format\n";
-				}
+					error += Resources.InvalidSrc + "\n";
 				if (!destDirNameMatch.Success)
-				{
-					error += "Invalid destination directory path format";
-				}
+					error += Resources.InvalidDest;
 				PrintMessage(error, -1);
 			}
 			
         }
+
+		/* Method to execute one save */
 		public void ExecuteOneSave(int templateIndex) {
 			try
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				this.model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
-				PrintMessage("Successfully executed the save", 1);
+				PrintMessage(Resources.SuccessExec, 1);
 			}
 			catch (Exception err)
 			{
 				PrintMessage(err.ToString(), -1);
 			}
 		}
+
+		/* Method to execute all saves */
 		public void ExecuteAllSave() {
 			try
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				this.model.ExecuteAllSave(extensionsToEncrypt);
-				PrintMessage("Successfully executed all saves", 1);
+				PrintMessage(Resources.SuccessExecAll, 1);
 			}
 			catch (Exception err)
 			{
 				PrintMessage(err.Message, -1);
 			}
 		}
+
+		/* Method to get all existing templates */
 		public List<string> GetAllTemplates() {
 			List<SaveTemplate> templates = this.model.templates;
 			List<string> templatesNames = new List<string>();
 			if (this.model.templates.Count == 0)
             {
-				PrintMessage("There is no save templates, please create one", -1);
+				PrintMessage(Resources.NoSave, -1);
             } 
 			else
             {
@@ -149,39 +173,56 @@ namespace NSController {
 			}
 			return templatesNames;
 		}
+
+		/* Method to open logs */
 		public void OpenLogs()
         {
 			this.model.OpenLogs();
 		}
+
+		/* Method to print a popup message */
 		public void PrintMessage(string message, int type)
         {
 			this.View.PrintMessage(message, type);
         }
 
+		/* Method to exit the program */
 		public void Exit()
         {
 			Environment.Exit(1);
 		}
+
+		/* Method to get all forbidden processes */
 		public List<string> getForbiddenProcesses()
 		{
 			return this.model.getForbiddenProcesses();
 		}
+
+		/* Method to get all extensions to encrypt */
 		public List<string> getExtensionsToEncrypt()
 		{
 			return this.model.getExtensionsToEncrypt();
 		}
+
+		/* Method to add a forbidden process */
 		public void addForbiddenProcess(string process)
 		{
 			this.model.addForbiddenProcess(process);
 		}
+
+		/* Method to add an extension to encrypt */
 		public void addExtensionToEncrypt(string extension)
 		{
 			this.model.addExtensionToEncrypt(extension);
 		}
+
+		/* Method to remove a forbidden process */
 		public void removeForbiddenProcess(int index)
         {
 			this.model.removeForbiddenProcess(index);
         }
+
+		/* Method to remove an extension to encrypt */
 		public void removeExtensionToEncrypt(int index)
 		{
 			this.model.removeExtensionToEncrypt(index);
