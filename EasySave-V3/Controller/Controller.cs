@@ -202,6 +202,11 @@ namespace NSController {
 		{
 			return this.model.getExtensionsToEncrypt();
 		}
+		/* Method to get all priority files extensions */
+		public List<string> getpriorityFilesExtensions()
+		{
+			return this.model.getPriorityFilesExtensions();
+		}
 
 		/* Method to add a forbidden process */
 		public void addForbiddenProcess(string process)
@@ -215,6 +220,12 @@ namespace NSController {
 			this.model.addExtensionToEncrypt(extension);
 		}
 
+		/* Method to add a priority file extension */
+		public void addPriorityFilesExtension(string extension)
+		{
+			this.model.addPriorityFilesExtension(extension);
+		}
+
 		/* Method to remove a forbidden process */
 		public void removeForbiddenProcess(int index)
         {
@@ -225,6 +236,12 @@ namespace NSController {
 		public void removeExtensionToEncrypt(int index)
 		{
 			this.model.removeExtensionToEncrypt(index);
+		}
+
+		/* Method to remove a priority file extension */
+		public void removePriorityFilesExtension(int index)
+		{
+			this.model.removePriorityFilesExtension(index);
 		}
 	}
 }

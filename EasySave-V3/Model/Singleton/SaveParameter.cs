@@ -14,6 +14,7 @@ namespace NSModel.Singleton
 		{
 			public List<string> cryptExtensions = new List<string>();
 			public List<string> forbiddenProcesses = new List<string>();
+			public List<string> priorityFilesExtensions = new List<string>();
 
 			public List<string> getCryptExtensions()
             {
@@ -27,8 +28,14 @@ namespace NSModel.Singleton
 					this.forbiddenProcesses = new List<string>();
 				return forbiddenProcesses;
 			}
+			public List<string> getPriorityFilesExtensions()
+			{
+				if (priorityFilesExtensions == null)
+					this.priorityFilesExtensions = new List<string>();
+				return priorityFilesExtensions;
+			}
 
-			public Parameters(List<string> cryptList, List<string> processesList)
+			public Parameters(List<string> cryptList, List<string> processesList, List<string> priorityFilesExtensions)
             {
 				if(cryptList == null)
 					this.cryptExtensions = new List<string>();
@@ -38,6 +45,10 @@ namespace NSModel.Singleton
 					this.forbiddenProcesses = new List<string>();
 				else
 					this.forbiddenProcesses = processesList;
+				if (priorityFilesExtensions == null)
+					this.priorityFilesExtensions = new List<string>();
+				else
+					this.priorityFilesExtensions = priorityFilesExtensions;
             }
 		}
 
@@ -58,7 +69,7 @@ namespace NSModel.Singleton
 				string reader = File.ReadAllText(file.ToString());
 				this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
 				if (this.Parameters1 == null)
-					this.Parameters1 = new Parameters(null, null);
+					this.Parameters1 = new Parameters(null, null, null);
 			}
 			else
 			{
@@ -67,7 +78,7 @@ namespace NSModel.Singleton
 					file = new FileInfo(path);
 					File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
 				}
-				this.Parameters1 = new Parameters(null, null);
+				this.Parameters1 = new Parameters(null, null, null);
 			}
 		}
 
@@ -80,8 +91,8 @@ namespace NSModel.Singleton
 		}
 		public void Write(string parameter, int type)
 		{
-			if (type != 1 && type != 2)
-				throw new Exception("Can only choose type 1 (forbidden processes) or type 2 (extensions to crypt)");
+			if (type != 1 && type != 2 && type != 3)
+				throw new Exception("Can only choose type 1 (forbidden processes), type 2 (extensions to crypt) or type 3 (priority files extensions)");
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
@@ -92,11 +103,13 @@ namespace NSModel.Singleton
 			/* Reading the config file and converting it to a list of SaveTemplates */
 			this.Parameters1 = JsonConvert.DeserializeObject<Parameters>(reader);
 			if (this.Parameters1 == null)
-				this.Parameters1 = new Parameters(null, null);
+				this.Parameters1 = new Parameters(null, null, null);
 			if (type == 1)
 				this.Parameters1.forbiddenProcesses.Add(parameter);
-			if(type == 2)
+			if (type == 2)
 				this.Parameters1.cryptExtensions.Add(parameter);
+			if (type == 3)
+				this.Parameters1.priorityFilesExtensions.Add(parameter);
 			StreamWriter writer = new StreamWriter(file.ToString());
 
 			/* Converting the list of SaveTemplates to a Json and writing it to config file */
@@ -110,7 +123,7 @@ namespace NSModel.Singleton
 		/* Method to delete a SaveTemplate in the config file */
 		public void Delete(int index, int type)
 		{
-			if (type != 1 && type != 2)
+			if (type != 1 && type != 2 && type != 3)
 				throw new Exception("Can only choose type 1 (forbidden processes) or type 2 (extensions to crypt)");
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
@@ -125,6 +138,8 @@ namespace NSModel.Singleton
 				this.Parameters1.forbiddenProcesses.RemoveAt(index - 1);
 			if (type == 2)
 				this.Parameters1.cryptExtensions.RemoveAt(index - 1);
+			if (type == 3)
+				this.Parameters1.priorityFilesExtensions.RemoveAt(index - 1);
 			StreamWriter writer = new StreamWriter(file.ToString());
 
 			/* Converting the list of SaveTemplates to a Json and writing it to config file */

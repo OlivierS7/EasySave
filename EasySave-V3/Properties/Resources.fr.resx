@@ -231,6 +231,9 @@
   <data name="Phrase9" xml:space="preserve">
     <value>Créer par : Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
   </data>
+  <data name="PriorityExtensions" xml:space="preserve">
+    <value>Extension Fichiers Prioritaires</value>
+  </data>
   <data name="Remove" xml:space="preserve">
     <value>Supprimer</value>
   </data>

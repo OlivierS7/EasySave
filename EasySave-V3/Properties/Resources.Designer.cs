@@ -423,6 +423,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Priority Files Extensions.
+        /// </summary>
+        public static string PriorityExtensions {
+            get {
+                return ResourceManager.GetString("PriorityExtensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Remove.
         /// </summary>
         public static string Remove {

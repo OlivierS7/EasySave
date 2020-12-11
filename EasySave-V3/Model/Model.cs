@@ -131,6 +131,11 @@ namespace NSModel
 		{
 			return SaveParameter.GetInstance().Parameters1.getCryptExtensions();
 		}
+		/* Method to get the priority files extensions from the parameters */
+		public List<string> getPriorityFilesExtensions()
+		{
+			return SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
+		}
 
 		/* Method to add the forbidden processes to the parameters */
 		public void addForbiddenProcess(string process)
@@ -142,6 +147,12 @@ namespace NSModel
 		{
 			SaveParameter.GetInstance().Write(extension, 2);
 		}
+		/* Method to add the priority files extensions to the parameters */
+		public void addPriorityFilesExtension(string extension)
+		{
+			SaveParameter.GetInstance().Write(extension, 3);
+		}
+
 		/* Method to remove the forbidden processes to the parameters */
 		public void removeForbiddenProcess(int index)
         {
@@ -151,6 +162,11 @@ namespace NSModel
 		public void removeExtensionToEncrypt(int index)
 		{
 			SaveParameter.GetInstance().Delete(index, 2);
+		}
+		/* Method to remove the priority files extensions to the parameters */
+		public void removePriorityFilesExtension(int index)
+		{
+			SaveParameter.GetInstance().Delete(index, 3);
 		}
 	}
 }

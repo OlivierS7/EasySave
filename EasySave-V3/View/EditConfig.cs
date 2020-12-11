@@ -11,21 +11,20 @@ namespace NSView
     {
         public List<string> forbiddenProcesses;
         public List<string> extensionsToEncrypt;
+        public List<string> priorityFilesExtensions;
         public StartMenu startMenu;
         public EditConfig()
         {
             InitializeComponent();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void EditConfig_Load(object sender, EventArgs e)
         {
-            button3.Show();
+            button3.Hide();
+            button4.Hide();
+            button6.Hide();
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            button4.Show();
-        }
 
         /* Add a forbidden procces */
         private void button1_Click(object sender, EventArgs e)
@@ -69,10 +68,25 @@ namespace NSView
             }
         }
 
-        private void EditConfig_Load(object sender, EventArgs e)
+        /* Add a priority files extension */
+        private void button5_Click(object sender, EventArgs e)
         {
-            button3.Hide();
-            button4.Hide();
+            if (textBox3.Text != "")
+            {
+                bool isEgal = false;
+                foreach (string item in listBox3.Items)
+                {
+                    if (textBox3.Text == item)
+                        isEgal = true;
+                }
+                if (!isEgal)
+                {
+                    GraphicalView.controller.addPriorityFilesExtension(textBox3.Text);
+                    priorityFilesExtensions = GraphicalView.controller.getpriorityFilesExtensions();
+                    ChangelistBox3();
+                    button6.Hide();
+                }
+            }
         }
 
         /* Remove a forbidden process */
@@ -84,13 +98,22 @@ namespace NSView
             button3.Hide();
         }
 
-        /* Remove an extensions to encrypt */
+        /* Remove an extension to encrypt */
         private void button4_Click(object sender, EventArgs e)
         {
             GraphicalView.controller.removeExtensionToEncrypt(listBox2.SelectedIndex + 1);
             extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
             ChangelistBox2();
             button4.Hide();
+        }
+
+        /* Remove an priority files extension */
+        private void button6_Click(object sender, EventArgs e)
+        {
+            GraphicalView.controller.removePriorityFilesExtension(listBox3.SelectedIndex + 1);
+            priorityFilesExtensions = GraphicalView.controller.getpriorityFilesExtensions();
+            ChangelistBox3();
+            button6.Hide();
         }
 
         /* Refresh the list */
@@ -119,16 +142,32 @@ namespace NSView
             }
         }
 
+        /* Refresh the list */
+        public void ChangelistBox3()
+        {
+            listBox3.Items.Clear();
+            if (priorityFilesExtensions != null)
+            {
+                for (int i = 0; i < priorityFilesExtensions.Count; i++)
+                {
+                    listBox3.Items.Add("" + priorityFilesExtensions[i]);
+                };
+            }
+        }
+
         /* Allows the use of multiple languages */
         public void loadLang()
         {
             label3.Text = Resources.EditParam;
             label1.Text = Resources.Extensions;
             label2.Text = Resources.Softwares;
+            label5.Text = Resources.PriorityExtensions;
             button1.Text = Resources.Add;
             button2.Text = Resources.Add;
+            button5.Text = Resources.Add;
             button3.Text = Resources.Remove;
             button4.Text = Resources.Remove;
+            button6.Text = Resources.Remove;
         }
 
        /* Change language */
@@ -147,6 +186,21 @@ namespace NSView
                     break;
             }
             this.startMenu.LoadAllLang();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button3.Show();
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button4.Show();
+        }
+
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button6.Show();
         }
     }
 }

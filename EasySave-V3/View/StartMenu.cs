@@ -41,8 +41,10 @@ namespace NSView
             }
             editConfig1.forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
+            editConfig1.priorityFilesExtensions = GraphicalView.controller.getpriorityFilesExtensions();
             editConfig1.ChangelistBox1();
             editConfig1.ChangelistBox2();
+            editConfig1.ChangelistBox3();
             editConfig1.BringToFront();
         }
 
