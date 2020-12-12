@@ -17,6 +17,9 @@ namespace NSModel
         DirectoryInfo currentSrcDir;
         int filesLeft;
         long sizeLeft;
+        List<string> priorityExtensions = new List<string>();
+        List<string> priorityFiles = new List<string>();
+        List<string> normalFiles = new List<string>();
 
         public SaveTemplate CheckFullSave(SaveTemplate template)
         {
@@ -45,64 +48,34 @@ namespace NSModel
                 long totalSize = countFiles[1];
                 filesLeft = totalFiles;
                 sizeLeft = totalSize;
+                Stopwatch stopw = new Stopwatch();
 
                 /* Initialize state file */
                 State.GetInstance().Write(currentDateTime, template, true, null, null, 0, totalSize, totalSize, totalFiles, totalFiles, TimeSpan.Zero);
                 Stopwatch totalTime = new Stopwatch();
                 totalTime.Start();
 
-                Stopwatch stopw = new Stopwatch();
-                cryptDuration = "0";
-
-                /* Checking for files to copy if they were modified since last full save */
-                foreach (string srcFile in srcFiles)
+                Model.Barrier.SignalAndWait();
+                foreach (string file in priorityFiles)
                 {
-                    FileInfo src = new FileInfo(srcFile);
-                    currentSrcDirName = src.DirectoryName;
-                    currentSrcDir = src.Directory;
-                    foreach (string compFile in compFiles)
-                    {
-                        sameFile = false;
-                        comp = new FileInfo(compFile);
-                        currentCompDir = comp.Directory;
-                        if (currentSrcDirName != srcDir)
-                        {
-                            if (currentSrcDir.Name == currentCompDir.Name)
-                                sameFile = true;
-                        }
-                        if (currentSrcDirName == srcDir)
-                        {
-                            if (currentSrcDirName.EndsWith(currentSrcDir.Name))
-                            {
-                                if (currentCompDir.FullName.EndsWith(compDir))
-                                    sameFile = true;
-                            }
-                        }
-                        /* Checking if files have the same name */
-                        if (comp.Name == src.Name && sameFile)
-                        {
-                            wasCreated = true;
-
-                            /* Checking if the file has been modified */
-                            if (comp.Length != src.Length)
-                            {
-                                Copy(srcDir, destDir, stopw, src, extensionsToEncrypt);
-                                State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
-                                stopw.Reset();
-                            }
-                        }
-                    }
-                    /* If file exists only in the src directory, it was created recently */
-                    if (!wasCreated)
-                    {
-                        Copy(srcDir, destDir, stopw, src, extensionsToEncrypt);
-                        State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
-                        stopw.Reset();
-                    }
-                    wasCreated = false;
+                    cryptDuration = "0";
+                    FileInfo src = new FileInfo(file);
+                    Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                    State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                    Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                    stopw.Reset();
                 }
+                Model.Barrier.SignalAndWait();
+                foreach (string file in normalFiles)
+                {
+                    cryptDuration = "0";
+                    FileInfo src = new FileInfo(file);
+                    Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                    State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                    Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                    stopw.Reset();
+                }
+
                 State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                 totalTime.Stop();
             }
@@ -151,6 +124,8 @@ namespace NSModel
         }
         public long[] CountFiles(string[] srcFiles, string[] compFiles, string srcDir, string compDir)
         {
+            bool priority = false;
+            priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
             int totalFiles = 0;
             long totalSize = 0;
 
@@ -186,6 +161,14 @@ namespace NSModel
                         /* Checking if the file has been modified */
                         if (comp.Length != src.Length)
                         {
+                            foreach (string priorityExtension in priorityExtensions)
+                            {
+                                if (Path.GetExtension(srcFile) == priorityExtension)
+                                {
+                                    priorityFiles.Add(srcFile);
+                                    priority = true;
+                                }
+                            }
                             totalSize += src.Length;
                             totalFiles++;
                         }
@@ -194,10 +177,21 @@ namespace NSModel
                 /* If file exists only in the src directory, it was created recently */
                 if (!wasCreated)
                 {
+                    foreach (string priorityExtension in priorityExtensions)
+                    {
+                        if (Path.GetExtension(srcFile) == priorityExtension)
+                        {
+                            priorityFiles.Add(srcFile);
+                            priority = true;
+                        }
+                    }
                     totalSize += src.Length;
                     totalFiles++;
+                    if (!priority)
+                        normalFiles.Add(srcFile);
                 }
                 wasCreated = false;
+                priority = false;
             }
             long[] results = { totalFiles, totalSize };
             return results;
