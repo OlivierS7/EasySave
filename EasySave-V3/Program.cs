@@ -16,7 +16,7 @@ namespace EasySave_V2
         static void Main()
         {
             bool createdNew;
-            new Mutex(true, "EasyaveRunning", out createdNew);
+            new Mutex(true, "EasySaveRunning", out createdNew);
             if (createdNew)
             {
                 Controller controller = new Controller();
