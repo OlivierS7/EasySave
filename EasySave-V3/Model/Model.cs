@@ -11,6 +11,7 @@ namespace NSModel
 	public class Model
 	{
 		private static Barrier barrier;
+		private static Mutex mutex = new Mutex();
 		private delegate void deleg();
 		private List<SaveTemplate> _templates;
 
@@ -20,6 +21,7 @@ namespace NSModel
 			set => this._templates = value;
 		}
         public static Barrier Barrier { get => barrier; set => barrier = value; }
+        public static Mutex Mutex { get => mutex; set => mutex = value; }
 
         /* Constructor */
         public Model()
