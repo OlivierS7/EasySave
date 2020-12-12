@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using NSModel.Singleton;
 
 namespace NSModel
 {
     public class DifferentialSave : SaveStrategy
     {
+        private delegate void deleg();
         bool wasCreated = false;
         bool sameFile;
         string currentSrcDirName;
@@ -27,6 +29,7 @@ namespace NSModel
         }
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+            Model.IncreasePrioritySaves();
             SaveTemplate fullSave = CheckFullSave(template);
             if (fullSave != null)
             {
@@ -60,20 +63,67 @@ namespace NSModel
                 {
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
-                    Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
-                    State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                    Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
-                    stopw.Reset();
+                    if (src.Length > 50000000)
+                    {
+                        deleg delg = () =>
+                        {
+                            Model.SetPriority(true);
+                            Model.Mutex.WaitOne();
+                            Stopwatch largeFileStopw = new Stopwatch();
+                            Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                            State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                            Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                            largeFileStopw.Reset();
+                            Model.Mutex.ReleaseMutex();
+                        };
+                        Thread largeFile = new Thread(new ThreadStart(delg));
+                        largeFile.Start();
+                    }
+                    else
+                    {
+                        Model.SetPriority(true);
+                        Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                        State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                        stopw.Reset();
+                    }
                 }
+                Model.DecreasePrioritySaves();
+                if (Model.GetPrioritySaves() == 0)
+                    Model.SetPriority(false);
                 Model.Barrier.SignalAndWait();
                 foreach (string file in normalFiles)
                 {
+                    while (Model.GetPriority())
+                    {
+
+                    }
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
-                    Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
-                    State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                    Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
-                    stopw.Reset();
+                    if (src.Length > 50000000)
+                    {
+                        deleg delg = () =>
+                        {
+                            Model.SetPriority(true);
+                            Model.Mutex.WaitOne();
+                            Stopwatch largeFileStopw = new Stopwatch();
+                            Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                            State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                            Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                            largeFileStopw.Reset();
+                            Model.Mutex.ReleaseMutex();
+                        };
+                        Thread largeFile = new Thread(new ThreadStart(delg));
+                        largeFile.Start();
+                    }
+                    else
+                    {
+                        Model.SetPriority(true);
+                        Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                        State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                        stopw.Reset();
+                    }
                 }
 
                 State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);

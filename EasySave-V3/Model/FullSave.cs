@@ -17,6 +17,7 @@ namespace NSModel
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+            Model.IncreasePrioritySaves();
             List<string> priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
             List<string> priorityFiles = new List<string>();
             List<string> normalFiles = new List<string>();
@@ -78,30 +79,41 @@ namespace NSModel
                 FileInfo src = new FileInfo(file);
                 string srcDir = template.srcDirectory;
                 string destDir = destDirectoryInfo.FullName;
-                if (src.Length > 50000)
+                if (src.Length > 50000000)
                 {
                     deleg delg = () =>
                     {
+                        Model.SetPriority(true);
+                        Model.Mutex.WaitOne();
                         Stopwatch largeFileStopw = new Stopwatch();
-                        CopyLargeFile(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
+                        Copy(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
                         largeFileStopw.Reset();
+                        Model.Mutex.ReleaseMutex();
                     };
                     Thread largeFile = new Thread(new ThreadStart(delg));
                     largeFile.Start();
                 }
                 else
                 {
+                    Model.SetPriority(true);
                     Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
                     State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                     Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                     stopw.Reset();
                 }
             }
+            Model.DecreasePrioritySaves();
+            if(Model.GetPrioritySaves() == 0)
+                Model.SetPriority(false);
             Model.Barrier.SignalAndWait();
             foreach (string file in normalFiles)
             {
+                while (Model.GetPriority())
+                {
+
+                }
                 cryptDuration = "0";
                 FileInfo src = new FileInfo(file);
                 string srcDir = template.srcDirectory;
@@ -110,11 +122,13 @@ namespace NSModel
                 {
                     deleg delg = () =>
                     {
+                        Model.Mutex.WaitOne();
                         Stopwatch largeFileStopw = new Stopwatch();
-                        CopyLargeFile(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
+                        Copy(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
                         largeFileStopw.Reset();
+                        Model.Mutex.ReleaseMutex();
                     };
                     Thread largeFile = new Thread(new ThreadStart(delg));
                     largeFile.Start();
@@ -154,29 +168,6 @@ namespace NSModel
             filesLeft--;
             sizeLeft = sizeLeft - src.Length;
             stopw.Stop();
-        }
-        public void CopyLargeFile(string srcDir, string destDir, Stopwatch stopw, FileInfo src, List<string> extensionsToEncrypt)
-        {
-            Model.Mutex.WaitOne();
-            /* Creating files and folders if they doesn't exists */
-            new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
-            stopw.Start();
-            bool isCrypted = false;
-            foreach (string extension in extensionsToEncrypt)
-            {
-                if (Path.GetExtension(src.ToString()) == extension)
-                {
-                    isCrypted = true;
-                    cryptDuration = crypt(src.ToString(), src.FullName.Replace(srcDir, destDir));
-                }
-            }
-
-            if (!isCrypted)
-                src.CopyTo(src.FullName.Replace(srcDir, destDir));
-            filesLeft--;
-            sizeLeft = sizeLeft - src.Length;
-            stopw.Stop();
-            Model.Mutex.ReleaseMutex();
         }
         public string crypt(string sourceFile, string destination)
         {

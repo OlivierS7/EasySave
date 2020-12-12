@@ -12,6 +12,9 @@ namespace NSModel
 	{
 		private static Barrier barrier;
 		private static Mutex mutex = new Mutex();
+		private static Mutex priorityRunning = new Mutex();
+		private static bool priority = false;
+		private static int runningPrioritySaves = 0;
 		private delegate void deleg();
 		private List<SaveTemplate> _templates;
 
@@ -22,11 +25,38 @@ namespace NSModel
 		}
         public static Barrier Barrier { get => barrier; set => barrier = value; }
         public static Mutex Mutex { get => mutex; set => mutex = value; }
+        public static Mutex PriorityRunning { get => priorityRunning; set => priorityRunning = value; }
 
         /* Constructor */
         public Model()
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
+		}
+		public static void SetPriority(bool priority)
+        {
+			priorityRunning.WaitOne();
+			Model.priority = priority;
+			priorityRunning.ReleaseMutex();
+        }
+		public static bool GetPriority()
+        {
+			return Model.priority;
+		}
+		public static void IncreasePrioritySaves()
+        {
+			priorityRunning.WaitOne();
+			runningPrioritySaves++;
+			priorityRunning.ReleaseMutex();
+		}
+		public static void DecreasePrioritySaves()
+		{
+			priorityRunning.WaitOne();
+			runningPrioritySaves++;
+			priorityRunning.ReleaseMutex();
+		}
+		public static int GetPrioritySaves()
+		{
+			return Model.runningPrioritySaves;
 		}
 
 		/* Method to create a save template */
