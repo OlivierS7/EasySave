@@ -8,17 +8,22 @@ namespace NSModel
 {
     public class FullSave : SaveStrategy
     {
+        private long sizeLeft;
         private int filesLeft;
+        private string cryptDuration;
 
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
-
+            List<string> priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
+            List<string> priorityFiles = new List<string>();
+            List<string> normalFiles = new List<string>();
             /* Variable for the directory name */
             DateTime currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             string TodaysTime = DateTime.Now.ToString("HH-mm-ss");
             string dateTimeName = Todaysdate + "_" + TodaysTime + "_" + template.backupName;
+            Stopwatch stopw = new Stopwatch();
 
             string[] allFiles = Directory.GetFiles(template.srcDirectory, ".", SearchOption.AllDirectories);
 
@@ -26,18 +31,30 @@ namespace NSModel
             int totalFiles = allFiles.Length;
             filesLeft = totalFiles;
             long totalSize = 0;
+            bool priority = false;
             foreach (string currentFile in allFiles)
             {
+                foreach (string priorityExtension in priorityExtensions)
+                {
+                    if (Path.GetExtension(currentFile) == priorityExtension)
+                    {
+                        priorityFiles.Add(currentFile);
+                        priority = true;
+                    }
+                }
+                if (!priority)
+                    normalFiles.Add(currentFile);
                 FileInfo info = new FileInfo(currentFile);
                 totalSize += info.Length;
+                priority = false;
             }
+            sizeLeft = totalSize;
 
             /* Initializing state file */
             State.GetInstance().Write(currentDateTime, template, true, null, null, 0, totalSize, totalSize, totalFiles, totalFiles, TimeSpan.Zero);
 
             Stopwatch totalTime = new Stopwatch();
             totalTime.Start();
-            DirectoryInfo srcDirectoryInfo = new DirectoryInfo(template.srcDirectory);
             DirectoryInfo destDirectoryInfo = new DirectoryInfo(template.destDirectory);
             if (!Directory.Exists(template.destDirectory))
             {
@@ -52,7 +69,30 @@ namespace NSModel
                 destDirectoryInfo.CreateSubdirectory(dateTimeName);
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTimeName);
             };
-            CopyAll(srcDirectoryInfo, destDirectoryInfo, template.backupName, totalTime, currentDateTime, template, totalFiles, totalSize, extensionsToEncrypt);
+            Model.Barrier.SignalAndWait();
+            foreach(string file in priorityFiles)
+            {
+                cryptDuration = "0";
+                FileInfo src = new FileInfo(file);
+                string srcDir = template.srcDirectory;
+                string destDir = destDirectoryInfo.FullName;
+                Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
+                State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                stopw.Reset();
+            }
+            Model.Barrier.SignalAndWait();
+            foreach (string file in normalFiles)
+            {
+                cryptDuration = "0";
+                FileInfo src = new FileInfo(file);
+                string srcDir = template.srcDirectory;
+                string destDir = destDirectoryInfo.FullName;
+                Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
+                State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                stopw.Reset();
+            }
             /* Call the Singleton to write in FullSaveHistory.json */
             FullSaveHistory.GetInstance().Write(template, dateTimeName);
             State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
@@ -60,51 +100,26 @@ namespace NSModel
         }
 
         /* Method to create a full backup of a directory */
-        public void CopyAll(DirectoryInfo source, DirectoryInfo target, string saveTemplateName, Stopwatch totalTime, DateTime start, SaveTemplate template, int totalFiles, long totalSize, List<string> extensionsToEncrypt)
+        public void Copy(string srcDir, string destDir, Stopwatch stopw, FileInfo src, List<string> extensionsToEncrypt)
         {
-            Stopwatch stopw = new Stopwatch();
-            Directory.CreateDirectory(target.FullName);
-            long sizeLeft = totalSize;
-            string cryptDuration;
-            bool isCrypted;
-            string destination;
-            string sourceFile;
-            // Copy each file into the new directory.
-            foreach (FileInfo fi in source.GetFiles())
+            /* Creating files and folders if they doesn't exists */
+            new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
+            stopw.Start();
+            bool isCrypted = false;
+            foreach (string extension in extensionsToEncrypt)
             {
-                cryptDuration = "0";
-                isCrypted = false;
-                destination = Path.Combine(target.FullName, fi.Name);
-                sourceFile = fi.ToString();
-                stopw.Start();
-
-                /* Checking if file needs to be crypted */
-                foreach (string extension in extensionsToEncrypt)
+                if (Path.GetExtension(src.ToString()) == extension)
                 {
-                    if (Path.GetExtension(sourceFile) == extension)
-                    {
-                        isCrypted = true;
-                        cryptDuration = crypt(sourceFile, destination);
-                    }
-                    
+                    isCrypted = true;
+                    cryptDuration = crypt(src.ToString(), src.FullName.Replace(srcDir, destDir));
                 }
+            }
 
-                /* If file doesn't need to be crypted, simply copy it */
-                if (!isCrypted)
-                    fi.CopyTo(destination, true);
-                filesLeft--;
-                sizeLeft = sizeLeft - fi.Length;
-                State.GetInstance().Write(start, template, true, sourceFile, destination, fi.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                stopw.Stop();
-                Log.GetInstance().Write(saveTemplateName, fi, new FileInfo(destination), fi.Length, stopw.Elapsed, cryptDuration);
-                stopw.Reset();
-            }
-            // Copy each subdirectory using recursion.
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
-            {
-                DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir, saveTemplateName, totalTime, start, template, totalFiles, totalSize, extensionsToEncrypt);
-            }
+            if (!isCrypted)
+                src.CopyTo(src.FullName.Replace(srcDir, destDir));
+            filesLeft--;
+            sizeLeft = sizeLeft - src.Length;
+            stopw.Stop();
         }
         public string crypt(string sourceFile, string destination)
         {

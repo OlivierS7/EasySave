@@ -10,6 +10,7 @@ namespace NSModel
 {
 	public class Model
 	{
+		private static Barrier barrier;
 		private delegate void deleg();
 		private List<SaveTemplate> _templates;
 
@@ -18,9 +19,10 @@ namespace NSModel
 			get => this._templates;
 			set => this._templates = value;
 		}
+        public static Barrier Barrier { get => barrier; set => barrier = value; }
 
-		/* Constructor */
-		public Model()
+        /* Constructor */
+        public Model()
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
 		}
@@ -75,6 +77,7 @@ namespace NSModel
 		/* Method to execute one backup */
 		public void ExecuteOneSave(int templateIndex, List<string> extensionsToEncrypt)
 		{
+			Barrier = new Barrier(participantCount: 1);
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			deleg delg = () =>
 			{
@@ -97,6 +100,7 @@ namespace NSModel
 		{
 			if (templates.Count == 0)
 				throw new Exception(Resources.NoSaveToExec);
+			Barrier = new Barrier(participantCount: templates.Count);
 			foreach (SaveTemplate template in templates)
 			{
 				deleg delg = () =>
