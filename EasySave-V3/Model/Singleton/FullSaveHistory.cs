@@ -2,9 +2,11 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace NSModel.Singleton {
 	public class FullSaveHistory {
+		private static Mutex mutex = new Mutex();
 		private static FullSaveHistory fullSaveHistory;
 		private FileInfo _file;
 
@@ -37,7 +39,7 @@ namespace NSModel.Singleton {
 
 		/* Method to write into FullSaveHistory.json to save the full backups */
 		public void Write(SaveTemplate template, string dateTime) {
-
+			mutex.WaitOne();
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
@@ -60,6 +62,7 @@ namespace NSModel.Singleton {
 
 			/* Hiding file */
 			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
+			mutex.ReleaseMutex();
 		}
 
 		/* Method to get the last full save for a source directory */

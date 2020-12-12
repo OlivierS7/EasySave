@@ -2,9 +2,11 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace NSModel.Singleton {
 	public class State {
+		private static Mutex mutex = new Mutex();
 		private static State state;
 		private FileInfo file;
 		public List<SaveTemplateState> templatesState = new List<SaveTemplateState>();
@@ -74,6 +76,7 @@ namespace NSModel.Singleton {
 
 		public void Write(DateTime date, SaveTemplate template, bool isActive, string srcFile, string destFile, long fileSize, long totalSize, long sizeLeft, int totalFiles, int filesLeft, TimeSpan time)
 		{
+			mutex.WaitOne();
 			/* Reading file and storing content */
 			string reader = File.ReadAllText(file.ToString());
 			templatesState = JsonConvert.DeserializeObject<List<SaveTemplateState>>(reader);
@@ -115,6 +118,7 @@ namespace NSModel.Singleton {
 			string output = JsonConvert.SerializeObject(templatesState, Formatting.Indented);
 			writer.Write(output);
 			writer.Close();
+			mutex.ReleaseMutex();
 		}
 		public void Create(SaveTemplate template)
 		{

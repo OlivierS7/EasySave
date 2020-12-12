@@ -31,10 +31,10 @@ namespace NSModel
                 DateTime currentDateTime = DateTime.Now;
                 String Todaysdate = currentDateTime.ToString("dd-MMM-yyyy");
                 String TodaysTime = currentDateTime.ToString("HH-mm-ss");
-                string dateTime = Todaysdate + "_" + TodaysTime;
+                string dateTimeName = Todaysdate + "_" + TodaysTime + "_" + template.backupName;
 
                 /* Variables for the source and destination directories + the directory to compare with for the differential save */
-                string destDir = template.destDirectory + "\\" + dateTime;
+                string destDir = template.destDirectory + "\\" + dateTimeName;
                 string srcDir = template.srcDirectory;
                 string compDir = fullSave.destDirectory;
                 string[] srcFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);

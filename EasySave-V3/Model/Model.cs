@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using NSModel.Singleton;
 using System.IO;
 using EasySave_V3.Properties;
+using System.Threading;
 
 namespace NSModel
 {
 	public class Model
 	{
-
+		private delegate void deleg();
 		private List<SaveTemplate> _templates;
 
 		public List<SaveTemplate> templates
@@ -74,11 +75,18 @@ namespace NSModel
 		/* Method to execute one backup */
 		public void ExecuteOneSave(int templateIndex, List<string> extensionsToEncrypt)
 		{
+			SaveTemplate template = IntToSaveTemplate(templateIndex);
+			deleg delg = () =>
+			{
+				template.saveStrategy.Execute(template, extensionsToEncrypt);
+			};
 			if (this.templates.Count < templateIndex)
 				throw new Exception(templateIndex + ": No save template at this index");
-			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			if (!CheckProcesses())
-				template.saveStrategy.Execute(template, extensionsToEncrypt);
+            {
+				Thread save = new Thread(new ThreadStart(delg));
+				save.Start();
+            }
 			else
 				throw new Exception(Resources.RunningError);
 		}
@@ -91,8 +99,15 @@ namespace NSModel
 				throw new Exception(Resources.NoSaveToExec);
 			foreach (SaveTemplate template in templates)
 			{
-				if (!CheckProcesses())
+				deleg delg = () =>
+				{
 					template.saveStrategy.Execute(template, extensionsToEncrypt);
+				};
+				if (!CheckProcesses())
+				{
+					Thread save = new Thread(new ThreadStart(delg));
+					save.Start();
+				}
 				else
 					throw new Exception(Resources.RunningError);
 			}

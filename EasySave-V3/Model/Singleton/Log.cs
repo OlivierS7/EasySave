@@ -2,11 +2,13 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace NSModel.Singleton
 {
 	public class Log
 	{
+		private static Mutex mutex = new Mutex();
 		private static Log log;
 		private FileInfo _file;
 		private string _fileName;
@@ -79,6 +81,7 @@ namespace NSModel.Singleton
 		}
 		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, string cryptDuration)
 		{
+			mutex.WaitOne();
 			/* Getting all the logs in a list and adding new logs */
 			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString() + " bytes", time, cryptDuration + "ms");
 			logObjects.Add(currentFile);
@@ -86,6 +89,7 @@ namespace NSModel.Singleton
 			string output = JsonConvert.SerializeObject(logObjects, Formatting.Indented);
 			writer.Write(output);
 			writer.Close();
+			mutex.ReleaseMutex();
 		}
 	}
 }

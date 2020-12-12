@@ -18,7 +18,7 @@ namespace NSModel
             DateTime currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             string TodaysTime = DateTime.Now.ToString("HH-mm-ss");
-            string dateTime = Todaysdate + "_" + TodaysTime;
+            string dateTimeName = Todaysdate + "_" + TodaysTime + "_" + template.backupName;
 
             string[] allFiles = Directory.GetFiles(template.srcDirectory, ".", SearchOption.AllDirectories);
 
@@ -43,18 +43,18 @@ namespace NSModel
             {
                 /* Create Directory and SubDirectory with date and time */
                 Directory.CreateDirectory(template.destDirectory);
-                destDirectoryInfo.CreateSubdirectory(dateTime);
-                destDirectoryInfo = new DirectoryInfo(destDirectoryInfo + "\\" + dateTime);
+                destDirectoryInfo.CreateSubdirectory(dateTimeName);
+                destDirectoryInfo = new DirectoryInfo(destDirectoryInfo + "\\" + dateTimeName);
             }
             else
             {
                 /* Create SubDirectory with date and time */
-                destDirectoryInfo.CreateSubdirectory(dateTime);
-                destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTime);
+                destDirectoryInfo.CreateSubdirectory(dateTimeName);
+                destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTimeName);
             };
             CopyAll(srcDirectoryInfo, destDirectoryInfo, template.backupName, totalTime, currentDateTime, template, totalFiles, totalSize, extensionsToEncrypt);
             /* Call the Singleton to write in FullSaveHistory.json */
-            FullSaveHistory.GetInstance().Write(template, dateTime);
+            FullSaveHistory.GetInstance().Write(template, dateTimeName);
             State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
             totalTime.Stop();
         }
