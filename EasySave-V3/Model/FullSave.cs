@@ -106,10 +106,26 @@ namespace NSModel
                 FileInfo src = new FileInfo(file);
                 string srcDir = template.srcDirectory;
                 string destDir = destDirectoryInfo.FullName;
-                Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
-                State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
-                Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
-                stopw.Reset();
+                if (src.Length > 50000)
+                {
+                    deleg delg = () =>
+                    {
+                        Stopwatch largeFileStopw = new Stopwatch();
+                        CopyLargeFile(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
+                        State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                        Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
+                        largeFileStopw.Reset();
+                    };
+                    Thread largeFile = new Thread(new ThreadStart(delg));
+                    largeFile.Start();
+                }
+                else
+                {
+                    Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
+                    State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
+                    Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
+                    stopw.Reset();
+                }
             }
             /* Call the Singleton to write in FullSaveHistory.json */
             FullSaveHistory.GetInstance().Write(template, dateTimeName);
