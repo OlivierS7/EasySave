@@ -51,7 +51,7 @@ namespace NSModel
 		public static void DecreasePrioritySaves()
 		{
 			priorityRunning.WaitOne();
-			runningPrioritySaves++;
+			runningPrioritySaves--;
 			priorityRunning.ReleaseMutex();
 		}
 		public static int GetPrioritySaves()
