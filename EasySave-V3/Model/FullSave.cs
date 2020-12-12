@@ -79,7 +79,7 @@ namespace NSModel
                 FileInfo src = new FileInfo(file);
                 string srcDir = template.srcDirectory;
                 string destDir = destDirectoryInfo.FullName;
-                if (src.Length > 50000000)
+                if (src.Length > Model.getMaxFileSize())
                 {
                     deleg delg = () =>
                     {
@@ -118,7 +118,7 @@ namespace NSModel
                 FileInfo src = new FileInfo(file);
                 string srcDir = template.srcDirectory;
                 string destDir = destDirectoryInfo.FullName;
-                if (src.Length > 50000)
+                if (src.Length > Model.getMaxFileSize())
                 {
                     deleg delg = () =>
                     {

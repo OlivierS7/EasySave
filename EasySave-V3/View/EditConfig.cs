@@ -12,6 +12,7 @@ namespace NSView
         public List<string> forbiddenProcesses;
         public List<string> extensionsToEncrypt;
         public List<string> priorityFilesExtensions;
+        public string maxFileSize;
         public StartMenu startMenu;
         public EditConfig()
         {
@@ -89,6 +90,16 @@ namespace NSView
             }
         }
 
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (textBox4.Text != "")
+            {
+                GraphicalView.controller.addMaxFileSize(textBox4.Text);
+                maxFileSize = GraphicalView.controller.getMaxFileSize().ToString();
+            }
+        }
+
         /* Remove a forbidden process */
         private void button3_Click(object sender, EventArgs e)
         {
@@ -155,6 +166,11 @@ namespace NSView
             }
         }
 
+        public void ChangetextBox4()
+        {
+            textBox4.Text = maxFileSize;
+        }
+
         /* Allows the use of multiple languages */
         public void loadLang()
         {
@@ -162,6 +178,7 @@ namespace NSView
             label1.Text = Resources.Extensions;
             label2.Text = Resources.Softwares;
             label5.Text = Resources.PriorityExtensions;
+            label6.Text = Resources.MaxFileSize;
             button1.Text = Resources.Add;
             button2.Text = Resources.Add;
             button5.Text = Resources.Add;

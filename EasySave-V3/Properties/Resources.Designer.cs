@@ -279,6 +279,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Maximum File Size (Ko).
+        /// </summary>
+        public static string MaxFileSize {
+            get {
+                return ResourceManager.GetString("MaxFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Modify a save template.
         /// </summary>
         public static string Modif {

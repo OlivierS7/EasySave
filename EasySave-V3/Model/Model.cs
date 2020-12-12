@@ -187,6 +187,11 @@ namespace NSModel
 		{
 			return SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
 		}
+		/* Method to get the max file size from the parameters */
+		public static int getMaxFileSize()
+		{
+			return SaveParameter.GetInstance().Parameters1.getMaxFileSize();
+		}
 
 		/* Method to add the forbidden processes to the parameters */
 		public void addForbiddenProcess(string process)
@@ -198,10 +203,15 @@ namespace NSModel
 		{
 			SaveParameter.GetInstance().Write(extension, 2);
 		}
-		/* Method to add the priority files extensions to the parameters */
+		
 		public void addPriorityFilesExtension(string extension)
 		{
 			SaveParameter.GetInstance().Write(extension, 3);
+		}
+		/* Method to add the max file size to the parameters */
+		public void addMaxFileSize(string size)
+		{
+			SaveParameter.GetInstance().Write(size, 4);
 		}
 
 		/* Method to remove the forbidden processes to the parameters */

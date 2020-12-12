@@ -208,6 +208,12 @@ namespace NSController {
 			return this.model.getPriorityFilesExtensions();
 		}
 
+		/* Method to get all priority files extensions */
+		public int getMaxFileSize()
+		{
+			return Model.getMaxFileSize();
+		}
+
 		/* Method to add a forbidden process */
 		public void addForbiddenProcess(string process)
 		{
@@ -224,6 +230,11 @@ namespace NSController {
 		public void addPriorityFilesExtension(string extension)
 		{
 			this.model.addPriorityFilesExtension(extension);
+		}
+		/* Method to add the max file size */
+		public void addMaxFileSize(string size)
+		{
+			this.model.addMaxFileSize(size);
 		}
 
 		/* Method to remove a forbidden process */

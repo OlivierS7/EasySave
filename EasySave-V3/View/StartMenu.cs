@@ -42,9 +42,11 @@ namespace NSView
             editConfig1.forbiddenProcesses = GraphicalView.controller.getForbiddenProcesses();
             editConfig1.extensionsToEncrypt = GraphicalView.controller.getExtensionsToEncrypt();
             editConfig1.priorityFilesExtensions = GraphicalView.controller.getpriorityFilesExtensions();
+            editConfig1.maxFileSize = GraphicalView.controller.getMaxFileSize().ToString();
             editConfig1.ChangelistBox1();
             editConfig1.ChangelistBox2();
             editConfig1.ChangelistBox3();
+            editConfig1.ChangetextBox4();
             editConfig1.BringToFront();
         }
 
@@ -108,7 +110,6 @@ namespace NSView
             manageTemplate1.loadLang();
             editConfig1.loadLang();
             aboutUs1.loadLang();
-
         }
 
         /* Allows the use of multiple languages */

@@ -63,7 +63,7 @@ namespace NSModel
                 {
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
-                    if (src.Length > 50000000)
+                    if (src.Length > Model.getMaxFileSize())
                     {
                         deleg delg = () =>
                         {
@@ -100,7 +100,7 @@ namespace NSModel
                     }
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
-                    if (src.Length > 50000000)
+                    if (src.Length > Model.getMaxFileSize())
                     {
                         deleg delg = () =>
                         {

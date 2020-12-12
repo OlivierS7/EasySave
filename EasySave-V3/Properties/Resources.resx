@@ -190,6 +190,9 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage save template(s)</value>
   </data>
+  <data name="MaxFileSize" xml:space="preserve">
+    <value>Maximum File Size (Ko)</value>
+  </data>
   <data name="Modif" xml:space="preserve">
     <value>Modify a save template</value>
   </data>

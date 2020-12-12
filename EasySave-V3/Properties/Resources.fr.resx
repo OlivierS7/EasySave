@@ -183,6 +183,9 @@
   <data name="Manage" xml:space="preserve">
     <value>Gérer les sauvegardes</value>
   </data>
+  <data name="MaxFileSize" xml:space="preserve">
+    <value>Taille Fichier Maximum (Ko)</value>
+  </data>
   <data name="Modif" xml:space="preserve">
     <value>Modifier une sauvegarde</value>
   </data>
