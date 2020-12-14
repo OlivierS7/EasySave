@@ -134,6 +134,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Differential.
+        /// </summary>
+        public static string DifferentialSave {
+            get {
+                return ResourceManager.GetString("DifferentialSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap EasySave1 {
@@ -203,6 +212,15 @@ namespace EasySave_V3.Properties {
         public static string Extensions {
             get {
                 return ResourceManager.GetString("Extensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Full.
+        /// </summary>
+        public static string FullSave {
+            get {
+                return ResourceManager.GetString("FullSave", resourceCulture);
             }
         }
         
@@ -522,7 +540,7 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à  successfully aborted !.
+        ///   Recherche une chaîne localisée semblable à Abort.
         /// </summary>
         public static string SuccessAbort {
             get {

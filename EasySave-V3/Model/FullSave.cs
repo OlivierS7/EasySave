@@ -198,6 +198,8 @@ namespace NSModel
                         stopw.Reset();
                     }
                 }
+                else
+                    break;
             }
         }
     }

@@ -142,6 +142,9 @@
   <data name="DestDir" xml:space="preserve">
     <value>Destination directory</value>
   </data>
+  <data name="DifferentialSave" xml:space="preserve">
+    <value>Differential</value>
+  </data>
   <data name="EasySave1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\EasySave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -165,6 +168,9 @@
   </data>
   <data name="Extensions" xml:space="preserve">
     <value>Extensions to encrypt</value>
+  </data>
+  <data name="FullSave" xml:space="preserve">
+    <value>Full</value>
   </data>
   <data name="InvalidDest" xml:space="preserve">
     <value>Invalid destination directory path format</value>
@@ -270,6 +276,9 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>Successfully created the save template</value>
+  </data>
+  <data name="SuccessAbort" xml:space="preserve">
+    <value>Abort</value>
   </data>
   <data name="SuccessDel" xml:space="preserve">
     <value>Successfully removed the save template</value>

@@ -27,8 +27,11 @@ namespace NSView
         /* Execute the selected save */
         private void button1_Click(object sender, EventArgs e)
         { 
-            if(listBox1.SelectedIndex + 1 > 0) 
-                GraphicalView.controller.ExecuteOneSave(listBox1.SelectedIndex + 1);
+            if(listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
+            {
+                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+                GraphicalView.controller.ExecuteOneSave(index);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -60,15 +63,26 @@ namespace NSView
         /* Resresh the list */
         public void ChangelistBox()
         {
-            listBox1.Items.Clear();
+            listView1.Items.Clear();
             int index = 1;
             if (templates != null)
             {
 
                 for (int i = 1; i <= templates.Count; i += 4)
                 {
-                    listBox1.Items.Add("ID : " + index + " | Name : " + templates[i - 1] + " | Source Directory : " + templates[i] + " | Destination Directory : " + templates[i + 1] + " | Backup Type : " + templates[i + 2]);
+                    ListViewItem item = new ListViewItem();
+                    item.SubItems[0].Text = index.ToString();
+                    item.SubItems.Add(templates[i - 1]);
+                    item.SubItems.Add(templates[i]);
+                    item.SubItems.Add(templates[i + 1]);
+                    if(templates[i + 2].ToString() == "1")
+                        item.SubItems.Add(Resources.FullSave);
+                    else
+                        item.SubItems.Add(Resources.DifferentialSave);
+                    item.SubItems.Add("Not running");
+                    item.SubItems.Add("0%");
                     index++;
+                    listView1.Items.Add(item);
                 }
             }
         }
@@ -82,6 +96,15 @@ namespace NSView
             button2.Text = Resources.ExecAll;
             button3.Text = Resources.Yes;
             button4.Text = Resources.No;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
+            {
+                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+                GraphicalView.controller.StopThread(index);
+            }
         }
     }
 }

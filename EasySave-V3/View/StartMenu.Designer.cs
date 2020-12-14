@@ -42,7 +42,6 @@ namespace NSView
             this.Exit = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // manageTemplate1
@@ -175,16 +174,6 @@ namespace NSView
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(1233, 13);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // StartMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 17F);
@@ -192,7 +181,6 @@ namespace NSView
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(112)))), ((int)(((byte)(193)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1524, 893);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.Manage);
             this.Controls.Add(this.Execute);
@@ -227,7 +215,6 @@ namespace NSView
         private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
     }
 }
 
