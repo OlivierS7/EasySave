@@ -278,7 +278,7 @@
     <value>Successfully created the save template</value>
   </data>
   <data name="SuccessAbort" xml:space="preserve">
-    <value>Abort</value>
+    <value> successfully aborted !</value>
   </data>
   <data name="SuccessDel" xml:space="preserve">
     <value>Successfully removed the save template</value>

@@ -84,7 +84,7 @@ namespace NSModel
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTimeName);
             };
             Model.Barrier.SignalAndWait();
-
+            
             if (!abort) 
             { 
                 copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime);
