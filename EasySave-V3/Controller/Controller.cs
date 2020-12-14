@@ -134,7 +134,7 @@ namespace NSController {
 			}
 			catch (Exception err)
 			{
-				PrintMessage(err.ToString(), -1);
+				PrintMessage(err.Message, -1);
 			}
 		}
 
@@ -172,6 +172,11 @@ namespace NSController {
 			}
 			return templatesNames;
 		}
+
+		public void StopThread(int index)
+        {
+			model.StopThread(index);
+        }
 
 		/* Method to open logs */
 		public void OpenLogs()

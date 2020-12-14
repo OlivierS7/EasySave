@@ -122,5 +122,10 @@ namespace NSView
             Execute.Text = Resources.Exec;
             AboutUs.Text = Resources.About;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            GraphicalView.controller.StopThread(2);
+        }
     }
 }
