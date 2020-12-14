@@ -522,6 +522,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à  successfully aborted !.
+        /// </summary>
+        public static string SuccessAbort {
+            get {
+                return ResourceManager.GetString("SuccessAbort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully removed the save template.
         /// </summary>
         public static string SuccessDel {

@@ -106,7 +106,12 @@ namespace NSModel
             {
                 Model.RemoveThread(template);
                 if (abort)
+                {
                     destDirectoryInfo.Delete(true);
+                    MessageBox.Show(template.backupName + Resources.SuccessAbort, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show(template.backupName + Resources.SuccessExecSave, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             abort = false;
         }
