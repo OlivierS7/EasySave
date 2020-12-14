@@ -220,6 +220,9 @@
   <data name="Param" xml:space="preserve">
     <value>Parameters</value>
   </data>
+  <data name="Paused" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
   <data name="Phrase1" xml:space="preserve">
     <value>EasySave is an application to manage your backups.</value>
   </data>
@@ -252,6 +255,9 @@
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
   </data>
   <data name="RunningError" xml:space="preserve">
     <value>A running program blocks the execution of the backup job. Please close it and retry</value>

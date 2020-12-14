@@ -369,7 +369,7 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Paused.
+        ///   Recherche une chaîne localisée semblable à Waiting.
         /// </summary>
         public static string Paused {
             get {
