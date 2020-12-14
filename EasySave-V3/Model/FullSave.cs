@@ -34,14 +34,14 @@ namespace NSModel
             }
             else
                 mre.Reset();
-            UpdateStatus(Resources.Paused);
+            UpdateStatus(Resources.Ready);
             return template.Status;
         }
 
         public void AbortExecution(bool isAbort)
         {
             abort = isAbort;
-            UpdateStatus(Resources.Paused);
+            UpdateStatus(Resources.Ready);
         }
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
@@ -138,7 +138,7 @@ namespace NSModel
                     MessageBox.Show(template.backupName + Resources.SuccessExecSave, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             abort = false;
-            UpdateStatus(Resources.Paused);
+            UpdateStatus(Resources.Ready);
         }
 
         /* Method to create a full backup of a directory */

@@ -253,6 +253,9 @@
   <data name="PriorityExtensions" xml:space="preserve">
     <value>Priority Files Extensions</value>
   </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
