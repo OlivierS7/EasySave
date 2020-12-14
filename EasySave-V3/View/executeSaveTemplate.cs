@@ -1,18 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using NSController;
 using EasySave_V3.Properties;
+using NSModel;
 
 namespace NSView
 {
     public partial class ExecuteSaveTemplate : UserControl
     {
-        public List<string> templates;
+        public List<SaveTemplate> templates;
+        public delegate void StatusDelegate();
+        public StatusDelegate refreshStatusDelegate;
+
+
+        public void RefreshStatus()
+        {
+            GraphicalView.controller.model.refreshStatusDelegate += (name, status) =>
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    for (int i = 0; i < templates.Count; i++)
+                    {
+                        if (templates[i].backupName == name)
+                            listView1.Items[i].SubItems[5].Text = status;
+                    }
+                }));
+            };
+        }
+
         public ExecuteSaveTemplate()
         {
             InitializeComponent();
@@ -20,6 +35,7 @@ namespace NSView
 
         private void executeSaveTemplate_Load(object sender, EventArgs e)
         {
+            RefreshStatus();
             ChangelistBox();
             HideAll();
         }
@@ -64,24 +80,21 @@ namespace NSView
         public void ChangelistBox()
         {
             listView1.Items.Clear();
-            int index = 1;
             if (templates != null)
             {
-
-                for (int i = 1; i <= templates.Count; i += 4)
+                for (int i = 0; i < templates.Count; i++)
                 {
                     ListViewItem item = new ListViewItem();
-                    item.SubItems[0].Text = index.ToString();
-                    item.SubItems.Add(templates[i - 1]);
-                    item.SubItems.Add(templates[i]);
-                    item.SubItems.Add(templates[i + 1]);
-                    if(templates[i + 2].ToString() == "1")
+                    item.SubItems[0].Text = (i+1).ToString();
+                    item.SubItems.Add(templates[i].backupName);
+                    item.SubItems.Add(templates[i].srcDirectory);
+                    item.SubItems.Add(templates[i].destDirectory);
+                    if(templates[i].backupType == 1)
                         item.SubItems.Add(Resources.FullSave);
                     else
                         item.SubItems.Add(Resources.DifferentialSave);
-                    item.SubItems.Add("Not running");
+                    item.SubItems.Add(Resources.Paused);
                     item.SubItems.Add("0%");
-                    index++;
                     listView1.Items.Add(item);
                 }
             }
@@ -104,6 +117,24 @@ namespace NSView
             {
                 int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
                 GraphicalView.controller.StopThread(index);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
+            {
+                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+                GraphicalView.controller.PauseOrResume(index, false);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
+            {
+                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+                GraphicalView.controller.PauseOrResume(index, true);
             }
         }
     }

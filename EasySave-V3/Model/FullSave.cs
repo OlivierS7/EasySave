@@ -21,26 +21,33 @@ namespace NSModel
         private long totalSize;
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
+        private SaveTemplate template;
+        public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
 
         public string PauseOrResume(bool play)
         {
             if (play)
             {
                 mre.Set();
-                return Resources.Running;
+                UpdateStatus(Resources.Running);
+                return template.Status;
             }
             else
                 mre.Reset();
-            return Resources.Paused;
+            UpdateStatus(Resources.Paused);
+            return template.Status;
         }
 
         public void AbortExecution(bool isAbort)
         {
             abort = isAbort;
+            UpdateStatus(Resources.Paused);
         }
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+            this.template = template;
+            UpdateStatus(Resources.Running);
             Model.IncreasePrioritySaves();
             List<string> priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
             List<string> priorityFiles = new List<string>();
@@ -131,6 +138,7 @@ namespace NSModel
                     MessageBox.Show(template.backupName + Resources.SuccessExecSave, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             abort = false;
+            UpdateStatus(Resources.Paused);
         }
 
         /* Method to create a full backup of a directory */
@@ -180,7 +188,6 @@ namespace NSModel
         {
             foreach (string file in files)
             {
-                Debug.WriteLine(abort);
                 if (!abort)
                 {
                     mre.WaitOne();
@@ -220,6 +227,12 @@ namespace NSModel
                 else
                     break;
             }
+        }
+
+        public void UpdateStatus(string status)
+        {
+            template.Status = status;
+            refreshStatusDelegate?.Invoke(status);
         }
     }
 }

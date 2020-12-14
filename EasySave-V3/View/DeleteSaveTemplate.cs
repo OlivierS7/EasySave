@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using NSController;
 using EasySave_V3.Properties;
+using NSModel;
 
 namespace NSView
 {
     public partial class DeleteSaveTemplate : UserControl
     {
-        public List<string> templates;
+        public List<SaveTemplate> templates;
         public DeleteSaveTemplate()
         {
             InitializeComponent();

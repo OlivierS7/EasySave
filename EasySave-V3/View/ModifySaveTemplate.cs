@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EasySave_V3.Properties;
+using NSModel;
 
 namespace NSView
 {
     public partial class ModifySaveTemplate : UserControl
     {
-        public List<string> templates;
+        public List<SaveTemplate> templates;
         public ModifySaveTemplate()
         {
             InitializeComponent();

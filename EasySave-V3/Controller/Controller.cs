@@ -44,7 +44,7 @@ namespace NSController {
 			/* Checking if informations matches regex */
 			if (nameMatch.Success && srcDirNameMatch.Success && destDirNameMatch.Success)
             {
-				List<SaveTemplate> templates = this.model.templates;
+				List<SaveTemplate> templates = model.templates;
 				foreach(SaveTemplate template in templates)
                 {
 					if (template.backupName == name)
@@ -58,7 +58,7 @@ namespace NSController {
                 {
 					try
 					{
-						this.model.CreateSaveTemplate(name, srcDir, destDir, type);
+						model.CreateSaveTemplate(name, srcDir, destDir, type);
 						PrintMessage(Resources.Success, 1);
 					}
 					catch (Exception err)
@@ -83,7 +83,7 @@ namespace NSController {
 		public void DeleteSaveTemplate(int templateIndex) {
 			try
 			{
-				this.model.DeleteSaveTemplate(templateIndex);
+				model.DeleteSaveTemplate(templateIndex);
 				PrintMessage(Resources.SuccessDel, 1);
 			}
 			catch (Exception err)
@@ -104,7 +104,7 @@ namespace NSController {
 			{
 				try
 				{
-					this.model.ModifySaveTemplate(templateIndex, name, srcDir, destDir, type);
+					model.ModifySaveTemplate(templateIndex, name, srcDir, destDir, type);
 					PrintMessage(Resources.SuccessModif, 1);
 				}
 				catch (Exception err)
@@ -129,8 +129,9 @@ namespace NSController {
 			try
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
-				this.model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
+				model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
 				PrintMessage(Resources.SuccessExec, 1);
+				//this.View.ChangeStatus
 			}
 			catch (Exception err)
 			{
@@ -143,7 +144,7 @@ namespace NSController {
 			try
 			{
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
-				this.model.ExecuteAllSave(extensionsToEncrypt);
+				model.ExecuteAllSave(extensionsToEncrypt);
 				PrintMessage(Resources.SuccessExecAll, 1);
 			}
 			catch (Exception err)
@@ -153,10 +154,10 @@ namespace NSController {
 		}
 
 		/* Method to get all existing templates */
-		public List<string> GetAllTemplates() {
-			List<SaveTemplate> templates = this.model.templates;
-			List<string> templatesNames = new List<string>();
-			if (this.model.templates.Count == 0)
+		public List<SaveTemplate> GetAllTemplates() {
+			return this.model.templates;
+			/*List<string> templatesNames = new List<string>();
+			if (model.templates.Count == 0)
             {
 				PrintMessage(Resources.NoSave, -1);
             } 
@@ -170,7 +171,7 @@ namespace NSController {
 					templatesNames.Add(template.backupType.ToString());
 				}
 			}
-			return templatesNames;
+			return templatesNames;*/
 		}
 
 		public void StopThread(int index)
@@ -186,13 +187,13 @@ namespace NSController {
 		/* Method to open logs */
 		public void OpenLogs()
         {
-			this.model.OpenLogs();
+			model.OpenLogs();
 		}
 
 		/* Method to print a popup message */
 		public void PrintMessage(string message, int type)
         {
-			this.View.PrintMessage(message, type);
+			View.PrintMessage(message, type);
         }
 
 		/* Method to exit the program */
@@ -204,18 +205,18 @@ namespace NSController {
 		/* Method to get all forbidden processes */
 		public List<string> getForbiddenProcesses()
 		{
-			return this.model.getForbiddenProcesses();
+			return model.getForbiddenProcesses();
 		}
 
 		/* Method to get all extensions to encrypt */
 		public List<string> getExtensionsToEncrypt()
 		{
-			return this.model.getExtensionsToEncrypt();
+			return model.getExtensionsToEncrypt();
 		}
 		/* Method to get all priority files extensions */
 		public List<string> getpriorityFilesExtensions()
 		{
-			return this.model.getPriorityFilesExtensions();
+			return model.getPriorityFilesExtensions();
 		}
 
 		/* Method to get all priority files extensions */
@@ -227,42 +228,42 @@ namespace NSController {
 		/* Method to add a forbidden process */
 		public void addForbiddenProcess(string process)
 		{
-			this.model.addForbiddenProcess(process);
+			model.addForbiddenProcess(process);
 		}
 
 		/* Method to add an extension to encrypt */
 		public void addExtensionToEncrypt(string extension)
 		{
-			this.model.addExtensionToEncrypt(extension);
+			model.addExtensionToEncrypt(extension);
 		}
 
 		/* Method to add a priority file extension */
 		public void addPriorityFilesExtension(string extension)
 		{
-			this.model.addPriorityFilesExtension(extension);
+			model.addPriorityFilesExtension(extension);
 		}
 		/* Method to add the max file size */
 		public void addMaxFileSize(string size)
 		{
-			this.model.addMaxFileSize(size);
+			model.addMaxFileSize(size);
 		}
 
 		/* Method to remove a forbidden process */
 		public void removeForbiddenProcess(int index)
         {
-			this.model.removeForbiddenProcess(index);
+			model.removeForbiddenProcess(index);
         }
 
 		/* Method to remove an extension to encrypt */
 		public void removeExtensionToEncrypt(int index)
 		{
-			this.model.removeExtensionToEncrypt(index);
+			model.removeExtensionToEncrypt(index);
 		}
 
 		/* Method to remove a priority file extension */
 		public void removePriorityFilesExtension(int index)
 		{
-			this.model.removePriorityFilesExtension(index);
+			model.removePriorityFilesExtension(index);
 		}
 	}
 }

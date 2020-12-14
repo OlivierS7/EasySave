@@ -30,22 +30,28 @@ namespace NSModel
         private int runningThreads = 0;
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
+        private SaveTemplate template;
+
+        public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
 
         public string PauseOrResume(bool play)
         {
             if (play)
             {
                 mre.Set();
-                return Resources.Running;
+                template.Status = Resources.Running;
+                return template.Status;
             }
             else
                 mre.Reset();
-            return Resources.Paused;
+            template.Status = Resources.Paused;
+            return template.Status;
         }
 
         public void AbortExecution(bool isAbort)
         {
             abort = isAbort;
+            template.Status = Resources.Paused;
         }
         public SaveTemplate CheckFullSave(SaveTemplate template)
         {
@@ -53,6 +59,8 @@ namespace NSModel
         }
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+            this.template = template;
+            template.Status = Resources.Running;
             Model.IncreasePrioritySaves();
             SaveTemplate fullSave = CheckFullSave(template);
             if (fullSave != null)
@@ -116,6 +124,7 @@ namespace NSModel
             }
             else
                 throw new Exception("You need to execute at least one full save with the same source directory as your differential save");
+            template.Status = Resources.Paused;
         }
         public string crypt(string sourceFile, string destination)
         {
@@ -268,6 +277,11 @@ namespace NSModel
                     }
                 }
             }
+        }
+
+        public void UpdateStatus(string status)
+        {
+            throw new NotImplementedException();
         }
     }
 }

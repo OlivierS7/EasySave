@@ -194,6 +194,7 @@
             this.button6.TabIndex = 10;
             this.button6.Text = "Pause";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -205,6 +206,7 @@
             this.button7.TabIndex = 11;
             this.button7.Text = "Play";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // ExecuteSaveTemplate
             // 

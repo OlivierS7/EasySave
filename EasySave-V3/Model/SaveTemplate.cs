@@ -1,3 +1,4 @@
+using EasySave_V3.Properties;
 using NSModel.Singleton;
 using System;
 using System.IO;
@@ -17,6 +18,10 @@ namespace NSModel
         [DataMember(Name = "type")]
         private int _backupType;
         private SaveStrategy _saveStrategy;
+        private string status = Resources.Paused;
+        public string Status { get => status; set => status = value; }
+        public delegate void TemplateStatusDelegate(string status);
+        public TemplateStatusDelegate refreshStatusDelegate;
 
         public string backupName
         {
@@ -53,7 +58,6 @@ namespace NSModel
         {
             /* Couting files in directory and subdirectories */
             string[] allFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
-            int totalFiles = allFiles.Length;
             long totalSize = 0;
             foreach (string currentFile in allFiles)
             {
@@ -68,6 +72,7 @@ namespace NSModel
                 this.saveStrategy = new FullSave();
             else if (type == 2)
                 this.saveStrategy = new DifferentialSave();
+            this.saveStrategy.refreshStatusDelegate += (Status) => { refreshStatusDelegate?.Invoke(Status); };
         }
     }
 }

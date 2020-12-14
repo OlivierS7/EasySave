@@ -18,6 +18,8 @@ namespace NSModel
 		private delegate void deleg();
 		private List<SaveTemplate> _templates;
 		private static Dictionary<SaveTemplate, Thread> templateThread = new Dictionary<SaveTemplate, Thread>();
+		public delegate void StatusDelegate(string name, string status);
+		public event StatusDelegate refreshStatusDelegate;
 
 		public List<SaveTemplate> templates
 		{
@@ -32,6 +34,10 @@ namespace NSModel
         public Model()
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
+            foreach (SaveTemplate item in templates)
+            {
+				item.refreshStatusDelegate += (status) => { refreshStatusDelegate?.Invoke(item.backupName, status); };
+			}
 		}
 		public string PauseOrResume(int index, bool play)
         {
@@ -81,6 +87,7 @@ namespace NSModel
 				throw new Exception(Resources.SrcInexist);
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
+			template.refreshStatusDelegate += (status) => { refreshStatusDelegate?.Invoke(name, status); };
 			SaveTemplateConfig.GetInstance().Write(template);
 			State.GetInstance().Create(template);
 		}
@@ -126,8 +133,8 @@ namespace NSModel
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			deleg delg = () =>
 			{
-				template.saveStrategy.AbortExecution(false);
 				template.saveStrategy.Execute(template, extensionsToEncrypt);
+				template.saveStrategy.AbortExecution(false);
 			};
 			if (!CheckProcesses())
             {
@@ -157,8 +164,8 @@ namespace NSModel
 			{
 				deleg delg = () =>
 				{
-					template.saveStrategy.AbortExecution(false);
 					template.saveStrategy.Execute(template, extensionsToEncrypt);
+					template.saveStrategy.AbortExecution(false);
 				};
 				if (!CheckProcesses())
 				{
