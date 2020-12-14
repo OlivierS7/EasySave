@@ -138,6 +138,9 @@
   <data name="DestDir" xml:space="preserve">
     <value>목적지 디렉토리</value>
   </data>
+  <data name="Differential save" xml:space="preserve">
+    <value>차등 저장</value>
+  </data>
   <data name="EditParam" xml:space="preserve">
     <value>매개 변수 편집</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="Extensions" xml:space="preserve">
     <value>암호화 할 확장</value>
+  </data>
+  <data name="full" xml:space="preserve">
+    <value>완전한</value>
   </data>
   <data name="InvalidDest" xml:space="preserve">
     <value>잘못된 대상 디렉터리 경로 형식</value>
@@ -263,6 +269,9 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>저장 템플릿을 성공적으로 생성했습니다.</value>
+  </data>
+  <data name="SuccessAbort" xml:space="preserve">
+    <value>차등 저장</value>
   </data>
   <data name="SuccessDel" xml:space="preserve">
     <value>저장 템플릿을 성공적으로 제거했습니다.</value>
