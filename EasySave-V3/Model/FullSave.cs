@@ -21,9 +21,9 @@ namespace NSModel
         private long totalSize;
         private bool abort = false;
 
-        public void AbortExecution()
+        public void AbortExecution(bool isAbort)
         {
-            abort = true;
+            abort = isAbort;
         }
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)

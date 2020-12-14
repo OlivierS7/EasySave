@@ -30,9 +30,9 @@ namespace NSModel
         private int runningThreads = 0;
         private bool abort = false;
 
-        public void AbortExecution()
+        public void AbortExecution(bool isAbort)
         {
-            abort = true;
+            abort = isAbort;
         }
         public SaveTemplate CheckFullSave(SaveTemplate template)
         {

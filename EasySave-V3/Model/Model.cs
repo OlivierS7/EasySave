@@ -122,6 +122,7 @@ namespace NSModel
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			deleg delg = () =>
 			{
+				template.saveStrategy.AbortExecution(false);
 				template.saveStrategy.Execute(template, extensionsToEncrypt);
 			};
 			if (!CheckProcesses())
@@ -152,6 +153,7 @@ namespace NSModel
 			{
 				deleg delg = () =>
 				{
+					template.saveStrategy.AbortExecution(false);
 					template.saveStrategy.Execute(template, extensionsToEncrypt);
 				};
 				if (!CheckProcesses())
@@ -174,7 +176,7 @@ namespace NSModel
 
 		public void StopThread(int index)
         {
-			IntToSaveTemplate(index).saveStrategy.AbortExecution();
+			IntToSaveTemplate(index).saveStrategy.AbortExecution(true);
         }
 
 		/* Method to get the saveTemplate from the user's input */
