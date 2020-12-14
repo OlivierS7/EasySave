@@ -22,12 +22,16 @@ namespace NSModel
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
 
-        public void PauseOrResume()
+        public string PauseOrResume(bool play)
         {
-            if (mre.WaitOne(0))
-                mre.Reset();
-            else
+            if (play)
+            {
                 mre.Set();
+                return Resources.Running;
+            }
+            else
+                mre.Reset();
+            return Resources.Paused;
         }
 
         public void AbortExecution(bool isAbort)

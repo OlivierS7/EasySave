@@ -178,9 +178,9 @@ namespace NSController {
 			model.StopThread(index);
         }
 
-		public void PauseOrResume(int index)
+		public string PauseOrResume(int index, bool play)
         {
-			model.PauseOrResume(index);
+			return model.PauseOrResume(index, play);
         }
 
 		/* Method to open logs */

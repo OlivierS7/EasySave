@@ -33,9 +33,9 @@ namespace NSModel
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
 		}
-		public void PauseOrResume(int index)
+		public string PauseOrResume(int index, bool play)
         {
-			IntToSaveTemplate(index).saveStrategy.PauseOrResume();
+			return IntToSaveTemplate(index).saveStrategy.PauseOrResume(play);
         }
 		public static void RemoveThread(SaveTemplate key)
 		{

@@ -31,12 +31,16 @@ namespace NSModel
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
 
-        public void PauseOrResume()
+        public string PauseOrResume(bool play)
         {
-            if (mre.WaitOne(0))
-                mre.Reset();
-            else
+            if (play)
+            {
                 mre.Set();
+                return Resources.Running;
+            }
+            else
+                mre.Reset();
+            return Resources.Paused;
         }
 
         public void AbortExecution(bool isAbort)
@@ -79,6 +83,7 @@ namespace NSModel
                 Stopwatch totalTime = new Stopwatch();
                 totalTime.Start();
                 Model.Barrier.SignalAndWait();
+                mre.WaitOne();
 
                 if (!abort)
                 { 
@@ -87,6 +92,7 @@ namespace NSModel
                     if (Model.GetPrioritySaves() == 0)
                         Model.SetPriority(false);
                     Model.Barrier.SignalAndWait();
+                    mre.WaitOne();
                 }
 
                 if (!abort)
@@ -94,6 +100,7 @@ namespace NSModel
                     copyPerGroup(normalFiles, template, destDir, srcDir, extensionsToEncrypt, stopw, totalTime);
                     State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                     totalTime.Stop();
+                    mre.WaitOne();
                 }
                 if (runningThreads == 0)
                 {
@@ -232,6 +239,7 @@ namespace NSModel
             {
                 if (!abort)
                 {
+                    mre.WaitOne();
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
                     if (src.Length > Model.getMaxFileSize())

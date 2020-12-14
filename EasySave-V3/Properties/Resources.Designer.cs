@@ -369,6 +369,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Paused.
+        /// </summary>
+        public static string Paused {
+            get {
+                return ResourceManager.GetString("Paused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à EasySave is an application to manage your backups..
         /// </summary>
         public static string Phrase1 {
@@ -468,6 +477,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Running.
+        /// </summary>
+        public static string Running {
+            get {
+                return ResourceManager.GetString("Running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à A running program blocks the execution of the backup job. Please close it and retry.
         /// </summary>
         public static string RunningError {
@@ -540,7 +558,7 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Abort.
+        ///   Recherche une chaîne localisée semblable à  successfully aborted !.
         /// </summary>
         public static string SuccessAbort {
             get {
