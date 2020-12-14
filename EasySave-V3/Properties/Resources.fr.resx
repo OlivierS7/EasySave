@@ -138,6 +138,9 @@
   <data name="DestDir" xml:space="preserve">
     <value>Dossier de destination</value>
   </data>
+  <data name="DifferentialSave" xml:space="preserve">
+    <value>Differentielle</value>
+  </data>
   <data name="EditParam" xml:space="preserve">
     <value>Modifier les paramètres</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="Extensions" xml:space="preserve">
     <value>Extensions à chiffrer</value>
+  </data>
+  <data name="FullSave" xml:space="preserve">
+    <value>Complète</value>
   </data>
   <data name="InvalidDest" xml:space="preserve">
     <value>Dossier de destination invalide</value>
@@ -263,6 +269,9 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>Sauvegarde créée avec succès</value>
+  </data>
+  <data name="SuccessAbort" xml:space="preserve">
+    <value>Arrêtée avec succès !</value>
   </data>
   <data name="SuccessDel" xml:space="preserve">
     <value>Sauvegarde supprimée avec succès</value>
