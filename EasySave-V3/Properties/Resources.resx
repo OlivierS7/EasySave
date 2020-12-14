@@ -280,6 +280,9 @@
   <data name="SuccessExecAll" xml:space="preserve">
     <value>Successfully starting all saves</value>
   </data>
+  <data name="SuccessExecSave" xml:space="preserve">
+    <value> successfully executed !</value>
+  </data>
   <data name="SuccessModif" xml:space="preserve">
     <value>Successfully modified the save template</value>
   </data>

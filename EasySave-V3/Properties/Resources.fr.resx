@@ -273,6 +273,9 @@
   <data name="SuccessExecAll" xml:space="preserve">
     <value>Sauvegardes lancées avec succès</value>
   </data>
+  <data name="SuccessExecSave" xml:space="preserve">
+    <value> a bien été exécutée !</value>
+  </data>
   <data name="SuccessModif" xml:space="preserve">
     <value>Sauvegarde modifiée avec succès</value>
   </data>

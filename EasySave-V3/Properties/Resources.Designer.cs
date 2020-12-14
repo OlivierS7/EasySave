@@ -549,6 +549,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à  successfully executed !.
+        /// </summary>
+        public static string SuccessExecSave {
+            get {
+                return ResourceManager.GetString("SuccessExecSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Successfully modified the save template.
         /// </summary>
         public static string SuccessModif {
