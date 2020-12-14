@@ -44,22 +44,17 @@ namespace NSModel
 			{
 				while (true)
 				{
-					foreach (string strProcess in getForbiddenProcesses())
+					foreach (string strProcess in GetForbiddenProcesses())
 					{
 						if (Process.GetProcessesByName(strProcess).Length > 0)
                         {
 							foreach (SaveTemplate template in templates)
-							{
 								template.saveStrategy.PauseOrResume(false);
-							}
-                            MessageBox.Show("A forbidden process have been launched, all the backups have been paused", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 						else
                         {
 							foreach (SaveTemplate template in templates)
-							{
 								template.saveStrategy.PauseOrResume(true);
-							}
 						}
 					}
 					Thread.Sleep(1000);
@@ -233,7 +228,7 @@ namespace NSModel
 		}
 		public bool CheckProcesses()
 		{
-			foreach(string strProcess in getForbiddenProcesses())
+			foreach(string strProcess in GetForbiddenProcesses())
             {
 				if (Process.GetProcessesByName(strProcess).Length > 0)
 					return true;
@@ -242,7 +237,7 @@ namespace NSModel
 		}
 
 		/* Method to get the forbidden processes from the parameters */
-		public List<string> getForbiddenProcesses()
+		public List<string> GetForbiddenProcesses()
         {
 			return SaveParameter.GetInstance().Parameters1.getForbiddenProcesses();
         }

@@ -205,7 +205,7 @@ namespace NSController {
 		/* Method to get all forbidden processes */
 		public List<string> getForbiddenProcesses()
 		{
-			return model.getForbiddenProcesses();
+			return model.GetForbiddenProcesses();
 		}
 
 		/* Method to get all extensions to encrypt */
