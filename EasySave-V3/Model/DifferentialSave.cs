@@ -29,6 +29,15 @@ namespace NSModel
         private long totalSize;
         private int runningThreads = 0;
         private bool abort = false;
+        private ManualResetEvent mre = new ManualResetEvent(true);
+
+        public void PauseOrResume()
+        {
+            if (mre.WaitOne(0))
+                mre.Reset();
+            else
+                mre.Set();
+        }
 
         public void AbortExecution(bool isAbort)
         {

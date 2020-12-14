@@ -178,6 +178,11 @@ namespace NSController {
 			model.StopThread(index);
         }
 
+		public void PauseOrResume(int index)
+        {
+			model.PauseOrResume(index);
+        }
+
 		/* Method to open logs */
 		public void OpenLogs()
         {

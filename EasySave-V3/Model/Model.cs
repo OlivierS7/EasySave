@@ -33,6 +33,10 @@ namespace NSModel
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
 		}
+		public void PauseOrResume(int index)
+        {
+			IntToSaveTemplate(index).saveStrategy.PauseOrResume();
+        }
 		public static void RemoveThread(SaveTemplate key)
 		{
 			priorityRunning.WaitOne();

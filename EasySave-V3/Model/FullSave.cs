@@ -20,6 +20,15 @@ namespace NSModel
         private int totalFiles;
         private long totalSize;
         private bool abort = false;
+        private ManualResetEvent mre = new ManualResetEvent(true);
+
+        public void PauseOrResume()
+        {
+            if (mre.WaitOne(0))
+                mre.Reset();
+            else
+                mre.Set();
+        }
 
         public void AbortExecution(bool isAbort)
         {
@@ -32,6 +41,7 @@ namespace NSModel
             List<string> priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
             List<string> priorityFiles = new List<string>();
             List<string> normalFiles = new List<string>();
+            abort = false;
             /* Variable for the directory name */
             currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -84,6 +94,7 @@ namespace NSModel
                 destDirectoryInfo = new DirectoryInfo(template.destDirectory + "\\" + dateTimeName);
             };
             Model.Barrier.SignalAndWait();
+            mre.WaitOne();
             
             if (!abort) 
             { 
@@ -92,6 +103,7 @@ namespace NSModel
                 if(Model.GetPrioritySaves() == 0)
                     Model.SetPriority(false);
                 Model.Barrier.SignalAndWait();
+                mre.WaitOne();
             }
 
             if (!abort)
@@ -101,6 +113,7 @@ namespace NSModel
                 FullSaveHistory.GetInstance().Write(template, dateTimeName);
                 State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                 totalTime.Stop();
+                mre.WaitOne();
             }
             if (runningThreads == 0)
             {
@@ -166,6 +179,7 @@ namespace NSModel
                 Debug.WriteLine(abort);
                 if (!abort)
                 {
+                    mre.WaitOne();
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
                     string srcDir = template.srcDirectory;
@@ -178,6 +192,7 @@ namespace NSModel
                             Model.Mutex.WaitOne();
                             if (!abort)
                             {
+                                mre.WaitOne();
                                 Stopwatch largeFileStopw = new Stopwatch();
                                 Copy(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
                                 State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
