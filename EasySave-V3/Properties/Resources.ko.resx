@@ -268,10 +268,13 @@
     <value>저장 템플릿을 성공적으로 제거했습니다.</value>
   </data>
   <data name="SuccessExec" xml:space="preserve">
-    <value>저장을 성공적으로 실행했습니다.</value>
+    <value>저장을 성공적으로 시작했습니다.</value>
   </data>
   <data name="SuccessExecAll" xml:space="preserve">
-    <value>모든 저장을 성공적으로 실행했습니다.</value>
+    <value>모든 저장을 성공적으로 시작했습니다.</value>
+  </data>
+  <data name="SuccessExecSave" xml:space="preserve">
+    <value>성공적으로 실행되었습니다!</value>
   </data>
   <data name="SuccessModif" xml:space="preserve">
     <value>저장 템플릿을 성공적으로 수정했습니다.</value>
