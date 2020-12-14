@@ -5,6 +5,7 @@ using NSModel.Singleton;
 using System.IO;
 using EasySave_V3.Properties;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace NSModel
 {
@@ -16,6 +17,7 @@ namespace NSModel
 		private static bool priority = false;
 		private static int runningPrioritySaves = 0;
 		private delegate void deleg();
+		private delegate void check();
 		private List<SaveTemplate> _templates;
 		private static Dictionary<SaveTemplate, Thread> templateThread = new Dictionary<SaveTemplate, Thread>();
 
@@ -32,6 +34,33 @@ namespace NSModel
         public Model()
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
+			check pauseOrPlayByChecking = () =>
+			{
+				while (true)
+				{
+					foreach (string strProcess in getForbiddenProcesses())
+					{
+						if (Process.GetProcessesByName(strProcess).Length > 0)
+                        {
+							foreach (SaveTemplate template in templates)
+							{
+								template.saveStrategy.PauseOrResume(false);
+							}
+                            MessageBox.Show("A forbidden process have been launched, all the backups have been paused", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+						else
+                        {
+							foreach (SaveTemplate template in templates)
+							{
+								template.saveStrategy.PauseOrResume(true);
+							}
+						}
+					}
+					Thread.Sleep(1000);
+				}
+			};
+			Thread test = new Thread(pauseOrPlayByChecking.Invoke);
+			test.Start();
 		}
 		public string PauseOrResume(int index, bool play)
         {
