@@ -183,6 +183,9 @@
   <data name="Manage" xml:space="preserve">
     <value>저장 템플릿 관리</value>
   </data>
+  <data name="MaxFileSize" xml:space="preserve">
+    <value>최대 파일 크기</value>
+  </data>
   <data name="Modif" xml:space="preserve">
     <value>저장 템플릿 수정</value>
   </data>
@@ -230,6 +233,9 @@
   </data>
   <data name="Phrase9" xml:space="preserve">
     <value>제작 : Olivier SIMONNEAU, Hadrien GOSSELIN, Lloyd GERVOT, Vincent LACLIDE</value>
+  </data>
+  <data name="PriorityExtensions" xml:space="preserve">
+    <value>우선 순위 확장</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>풀다</value>
