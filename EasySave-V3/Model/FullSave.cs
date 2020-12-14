@@ -34,7 +34,7 @@ namespace NSModel
             }
             else
                 mre.Reset();
-            UpdateStatus(Resources.Ready);
+            UpdateStatus(Resources.Paused);
             return template.Status;
         }
 

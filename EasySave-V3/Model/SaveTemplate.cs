@@ -18,7 +18,7 @@ namespace NSModel
         [DataMember(Name = "type")]
         private int _backupType;
         private SaveStrategy _saveStrategy;
-        private string status = Resources.Paused;
+        private string status = Resources.Ready;
         public string Status { get => status; set => status = value; }
         public delegate void TemplateStatusDelegate(string status);
         public TemplateStatusDelegate refreshStatusDelegate;
