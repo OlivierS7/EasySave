@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 using NSModel.Singleton;
 
 namespace NSModel
@@ -128,6 +129,7 @@ namespace NSModel
 
                 State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                 totalTime.Stop();
+                MessageBox.Show(template.backupName + "successfully executed", "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                 throw new Exception("You need to execute at least one full save with the same source directory as your differential save");

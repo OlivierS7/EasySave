@@ -275,10 +275,10 @@
     <value>Successfully removed the save template</value>
   </data>
   <data name="SuccessExec" xml:space="preserve">
-    <value>Successfully executed the save</value>
+    <value>Successfully starting the save</value>
   </data>
   <data name="SuccessExecAll" xml:space="preserve">
-    <value>Successfully executed all saves</value>
+    <value>Successfully starting all saves</value>
   </data>
   <data name="SuccessModif" xml:space="preserve">
     <value>Successfully modified the save template</value>

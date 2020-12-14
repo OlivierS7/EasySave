@@ -531,7 +531,7 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Successfully executed the save.
+        ///   Recherche une chaîne localisée semblable à Successfully starting the save.
         /// </summary>
         public static string SuccessExec {
             get {
@@ -540,7 +540,7 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Successfully executed all saves.
+        ///   Recherche une chaîne localisée semblable à Successfully starting all saves.
         /// </summary>
         public static string SuccessExecAll {
             get {

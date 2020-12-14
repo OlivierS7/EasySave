@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 using NSModel.Singleton;
 
 namespace NSModel
@@ -145,6 +146,7 @@ namespace NSModel
             FullSaveHistory.GetInstance().Write(template, dateTimeName);
             State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
             totalTime.Stop();
+            MessageBox.Show(template.backupName + "successfully executed", "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /* Method to create a full backup of a directory */

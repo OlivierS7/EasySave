@@ -268,10 +268,10 @@
     <value>Sauvegarde supprimée avec succès</value>
   </data>
   <data name="SuccessExec" xml:space="preserve">
-    <value>Sauvegarde exécutée avec succès</value>
+    <value>Sauvegarde lancée avec succès</value>
   </data>
   <data name="SuccessExecAll" xml:space="preserve">
-    <value>Sauvegardes effectuées avec succès</value>
+    <value>Sauvegardes lancées avec succès</value>
   </data>
   <data name="SuccessModif" xml:space="preserve">
     <value>Sauvegarde modifiée avec succès</value>
