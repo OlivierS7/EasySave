@@ -17,6 +17,7 @@ namespace NSModel
 		private static int runningPrioritySaves = 0;
 		private delegate void deleg();
 		private List<SaveTemplate> _templates;
+		private static Dictionary<SaveTemplate, Thread> templateThread = new Dictionary<SaveTemplate, Thread>();
 
 		public List<SaveTemplate> templates
 		{
@@ -31,6 +32,12 @@ namespace NSModel
         public Model()
 		{
 			this.templates = SaveTemplateConfig.GetInstance().GetTemplates();
+		}
+		public static void RemoveThread(SaveTemplate key)
+		{
+			priorityRunning.WaitOne();
+			templateThread.Remove(key);
+			priorityRunning.ReleaseMutex();
 		}
 		public static void SetPriority(bool priority)
         {
@@ -110,16 +117,24 @@ namespace NSModel
 		public void ExecuteOneSave(int templateIndex, List<string> extensionsToEncrypt)
 		{
 			Barrier = new Barrier(participantCount: 1);
+			if (this.templates.Count < templateIndex)
+				throw new Exception(templateIndex + ": No save template at this index");
 			SaveTemplate template = IntToSaveTemplate(templateIndex);
 			deleg delg = () =>
 			{
 				template.saveStrategy.Execute(template, extensionsToEncrypt);
 			};
-			if (this.templates.Count < templateIndex)
-				throw new Exception(templateIndex + ": No save template at this index");
 			if (!CheckProcesses())
             {
 				Thread save = new Thread(new ThreadStart(delg));
+				try
+				{
+					templateThread.Add(template, save);
+				}
+				catch (ArgumentException)
+				{
+					throw new Exception("Already running");
+				}
 				save.Start();
             }
 			else
@@ -142,6 +157,14 @@ namespace NSModel
 				if (!CheckProcesses())
 				{
 					Thread save = new Thread(new ThreadStart(delg));
+					try
+					{
+						templateThread.Add(template, save);
+					}
+					catch (ArgumentException)
+					{
+						throw new Exception("Already running");
+					}
 					save.Start();
 				}
 				else
@@ -149,6 +172,10 @@ namespace NSModel
 			}
 		}
 
+		public void StopThread(int index)
+        {
+			IntToSaveTemplate(index).saveStrategy.AbortExecution();
+        }
 
 		/* Method to get the saveTemplate from the user's input */
 		private SaveTemplate IntToSaveTemplate(int templateIndex)
