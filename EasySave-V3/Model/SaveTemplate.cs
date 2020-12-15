@@ -1,6 +1,7 @@
 using EasySave_V3.Properties;
 using NSModel.Singleton;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 
@@ -18,10 +19,10 @@ namespace NSModel
         [DataMember(Name = "type")]
         private int _backupType;
         private SaveStrategy _saveStrategy;
-        private string status = Resources.Ready;
-        public string Status { get => status; set => status = value; }
         public delegate void TemplateStatusDelegate(string status);
         public TemplateStatusDelegate refreshStatusDelegate;
+        public delegate void TemplateProgressDelegate(float progression);
+        public event TemplateProgressDelegate refreshProgressDelegate;
 
         public string backupName
         {
@@ -73,6 +74,7 @@ namespace NSModel
             else if (type == 2)
                 this.saveStrategy = new DifferentialSave();
             this.saveStrategy.refreshStatusDelegate += (Status) => { refreshStatusDelegate?.Invoke(Status); };
+            this.saveStrategy.refreshProgressDelegate += (progression) => { refreshProgressDelegate?.Invoke(progression); };
         }
     }
 }

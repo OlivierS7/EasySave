@@ -28,6 +28,21 @@ namespace NSView
             };
         }
 
+        public void RefreshProgress()
+        {
+            GraphicalView.controller.model.refreshProgressDelegate += (name, progression) =>
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    for (int i = 0; i < templates.Count; i++)
+                    {
+                        if (templates[i].backupName == name)
+                            listView1.Items[i].SubItems[6].Text = progression.ToString() + "%";
+                    }
+                }));
+            };
+        }
+
         public ExecuteSaveTemplate()
         {
             InitializeComponent();
@@ -36,6 +51,7 @@ namespace NSView
         private void executeSaveTemplate_Load(object sender, EventArgs e)
         {
             RefreshStatus();
+            RefreshProgress();
             ChangelistBox();
             HideAll();
         }

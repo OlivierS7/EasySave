@@ -21,9 +21,11 @@ namespace NSModel
         private long totalSize;
         private float progression;
         private bool abort = false;
+        private string status = Resources.Ready;
         private ManualResetEvent mre = new ManualResetEvent(true);
         private SaveTemplate template;
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
+        public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
         private Mutex updateProgress = new Mutex();
 
         public string PauseOrResume(bool play)
@@ -32,12 +34,14 @@ namespace NSModel
             {
                 mre.Set();
                 UpdateStatus(Resources.Running);
-                return template.Status;
+                return status;
             }
             else
+            {
                 mre.Reset();
-            UpdateStatus(Resources.Paused);
-            return template.Status;
+                UpdateStatus(Resources.Paused);
+            }
+            return status;
         }
 
         public void AbortExecution(bool isAbort)
@@ -133,6 +137,7 @@ namespace NSModel
                 Model.RemoveThread(template);
                 if (abort)
                 {
+                    progression = 0;
                     destDirectoryInfo.Delete(true);
                     MessageBox.Show(template.backupName + Resources.SuccessAbort, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -235,17 +240,23 @@ namespace NSModel
 
         public void UpdateStatus(string status)
         {
-            template.Status = status;
+            this.status = status;
             refreshStatusDelegate?.Invoke(status);
         }
         public void UpdateProgress(long sizeLeft, long totalSize)
         {
             updateProgress.WaitOne();
             if (totalSize == 0)
-                this.progression = 0;
+                progression = 0;
             else
-                this.progression = 100 - ((sizeLeft * 100) / totalSize);
+                progression = 100 - ((sizeLeft * 100) / totalSize);
             updateProgress.ReleaseMutex();
+            refreshProgressDelegate?.Invoke(progression);
+        }
+
+        public string getStatus()
+        {
+            return this.status;
         }
     }
 }

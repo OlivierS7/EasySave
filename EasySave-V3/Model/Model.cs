@@ -22,6 +22,8 @@ namespace NSModel
 		private static Dictionary<SaveTemplate, Thread> templateThread = new Dictionary<SaveTemplate, Thread>();
 		public delegate void StatusDelegate(string name, string status);
 		public event StatusDelegate refreshStatusDelegate;
+		public delegate void ProgressDelegate(string name, float progression);
+		public event ProgressDelegate refreshProgressDelegate;
 
 		public List<SaveTemplate> templates
 		{
@@ -39,7 +41,13 @@ namespace NSModel
             foreach (SaveTemplate item in templates)
             {
 				item.refreshStatusDelegate += (status) => { refreshStatusDelegate?.Invoke(item.backupName, status); };
+				item.refreshProgressDelegate += (progression) => { refreshProgressDelegate?.Invoke(item.backupName, progression); };
 			}
+			CheckBusinessProcesses();
+		}
+
+        private void CheckBusinessProcesses()
+        {
 			check pauseOrPlayByChecking = () =>
 			{
 				while (true)
@@ -47,14 +55,10 @@ namespace NSModel
 					foreach (string strProcess in GetForbiddenProcesses())
 					{
 						if (Process.GetProcessesByName(strProcess).Length > 0)
-                        {
+						{
 							foreach (SaveTemplate template in templates)
-								template.saveStrategy.PauseOrResume(false);
-						}
-						else
-                        {
-							foreach (SaveTemplate template in templates)
-								template.saveStrategy.PauseOrResume(true);
+								if(template.saveStrategy.getStatus() == Resources.Running)
+									template.saveStrategy.PauseOrResume(false);
 						}
 					}
 					Thread.Sleep(1000);
@@ -63,7 +67,8 @@ namespace NSModel
 			Thread permanentCheck = new Thread(pauseOrPlayByChecking.Invoke);
 			permanentCheck.Start();
 		}
-		public string PauseOrResume(int index, bool play)
+
+        public string PauseOrResume(int index, bool play)
         {
 			return IntToSaveTemplate(index).saveStrategy.PauseOrResume(play);
         }
@@ -112,6 +117,7 @@ namespace NSModel
 			SaveTemplate template = new SaveTemplate(name, srcDir, destDir, type);
 			this.templates.Add(template);
 			template.refreshStatusDelegate += (status) => { refreshStatusDelegate?.Invoke(name, status); };
+			template.refreshProgressDelegate += (progression) => { refreshProgressDelegate?.Invoke(name, progression); };
 			SaveTemplateConfig.GetInstance().Write(template);
 			State.GetInstance().Create(template);
 		}

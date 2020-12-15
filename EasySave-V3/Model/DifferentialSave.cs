@@ -29,12 +29,14 @@ namespace NSModel
         private long totalSize;
         private int runningThreads = 0;
         private bool abort = false;
+        private string status;
         private ManualResetEvent mre = new ManualResetEvent(true);
         private SaveTemplate template;
         private float progression;
         private Mutex updateProgress = new Mutex();
 
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
+        public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
 
         public string PauseOrResume(bool play)
         {
@@ -42,12 +44,12 @@ namespace NSModel
             {
                 mre.Set();
                 UpdateStatus(Resources.Running);
-                return template.Status;
+                return status;
             }
             else
                 mre.Reset();
             UpdateStatus(Resources.Paused);
-            return template.Status;
+            return status;
         }
 
         public void AbortExecution(bool isAbort)
@@ -117,6 +119,7 @@ namespace NSModel
                     Model.RemoveThread(template);
                     if (abort)
                     {
+                        progression = 0;
                         destDirectoryInfo.Delete(true);
                         MessageBox.Show(template.backupName + Resources.SuccessAbort, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -290,12 +293,17 @@ namespace NSModel
             else
                 this.progression = 100 - ((sizeLeft * 100) / totalSize);
             updateProgress.ReleaseMutex();
+            refreshProgressDelegate?.Invoke(progression);
         }
 
         public void UpdateStatus(string status)
         {
-            template.Status = status;
+            this.status = status;
             refreshStatusDelegate?.Invoke(status);
+        }
+        public string getStatus()
+        {
+            return this.status;
         }
     }
 }
