@@ -31,6 +31,8 @@ namespace NSModel
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
         private SaveTemplate template;
+        private float progression;
+        private Mutex updateProgress = new Mutex();
 
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
 
@@ -259,6 +261,7 @@ namespace NSModel
                             Model.Mutex.WaitOne();
                             Stopwatch largeFileStopw = new Stopwatch();
                             Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                            UpdateProgress(sizeLeft, totalSize);
                             State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                             Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                             largeFileStopw.Reset();
@@ -271,12 +274,22 @@ namespace NSModel
                     {
                         Model.SetPriority(true);
                         Copy(template.srcDirectory, destDir, stopw, src, extensionsToEncrypt);
+                        UpdateProgress(sizeLeft, totalSize);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                         stopw.Reset();
                     }
                 }
             }
+        }
+        public void UpdateProgress(long sizeLeft, long totalSize)
+        {
+            updateProgress.WaitOne();
+            if (totalSize == 0)
+                this.progression = 0;
+            else
+                this.progression = 100 - ((sizeLeft * 100) / totalSize);
+            updateProgress.ReleaseMutex();
         }
 
         public void UpdateStatus(string status)

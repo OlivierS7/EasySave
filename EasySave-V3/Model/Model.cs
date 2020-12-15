@@ -60,8 +60,8 @@ namespace NSModel
 					Thread.Sleep(1000);
 				}
 			};
-			Thread test = new Thread(pauseOrPlayByChecking.Invoke);
-			test.Start();
+			Thread permanentCheck = new Thread(pauseOrPlayByChecking.Invoke);
+			permanentCheck.Start();
 		}
 		public string PauseOrResume(int index, bool play)
         {
