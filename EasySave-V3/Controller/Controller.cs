@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using EasySave_V3.Properties;
+using System.Net.Sockets;
+using System.Net;
+using System.Text;
+using System.Diagnostics;
 
 namespace NSController {
 	public class Controller {
@@ -15,6 +19,12 @@ namespace NSController {
 		private string error = "";
 		private Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
 		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
+
+		/* Variables for Socket */
+		private static int maxUsers = 10;
+		private static byte[] data = new byte[1024];
+		private static List<Socket> clients = new List<Socket>();
+		private static Socket server;
 
 		public IView View
 		{
@@ -32,7 +42,9 @@ namespace NSController {
 		public Controller() {
 			this.model = new Model();
 			this.View = new GraphicalView(this);
-			this.View.Start(); ;
+			server = Connection("127.0.0.1", 1234);
+			server.BeginAccept(Accept, server);
+			this.View.Start();
 		}
 		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
@@ -265,5 +277,93 @@ namespace NSController {
 		{
 			model.removePriorityFilesExtension(index);
 		}
+
+		/****************************/
+		/******* Socket part *******/
+		/***************************/
+
+		private static Socket Connection(string ip, int port)
+		{
+			IPEndPoint adressPort = new IPEndPoint(IPAddress.Parse(ip), port);
+			Socket serveurSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+			serveurSocket.Bind(adressPort);
+			serveurSocket.Listen(maxUsers);
+			Debug.WriteLine("Server created");
+			return serveurSocket;
+		}
+
+		private static void Accept(IAsyncResult ar)
+		{
+			Socket client = ((Socket)ar.AsyncState).EndAccept(ar);
+			clients.Add(client);
+			StateObject state = new StateObject();
+			state.workSocket = client;
+			client = AccepterConnection(client);
+			client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, EcouterReseau, state);
+			server.BeginAccept(Accept, server);
+		}
+
+		private static Socket AccepterConnection(Socket client)
+		{
+			Debug.WriteLine("Client connected");
+			return client;
+		}
+
+		private static void EcouterReseau(IAsyncResult ar)
+		{
+			StateObject state = (StateObject)ar.AsyncState;
+			Socket client = state.workSocket;
+			data = new byte[1024];
+			int bytesRec = client.EndReceive(ar);
+			if (bytesRec > 0)
+			{
+				state.sb.Clear();
+				state.sb.Append(Encoding.UTF8.GetString(state.buffer, 0, bytesRec));
+				string msg = state.sb.ToString();
+				Console.WriteLine("{0}", msg);
+				Send(client, msg);
+				client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, EcouterReseau, state);
+			}
+		}
+
+		private static void Send(Socket sender, string msg)
+		{
+			byte[] byteData = Encoding.UTF8.GetBytes(msg);
+			foreach (Socket client in clients)
+			{
+				if (client != sender)
+				{
+					client.BeginSend(byteData, 0, byteData.Length, 0, Broadcast, client);
+				}
+			}
+		}
+
+		private static void Broadcast(IAsyncResult ar)
+		{
+			try
+			{
+				Socket client = (Socket)ar.AsyncState;
+				int bytesSent = client.EndSend(ar);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.ToString());
+			}
+		}
+
+		private static void Deconnecter(Socket client)
+		{
+			Console.WriteLine("Client {0} disconnected from the server", client.RemoteEndPoint.ToString());
+			clients.Remove(client);
+			client.Close();
+		}
+	}
+
+	public class StateObject
+	{
+		public const int BufferSize = 1024;
+		public byte[] buffer = new byte[BufferSize];
+		public StringBuilder sb = new StringBuilder();
+		public Socket workSocket = null;
 	}
 }
