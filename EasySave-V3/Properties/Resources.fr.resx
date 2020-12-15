@@ -213,6 +213,9 @@
   <data name="Param" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="Paused" xml:space="preserve">
+    <value>En pause</value>
+  </data>
   <data name="Phrase1" xml:space="preserve">
     <value>EasySave est une application pour gérer vos sauvegardes.</value>
   </data>

@@ -213,6 +213,9 @@
   <data name="Param" xml:space="preserve">
     <value>매개 변수</value>
   </data>
+  <data name="Paused" xml:space="preserve">
+    <value>기다리는</value>
+  </data>
   <data name="Phrase1" xml:space="preserve">
     <value>EasySave는 백업을 관리하는 응용 프로그램입니다.</value>
   </data>
