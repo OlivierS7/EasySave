@@ -19,10 +19,12 @@ namespace NSModel
         private DateTime currentDateTime;
         private int totalFiles;
         private long totalSize;
+        private float progression;
         private bool abort = false;
         private ManualResetEvent mre = new ManualResetEvent(true);
         private SaveTemplate template;
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
+        private Mutex updateProgress = new Mutex();
 
         public string PauseOrResume(bool play)
         {
@@ -206,6 +208,7 @@ namespace NSModel
                                 mre.WaitOne();
                                 Stopwatch largeFileStopw = new Stopwatch();
                                 Copy(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
+                                UpdateProgress(sizeLeft, totalSize);
                                 State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                                 Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
                                 largeFileStopw.Reset();
@@ -219,6 +222,7 @@ namespace NSModel
                     {
                         Model.SetPriority(true);
                         Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
+                        UpdateProgress(sizeLeft, totalSize);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                         stopw.Reset();
@@ -233,6 +237,15 @@ namespace NSModel
         {
             template.Status = status;
             refreshStatusDelegate?.Invoke(status);
+        }
+        public void UpdateProgress(long sizeLeft, long totalSize)
+        {
+            updateProgress.WaitOne();
+            if (totalSize == 0)
+                this.progression = 0;
+            else
+                this.progression = 100 - ((sizeLeft * 100) / totalSize);
+            updateProgress.ReleaseMutex();
         }
     }
 }
