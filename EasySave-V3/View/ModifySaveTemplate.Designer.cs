@@ -29,7 +29,6 @@ namespace NSView
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,18 +42,13 @@ namespace NSView
             this.Confirm = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.Id = new System.Windows.Forms.ColumnHeader();
+            this.backupname = new System.Windows.Forms.ColumnHeader();
+            this.srcDir = new System.Windows.Forms.ColumnHeader();
+            this.destDir = new System.Windows.Forms.ColumnHeader();
+            this.type = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
-            // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("Impact", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(59, 71);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(901, 327);
-            this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -181,11 +175,58 @@ namespace NSView
             this.comboBox1.Size = new System.Drawing.Size(407, 27);
             this.comboBox1.TabIndex = 13;
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Id,
+            this.backupname,
+            this.srcDir,
+            this.destDir,
+            this.type});
+            this.listView1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listView1.Font = new System.Drawing.Font("Impact", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(74, 71);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(924, 328);
+            this.listView1.TabIndex = 14;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
+            this.Id.Width = 40;
+            // 
+            // backupname
+            // 
+            this.backupname.Text = "Backup Name";
+            this.backupname.Width = 150;
+            // 
+            // srcDir
+            // 
+            this.srcDir.Text = "Source Directory";
+            this.srcDir.Width = 400;
+            // 
+            // destDir
+            // 
+            this.destDir.Text = "Destination Directory";
+            this.destDir.Width = 400;
+            // 
+            // type
+            // 
+            this.type.Text = "Backup Type";
+            this.type.Width = 100;
+            // 
             // ModifySaveTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Confirm);
             this.Controls.Add(this.button2);
@@ -198,7 +239,6 @@ namespace NSView
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBox1);
             this.Name = "ModifySaveTemplate";
             this.Size = new System.Drawing.Size(1036, 657);
             this.ResumeLayout(false);
@@ -207,8 +247,6 @@ namespace NSView
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -222,5 +260,11 @@ namespace NSView
         private System.Windows.Forms.Button Confirm;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.ColumnHeader backupname;
+        private System.Windows.Forms.ColumnHeader srcDir;
+        private System.Windows.Forms.ColumnHeader destDir;
+        private System.Windows.Forms.ColumnHeader type;
     }
 }

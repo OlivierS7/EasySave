@@ -31,7 +31,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.Id = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.srcDir = new System.Windows.Forms.ColumnHeader();
+            this.destDir = new System.Windows.Forms.ColumnHeader();
+            this.type = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +54,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.AliceBlue;
             this.button1.Font = new System.Drawing.Font("Impact", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(467, 315);
+            this.button1.Location = new System.Drawing.Point(479, 395);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 37);
             this.button1.TabIndex = 2;
@@ -65,27 +70,62 @@
             this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 4;
             // 
-            // listBox1
+            // listView1
             // 
-            this.listBox1.Font = new System.Drawing.Font("Impact", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(54, 67);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(962, 232);
-            this.listBox1.TabIndex = 6;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Id,
+            this.columnHeader2,
+            this.srcDir,
+            this.destDir,
+            this.type});
+            this.listView1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listView1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(105, 80);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(836, 294);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
+            this.Id.Width = 40;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Backup Name";
+            this.columnHeader2.Width = 150;
+            // 
+            // srcDir
+            // 
+            this.srcDir.Text = "Source Directory";
+            this.srcDir.Width = 400;
+            // 
+            // destDir
+            // 
+            this.destDir.Text = "Destination Directory";
+            this.destDir.Width = 400;
+            // 
+            // type
+            // 
+            this.type.Text = "Backup Type";
+            this.type.Width = 100;
             // 
             // DeleteSaveTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "DeleteSaveTemplate";
-            this.Size = new System.Drawing.Size(1176, 407);
+            this.Size = new System.Drawing.Size(1176, 549);
             this.Load += new System.EventHandler(this.DelSaveTemplate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,6 +136,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader srcDir;
+        private System.Windows.Forms.ColumnHeader destDir;
+        private System.Windows.Forms.ColumnHeader type;
     }
 }

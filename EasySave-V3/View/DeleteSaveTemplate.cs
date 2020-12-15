@@ -17,9 +17,10 @@ namespace NSView
         /* Delete a save template from provided informations */
         private void button1_Click(object sender, EventArgs e)
         {
-            if(listBox1.SelectedIndex + 1 > 0)
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            if (listView1.SelectedItems.Count > 0 && index > 0)
             {
-                GraphicalView.controller.DeleteSaveTemplate(listBox1.SelectedIndex + 1);
+                GraphicalView.controller.DeleteSaveTemplate(index);
                 this.templates = GraphicalView.controller.GetAllTemplates();
                 ChangelistBox1();
             } 
@@ -34,15 +35,22 @@ namespace NSView
         /* Refresh the list */
         public void ChangelistBox1()
         {
-            listBox1.Items.Clear();
-            int index = 1;
-            if(templates != null)
+            listView1.Items.Clear();
+            if (templates != null)
             {
-                for (int i = 1; i <= templates.Count; i += 4)
+                for (int i = 0; i < templates.Count; i++)
                 {
-                    listBox1.Items.Add("ID : " + index + " | " + Resources.Name + " : " + templates[i - 1] + " | " + Resources.SrcDir + " : " + templates[i] + " | " + Resources.DestDir + " : " + templates[i + 1] + " | " + Resources.SaveType + " : " + templates[i + 2]);
-                    index++;
-                };
+                    ListViewItem item = new ListViewItem();
+                    item.SubItems[0].Text = (i + 1).ToString();
+                    item.SubItems.Add(templates[i].backupName);
+                    item.SubItems.Add(templates[i].srcDirectory);
+                    item.SubItems.Add(templates[i].destDirectory);
+                    if (templates[i].backupType == 1)
+                        item.SubItems.Add(Resources.FullSave);
+                    else
+                        item.SubItems.Add(Resources.DifferentialSave);
+                    listView1.Items.Add(item);
+                }
             }
         }
 

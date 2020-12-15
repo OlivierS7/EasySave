@@ -42,12 +42,10 @@ namespace NSView
 
         /* Execute the selected save */
         private void button1_Click(object sender, EventArgs e)
-        { 
-            if(listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
-            {
-                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+        {
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            if (listView1.SelectedItems.Count > 0 && index > 0)
                 GraphicalView.controller.ExecuteOneSave(index);
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -113,29 +111,23 @@ namespace NSView
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
-            {
-                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            if (listView1.SelectedItems.Count > 0 && index > 0)
                 GraphicalView.controller.StopThread(index);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
-            {
-                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            if (listView1.SelectedItems.Count > 0 && index > 0)
                 GraphicalView.controller.PauseOrResume(index, false);
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0 && listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1 > 0)
-            {
-                int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            if (listView1.SelectedItems.Count > 0 && index > 0)
                 GraphicalView.controller.PauseOrResume(index, true);
-            }
         }
     }
 }
