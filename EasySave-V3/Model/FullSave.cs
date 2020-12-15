@@ -15,18 +15,19 @@ namespace NSModel
         private long sizeLeft;
         private int filesLeft;
         private string cryptDuration;
-        private int runningThreads = 0;
         private DateTime currentDateTime;
         private int totalFiles;
         private long totalSize;
         private float progression;
         private bool abort = false;
-        private string status = Resources.Ready;
+        private string status;
         private ManualResetEvent mre = new ManualResetEvent(true);
         private SaveTemplate template;
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
         public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
         private Mutex updateProgress = new Mutex();
+        private int threadsRunning;
+        private bool aborted;
 
         public string PauseOrResume(bool play)
         {
@@ -47,14 +48,14 @@ namespace NSModel
         public void AbortExecution(bool isAbort)
         {
             abort = isAbort;
-            UpdateStatus(Resources.Ready);
         }
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
+            aborted = false;
+            threadsRunning = 0;
             this.template = template;
             UpdateStatus(Resources.Running);
-            Model.IncreasePrioritySaves();
             List<string> priorityExtensions = SaveParameter.GetInstance().Parameters1.getPriorityFilesExtensions();
             List<string> priorityFiles = new List<string>();
             List<string> normalFiles = new List<string>();
@@ -114,44 +115,32 @@ namespace NSModel
             mre.WaitOne();
             
             if (!abort) 
-            { 
-                copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime);
-                Model.DecreasePrioritySaves();
-                if(Model.GetPrioritySaves() == 0)
-                    Model.SetPriority(false);
+            {
+                Model.SetPriority(true);
+                copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, true);
                 Model.Barrier.SignalAndWait();
                 mre.WaitOne();
             }
 
             if (!abort)
             {
-                copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime);
+                while (Model.GetPriority())
+                {
+                    Thread.Sleep(1000);
+                }
+                copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, false);
                 /* Call the Singleton to write in FullSaveHistory.json */
                 FullSaveHistory.GetInstance().Write(template, dateTimeName);
                 State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                 totalTime.Stop();
-                mre.WaitOne();
             }
-            if (runningThreads == 0)
-            {
-                Model.RemoveThread(template);
-                if (abort)
-                {
-                    progression = 0;
-                    destDirectoryInfo.Delete(true);
-                    MessageBox.Show(template.backupName + Resources.SuccessAbort, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                    MessageBox.Show(template.backupName + Resources.SuccessExecSave, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            CheckEnd(destDirectoryInfo);
             abort = false;
-            UpdateStatus(Resources.Ready);
         }
 
         /* Method to create a full backup of a directory */
         public void Copy(string srcDir, string destDir, Stopwatch stopw, FileInfo src, List<string> extensionsToEncrypt)
         {
-            runningThreads++;
             /* Creating files and folders if they doesn't exists */
             new FileInfo(src.FullName.Replace(srcDir, destDir)).Directory.Create();
             stopw.Start();
@@ -170,7 +159,6 @@ namespace NSModel
             filesLeft--;
             sizeLeft = sizeLeft - src.Length;
             stopw.Stop();
-            runningThreads--;
         }
         public string crypt(string sourceFile, string destination)
         {
@@ -191,7 +179,7 @@ namespace NSModel
             /* Returning exit code of process which is the crypt duration */
             return currentProcess.ExitCode.ToString();
         }
-        public void copyPerGroup(List<string> files, SaveTemplate template, DirectoryInfo destDirectoryInfo, List<string> extensionsToEncrypt, Stopwatch stopw, Stopwatch totalTime)
+        public void copyPerGroup(List<string> files, SaveTemplate template, DirectoryInfo destDirectoryInfo, List<string> extensionsToEncrypt, Stopwatch stopw, Stopwatch totalTime, bool priority)
         {
             foreach (string file in files)
             {
@@ -206,7 +194,9 @@ namespace NSModel
                     {
                         deleg delg = () =>
                         {
-                            Model.SetPriority(true);
+                            if (priority)
+                                Model.IncreasePrioritySaves();
+                            threadsRunning++;
                             Model.Mutex.WaitOne();
                             if (!abort)
                             {
@@ -218,6 +208,10 @@ namespace NSModel
                                 Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
                                 largeFileStopw.Reset();
                             }
+                            if (priority)
+                                Model.DecreasePrioritySaves();
+                            threadsRunning--;
+                            CheckEnd(destDirectoryInfo);
                             Model.Mutex.ReleaseMutex();
                         };
                         Thread largeFile = new Thread(new ThreadStart(delg));
@@ -225,12 +219,16 @@ namespace NSModel
                     }
                     else
                     {
-                        Model.SetPriority(true);
+                        if (priority)
+                            Model.IncreasePrioritySaves();
                         Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
                         UpdateProgress(sizeLeft, totalSize);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                         stopw.Reset();
+                        if (priority)
+                            Model.DecreasePrioritySaves();
+                        CheckEnd(destDirectoryInfo);
                     }
                 }
                 else
@@ -257,6 +255,24 @@ namespace NSModel
         public string getStatus()
         {
             return this.status;
+        }
+        private void CheckEnd(DirectoryInfo destDirectoryInfo)
+        {
+            if (Model.GetPrioritySaves() == 0)
+                Model.SetPriority(false);
+            if (abort && threadsRunning == 0 && !aborted)
+            {
+                Model.RemoveThread(template);
+                UpdateProgress(0, 0);
+                destDirectoryInfo.Delete(true);
+                UpdateStatus(Resources.Aborted);
+                aborted = true;
+            }
+            else if (filesLeft == 0)
+            {
+                Model.RemoveThread(template);
+                UpdateStatus(Resources.Finished);
+            }
         }
     }
 }

@@ -107,7 +107,7 @@ namespace NSView
                         item.SubItems.Add(Resources.FullSave);
                     else
                         item.SubItems.Add(Resources.DifferentialSave);
-                    item.SubItems.Add(Resources.Paused);
+                    item.SubItems.Add(Resources.Ready);
                     item.SubItems.Add("0%");
                     listView1.Items.Add(item);
                 }

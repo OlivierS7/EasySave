@@ -38,6 +38,10 @@ namespace NSModel
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
         public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
 
+        public DifferentialSave()
+        {
+            UpdateStatus(Resources.Ready);
+        }
         public string PauseOrResume(bool play)
         {
             if (play)
@@ -119,7 +123,7 @@ namespace NSModel
                     Model.RemoveThread(template);
                     if (abort)
                     {
-                        progression = 0;
+                        UpdateProgress(0, 0);
                         destDirectoryInfo.Delete(true);
                         MessageBox.Show(template.backupName + Resources.SuccessAbort, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

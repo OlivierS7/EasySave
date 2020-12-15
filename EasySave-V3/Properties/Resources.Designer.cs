@@ -61,6 +61,15 @@ namespace EasySave_V3.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Aborted.
+        /// </summary>
+        public static string Aborted {
+            get {
+                return ResourceManager.GetString("Aborted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à About us.
         /// </summary>
         public static string About {
@@ -212,6 +221,15 @@ namespace EasySave_V3.Properties {
         public static string Extensions {
             get {
                 return ResourceManager.GetString("Extensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Finished.
+        /// </summary>
+        public static string Finished {
+            get {
+                return ResourceManager.GetString("Finished", resourceCulture);
             }
         }
         
