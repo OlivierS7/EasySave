@@ -59,7 +59,7 @@ namespace RemoteClient.NSController
             }
             catch (SocketException)
             {
-                throw new Exception("Can't connect to the server please try again..");
+                View.PrintMessage("Can't connect to this server please try again !", -1);
             }
         }
 
@@ -122,8 +122,11 @@ namespace RemoteClient.NSController
 
         public void Disconnect()
         {
-            client.Shutdown(SocketShutdown.Both);
-            client.Close();
+            if(client != null)
+            {
+                client.Shutdown(SocketShutdown.Both);
+                client.Close();
+            }
         }
     }
 }

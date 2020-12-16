@@ -28,7 +28,10 @@ namespace RemoteClient.NSView
 
         public void PrintMessage(string message, int type)
         {
-            
+            if (type == -1)
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (type == 1)
+                MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Connection_Click(object sender, EventArgs e)
@@ -36,9 +39,17 @@ namespace RemoteClient.NSView
             string ip = textBox1.Text;
             int port;
             Int32.TryParse(textBox2.Text, out port);
-            GraphicalView.controller.Connexion(ip, port);
-            JObject myObject = new JObject(new JProperty("title", "getAllTemplates"));
-            GraphicalView.controller.Send(myObject);
+            try
+            {
+                GraphicalView.controller.Connexion(ip, port);
+                JObject myObject = new JObject(new JProperty("title", "getAllTemplates"));
+                GraphicalView.controller.Send(myObject);
+            } catch
+            {
+                PrintMessage("Can't connect to this server please try again !", -1);
+            }
+           
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
