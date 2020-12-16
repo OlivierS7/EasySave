@@ -23,6 +23,10 @@ namespace RemoteClient.NSController
         private IView _View;
         private Socket client;
         public static List<SaveTemplate> templates;
+        public delegate void StatusDelegate(string name, string status);
+        public static event StatusDelegate refreshStatusDelegate;
+        public delegate void ProgressDelegate(string name, float progression);
+        public static event ProgressDelegate refreshProgressDelegate;
 
         public List<SaveTemplate> GetTemplates()
         {
@@ -93,10 +97,23 @@ namespace RemoteClient.NSController
             {
                 string data = Encoding.UTF8.GetString(state.buffer, 0, bytesRec);
                 JObject received = JObject.Parse(data);
+                string name;
+                string status;
+                float progress;
                 switch (received["title"].ToString())
                 {
                     case "getAllTemplates":
                         templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(received["templates"].ToString());
+                        break;
+                    case "refreshProgress":
+                        name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
+                        progress = JsonConvert.DeserializeObject<float>(received["progress"].ToString());
+                        refreshProgressDelegate?.Invoke(name, progress);
+                        break;
+                    case "refreshStatus":
+                        name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
+                        status = JsonConvert.DeserializeObject<string>(received["status"].ToString());
+                        refreshStatusDelegate?.Invoke(name, status);
                         break;
                 }
                 client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);

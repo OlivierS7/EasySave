@@ -9,9 +9,6 @@ namespace NSView
     public partial class ExecuteSaveTemplate : UserControl
     {
         public List<SaveTemplate> templates;
-        public delegate void StatusDelegate();
-        public StatusDelegate refreshStatusDelegate;
-
 
         public void RefreshStatus()
         {

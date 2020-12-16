@@ -30,6 +30,11 @@ namespace NSController {
 		private static List<Socket> clients = new List<Socket>();
 		private static Socket server;
 
+		public delegate void StatusDelegate(string name, string status);
+		public event StatusDelegate refreshStatusDelegate;
+		public delegate void ProgressDelegate(string name, float progression);
+		public event ProgressDelegate refreshProgressDelegate;
+
 		public IView View
 		{
 			get => this._View;
@@ -50,6 +55,22 @@ namespace NSController {
 			server = Connection("127.0.0.1", 1234);
 			server.BeginAccept(Accept, server);
 			this.View.Start();
+			model.refreshStatusDelegate += (name, status) => { 
+				refreshStatusDelegate?.Invoke(name, status);
+				buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshStatus"), new JProperty("templateName", name), new JProperty("status", status))));
+				foreach (Socket client in clients)
+                {
+					client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
+				}
+			};
+			model.refreshProgressDelegate += (name, progression) => {
+				refreshProgressDelegate?.Invoke(name, progression);
+				buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshProgress"), new JProperty("templateName", name), new JProperty("progress", progression))));
+				foreach (Socket client in clients)
+				{
+					client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
+				}
+			};
 		}
 		/* Method to create a save template */
 		public void CreateSaveTemplate(string name, string srcDir, string destDir, int type) {
