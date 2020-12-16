@@ -28,6 +28,8 @@ namespace NSModel
         private Mutex updateProgress = new Mutex();
         private int threadsRunning;
         private bool aborted;
+        string dateTimeName;
+        private Mutex checkEnd = new Mutex();
 
         /* Method to pause or resume current save */
         public string PauseOrResume(bool play)
@@ -66,7 +68,7 @@ namespace NSModel
             currentDateTime = DateTime.Now;
             string Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
             string TodaysTime = DateTime.Now.ToString("HH-mm-ss");
-            string dateTimeName = Todaysdate + "_" + TodaysTime + "_" + template.backupName;
+            dateTimeName = Todaysdate + "_" + TodaysTime + "_" + template.backupName;
             Stopwatch stopw = new Stopwatch();
 
             string[] allFiles = Directory.GetFiles(template.srcDirectory, ".", SearchOption.AllDirectories);
@@ -126,7 +128,7 @@ namespace NSModel
                 Model.IncreasePrioritySaves();
                 copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, true);
                 Model.DecreasePrioritySaves();
-                CheckEnd(destDirectoryInfo);
+                CheckEnd(destDirectoryInfo, totalTime.Elapsed);
                 /* Synchronize barrier */
                 Model.Barrier.SignalAndWait();
                 /* Resent event to pause execution */
@@ -144,11 +146,9 @@ namespace NSModel
                 /* Transfer normal files */
                 copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, false);
                 /* Call the Singleton to write in FullSaveHistory.json */
-                FullSaveHistory.GetInstance().Write(template, dateTimeName);
-                State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime.Elapsed);
                 totalTime.Stop();
             }
-            CheckEnd(destDirectoryInfo);
+            CheckEnd(destDirectoryInfo, totalTime.Elapsed);
         }
 
         /* Method to create a full backup of a directory */
@@ -236,7 +236,7 @@ namespace NSModel
                             if (priority)
                                 Model.DecreasePrioritySaves();
                             threadsRunning--;
-                            CheckEnd(destDirectoryInfo);
+                            CheckEnd(destDirectoryInfo, totalTime.Elapsed);
                             Model.Mutex.ReleaseMutex();
                         };
                         Thread largeFile = new Thread(new ThreadStart(delg));
@@ -259,7 +259,7 @@ namespace NSModel
                         if (priority)
                             Model.DecreasePrioritySaves();
                         threadsRunning--;
-                        CheckEnd(destDirectoryInfo);
+                        CheckEnd(destDirectoryInfo, totalTime.Elapsed);
                     }
                 }
                 else
@@ -291,8 +291,9 @@ namespace NSModel
         }
 
         /* Method to check for end of priority files and for end of current save */
-        private void CheckEnd(DirectoryInfo destDirectoryInfo)
+        private void CheckEnd(DirectoryInfo destDirectoryInfo, TimeSpan totalTime)
         {
+            checkEnd.WaitOne();
             if (Model.GetPrioritySaves() == 0)
                 Model.SetPriority(false);
             if (abort && threadsRunning == 0 && !aborted)
@@ -311,7 +312,10 @@ namespace NSModel
             {
                 Model.RemoveThread(template);
                 UpdateStatus(Resources.Finished);
+                FullSaveHistory.GetInstance().Write(template, dateTimeName);
+                State.GetInstance().Write(currentDateTime, template, false, null, null, 0, totalSize, 0, totalFiles, 0, totalTime);
             }
+            checkEnd.ReleaseMutex();
         }
     }
 }
