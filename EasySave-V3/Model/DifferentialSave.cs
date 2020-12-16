@@ -35,6 +35,7 @@ namespace NSModel
         private Mutex updateProgress = new Mutex();
         private int threadsRunning;
         private bool aborted;
+        private Mutex checkEnd = new Mutex();
 
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
         public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
@@ -365,6 +366,7 @@ namespace NSModel
         /* Method to check for end of priority files and for end of current save */
         private void CheckEnd(DirectoryInfo destDirectoryInfo)
         {
+            checkEnd.WaitOne();
             if (Model.GetPrioritySaves() == 0)
                 Model.SetPriority(false);
             if (abort && threadsRunning == 0 && !aborted)
@@ -384,6 +386,7 @@ namespace NSModel
                 Model.RemoveThread(template);
                 UpdateStatus(Resources.Finished);
             }
+            checkEnd.ReleaseMutex();
         }
     }
 }
