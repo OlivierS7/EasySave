@@ -15,17 +15,14 @@ namespace RemoteClient.NSView
 {
     public partial class StartMenu : Form
     {
+        /* Constructor */
         public StartMenu()
         {
             InitializeComponent();
             executeMenu1.Hide();
         }
 
-        private void StartMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /* Method to print message */
         public void PrintMessage(string message, int type)
         {
             if (type == -1)
@@ -34,6 +31,7 @@ namespace RemoteClient.NSView
                 MessageBox.Show(message, "Operation success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /* Method to connect to the remote server */
         private void Connection_Click(object sender, EventArgs e)
         {
             string ip = textBox1.Text;
@@ -48,15 +46,9 @@ namespace RemoteClient.NSView
             {
                 PrintMessage("Can't connect to this server please try again !", -1);
             }
-           
-            
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+        /* Method to get to the execute menu */
         private void button2_Click(object sender, EventArgs e)
         {
             if (!executeMenu1.Visible)

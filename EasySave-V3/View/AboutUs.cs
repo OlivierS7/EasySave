@@ -12,6 +12,7 @@ namespace NSView
         /* Allows to open links with chrome */
         private const string ChromeAppKey = @"\Software\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe";
 
+        /* Constructor */
         public AboutUs()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace NSView
             OpenLink("https://github.com/OlivierS7/EasySave/tree/easysave/v2.0");
         }
 
+        /* Link with chrome app */
         private static string ChromeAppFileName
         {
             get
@@ -41,11 +43,6 @@ namespace NSView
                 throw new Exception("Could not find chrome.exe!");
             }
             Process.Start(chromeAppFileName, url);
-        }
-
-        private void AboutUs_Load(object sender, EventArgs e)
-        {
-            
         }
 
         /* Allows the use of multiple languages */

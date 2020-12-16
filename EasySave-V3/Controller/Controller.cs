@@ -25,12 +25,6 @@ namespace NSController {
 		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
 		private static List<SaveTemplate> myTemplates;
 
-		/* Variables for Socket */
-		private static int maxUsers = 1;
-		private static byte[] buffer = new byte[2048];
-		private static List<Socket> clients = new List<Socket>();
-		private static Socket server;
-
 		public IView View
 		{
 			get => this._View;
@@ -169,13 +163,13 @@ namespace NSController {
 			}
 		}
 
+		/* Method to notify progress and status changes to client */
 		public void NotifyClients()
         {
 			model.refreshStatusDelegate += (name, status) => {
 				byte[] buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshStatus"), new JProperty("templateName", name), new JProperty("status", status))));
 				foreach (Socket client in clients)
 				{
-					Debug.WriteLine(client.RemoteEndPoint);
 					client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
 				}
 			};
@@ -194,11 +188,13 @@ namespace NSController {
 			return this.model.templates;
 		}
 
+		/* Method to abort a save */
 		public void StopThread(int index)
         {
 			model.StopThread(index);
         }
 
+		/* Method to pause or resume a save */
 		public string PauseOrResume(int index, bool play)
         {
 			return model.PauseOrResume(index, play);
@@ -286,51 +282,55 @@ namespace NSController {
 			model.removePriorityFilesExtension(index);
 		}
 
-		  /***************************/
-		 /******* Socket part *******/
+		/***************************/
+		/******* Socket part *******/
 		/***************************/
 
+		/* Variables for Socket */
+		private static int maxUsers = 1;
+		private static byte[] buffer = new byte[2048];
+		private static List<Socket> clients = new List<Socket>();
+		private static Socket server;
+
+		/* Method for server parameters */
 		private static Socket Connection(string ip, int port)
 		{
 			IPEndPoint adressPort = new IPEndPoint(IPAddress.Parse(ip), port);
 			Socket serveurSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			serveurSocket.Bind(adressPort);
+			/* Server starts listenning */
 			serveurSocket.Listen(maxUsers);
 			return serveurSocket;
 		}
 
+		/* Asynchronous method to accept connection from clients */
 		private static void Accept(IAsyncResult ar)
 		{
 			Socket client = ((Socket)ar.AsyncState).EndAccept(ar);
 			clients.Add(client);
-			Debug.WriteLine(client.RemoteEndPoint);
-			client = AccepterConnection(client);
 			controller.NotifyClients();
 			client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 			server.BeginAccept(Accept, server);
 		}
 
-		private static Socket AccepterConnection(Socket client)
-		{
-			Debug.WriteLine("Client connected");
-			return client;
-		}
-
+		/* Asynchronous method to listen for message from client */
 		private static void ListenNetwork(IAsyncResult ar)
 		{
 			Socket client = (Socket)ar.AsyncState;
 			int bytesRec = client.EndReceive(ar);
+
+			/* Looking for message */
 			if (bytesRec > 0)
 			{
 				string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
-				Debug.WriteLine(data);
 				JObject received = JObject.Parse(data);
-                switch (received["title"].ToString())
+
+				/* Switching different possibilities */
+				switch (received["title"].ToString())
                 {
 					case "getAllTemplates":
 						buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(SaveTemplateConfig.GetInstance().GetTemplates())))));
 						client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
-						Debug.WriteLine("Send save templates");
 						break;
 					case "executeOneSave":
 						int index = JsonConvert.DeserializeObject<int>(received["index"].ToString());
@@ -360,6 +360,7 @@ namespace NSController {
             }
 		}
 
+		/* Callback method for sending messages */
 		private static void SendCallback(IAsyncResult ar)
 		{
 			try
@@ -373,22 +374,9 @@ namespace NSController {
 			}
 		}
 
-		private static void Broadcast(IAsyncResult ar)
-		{
-			try
-			{
-				Socket client = (Socket)ar.AsyncState;
-				int bytesSent = client.EndSend(ar);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e.ToString());
-			}
-		}
-
+		/* Method to disconnect a client */
 		private static void Disconnect(Socket client)
 		{
-			Console.WriteLine("Client {0} disconnected from the server", client.RemoteEndPoint.ToString());
 			clients.Remove(client);
 			client.Close();
 		}

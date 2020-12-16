@@ -39,12 +39,14 @@ namespace RemoteClient.NSController
             set => this._View = value;
         }
 
+        /* Constructor */
         public Controller()
         {
             this.View = new GraphicalView(this);
             this.View.Start();
         }
 
+        /* Connect to the specified server */
         public void Connexion(string ipString, int portCommunication)
         {
             IPEndPoint pointTerminaison = new IPEndPoint(IPAddress.Parse(ipString), portCommunication);
@@ -63,6 +65,7 @@ namespace RemoteClient.NSController
             }
         }
 
+        /* Method to send messages to server */
         public void Send(JObject myObject)
         {
             try
@@ -75,6 +78,7 @@ namespace RemoteClient.NSController
             }
         }
 
+        /* Callback method to send messages */
         private static void SendCallback(IAsyncResult ar)
         {
             try
@@ -87,11 +91,13 @@ namespace RemoteClient.NSController
             }
         }
 
+        /* Callback method to receive messages */
         private static void ReceiveCallback(IAsyncResult ar)
         {
             StateObject state = (StateObject)ar.AsyncState;
             Socket client = state.workSocket;
             int bytesRec = client.EndReceive(ar);
+            /* Checking for received message */
             if (bytesRec > 0)
             {
                 string data = Encoding.UTF8.GetString(state.buffer, 0, bytesRec);
@@ -99,6 +105,7 @@ namespace RemoteClient.NSController
                 string name;
                 string status;
                 float progress;
+                /* Actions depending on received message */
                 switch (received["title"].ToString())
                 {
                     case "getAllTemplates":
@@ -120,6 +127,7 @@ namespace RemoteClient.NSController
             
         }
 
+        /* Method to disconnect from server */
         public void Disconnect()
         {
             if(client != null)

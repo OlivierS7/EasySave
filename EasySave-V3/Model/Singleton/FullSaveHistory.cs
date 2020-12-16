@@ -40,6 +40,7 @@ namespace NSModel.Singleton {
 
 		/* Method to write into FullSaveHistory.json to save the full backups */
 		public void Write(SaveTemplate template, string dateTime) {
+			/* Waiting for mutex to avoid multiple threads writing at the same time */
 			Mutex.WaitOne();
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());

@@ -7,6 +7,8 @@ namespace NSView
     public partial class ManageTemplate : UserControl
     {
         public IView View;
+
+        /* Constructor */
         public ManageTemplate()
         {
             InitializeComponent();
@@ -50,23 +52,14 @@ namespace NSView
             modifySaveTemplate1.ChangelistBox1();
             modifySaveTemplate1.Show();
             modifySaveTemplate1.BringToFront();
-        }    
-        
+        }
+
+        /* Method to hide all */
         private void HideAll()
         {
             creaSaveTemplate1.Hide();
             delSaveTemplate1.Hide();
             modifySaveTemplate1.Hide();
-        }
-
-        private void modifySaveTemplate1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ManageTemplate_Load(object sender, EventArgs e)
-        {
-            
         }
 
         /* Allows the use of multiple languages */

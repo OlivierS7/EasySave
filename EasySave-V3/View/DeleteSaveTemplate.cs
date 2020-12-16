@@ -9,6 +9,8 @@ namespace NSView
     public partial class DeleteSaveTemplate : UserControl
     {
         public List<SaveTemplate> templates;
+
+        /* Constructor */
         public DeleteSaveTemplate()
         {
             InitializeComponent();

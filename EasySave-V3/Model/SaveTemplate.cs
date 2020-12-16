@@ -55,6 +55,7 @@ namespace NSModel
             set => this._saveStrategy = value;
         }
 
+        /* Constructor */
         public SaveTemplate(string name, string srcDir, string destDir, int type)
         {
             /* Couting files in directory and subdirectories */

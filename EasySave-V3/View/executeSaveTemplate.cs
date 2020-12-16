@@ -10,6 +10,7 @@ namespace NSView
     {
         public List<SaveTemplate> templates;
 
+        /* Method to refresh status of saves */
         public void RefreshStatus()
         {
             GraphicalView.controller.model.refreshStatusDelegate += (name, status) =>
@@ -25,6 +26,7 @@ namespace NSView
             };
         }
 
+        /* Method to refresh progress of saves */
         public void RefreshProgress()
         {
             GraphicalView.controller.model.refreshProgressDelegate += (name, progression) =>
@@ -40,11 +42,13 @@ namespace NSView
             };
         }
 
+        /* Constructor */
         public ExecuteSaveTemplate()
         {
             InitializeComponent();
         }
 
+        /* On load method */
         private void executeSaveTemplate_Load(object sender, EventArgs e)
         {
             RefreshStatus();
@@ -61,6 +65,7 @@ namespace NSView
                 GraphicalView.controller.ExecuteOneSave(index);
         }
 
+        /* Shows buttons */
         private void button2_Click(object sender, EventArgs e)
         {
             button3.Show();
@@ -75,11 +80,13 @@ namespace NSView
             HideAll();
         }
 
+        /* Hide all */
         private void button4_Click(object sender, EventArgs e)
         {
             HideAll();
         }
 
+        /* Hide buttons */
         private void HideAll()
         {
             button3.Hide();
@@ -122,6 +129,7 @@ namespace NSView
             button4.Text = Resources.No;
         }
 
+        /* Abort save */
         private void button5_Click(object sender, EventArgs e)
         {
             int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
@@ -129,6 +137,7 @@ namespace NSView
                 GraphicalView.controller.StopThread(index);
         }
 
+        /* Pause the save */
         private void button6_Click(object sender, EventArgs e)
         {
             int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
@@ -136,6 +145,7 @@ namespace NSView
                 GraphicalView.controller.PauseOrResume(index, false);
         }
 
+        /* Resume the save */
         private void button7_Click(object sender, EventArgs e)
         {
             int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;

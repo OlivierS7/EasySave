@@ -8,6 +8,8 @@ namespace NSView
 {
     public partial class StartMenu : Form
     {
+
+        /* Constructor */
         public StartMenu()
         {
             InitializeComponent();
@@ -15,6 +17,7 @@ namespace NSView
             LoadAllLang();
         }
 
+        /* On load method */
         private void Form1_Load(object sender, EventArgs e)
         {
             aboutUs1.Show();
@@ -80,6 +83,7 @@ namespace NSView
             manageTemplate1.BringToFront();
         }
 
+        /* Method to hide all */
         private void HideAll()
         {
             executeSaveTemplate1.Hide();
