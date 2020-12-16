@@ -42,6 +42,7 @@ namespace RemoteClient.NSView
                 GraphicalView.controller.Connexion(ip, port);
                 JObject myObject = new JObject(new JProperty("title", "getAllTemplates"));
                 GraphicalView.controller.Send(myObject);
+                PrintMessage("Connection successfull to the server !", 1);
             } catch
             {
                 PrintMessage("Can't connect to this server please try again !", -1);
