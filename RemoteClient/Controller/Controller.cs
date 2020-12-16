@@ -122,9 +122,8 @@ namespace RemoteClient.NSController
 
         public void Disconnect()
         {
-            if(client != null)
+            if(client != null && client.Connected)
             {
-                client.Shutdown(SocketShutdown.Both);
                 client.Close();
             }
         }
