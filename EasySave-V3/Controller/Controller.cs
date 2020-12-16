@@ -8,6 +8,9 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using NSModel.Singleton;
 
 namespace NSController {
 	public class Controller {
@@ -19,10 +22,11 @@ namespace NSController {
 		private string error = "";
 		private Regex nameForm = new Regex("^[^/\":*?\\<>|]+$");
 		private Regex directoryName = new Regex(@"^([A-Za-z]:\\|\\)([^/:*?""\<>|]*\\)*[^/:*?""\<>|]*$");
+		private static List<SaveTemplate> myTemplates;
 
 		/* Variables for Socket */
 		private static int maxUsers = 10;
-		private static byte[] data = new byte[1024];
+		private static byte[] buffer = new byte[2048];
 		private static List<Socket> clients = new List<Socket>();
 		private static Socket server;
 
@@ -37,9 +41,10 @@ namespace NSController {
 			get => this._model;
 			set => this._model = value;
 		}
+        public static List<SaveTemplate> MyTemplates { get => myTemplates; set => myTemplates = value; }
 
-		/* Constructor */
-		public Controller() {
+        /* Constructor */
+        public Controller() {
 			this.model = new Model();
 			this.View = new GraphicalView(this);
 			server = Connection("127.0.0.1", 1234);
@@ -166,25 +171,17 @@ namespace NSController {
 		}
 
 		/* Method to get all existing templates */
-		public List<SaveTemplate> GetAllTemplates() {
+		public List<SaveTemplate> GetAllTemplates()
+		{
 			return this.model.templates;
-			/*List<string> templatesNames = new List<string>();
-			if (model.templates.Count == 0)
-            {
-				PrintMessage(Resources.NoSave, -1);
-            } 
-			else
-            {
-				foreach (SaveTemplate template in templates)
-				{
-					templatesNames.Add(template.backupName);
-					templatesNames.Add(template.srcDirectory);
-					templatesNames.Add(template.destDirectory);
-					templatesNames.Add(template.backupType.ToString());
-				}
-			}
-			return templatesNames;*/
 		}
+
+		public static List<SaveTemplate> GetAllTemplatesRemotely()
+		{
+			return SaveTemplateConfig.GetInstance().GetTemplates();
+		}
+
+		
 
 		public void StopThread(int index)
         {
@@ -278,8 +275,8 @@ namespace NSController {
 			model.removePriorityFilesExtension(index);
 		}
 
-		/****************************/
-		/******* Socket part *******/
+		  /***************************/
+		 /******* Socket part *******/
 		/***************************/
 
 		private static Socket Connection(string ip, int port)
@@ -288,7 +285,6 @@ namespace NSController {
 			Socket serveurSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			serveurSocket.Bind(adressPort);
 			serveurSocket.Listen(maxUsers);
-			Debug.WriteLine("Server created");
 			return serveurSocket;
 		}
 
@@ -296,10 +292,8 @@ namespace NSController {
 		{
 			Socket client = ((Socket)ar.AsyncState).EndAccept(ar);
 			clients.Add(client);
-			StateObject state = new StateObject();
-			state.workSocket = client;
 			client = AccepterConnection(client);
-			client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, EcouterReseau, state);
+			client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 			server.BeginAccept(Accept, server);
 		}
 
@@ -309,32 +303,40 @@ namespace NSController {
 			return client;
 		}
 
-		private static void EcouterReseau(IAsyncResult ar)
+		private static void ListenNetwork(IAsyncResult ar)
 		{
-			StateObject state = (StateObject)ar.AsyncState;
-			Socket client = state.workSocket;
-			data = new byte[1024];
+			Socket client = (Socket)ar.AsyncState;
 			int bytesRec = client.EndReceive(ar);
 			if (bytesRec > 0)
 			{
-				state.sb.Clear();
-				state.sb.Append(Encoding.UTF8.GetString(state.buffer, 0, bytesRec));
-				string msg = state.sb.ToString();
-				Console.WriteLine("{0}", msg);
-				Send(client, msg);
-				client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, EcouterReseau, state);
-			}
+				string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
+				JObject received = JObject.Parse(data);
+                switch (received["title"].ToString())
+                {
+					case "getAllTemplates":
+						buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(GetAllTemplatesRemotely())))));
+						client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
+						Debug.WriteLine("Send save templates");
+						break;
+                }
+				//Send(client, msg);
+				client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
+			} else
+            {
+				Disconnect(client);
+            }
 		}
 
-		private static void Send(Socket sender, string msg)
+		private static void SendCallback(IAsyncResult ar)
 		{
-			byte[] byteData = Encoding.UTF8.GetBytes(msg);
-			foreach (Socket client in clients)
+			try
 			{
-				if (client != sender)
-				{
-					client.BeginSend(byteData, 0, byteData.Length, 0, Broadcast, client);
-				}
+				Socket client = (Socket)ar.AsyncState;
+				client.EndSend(ar);
+			}
+			catch
+			{
+				throw new Exception("Error in endsend");
 			}
 		}
 
@@ -351,7 +353,7 @@ namespace NSController {
 			}
 		}
 
-		private static void Deconnecter(Socket client)
+		private static void Disconnect(Socket client)
 		{
 			Console.WriteLine("Client {0} disconnected from the server", client.RemoteEndPoint.ToString());
 			clients.Remove(client);

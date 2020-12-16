@@ -1,14 +1,33 @@
-﻿using RemoteClient.NSView;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RemoteClient.NSView;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using NSModel;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace RemoteClient.NSController
 {
+    public class StateObject
+    {
+        public Socket workSocket = null;
+        public const int BufferSize = 2048;
+        public byte[] buffer = new byte[BufferSize];
+        public StringBuilder sb = new StringBuilder();
+    }
     public class Controller
     {
         private IView _View;
+        private Socket client;
+        public static List<SaveTemplate> templates;
+
+        public List<SaveTemplate> GetTemplates()
+        {
+            return templates;
+        }
 
         public IView View
         {
@@ -19,17 +38,20 @@ namespace RemoteClient.NSController
         public Controller()
         {
             this.View = new GraphicalView(this);
-            this.View.Start(); ;
+            this.View.Start();
         }
 
-        public Socket Connexion(string ipString, int portCommunication)
+        public void Connexion(string ipString, int portCommunication)
         {
             IPEndPoint pointTerminaison = new IPEndPoint(IPAddress.Parse(ipString), portCommunication);
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
                 client.Connect(pointTerminaison);
-                return client;
+                this.client = client;
+                StateObject state = new StateObject();
+                state.workSocket = client;
+                client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
             }
             catch (SocketException)
             {
@@ -37,23 +59,28 @@ namespace RemoteClient.NSController
             }
         }
 
-        private static void EcouterReseau(Socket client)
+        public void Send(JObject myObject)
         {
             try
             {
-                StateObject state = new StateObject();
-                state.workSocket = client;
-                client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
-                while (true)
-                {
-
-                    byte[] data = Encoding.UTF8.GetBytes("test");
-                    client.Send(data);
-                }
-            }
-            catch (Exception e)
+                byte[] myBuffer = new byte[2048];
+                myBuffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myObject));
+                client.BeginSend(myBuffer, 0, myBuffer.Length, 0, SendCallback, client);
+            } catch
             {
-                Console.WriteLine(e.ToString());
+                throw new Exception("Error in beginsend");
+            }
+        }
+
+        private static void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                Socket client = (Socket)ar.AsyncState;
+                client.EndSend(ar);
+            } catch
+            {
+                throw new Exception("Error in endsend");
             }
         }
 
@@ -61,33 +88,26 @@ namespace RemoteClient.NSController
         {
             StateObject state = (StateObject)ar.AsyncState;
             Socket client = state.workSocket;
-            int bytesRead = client.EndReceive(ar);
-            if (bytesRead > 0)
+            int bytesRec = client.EndReceive(ar);
+            if (bytesRec > 0)
             {
-                state.sb.Clear();
-                state.sb.Append(Encoding.UTF8.GetString(state.buffer, 0, bytesRead));
-                if (state.sb.Length > 1)
+                string data = Encoding.UTF8.GetString(state.buffer, 0, bytesRec);
+                JObject received = JObject.Parse(data);
+                switch (received["title"].ToString())
                 {
-                    string msg = state.sb.ToString();
-                    Console.WriteLine(msg);
+                    case "getAllTemplates":
+                        templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(received["templates"].ToString());
+                        break;
                 }
+                client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
             }
-            client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
+            
         }
 
-        private static void Deconnecter(Socket client)
+        private static void Disconnect(Socket client)
         {
             client.Shutdown(SocketShutdown.Both);
             client.Close();
         }
-
-    }
-
-    public class StateObject
-    {
-        public Socket workSocket = null;
-        public const int BufferSize = 1024;
-        public byte[] buffer = new byte[BufferSize];
-        public StringBuilder sb = new StringBuilder();
     }
 }

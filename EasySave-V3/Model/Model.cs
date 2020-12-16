@@ -5,7 +5,6 @@ using NSModel.Singleton;
 using System.IO;
 using EasySave_V3.Properties;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace NSModel
 {
