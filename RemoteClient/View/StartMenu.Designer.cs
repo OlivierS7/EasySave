@@ -104,6 +104,7 @@ namespace RemoteClient.NSView
             this.executeMenu1.Name = "executeMenu1";
             this.executeMenu1.Size = new System.Drawing.Size(841, 588);
             this.executeMenu1.TabIndex = 8;
+            this.executeMenu1.Load += new System.EventHandler(this.executeMenu1_Load);
             // 
             // button3
             // 

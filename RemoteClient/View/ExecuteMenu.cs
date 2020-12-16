@@ -88,12 +88,15 @@ namespace RemoteClient.NSView
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //To do Execute all save
+            JObject myObject = new JObject(new JProperty("title", "executeAllSave"));
+            GraphicalView.controller.Send(myObject);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //To do Abort save
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            JObject myObject = new JObject(new JProperty("title", "abortExecution"), new JProperty("index", index));
+            GraphicalView.controller.Send(myObject);
         }
 
         private void button4_Click(object sender, EventArgs e)
