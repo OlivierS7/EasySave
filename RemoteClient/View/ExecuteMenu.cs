@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using NSModel;
+using RemoteClient.NSController;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,35 @@ namespace RemoteClient.NSView
         public ExecuteMenu()
         {
             InitializeComponent();
+        }
+        public void RefreshStatus()
+        {
+            Controller.refreshStatusDelegate += (name, status) =>
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    for (int i = 0; i < templates.Count; i++)
+                    {
+                        if (templates[i].backupName == name)
+                            listView1.Items[i].SubItems[5].Text = status;
+                    }
+                }));
+            };
+        }
+
+        public void RefreshProgress()
+        {
+            Controller.refreshProgressDelegate += (name, progression) =>
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    for (int i = 0; i < templates.Count; i++)
+                    {
+                        if (templates[i].backupName == name)
+                            listView1.Items[i].SubItems[6].Text = progression.ToString() + "%";
+                    }
+                }));
+            };
         }
 
         public void ChangeListView()
@@ -45,6 +75,8 @@ namespace RemoteClient.NSView
         private void ExecuteMenu_Load(object sender, EventArgs e)
         {
             ChangeListView();
+            RefreshProgress();
+            RefreshStatus();
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -14,8 +14,9 @@ namespace NSModel.Singleton {
 			get => _file; 
 			set => _file = value; 
 		}
+        public static Mutex Mutex { get => mutex; set => mutex = value; }
 
-		/* Constructor */
+        /* Constructor */
         private FullSaveHistory() {
 			string path = "..\\..\\..\\FullSaveHistory.json";
 			if (File.Exists(path))
@@ -39,7 +40,7 @@ namespace NSModel.Singleton {
 
 		/* Method to write into FullSaveHistory.json to save the full backups */
 		public void Write(SaveTemplate template, string dateTime) {
-			mutex.WaitOne();
+			Mutex.WaitOne();
 			/* Unhiding file to allow edit */
 			var attributes = File.GetAttributes(file.ToString());
 			attributes &= ~FileAttributes.Hidden;
@@ -62,7 +63,7 @@ namespace NSModel.Singleton {
 
 			/* Hiding file */
 			File.SetAttributes(file.ToString(), File.GetAttributes(file.ToString()) | FileAttributes.Hidden);
-			mutex.ReleaseMutex();
+			Mutex.ReleaseMutex();
 		}
 
 		/* Method to get the last full save for a source directory */

@@ -49,8 +49,9 @@ namespace NSModel.Singleton
 			get => _fileName;
 			set => _fileName = value;
 		}
+        public static Mutex Mutex { get => mutex; set => mutex = value; }
 
-		private Log()
+        private Log()
 		{
 			String Todaysdate = DateTime.Now.ToString("dd-MMM-yyyy");
 			string currentLog = _directoryPath + "\\" + "logs-" + Todaysdate + ".json";
@@ -81,7 +82,7 @@ namespace NSModel.Singleton
 		}
 		public void Write(string name, FileInfo srcFile, FileInfo destFile, long fileSize, TimeSpan time, string cryptDuration)
 		{
-			mutex.WaitOne();
+			Mutex.WaitOne();
 			/* Getting all the logs in a list and adding new logs */
 			LogObject currentFile = new LogObject(name, srcFile.ToString(), destFile.ToString(), fileSize.ToString() + " bytes", time, cryptDuration + "ms");
 			logObjects.Add(currentFile);
@@ -89,7 +90,7 @@ namespace NSModel.Singleton
 			string output = JsonConvert.SerializeObject(logObjects, Formatting.Indented);
 			writer.Write(output);
 			writer.Close();
-			mutex.ReleaseMutex();
+			Mutex.ReleaseMutex();
 		}
 	}
 }

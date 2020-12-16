@@ -100,6 +100,7 @@ namespace RemoteClient.NSController
                 string name;
                 string status;
                 float progress;
+                Debug.WriteLine(received);
                 switch (received["title"].ToString())
                 {
                     case "getAllTemplates":
@@ -109,11 +110,13 @@ namespace RemoteClient.NSController
                         name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
                         progress = JsonConvert.DeserializeObject<float>(received["progress"].ToString());
                         refreshProgressDelegate?.Invoke(name, progress);
+                        Debug.WriteLine(name + progress);
                         break;
                     case "refreshStatus":
                         name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
                         status = JsonConvert.DeserializeObject<string>(received["status"].ToString());
                         refreshStatusDelegate?.Invoke(name, status);
+                        Debug.WriteLine(name + status);
                         break;
                 }
                 client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);

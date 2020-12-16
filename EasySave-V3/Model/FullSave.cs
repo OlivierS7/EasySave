@@ -117,7 +117,9 @@ namespace NSModel
             if (!abort) 
             {
                 Model.SetPriority(true);
+                Model.IncreasePrioritySaves();
                 copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, true);
+                Model.DecreasePrioritySaves();
                 CheckEnd(destDirectoryInfo);
                 Model.Barrier.SignalAndWait();
                 mre.WaitOne();
@@ -191,7 +193,7 @@ namespace NSModel
                     FileInfo src = new FileInfo(file);
                     string srcDir = template.srcDirectory;
                     string destDir = destDirectoryInfo.FullName;
-                    if (src.Length > Model.getMaxFileSize())
+                    if (src.Length/1000 > Model.getMaxFileSize())
                     {
                         deleg delg = () =>
                         {
@@ -220,6 +222,7 @@ namespace NSModel
                     }
                     else
                     {
+                        threadsRunning++;
                         if (priority)
                             Model.IncreasePrioritySaves();
                         Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
@@ -229,6 +232,7 @@ namespace NSModel
                         stopw.Reset();
                         if (priority)
                             Model.DecreasePrioritySaves();
+                        threadsRunning--;
                         CheckEnd(destDirectoryInfo);
                     }
                 }
@@ -265,7 +269,11 @@ namespace NSModel
             {
                 Model.RemoveThread(template);
                 UpdateProgress(0, 0);
+                State.Mutex.WaitOne();
+                Log.Mutex.WaitOne();
                 destDirectoryInfo.Delete(true);
+                State.Mutex.ReleaseMutex();
+                Log.Mutex.ReleaseMutex();
                 UpdateStatus(Resources.Aborted);
                 aborted = true;
             }
