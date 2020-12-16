@@ -69,12 +69,16 @@ namespace RemoteClient.NSView
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //To do pause save
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            JObject myObject = new JObject(new JProperty("title", "pauseExecution"), new JProperty("index", index));
+            GraphicalView.controller.Send(myObject);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //to do play save
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            JObject myObject = new JObject(new JProperty("title", "resumeExecution"), new JProperty("index", index));
+            GraphicalView.controller.Send(myObject);
         }
     }
 }

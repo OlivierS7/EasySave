@@ -343,7 +343,15 @@ namespace NSController {
 						break;
 					case "abortExecution":
 						int indexAbort = JsonConvert.DeserializeObject<int>(received["index"].ToString());
-						controller.ExecuteOneSave(indexAbort);
+						controller.model.StopThread(indexAbort);
+						break;
+					case "pauseExecution":
+						int indexPause = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+						controller.PauseOrResume(indexPause, false);
+						break;
+					case "resumeExecution":
+						int indexResume = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+						controller.PauseOrResume(indexResume, true);
 						break;
 
 				}
