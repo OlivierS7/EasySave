@@ -338,6 +338,9 @@ namespace NSController {
 						int index = JsonConvert.DeserializeObject<int>(received["index"].ToString());
 						controller.ExecuteOneSave(index);
 						break;
+					case "executeAllSave":
+						controller.ExecuteAllSave();
+						break;
 
 				}
 				client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
