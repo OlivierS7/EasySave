@@ -118,6 +118,7 @@ namespace NSModel
             {
                 Model.SetPriority(true);
                 copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, true);
+                CheckEnd(destDirectoryInfo);
                 Model.Barrier.SignalAndWait();
                 mre.WaitOne();
             }
