@@ -67,5 +67,10 @@ namespace RemoteClient.NSView
             GraphicalView.controller.Disconnect();
             Environment.Exit(1);
         }
+
+        private void executeMenu1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
