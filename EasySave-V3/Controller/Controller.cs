@@ -176,13 +176,6 @@ namespace NSController {
 			return this.model.templates;
 		}
 
-		public static List<SaveTemplate> GetAllTemplatesRemotely()
-		{
-			return SaveTemplateConfig.GetInstance().GetTemplates();
-		}
-
-		
-
 		public void StopThread(int index)
         {
 			model.StopThread(index);
@@ -314,12 +307,11 @@ namespace NSController {
                 switch (received["title"].ToString())
                 {
 					case "getAllTemplates":
-						buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(GetAllTemplatesRemotely())))));
+						buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(SaveTemplateConfig.GetInstance().GetTemplates())))));
 						client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
 						Debug.WriteLine("Send save templates");
 						break;
                 }
-				//Send(client, msg);
 				client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 			} else
             {
@@ -359,13 +351,5 @@ namespace NSController {
 			clients.Remove(client);
 			client.Close();
 		}
-	}
-
-	public class StateObject
-	{
-		public const int BufferSize = 1024;
-		public byte[] buffer = new byte[BufferSize];
-		public StringBuilder sb = new StringBuilder();
-		public Socket workSocket = null;
 	}
 }
