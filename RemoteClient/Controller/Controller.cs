@@ -121,7 +121,7 @@ namespace RemoteClient.NSController
             
         }
 
-        private static void Disconnect(Socket client)
+        public void Disconnect()
         {
             client.Shutdown(SocketShutdown.Both);
             client.Close();

@@ -17,6 +17,7 @@ namespace NSController {
 
 		private IView _View;
 		private Model _model;
+		private static Controller controller;
 
 		/* Variables for Regex */
 		private string error = "";
@@ -52,6 +53,7 @@ namespace NSController {
         public Controller() {
 			this.model = new Model();
 			this.View = new GraphicalView(this);
+			controller = this;
 			server = Connection("127.0.0.1", 1234);
 			server.BeginAccept(Accept, server);
 			this.View.Start();
@@ -332,7 +334,12 @@ namespace NSController {
 						client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
 						Debug.WriteLine("Send save templates");
 						break;
-                }
+					case "executeOneSave":
+						int index = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+						controller.ExecuteOneSave(index);
+						break;
+
+				}
 				client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 			} else
             {

@@ -1,4 +1,5 @@
-﻿using NSModel;
+﻿using Newtonsoft.Json.Linq;
+using NSModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace RemoteClient.View
+namespace RemoteClient.NSView
 {
     public partial class ExecuteMenu : UserControl
     {
@@ -44,6 +45,33 @@ namespace RemoteClient.View
         private void ExecuteMenu_Load(object sender, EventArgs e)
         {
             ChangeListView();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int index = listView1.SelectedItems[listView1.SelectedItems.Count - 1].Index + 1;
+            JObject myObject = new JObject(new JProperty("title", "executeOneSave"), new JProperty("index", index));
+            GraphicalView.controller.Send(myObject);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //To do Execute all save
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //To do Abort save
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //To do pause save
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //to do play save
         }
     }
 }

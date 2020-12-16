@@ -82,7 +82,6 @@ namespace NSModel
 			priorityRunning.WaitOne();
 			Model.priority = priority;
 			priorityRunning.ReleaseMutex();
-			Debug.WriteLine(priority);
         }
 		public static bool GetPriority()
         {
@@ -93,14 +92,12 @@ namespace NSModel
 			priorityRunning.WaitOne();
 			runningPrioritySaves++;
 			priorityRunning.ReleaseMutex();
-			Debug.WriteLine(runningPrioritySaves);
 		}
 		public static void DecreasePrioritySaves()
 		{
 			priorityRunning.WaitOne();
 			runningPrioritySaves--;
 			priorityRunning.ReleaseMutex();
-			Debug.WriteLine(runningPrioritySaves);
 		}
 		public static int GetPrioritySaves()
 		{

@@ -56,5 +56,16 @@ namespace RemoteClient.NSView
             executeMenu1.ChangeListView();
             executeMenu1.BringToFront();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            executeMenu1.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            GraphicalView.controller.Disconnect();
+            Environment.Exit(1);
+        }
     }
 }
