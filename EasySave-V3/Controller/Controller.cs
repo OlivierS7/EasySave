@@ -26,7 +26,7 @@ namespace NSController {
 		private static List<SaveTemplate> myTemplates;
 
 		/* Variables for Socket */
-		private static int maxUsers = 10;
+		private static int maxUsers = 1;
 		private static byte[] buffer = new byte[2048];
 		private static List<Socket> clients = new List<Socket>();
 		private static Socket server;
