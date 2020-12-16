@@ -67,8 +67,7 @@ namespace RemoteClient.NSController
         {
             try
             {
-                byte[] myBuffer = new byte[2048];
-                myBuffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myObject));
+                byte[] myBuffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myObject));
                 client.BeginSend(myBuffer, 0, myBuffer.Length, 0, SendCallback, client);
             } catch
             {
@@ -100,23 +99,20 @@ namespace RemoteClient.NSController
                 string name;
                 string status;
                 float progress;
-                Debug.WriteLine(received);
                 switch (received["title"].ToString())
                 {
                     case "getAllTemplates":
                         templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(received["templates"].ToString());
                         break;
                     case "refreshProgress":
-                        name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
-                        progress = JsonConvert.DeserializeObject<float>(received["progress"].ToString());
+                        name = (received["templateName"].ToString());
+                        float.TryParse(received["progress"].ToString(), out progress);
                         refreshProgressDelegate?.Invoke(name, progress);
-                        Debug.WriteLine(name + progress);
                         break;
                     case "refreshStatus":
-                        name = JsonConvert.DeserializeObject<string>(received["templateName"].ToString());
-                        status = JsonConvert.DeserializeObject<string>(received["status"].ToString());
+                        name = (received["templateName"].ToString());
+                        status = (received["status"].ToString());
                         refreshStatusDelegate?.Invoke(name, status);
-                        Debug.WriteLine(name + status);
                         break;
                 }
                 client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);

@@ -138,7 +138,6 @@ namespace NSModel
                 totalTime.Stop();
             }
             CheckEnd(destDirectoryInfo);
-            abort = false;
         }
 
         /* Method to create a full backup of a directory */
@@ -281,6 +280,7 @@ namespace NSModel
             {
                 Model.RemoveThread(template);
                 UpdateStatus(Resources.Finished);
+                abort = false;
             }
         }
     }

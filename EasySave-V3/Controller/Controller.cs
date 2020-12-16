@@ -147,11 +147,8 @@ namespace NSController {
 		public void ExecuteOneSave(int templateIndex) {
 			try
 			{
-				NotifyClients();
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				model.ExecuteOneSave(templateIndex, extensionsToEncrypt);
-				PrintMessage(Resources.SuccessExec, 1);
-				//this.View.ChangeStatus
 			}
 			catch (Exception err)
 			{
@@ -163,10 +160,8 @@ namespace NSController {
 		public void ExecuteAllSave() {
 			try
 			{
-				NotifyClients();
 				List<string> extensionsToEncrypt = getExtensionsToEncrypt();
 				model.ExecuteAllSave(extensionsToEncrypt);
-				PrintMessage(Resources.SuccessExecAll, 1);
 			}
 			catch (Exception err)
 			{
@@ -177,14 +172,15 @@ namespace NSController {
 		public void NotifyClients()
         {
 			model.refreshStatusDelegate += (name, status) => {
-				buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshStatus"), new JProperty("templateName", name), new JProperty("status", status))));
+				byte[] buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshStatus"), new JProperty("templateName", name), new JProperty("status", status))));
 				foreach (Socket client in clients)
 				{
+					Debug.WriteLine(client.RemoteEndPoint);
 					client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
 				}
 			};
 			model.refreshProgressDelegate += (name, progression) => {
-				buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshProgress"), new JProperty("templateName", name), new JProperty("progress", progression))));
+				byte[] buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "refreshProgress"), new JProperty("templateName", name), new JProperty("progress", progression))));
 				foreach (Socket client in clients)
 				{
 					client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
@@ -307,7 +303,9 @@ namespace NSController {
 		{
 			Socket client = ((Socket)ar.AsyncState).EndAccept(ar);
 			clients.Add(client);
+			Debug.WriteLine(client.RemoteEndPoint);
 			client = AccepterConnection(client);
+			controller.NotifyClients();
 			client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 			server.BeginAccept(Accept, server);
 		}
@@ -325,6 +323,7 @@ namespace NSController {
 			if (bytesRec > 0)
 			{
 				string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
+				Debug.WriteLine(data);
 				JObject received = JObject.Parse(data);
                 switch (received["title"].ToString())
                 {
