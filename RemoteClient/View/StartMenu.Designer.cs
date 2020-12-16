@@ -111,14 +111,14 @@ namespace RemoteClient.NSView
             // 
             this.executeMenu1.Location = new System.Drawing.Point(-17, 38);
             this.executeMenu1.Name = "executeMenu1";
-            this.executeMenu1.Size = new System.Drawing.Size(793, 588);
+            this.executeMenu1.Size = new System.Drawing.Size(841, 588);
             this.executeMenu1.TabIndex = 8;
             // 
             // StartMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 601);
+            this.ClientSize = new System.Drawing.Size(821, 601);
             this.Controls.Add(this.executeMenu1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
