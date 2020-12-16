@@ -10,6 +10,8 @@ namespace NSModel.Singleton
         private static SaveParameter saveParameter;
         private FileInfo _file;
 		private Parameters parameters;
+
+		/* Nested class */
 		public class Parameters
 		{
 			public List<string> cryptExtensions = new List<string>();

@@ -196,7 +196,6 @@ namespace NSView
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Name = "AboutUs";
             this.Size = new System.Drawing.Size(1135, 694);
-            this.Load += new System.EventHandler(this.AboutUs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

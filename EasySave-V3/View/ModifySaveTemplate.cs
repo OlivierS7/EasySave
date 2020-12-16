@@ -9,6 +9,8 @@ namespace NSView
     public partial class ModifySaveTemplate : UserControl
     {
         public List<SaveTemplate> templates;
+
+        /* Constructor */
         public ModifySaveTemplate()
         {
             InitializeComponent();
@@ -32,11 +34,6 @@ namespace NSView
             {
                 this.textBox3.Text = fdb.SelectedPath;
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         /* Modify the selected save template */
@@ -84,6 +81,7 @@ namespace NSView
             label5.Text = Resources.SaveType;
         }
 
+        /* Load selected save informations in textboxes */
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = 0;

@@ -76,8 +76,10 @@ namespace NSModel.Singleton {
 			return state;
 		}
 
+		/* Method to write state */
 		public void Write(DateTime date, SaveTemplate template, bool isActive, string srcFile, string destFile, long fileSize, long totalSize, long sizeLeft, int totalFiles, int filesLeft, TimeSpan time)
 		{
+			/* Waiting for mutex to avoid multiple threads writing at the same time */
 			Mutex.WaitOne();
 			/* Reading file and storing content */
 			string reader = File.ReadAllText(file.ToString());

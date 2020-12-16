@@ -35,14 +35,18 @@ namespace NSModel
         private Mutex updateProgress = new Mutex();
         private int threadsRunning;
         private bool aborted;
+        private Mutex checkEnd = new Mutex();
 
         public event SaveStrategy.TemplateStatusDelegate refreshStatusDelegate;
         public event SaveStrategy.TemplateProgressDelegate refreshProgressDelegate;
 
+        /* Constructor */
         public DifferentialSave()
         {
             UpdateStatus(Resources.Ready);
         }
+
+        /* Method to pause or resume the current save */
         public string PauseOrResume(bool play)
         {
             if (play)
@@ -57,15 +61,20 @@ namespace NSModel
             return status;
         }
 
+        /* Method to abort the current save */
         public void AbortExecution(bool isAbort)
         {
             abort = isAbort;
             UpdateStatus(Resources.Ready);
         }
+
+        /* Method to check last full save */
         public SaveTemplate CheckFullSave(SaveTemplate template)
         {
             return FullSaveHistory.GetInstance().GetFullSaveForDir(template);
         }
+
+        /* Method to execute the save */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
         {
             threadsRunning = 0;
@@ -89,6 +98,7 @@ namespace NSModel
                 string[] srcFiles = Directory.GetFiles(srcDir, ".", SearchOption.AllDirectories);
                 string[] compFiles = Directory.GetFiles(compDir, ".", SearchOption.AllDirectories);
 
+                /* Variables for files informations */
                 long[] countFiles = CountFiles(srcFiles, compFiles, srcDir, compDir);
                 totalFiles = unchecked((int)countFiles[0]);
                 totalSize = countFiles[1];
@@ -100,26 +110,36 @@ namespace NSModel
                 State.GetInstance().Write(currentDateTime, template, true, null, null, 0, totalSize, totalSize, totalFiles, totalFiles, TimeSpan.Zero);
                 Stopwatch totalTime = new Stopwatch();
                 totalTime.Start();
+
+                /* Synchronize barrier */
                 Model.Barrier.SignalAndWait();
+                /* Resent event to pause execution */
                 mre.WaitOne();
 
+                /* Checking if save needs to abort */
                 if (!abort)
                 {
+                    /* Transfer priority files */
                     Model.SetPriority(true);
                     Model.IncreasePrioritySaves();
                     copyPerGroup(priorityFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, true);
                     Model.DecreasePrioritySaves();
                     CheckEnd(destDirectoryInfo);
+                    /* Synchronize barrier */
                     Model.Barrier.SignalAndWait();
+                    /* Resent event to pause execution */
                     mre.WaitOne();
                 }
 
+                /* Checking if save needs to abort */
                 if (!abort)
                 {
+                    /* Waiting for priority files to transfer */
                     while (Model.GetPriority())
                     {
                         Thread.Sleep(1000);
                     }
+                    /* Transfer normal files */
                     copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, false);
                     /* Call the Singleton to write in FullSaveHistory.json */
                     FullSaveHistory.GetInstance().Write(template, dateTimeName);
@@ -157,6 +177,7 @@ namespace NSModel
             bool isCrypted = false;
             foreach (string extension in extensionsToEncrypt)
             {
+                /* Checking if files need to be crypted */
                 if (Path.GetExtension(src.ToString()) == extension)
                 {
                     isCrypted = true;
@@ -248,31 +269,43 @@ namespace NSModel
         {
             foreach (string file in files)
             {
+                /* Checking if save needs to abort */
                 if (!abort)
                 {
+                    /* Resent event to pause execution */
                     mre.WaitOne();
                     cryptDuration = "0";
                     FileInfo src = new FileInfo(file);
                     string srcDir = template.srcDirectory;
                     string destDir = destDirectoryInfo.FullName;
+
+                    /* Checking for large file */
                     if (src.Length / 1000 > Model.getMaxFileSize())
                     {
                         deleg delg = () =>
                         {
+                            /* Checking if it's priority work */
                             if (priority)
                                 Model.IncreasePrioritySaves();
                             threadsRunning++;
+
+                            /* Allows only one large file to be transfered at a time */
                             Model.Mutex.WaitOne();
+                            /* Checking if save needs to abort */
                             if (!abort)
                             {
+                                /* Resent event to pause execution */
                                 mre.WaitOne();
                                 Stopwatch largeFileStopw = new Stopwatch();
+
+                                /* Copy a file */
                                 Copy(template.srcDirectory, destDirectoryInfo.FullName, largeFileStopw, src, extensionsToEncrypt);
                                 UpdateProgress(sizeLeft, totalSize);
                                 State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                                 Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, largeFileStopw.Elapsed, cryptDuration);
                                 largeFileStopw.Reset();
                             }
+                            /* Checking if it's priority work */
                             if (priority)
                                 Model.DecreasePrioritySaves();
                             threadsRunning--;
@@ -285,13 +318,17 @@ namespace NSModel
                     else
                     {
                         threadsRunning++;
+                        /* Checking if it's priority work */
                         if (priority)
                             Model.IncreasePrioritySaves();
+
+                        /* Copy a file */
                         Copy(template.srcDirectory, destDirectoryInfo.FullName, stopw, src, extensionsToEncrypt);
                         UpdateProgress(sizeLeft, totalSize);
                         State.GetInstance().Write(currentDateTime, template, true, src.FullName, src.FullName.Replace(srcDir, destDir), src.Length, totalSize, sizeLeft, totalFiles, filesLeft, totalTime.Elapsed);
                         Log.GetInstance().Write(template.backupName, src, new FileInfo(src.FullName.Replace(srcDir, destDir)), src.Length, stopw.Elapsed, cryptDuration);
                         stopw.Reset();
+                        /* Checking if it's priority work */
                         if (priority)
                             Model.DecreasePrioritySaves();
                         threadsRunning--;
@@ -302,6 +339,8 @@ namespace NSModel
                     break;
             }
         }
+
+        /* Method to update progress of the running save */
         public void UpdateProgress(long sizeLeft, long totalSize)
         {
             updateProgress.WaitOne();
@@ -313,6 +352,7 @@ namespace NSModel
             refreshProgressDelegate?.Invoke(progression);
         }
 
+        /* Method to update status of the running save */
         public void UpdateStatus(string status)
         {
             this.status = status;
@@ -322,8 +362,11 @@ namespace NSModel
         {
             return this.status;
         }
+
+        /* Method to check for end of priority files and for end of current save */
         private void CheckEnd(DirectoryInfo destDirectoryInfo)
         {
+            checkEnd.WaitOne();
             if (Model.GetPrioritySaves() == 0)
                 Model.SetPriority(false);
             if (abort && threadsRunning == 0 && !aborted)
@@ -343,6 +386,7 @@ namespace NSModel
                 Model.RemoveThread(template);
                 UpdateStatus(Resources.Finished);
             }
+            checkEnd.ReleaseMutex();
         }
     }
 }

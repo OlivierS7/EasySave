@@ -8,6 +8,8 @@ namespace NSView
     public partial class creaSaveTemplate : UserControl
     {
         public Controller controller;
+
+        /* Constructor */
         public creaSaveTemplate()
         {
             InitializeComponent();
@@ -42,11 +44,6 @@ namespace NSView
             string destDir = textBox3.Text;
             int type = comboBox1.SelectedIndex + 1;
             GraphicalView.controller.CreateSaveTemplate(name, srcDir, destDir, type);
-        }
-
-        private void creaSaveTemplate_Load(object sender, EventArgs e)
-        {
-            
         }
 
         /* Allows the use of multiple languages */

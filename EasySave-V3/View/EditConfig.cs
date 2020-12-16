@@ -14,11 +14,14 @@ namespace NSView
         public List<string> priorityFilesExtensions;
         public string maxFileSize;
         public StartMenu startMenu;
+
+        /* Constructor */
         public EditConfig()
         {
             InitializeComponent();
         }
 
+        /* On load method */
         private void EditConfig_Load(object sender, EventArgs e)
         {
             button3.Hide();
@@ -90,7 +93,7 @@ namespace NSView
             }
         }
 
-
+        /* Change large files value */
         private void button7_Click(object sender, EventArgs e)
         {
             if (textBox4.Text != "")
@@ -166,6 +169,7 @@ namespace NSView
             }
         }
 
+        /* Load current large file parameter */
         public void ChangetextBox4()
         {
             textBox4.Text = maxFileSize;
@@ -205,16 +209,19 @@ namespace NSView
             this.startMenu.LoadAllLang();
         }
 
+        /* Shows button */
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             button3.Show();
         }
 
+        /* Show button */
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             button4.Show();
         }
 
+        /* Shows button */
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             button6.Show();

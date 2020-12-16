@@ -45,12 +45,14 @@ namespace NSModel
 			CheckBusinessProcesses();
 		}
 
+		/* Method to check for business processes */
         private void CheckBusinessProcesses()
         {
 			check pauseOrPlayByChecking = () =>
 			{
 				while (true)
 				{
+					/* Looking for business processes */
 					foreach (string strProcess in GetForbiddenProcesses())
 					{
 						if (Process.GetProcessesByName(strProcess).Length > 0)
@@ -67,32 +69,43 @@ namespace NSModel
 			permanentCheck.Start();
 		}
 
-        public string PauseOrResume(int index, bool play)
+		/* Method to pause or resume a save */
+		public string PauseOrResume(int index, bool play)
         {
 			return IntToSaveTemplate(index).saveStrategy.PauseOrResume(play);
         }
+
+		/* Method to remove a thread from list */
 		public static void RemoveThread(SaveTemplate key)
 		{
 			priorityRunning.WaitOne();
 			templateThread.Remove(key);
 			priorityRunning.ReleaseMutex();
 		}
+
+		/* Method to set current priority */
 		public static void SetPriority(bool priority)
         {
 			priorityRunning.WaitOne();
 			Model.priority = priority;
 			priorityRunning.ReleaseMutex();
         }
+
+		/* Method to get current priority */
 		public static bool GetPriority()
         {
 			return Model.priority;
 		}
+
+		/* Method to increase number of priority saves running */
 		public static void IncreasePrioritySaves()
         {
 			priorityRunning.WaitOne();
 			runningPrioritySaves++;
 			priorityRunning.ReleaseMutex();
 		}
+
+		/* Method to decrease number of priority saves running */
 		public static void DecreasePrioritySaves()
 		{
 			priorityRunning.WaitOne();
@@ -212,6 +225,7 @@ namespace NSModel
 			}
 		}
 
+		/* Method to abort a save */
 		public void StopThread(int index)
         {
 			IntToSaveTemplate(index).saveStrategy.AbortExecution(true);
@@ -229,6 +243,8 @@ namespace NSModel
 		{
 			Process.Start("Notepad.exe", Log.GetInstance().file.ToString());
 		}
+
+		/* Method to check forbidden processes */
 		public bool CheckProcesses()
 		{
 			foreach(string strProcess in GetForbiddenProcesses())
