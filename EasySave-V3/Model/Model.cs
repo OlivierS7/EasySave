@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using NSModel.Singleton;
 using System.IO;
 using EasySave_V3.Properties;
 using System.Threading;
+using System.Globalization;
 
 namespace NSModel
 {
@@ -52,17 +53,21 @@ namespace NSModel
 			{
 				while (true)
 				{
+					
 					/* Looking for business processes */
 					foreach (string strProcess in GetForbiddenProcesses())
 					{
 						if (Process.GetProcessesByName(strProcess).Length > 0)
 						{
 							foreach (SaveTemplate template in templates)
-								if(template.saveStrategy.getStatus() == Resources.Running)
+                            {
+								if (template.saveStrategy.getStatus() == Resources.Running || template.saveStrategy.getStatus() == "Running" || template.saveStrategy.getStatus() == "실행 중입니다")
+								{
 									template.saveStrategy.PauseOrResume(false);
+								}
+							}			
 						}
 					}
-					Thread.Sleep(1000);
 				}
 			};
 			Thread permanentCheck = new Thread(pauseOrPlayByChecking.Invoke);
