@@ -102,7 +102,7 @@ namespace RemoteClient.NSView
             // 
             this.executeMenu1.Location = new System.Drawing.Point(-2, 38);
             this.executeMenu1.Name = "executeMenu1";
-            this.executeMenu1.Size = new System.Drawing.Size(841, 588);
+            this.executeMenu1.Size = new System.Drawing.Size(841, 567);
             this.executeMenu1.TabIndex = 8;
             this.executeMenu1.Load += new System.EventHandler(this.executeMenu1_Load);
             // 
@@ -142,8 +142,10 @@ namespace RemoteClient.NSView
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Connection);
+            this.MaximumSize = new System.Drawing.Size(837, 640);
+            this.MinimumSize = new System.Drawing.Size(837, 640);
             this.Name = "StartMenu";
-            this.Text = "Form1";
+            this.Text = "Remote Client";
             this.ResumeLayout(false);
             this.PerformLayout();
 

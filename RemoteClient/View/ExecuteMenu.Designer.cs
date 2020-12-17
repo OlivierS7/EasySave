@@ -99,7 +99,7 @@ namespace RemoteClient.NSView
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(15, 374);
+            this.button1.Location = new System.Drawing.Point(84, 374);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(234, 49);
             this.button1.TabIndex = 1;
@@ -110,7 +110,7 @@ namespace RemoteClient.NSView
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(307, 374);
+            this.button2.Location = new System.Drawing.Point(530, 374);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(234, 49);
             this.button2.TabIndex = 2;
@@ -121,7 +121,7 @@ namespace RemoteClient.NSView
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(15, 527);
+            this.button3.Location = new System.Drawing.Point(17, 481);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(215, 49);
             this.button3.TabIndex = 3;
@@ -132,7 +132,7 @@ namespace RemoteClient.NSView
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(307, 526);
+            this.button4.Location = new System.Drawing.Point(309, 481);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(215, 49);
             this.button4.TabIndex = 4;
@@ -143,7 +143,7 @@ namespace RemoteClient.NSView
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(617, 526);
+            this.button5.Location = new System.Drawing.Point(597, 481);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(215, 49);
             this.button5.TabIndex = 5;
