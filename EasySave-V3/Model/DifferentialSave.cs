@@ -84,6 +84,11 @@ namespace NSModel
             SaveTemplate fullSave = CheckFullSave(template);
             if (fullSave != null)
             {
+                if(!new DirectoryInfo(fullSave.destDirectory).Exists)
+                {
+                    Model.DecreasePrioritySaves();
+                    throw new Exception("The comparative directory was manually removed. Can't execute " + template.backupName);
+                }
                 /* Variables to get the current time for the directory name */
                 currentDateTime = DateTime.Now;
                 String Todaysdate = currentDateTime.ToString("dd-MMM-yyyy");
@@ -134,11 +139,6 @@ namespace NSModel
                 /* Checking if save needs to abort */
                 if (!abort)
                 {
-                    /* Waiting for priority files to transfer */
-                    while (Model.GetPriority())
-                    {
-                        Thread.Sleep(1000);
-                    }
                     /* Transfer normal files */
                     copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, false);
                     /* Call the Singleton to write in FullSaveHistory.json */
@@ -269,6 +269,11 @@ namespace NSModel
         {
             foreach (string file in files)
             {
+                /* Waiting for priority files to transfer */
+                while (Model.GetPriority() && !priority && !abort)
+                {
+                    Thread.Sleep(1000);
+                }
                 /* Checking if save needs to abort */
                 if (!abort)
                 {

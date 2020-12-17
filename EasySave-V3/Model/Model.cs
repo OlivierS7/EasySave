@@ -205,7 +205,16 @@ namespace NSModel
 			{
 				deleg delg = () =>
 				{
-					template.saveStrategy.Execute(template, extensionsToEncrypt);
+                    try
+                    {
+						template.saveStrategy.Execute(template, extensionsToEncrypt);
+						barrier.RemoveParticipant();
+					}
+					catch
+                    {
+						barrier.RemoveParticipant();
+						template.saveStrategy.UpdateStatus(Resources.Aborted);
+                    }
 				};
 				if (!CheckProcesses())
 				{

@@ -51,7 +51,7 @@ namespace NSModel
         /* Method to abort current save */
         public void AbortExecution(bool isAbort)
         {
-            abort = isAbort;
+            this.abort = isAbort;
         }
         /* Method to execute a backup */
         public void Execute(SaveTemplate template, List<string> extensionsToEncrypt)
@@ -138,11 +138,6 @@ namespace NSModel
             /* Checking if save needs to abort */
             if (!abort)
             {
-                /* Waiting for priority files to transfer */
-                while (Model.GetPriority())
-                {
-                    Thread.Sleep(1000);
-                }
                 /* Transfer normal files */
                 copyPerGroup(normalFiles, template, destDirectoryInfo, extensionsToEncrypt, stopw, totalTime, false);
                 /* Call the Singleton to write in FullSaveHistory.json */
@@ -196,6 +191,11 @@ namespace NSModel
         {
             foreach (string file in files)
             {
+                /* Waiting for priority files to transfer */
+                while (Model.GetPriority() && !priority)
+                {
+                    Thread.Sleep(1000);
+                }
                 /* Checking if save needs to abort */
                 if (!abort)
                 {
