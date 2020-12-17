@@ -68,7 +68,7 @@ namespace RemoteClient.NSView
 
         private void button4_Click(object sender, EventArgs e)
         {
-            GraphicalView.controller.Disconnect();
+            NSController.Controller.Disconnect(GraphicalView.controller.GetSocket(), true);
             Environment.Exit(1);
         }
 
