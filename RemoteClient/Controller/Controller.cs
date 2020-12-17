@@ -7,7 +7,6 @@ using System.Net.Sockets;
 using System.Text;
 using NSModel;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace RemoteClient.NSController
 {
