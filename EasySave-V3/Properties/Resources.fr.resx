@@ -249,6 +249,9 @@
   <data name="Remove" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="Running" xml:space="preserve">
+    <value>En cours d'exécution</value>
+  </data>
   <data name="RunningError" xml:space="preserve">
     <value>Un programme en cours empêche l'exécution du programme. Veuillez le fermer pour continuer.</value>
   </data>
