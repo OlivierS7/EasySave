@@ -319,44 +319,50 @@ namespace NSController {
 		private static void ListenNetwork(IAsyncResult ar)
 		{
 			Socket client = (Socket)ar.AsyncState;
-			int bytesRec = client.EndReceive(ar);
+			try
+            {
+				int bytesRec = client.EndReceive(ar);
 
-			/* Looking for message */
-			if (bytesRec > 0)
-			{
-				string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
-				JObject received = JObject.Parse(data);
+				/* Looking for message */
+				if (bytesRec > 0)
+				{
+					string data = Encoding.UTF8.GetString(buffer, 0, bytesRec);
+					JObject received = JObject.Parse(data);
 
-				/* Switching different possibilities */
-				switch (received["title"].ToString())
-                {
-					case "getAllTemplates":
-						buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(SaveTemplateConfig.GetInstance().GetTemplates())))));
-						client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
-						break;
-					case "executeOneSave":
-						int index = JsonConvert.DeserializeObject<int>(received["index"].ToString());
-						controller.ExecuteOneSave(index);
-						break;
-					case "executeAllSave":
-						controller.ExecuteAllSave();
-						break;
-					case "abortExecution":
-						int indexAbort = JsonConvert.DeserializeObject<int>(received["index"].ToString());
-						controller.model.StopThread(indexAbort);
-						break;
-					case "pauseExecution":
-						int indexPause = JsonConvert.DeserializeObject<int>(received["index"].ToString());
-						controller.PauseOrResume(indexPause, false);
-						break;
-					case "resumeExecution":
-						int indexResume = JsonConvert.DeserializeObject<int>(received["index"].ToString());
-						controller.PauseOrResume(indexResume, true);
-						break;
+					/* Switching different possibilities */
+					switch (received["title"].ToString())
+					{
+						case "getAllTemplates":
+							buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new JObject(new JProperty("title", "getAllTemplates"), new JProperty("templates", JsonConvert.SerializeObject(SaveTemplateConfig.GetInstance().GetTemplates())))));
+							client.BeginSend(buffer, 0, buffer.Length, 0, SendCallback, client);
+							break;
+						case "executeOneSave":
+							int index = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+							controller.ExecuteOneSave(index);
+							break;
+						case "executeAllSave":
+							controller.ExecuteAllSave();
+							break;
+						case "abortExecution":
+							int indexAbort = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+							controller.model.StopThread(indexAbort);
+							break;
+						case "pauseExecution":
+							int indexPause = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+							controller.PauseOrResume(indexPause, false);
+							break;
+						case "resumeExecution":
+							int indexResume = JsonConvert.DeserializeObject<int>(received["index"].ToString());
+							controller.PauseOrResume(indexResume, true);
+							break;
 
+					}
+					client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
 				}
-				client.BeginReceive(buffer, 0, buffer.Length, 0, ListenNetwork, client);
-			} else
+				else
+					Disconnect(client);
+			}
+			 catch
             {
 				Disconnect(client);
             }
@@ -380,7 +386,7 @@ namespace NSController {
 		private static void Disconnect(Socket client)
 		{
 			clients.Remove(client);
-			client.Close();
+			client.Disconnect(true);
 		}
 	}
 }

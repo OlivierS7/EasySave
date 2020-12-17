@@ -19,9 +19,11 @@ namespace RemoteClient.NSController
     }
     public class Controller
     {
+        private static bool disconnected = false;
         private IView _View;
         private Socket client;
         public static List<SaveTemplate> templates;
+        private static IView view;
         public delegate void StatusDelegate(string name, string status);
         public static event StatusDelegate refreshStatusDelegate;
         public delegate void ProgressDelegate(string name, float progression);
@@ -42,6 +44,7 @@ namespace RemoteClient.NSController
         public Controller()
         {
             this.View = new GraphicalView(this);
+            Controller.view = this.View;
             this.View.Start();
         }
 
@@ -50,18 +53,11 @@ namespace RemoteClient.NSController
         {
             IPEndPoint pointTerminaison = new IPEndPoint(IPAddress.Parse(ipString), portCommunication);
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            try
-            {
                 client.Connect(pointTerminaison);
                 this.client = client;
                 StateObject state = new StateObject();
                 state.workSocket = client;
                 client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
-            }
-            catch (SocketException)
-            {
-                View.PrintMessage("Can't connect to this server please try again !", -1);
-            }
         }
 
         /* Method to send messages to server */
@@ -69,8 +65,11 @@ namespace RemoteClient.NSController
         {
             try
             {
-                byte[] myBuffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myObject));
-                client.BeginSend(myBuffer, 0, myBuffer.Length, 0, SendCallback, client);
+                if(client != null && client.Connected)
+                {
+                    byte[] myBuffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myObject));
+                    client.BeginSend(myBuffer, 0, myBuffer.Length, 0, SendCallback, client);
+                }
             } catch
             {
                 throw new Exception("Error in beginsend");
@@ -95,43 +94,60 @@ namespace RemoteClient.NSController
         {
             StateObject state = (StateObject)ar.AsyncState;
             Socket client = state.workSocket;
-            int bytesRec = client.EndReceive(ar);
-            /* Checking for received message */
-            if (bytesRec > 0)
+            try
             {
-                string data = Encoding.UTF8.GetString(state.buffer, 0, bytesRec);
-                JObject received = JObject.Parse(data);
-                string name;
-                string status;
-                float progress;
-                /* Actions depending on received message */
-                switch (received["title"].ToString())
+                int bytesRec = client.EndReceive(ar);
+                /* Checking for received message */
+                if (bytesRec > 0)
                 {
-                    case "getAllTemplates":
-                        templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(received["templates"].ToString());
-                        break;
-                    case "refreshProgress":
-                        name = (received["templateName"].ToString());
-                        float.TryParse(received["progress"].ToString(), out progress);
-                        refreshProgressDelegate?.Invoke(name, progress);
-                        break;
-                    case "refreshStatus":
-                        name = (received["templateName"].ToString());
-                        status = (received["status"].ToString());
-                        refreshStatusDelegate?.Invoke(name, status);
-                        break;
+                    string data = Encoding.UTF8.GetString(state.buffer, 0, bytesRec);
+                    JObject received = JObject.Parse(data);
+                    string name;
+                    string status;
+                    float progress;
+                    /* Actions depending on received message */
+                    switch (received["title"].ToString())
+                    {
+                        case "getAllTemplates":
+                            templates = JsonConvert.DeserializeObject<List<SaveTemplate>>(received["templates"].ToString());
+                            break;
+                        case "refreshProgress":
+                            name = (received["templateName"].ToString());
+                            float.TryParse(received["progress"].ToString(), out progress);
+                            refreshProgressDelegate?.Invoke(name, progress);
+                            break;
+                        case "refreshStatus":
+                            name = (received["templateName"].ToString());
+                            status = (received["status"].ToString());
+                            refreshStatusDelegate?.Invoke(name, status);
+                            break;
+                    }
+                    client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
                 }
-                client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, ReceiveCallback, state);
+            }
+            catch
+            {
+                Disconnect(client, false);
             }
             
         }
 
-        /* Method to disconnect from server */
-        public void Disconnect()
+        public Socket GetSocket()
         {
-            if(client != null && client.Connected)
+            return client;
+        }
+
+        /* Method to disconnect from server */
+        public static void Disconnect(Socket client, bool local)
+        {
+            if (!disconnected)
             {
-                client.Close();
+                disconnected = true;
+                if(client != null)
+                    client.Close();
+                if(!local)
+                    Controller.view.PrintMessage("Disconnected by remote host", -1);
+                Environment.Exit(0);
             }
         }
     }
