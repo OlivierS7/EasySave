@@ -272,7 +272,9 @@ namespace NSModel
 		/* Method to get the forbidden processes from the parameters */
 		public List<string> GetForbiddenProcesses()
         {
-			return SaveParameter.GetInstance().Parameters1.getForbiddenProcesses();
+			if(SaveParameter.GetInstance().Parameters1 != null)
+				return SaveParameter.GetInstance().Parameters1.getForbiddenProcesses();
+			return new List<string>();
         }
 		/* Method to get the extensions to encrypt from the parameters */
 		public List<string> getExtensionsToEncrypt()

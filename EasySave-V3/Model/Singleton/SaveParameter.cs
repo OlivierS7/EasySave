@@ -69,7 +69,7 @@ namespace NSModel.Singleton
         public Parameters Parameters1 { get => parameters; set => parameters = value; }
 
         /* Constructor */
-        private SaveParameter()
+        public SaveParameter()
 		{
 			string path = "..\\..\\..\\SaveParameters.json";
 			if (File.Exists(path))
