@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RemoteClient.NSController;
+﻿using RemoteClient.NSController;
 
 namespace RemoteClient.NSView
 {
