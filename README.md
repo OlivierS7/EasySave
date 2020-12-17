@@ -1,10 +1,10 @@
-# EasySave V1.0
+# EasySave V3.0
 
 ## Table of content
 
 - [Introduction](#Introduction)
 - [Pre-requisites](#Pre-requisites)
-- <a href="https://github.com/OlivierS7/EasySave/tree/easysave/v1.0/UML" >UML Diagrams</a>
+- <a href="https://github.com/OlivierS7/EasySave/tree/easysave/v3.0/UML%20-%20V3" >UML Diagrams</a>
 - [Made With](#Made-With)
 - [Autors](#Autors)
 
@@ -15,7 +15,8 @@ EasySave is an application to manage your backups. You can pre-configure 5 backu
 
  1 - Install Visual Studio on your machine<br />
  2 - Download or clone the repository<br />
- 3 - Open the solution (.sln) with Visual Studio and launch the application
+ 3 - Open the solution (.sln) with Visual Studio and launch the application<br />
+ 4 - Go the the Executables folder and execute the RemoteClient.exe
 
 ## Made With
 
